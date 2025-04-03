@@ -2555,6 +2555,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1702877484}
   - component: {fileID: 1702877485}
+  - component: {fileID: 1702877486}
   m_Layer: 0
   m_Name: MovimientoJugadores
   m_TagString: Untagged
@@ -2593,6 +2594,21 @@ MonoBehaviour:
   jugadorEspejado: {fileID: 1201819693}
   velocidadMovimiento: 25
   tiempoEsperaColision: 0.3
+--- !u!114 &1702877486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702877483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b708fd8ddb7f1b4db59fd52b4ceb54b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jugador: {fileID: 188882161}
+  jugadorEspejado: {fileID: 1201819693}
+  velocidadMovimiento: 15
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
