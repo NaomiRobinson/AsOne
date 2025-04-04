@@ -7,109 +7,75 @@ public class MovimientoJugador : MonoBehaviour
     private Rigidbody2D rb;
     private Rigidbody2D rbEspejado;
 
-    private Vector2 direccionMovimiento;
-    [SerializeField] private float velocidadMovimiento = 5f;
+    [SerializeField] private float velocidadX = 5f;
 
-    private bool estaMoviendose = false;
-    private bool esperandoColision = false;
-    private bool esatColisionando = false;
-
-    private Vector2 direccionBloqueada = Vector2.zero;
-
-    [SerializeField] private float tiempoEsperaColision = 0.5f;
-    private float tiempoRestanteColision = 0f;
-
-    private readonly KeyCode[] teclasMovimiento = { KeyCode.W, KeyCode.S, KeyCode.A, KeyCode.D };
-    private readonly Vector2[] direcciones = { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
+    private bool gravedadInvertida = false;
 
     void Start()
     {
         rb = jugador.GetComponent<Rigidbody2D>();
         rbEspejado = jugadorEspejado.GetComponent<Rigidbody2D>();
+
+        rb.gravityScale = 1f;
+        rbEspejado.gravityScale = 1f;
+        Debug.Log("Script activo. Jugador: " + jugador.name + ", Espejado: " + jugadorEspejado.name);
+
     }
 
     void Update()
     {
-        // Bloquea la entrada si está esperando colisiones o está contra una pared
-        if (esperandoColision || estaMoviendose || esatColisionando)
+        Debug.Log("Gravedad actual jugador: " + rb.gravityScale);
+
+        // Movimiento en X (libre y espejado)
+        if (Input.GetKey(KeyCode.A))
         {
-            if (esperandoColision)
-            {
-                tiempoRestanteColision -= Time.deltaTime;
-                if (tiempoRestanteColision <= 0f)
-                {
-                    esperandoColision = false;
-                    estaMoviendose = false;
-                    direccionBloqueada = Vector2.zero;
-                    Debug.Log("Tiempo de espera de colisión ha terminado.");
-                }
-            }
-            return;
+            rb.linearVelocity = new Vector2(-velocidadX, rb.linearVelocity.y);
+            rbEspejado.linearVelocity = new Vector2(velocidadX, rbEspejado.linearVelocity.y);
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            rb.linearVelocity = new Vector2(velocidadX, rb.linearVelocity.y);
+            rbEspejado.linearVelocity = new Vector2(-velocidadX, rbEspejado.linearVelocity.y);
+        }
+        else
+        {
+            // Frena en X si no está moviéndose
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            rbEspejado.linearVelocity = new Vector2(0, rbEspejado.linearVelocity.y);
         }
 
-        for (int i = 0; i < teclasMovimiento.Length; i++)
+        // Invertir gravedad con W, restaurar con S
+        if (Input.GetKeyDown(KeyCode.W))
         {
-            if (Input.GetKeyDown(teclasMovimiento[i]))
-            {
-                Debug.Log("Tecla presionada: " + teclasMovimiento[i]);
-                Moverse(direcciones[i]);
-                break;
-            }
+            InvertirGravedad(true);
+        }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            InvertirGravedad(false);
         }
     }
 
-    void Moverse(Vector2 direccion)
+    void InvertirGravedad(bool invertir)
     {
-        if (!estaMoviendose && !esatColisionando)
-        {
-            direccionMovimiento = direccion;
-            estaMoviendose = true;
-
-            // Movimiento horizontal igual en ambos jugadores
-            if (direccionMovimiento.x != 0)
-            {
-                rb.linearVelocity = direccionMovimiento * velocidadMovimiento;
-                rbEspejado.linearVelocity = -direccionMovimiento * velocidadMovimiento;
-            }
-            // Movimiento vertical espejado
-            else if (direccionMovimiento.y != 0)
-            {
-                rb.linearVelocity = direccionMovimiento * velocidadMovimiento;
-                rbEspejado.linearVelocity = direccionMovimiento * velocidadMovimiento;
-            }
-
-            esperandoColision = true;
-            tiempoRestanteColision = tiempoEsperaColision;
-        }
+        gravedadInvertida = invertir;
+        float gravedad = invertir ? -1f : 1f;
+        rb.gravityScale = gravedad;
+        rbEspejado.gravityScale = gravedad;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject == jugador || collision.gameObject == jugadorEspejado)
-            return;
+        foreach (ContactPoint2D contacto in collision.contacts)
+        {
+            Vector2 normal = contacto.normal;
 
-        Debug.Log("Colisión detectada con una pared.");
-        direccionBloqueada = direccionMovimiento; // Bloquea la dirección en la que se estaba moviendo
-
-        DetenerMovimiento();
-    }
-
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject == jugador || collision.gameObject == jugadorEspejado)
-            return;
-
-        Debug.Log("Se alejó de la pared.");
-        direccionBloqueada = Vector2.zero;
-    }
-    void DetenerMovimiento()
-    {
-        Debug.Log("Deteniendo movimiento.");
-        estaMoviendose = false;
-        rb.linearVelocity = Vector2.zero;
-        rbEspejado.linearVelocity = Vector2.zero;
-
-        esperandoColision = true;
-        tiempoRestanteColision = tiempoEsperaColision;
+            if (Vector2.Angle(normal, Vector2.right) < 10f || Vector2.Angle(normal, Vector2.left) < 10f)
+            {
+                // Paredes laterales: frenar en X
+                rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+                rbEspejado.linearVelocity = new Vector2(0, rbEspejado.linearVelocity.y);
+            }
+            // No hace falta frenar en Y, lo hace la gravedad + colisión
+        }
     }
 }
