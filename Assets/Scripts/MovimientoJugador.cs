@@ -18,14 +18,11 @@ public class MovimientoJugador : MonoBehaviour
 
         rb.gravityScale = 1f;
         rbEspejado.gravityScale = 1f;
-        Debug.Log("Script activo. Jugador: " + jugador.name + ", Espejado: " + jugadorEspejado.name);
 
     }
 
     void Update()
     {
-        Debug.Log("Gravedad actual jugador: " + rb.gravityScale);
-
         // Movimiento en X (libre y espejado)
         if (Input.GetKey(KeyCode.A))
         {
@@ -78,4 +75,6 @@ public class MovimientoJugador : MonoBehaviour
             // No hace falta frenar en Y, lo hace la gravedad + colisión
         }
     }
-}
+
+    
+} 
