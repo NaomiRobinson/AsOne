@@ -7,6 +7,7 @@ public class MovimientoJugador : MonoBehaviour
     private Rigidbody2D rb;
     private Rigidbody2D rbEspejado;
 
+
     [SerializeField] private float velocidadX = 5f;
 
     private bool gravedadInvertida = false;
@@ -28,11 +29,18 @@ public class MovimientoJugador : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(-velocidadX, rb.linearVelocity.y);
             rbEspejado.linearVelocity = new Vector2(velocidadX, rbEspejado.linearVelocity.y);
+
+            SetFlipX(jugador, 1);
+            SetFlipX(jugadorEspejado, 1);
+
         }
         else if (Input.GetKey(KeyCode.D))
         {
             rb.linearVelocity = new Vector2(velocidadX, rb.linearVelocity.y);
             rbEspejado.linearVelocity = new Vector2(-velocidadX, rbEspejado.linearVelocity.y);
+
+            SetFlipX(jugador, -1);
+            SetFlipX(jugadorEspejado, -1);
         }
         else
         {
@@ -45,10 +53,14 @@ public class MovimientoJugador : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W))
         {
             InvertirGravedad(true);
+            SetFlipY(jugador, -1);
+            SetFlipY(jugadorEspejado, -1);
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
             InvertirGravedad(false);
+            SetFlipY(jugador, 1);
+            SetFlipY(jugadorEspejado, 1);
         }
     }
 
@@ -58,6 +70,20 @@ public class MovimientoJugador : MonoBehaviour
         float gravedad = invertir ? -1f : 1f;
         rb.gravityScale = gravedad;
         rbEspejado.gravityScale = gravedad;
+    }
+
+    void SetFlipX(GameObject obj, int direccion)
+    {
+        Vector3 scale = obj.transform.localScale;
+        scale.x = Mathf.Abs(scale.x) * direccion;
+        obj.transform.localScale = scale;
+    }
+
+    void SetFlipY(GameObject obj, int direccion)
+    {
+        Vector3 scale = obj.transform.localScale;
+        scale.y = Mathf.Abs(scale.y) * direccion;
+        obj.transform.localScale = scale;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -76,5 +102,5 @@ public class MovimientoJugador : MonoBehaviour
         }
     }
 
-    
-} 
+
+}
