@@ -7,8 +7,9 @@ public class MovimientoJugador : MonoBehaviour
     private Rigidbody2D rb;
     private Rigidbody2D rbEspejado;
 
-
     [SerializeField] private float velocidadX = 5f;
+    [SerializeField] private ParticleSystem particulasIzq;
+    [SerializeField] private ParticleSystem particulasDer;
 
     private bool gravedadInvertida = false;
 
@@ -52,12 +53,16 @@ public class MovimientoJugador : MonoBehaviour
         // Invertir gravedad con W, restaurar con S
         if (Input.GetKeyDown(KeyCode.W))
         {
+            particulasIzq.Play();
+            particulasDer.Play();
             InvertirGravedad(true);
             SetFlipY(jugador, -1);
             SetFlipY(jugadorEspejado, -1);
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
+            particulasIzq.Play();
+            particulasDer.Play();
             InvertirGravedad(false);
             SetFlipY(jugador, 1);
             SetFlipY(jugadorEspejado, 1);
@@ -77,6 +82,7 @@ public class MovimientoJugador : MonoBehaviour
         Vector3 scale = obj.transform.localScale;
         scale.x = Mathf.Abs(scale.x) * direccion;
         obj.transform.localScale = scale;
+
     }
 
     void SetFlipY(GameObject obj, int direccion)
