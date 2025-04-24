@@ -120,11 +120,11 @@ public class MovimientoJugador : MonoBehaviour
 
             if (Vector2.Angle(normal, Vector2.right) < 10f || Vector2.Angle(normal, Vector2.left) < 10f)
             {
-                // Paredes laterales: frenar en X
+               
                 rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
                 rbEspejado.linearVelocity = new Vector2(0, rbEspejado.linearVelocity.y);
             }
-            // No hace falta frenar en Y, lo hace la gravedad + colisión
+            
         }
     }
 
