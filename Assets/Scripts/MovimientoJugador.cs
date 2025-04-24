@@ -6,6 +6,7 @@ public class MovimientoJugador : MonoBehaviour
     public GameObject jugadorEspejado;
     private Rigidbody2D rb;
     private Rigidbody2D rbEspejado;
+    float velocidadMaximaY = 10f;
 
     [SerializeField] private float velocidadX = 5f;
     [SerializeField] private ParticleSystem particulasIzq;
@@ -13,10 +14,16 @@ public class MovimientoJugador : MonoBehaviour
 
     private bool gravedadInvertida = false;
 
+    private Animator animatorJugador;
+    private Animator animatorEspejado;
+
     void Start()
     {
         rb = jugador.GetComponent<Rigidbody2D>();
         rbEspejado = jugadorEspejado.GetComponent<Rigidbody2D>();
+
+        animatorJugador = jugador.GetComponent<Animator>();
+        animatorEspejado = jugadorEspejado.GetComponent<Animator>();
 
         rb.gravityScale = 1f;
         rbEspejado.gravityScale = 1f;
@@ -25,20 +32,23 @@ public class MovimientoJugador : MonoBehaviour
 
     void Update()
     {
+        float movimientoHorizontal = 0f;
+
         // Movimiento en X (libre y espejado)
         if (Input.GetKey(KeyCode.A))
         {
-            rb.linearVelocity = new Vector2(-velocidadX, rb.linearVelocity.y);
-            rbEspejado.linearVelocity = new Vector2(velocidadX, rbEspejado.linearVelocity.y);
+            movimientoHorizontal = -1f;
+            rb.linearVelocity = new Vector2(movimientoHorizontal * velocidadX, rb.linearVelocity.y);
+            rbEspejado.linearVelocity = new Vector2(-movimientoHorizontal * velocidadX, rbEspejado.linearVelocity.y);
 
             SetFlipX(jugador, 1);
             SetFlipX(jugadorEspejado, 1);
-
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            rb.linearVelocity = new Vector2(velocidadX, rb.linearVelocity.y);
-            rbEspejado.linearVelocity = new Vector2(-velocidadX, rbEspejado.linearVelocity.y);
+            movimientoHorizontal = 1f;
+            rb.linearVelocity = new Vector2(movimientoHorizontal * velocidadX, rb.linearVelocity.y);
+            rbEspejado.linearVelocity = new Vector2(-movimientoHorizontal * velocidadX, rbEspejado.linearVelocity.y);
 
             SetFlipX(jugador, -1);
             SetFlipX(jugadorEspejado, -1);
@@ -67,6 +77,16 @@ public class MovimientoJugador : MonoBehaviour
             SetFlipY(jugador, 1);
             SetFlipY(jugadorEspejado, 1);
         }
+
+
+        animatorJugador.SetFloat("Horizontal", Mathf.Abs(movimientoHorizontal));
+        animatorEspejado.SetFloat("Horizontal", Mathf.Abs(movimientoHorizontal));
+    }
+    void FixedUpdate()
+    {
+        // Limitar velocidad en Y
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Clamp(rb.linearVelocity.y, -velocidadMaximaY, velocidadMaximaY));
+        rbEspejado.linearVelocity = new Vector2(rbEspejado.linearVelocity.x, Mathf.Clamp(rbEspejado.linearVelocity.y, -velocidadMaximaY, velocidadMaximaY));
     }
 
     void InvertirGravedad(bool invertir)

@@ -62,21 +62,17 @@ public class Seguirjugador : MonoBehaviour
 
     private void EstadoSiguiendo()
     {
-        if (transform == null)
-        {
-            estadoActual = EstadosMovimiento.Volviendo;
-            return;
-        }
+        rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
 
-        if (transform.position.x < transformJugador.position.x){
+        if (transform.position.x < transformJugador.position.x)
             rb2D.linearVelocity = new Vector2(velocidad, rb2D.linearVelocity.y);
-        }else{
-            rb2D.linearVelocity = new Vector2(-velocidad,rb2D.linearVelocity.y);
-        }
+        else
+            rb2D.linearVelocity = new Vector2(-velocidad, rb2D.linearVelocity.y);
 
-         GirarAObjetivo(transformJugador.position);
+        GirarAObjetivo(transformJugador.position);
 
-        if (Vector2.Distance(transform.position, puntoInicial) > distanciaMax || Vector2.Distance(transform.position, transformJugador.position) > distanciaMax)
+        if (Vector2.Distance(transform.position, puntoInicial) > distanciaMax ||
+            Vector2.Distance(transform.position, transformJugador.position) > distanciaMax)
         {
             estadoActual = EstadosMovimiento.Volviendo;
             transformJugador = null;
@@ -85,29 +81,33 @@ public class Seguirjugador : MonoBehaviour
 
     private void EstadoVolviendo()
     {
-        if (transform.position.x < puntoInicial.x){
-            rb2D.linearVelocity = new Vector2(velocidad, rb2D.linearVelocity.y);
-        }else{
-            rb2D.linearVelocity = new Vector2(-velocidad,rb2D.linearVelocity.y);
-        }
+        rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
 
-         GirarAObjetivo(puntoInicial);
-        if (Vector2.Distance(transform.position, puntoInicial) < 0.1f)
+        if (transform.position.x < puntoInicial.x)
+            rb2D.linearVelocity = new Vector2(velocidad, rb2D.linearVelocity.y);
+        else
+            rb2D.linearVelocity = new Vector2(-velocidad, rb2D.linearVelocity.y);
+
+        GirarAObjetivo(puntoInicial);
+
+        if (Mathf.Abs(transform.position.x - puntoInicial.x) < 0.1f)
         {
             rb2D.linearVelocity = Vector2.zero;
+            rb2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
             estadoActual = EstadosMovimiento.Esperando;
         }
     }
 
     private void GirarAObjetivo(Vector3 objetivo)
     {
-        if (objetivo.x > transform.position.x && !mirandoDer)
+        float diferenciaX = objetivo.x - transform.position.x;
+
+        if (Mathf.Abs(diferenciaX) > 0.05f)
         {
-            Girar();
-        }
-        else if (objetivo.x < transform.position.x && mirandoDer)
-        {
-            Girar();
+            if (diferenciaX > 0 && !mirandoDer)
+                Girar();
+            else if (diferenciaX < 0 && mirandoDer)
+                Girar();
         }
     }
 
