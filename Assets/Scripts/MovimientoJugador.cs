@@ -12,10 +12,15 @@ public class MovimientoJugador : MonoBehaviour
     [SerializeField] private ParticleSystem particulasIzq;
     [SerializeField] private ParticleSystem particulasDer;
 
+    [SerializeField] private ParticleSystem indicadorJugador;
+
     private bool gravedadInvertida = false;
+
+    private bool estaIndicadorJugador = true;
 
     private Animator animatorJugador;
     private Animator animatorEspejado;
+
 
     void Start()
     {
@@ -27,11 +32,13 @@ public class MovimientoJugador : MonoBehaviour
 
         rb.gravityScale = 1f;
         rbEspejado.gravityScale = 1f;
+        indicadorJugador.Play();
 
     }
 
     void Update()
     {
+
         float movimientoHorizontal = 0f;
 
         // Movimiento en X (libre y espejado)
@@ -43,6 +50,7 @@ public class MovimientoJugador : MonoBehaviour
 
             SetFlipX(jugador, 1);
             SetFlipX(jugadorEspejado, 1);
+            desactivarIndicador();
         }
         else if (Input.GetKey(KeyCode.D))
         {
@@ -52,6 +60,8 @@ public class MovimientoJugador : MonoBehaviour
 
             SetFlipX(jugador, -1);
             SetFlipX(jugadorEspejado, -1);
+            desactivarIndicador();
+
         }
         else
         {
@@ -68,6 +78,8 @@ public class MovimientoJugador : MonoBehaviour
             InvertirGravedad(true);
             SetFlipY(jugador, -1);
             SetFlipY(jugadorEspejado, -1);
+            desactivarIndicador();
+
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
@@ -76,11 +88,16 @@ public class MovimientoJugador : MonoBehaviour
             InvertirGravedad(false);
             SetFlipY(jugador, 1);
             SetFlipY(jugadorEspejado, 1);
+            desactivarIndicador();
+
         }
 
 
         animatorJugador.SetFloat("Horizontal", Mathf.Abs(movimientoHorizontal));
         animatorEspejado.SetFloat("Horizontal", Mathf.Abs(movimientoHorizontal));
+
+
+
     }
     void FixedUpdate()
     {
@@ -120,12 +137,23 @@ public class MovimientoJugador : MonoBehaviour
 
             if (Vector2.Angle(normal, Vector2.right) < 10f || Vector2.Angle(normal, Vector2.left) < 10f)
             {
-               
+
                 rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
                 rbEspejado.linearVelocity = new Vector2(0, rbEspejado.linearVelocity.y);
             }
-            
+
         }
+    }
+
+    void desactivarIndicador()
+    {
+
+        if (estaIndicadorJugador)
+        {
+            estaIndicadorJugador = false;
+            indicadorJugador.Stop();
+        }
+
     }
 
 

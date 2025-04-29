@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,33 +6,47 @@ public class Salida : MonoBehaviour
 {
     public GameObject jugadorAsignado;
 
-
-    public AbrirPuerta puertaAsociada;
+    private Animator animPuerta;
+    public AbrirPuerta palancaAsociada;
     private static int jugadoresEnSalida = 0;
 
     public bool requiereAbrir = false;
 
+
+    void Start()
+    {
+        animPuerta = GetComponent<Animator>();
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
+
         if (other.gameObject == jugadorAsignado)
         {
-            if (requiereAbrir && puertaAsociada != null && !puertaAsociada.EstaAbierta())
+
+            if (requiereAbrir && palancaAsociada != null && !palancaAsociada.EstaAbierta())
             {
                 Debug.Log("La puerta está cerrada, no puedes pasar.");
                 return;
             }
-
-            if (!requiereAbrir && puertaAsociada != null)
+            if (!requiereAbrir)
             {
-                puertaAsociada.ForzarAbrir(); // Se abre sola
+                if (animPuerta != null)
+                {
+                    animPuerta.SetBool("estaAbierta", true);
+                }
+            }
+            if (!requiereAbrir && palancaAsociada != null)
+            {
+                palancaAsociada.ForzarAbrir();
+
             }
 
             jugadoresEnSalida++;
 
-            // Nueva verificación: ¿ambos están y la puerta está abierta?
+
             if (jugadoresEnSalida == 2)
             {
-                if (!requiereAbrir || (puertaAsociada != null && puertaAsociada.EstaAbierta()))
+                if (!requiereAbrir || (palancaAsociada != null && palancaAsociada.EstaAbierta()))
                 {
                     PasarNivel();
                 }
@@ -47,6 +62,10 @@ public class Salida : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
+        if (animPuerta != null)
+        {
+            animPuerta.SetBool("estaAbierta", false);
+        }
         if (other.gameObject == jugadorAsignado)
         {
             if (jugadoresEnSalida > 0)

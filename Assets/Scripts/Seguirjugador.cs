@@ -3,7 +3,8 @@ using UnityEngine;
 public class Seguirjugador : MonoBehaviour
 {
     public Rigidbody2D rb2D;
-    public float radioBusqueda;
+    public float distanciaBusquedaX;
+    public float distanciaBusquedaY;
     public LayerMask capaJugador;
 
     public Transform transformJugador;
@@ -51,7 +52,7 @@ public class Seguirjugador : MonoBehaviour
 
     private void EstadoEsperando()
     {
-        Collider2D jugadorCollider = Physics2D.OverlapCircle(transform.position, radioBusqueda, capaJugador);
+        Collider2D jugadorCollider = Physics2D.OverlapBox(transform.position, new Vector2(distanciaBusquedaX * 2, distanciaBusquedaY * 2), 0f, capaJugador);
 
         if (jugadorCollider)
         {
@@ -120,7 +121,7 @@ public class Seguirjugador : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, radioBusqueda);
+        Gizmos.DrawWireCube(transform.position, new Vector3(distanciaBusquedaX * 2, distanciaBusquedaY * 2, 0));
         Gizmos.DrawWireSphere(puntoInicial, distanciaMax);
     }
 }

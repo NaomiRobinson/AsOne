@@ -9,24 +9,23 @@ public class AbrirPuerta : MonoBehaviour
 
     public Sprite palanca;
     public Sprite palancaInclinada;
-    public Sprite puertaCerrada;
-    public Sprite puertaAbierta;
+
 
     private SpriteRenderer spriteRenderer;
-    private SpriteRenderer puertaRenderer;
+    private Animator puertaAnimator;
     private bool estaJugador = false;
 
     private bool puertaAbiertaEstado = false;
 
     void Start()
     {
-        
-        spriteRenderer = GetComponent<SpriteRenderer>();
 
+        spriteRenderer = GetComponent<SpriteRenderer>();
         if (puertaAsociada != null)
         {
-            puertaRenderer = puertaAsociada.GetComponent<SpriteRenderer>();
+            puertaAnimator = puertaAsociada.GetComponent<Animator>();
         }
+
 
         ActualizarSprites();
     }
@@ -37,9 +36,11 @@ public class AbrirPuerta : MonoBehaviour
     {
         if (tipo == TipoPalanca.Boton && estaJugador && Input.GetKeyDown(KeyCode.Space))
         {
-
             puertaAbiertaEstado = !puertaAbiertaEstado;
-            puertaAsociada.SetActive(puertaAbiertaEstado);
+            if (puertaAnimator != null)
+            {
+                puertaAnimator.SetBool("estaAbierta", puertaAbiertaEstado);
+            }
             ActualizarSprites();
         }
     }
@@ -53,7 +54,10 @@ public class AbrirPuerta : MonoBehaviour
         if (tipo == TipoPalanca.Presion)
         {
             puertaAbiertaEstado = true;
-            puertaAsociada.SetActive(true);
+            if (puertaAnimator != null)
+            {
+                puertaAnimator.SetBool("estaAbierta", true);
+            }
             ActualizarSprites();
         }
     }
@@ -67,7 +71,10 @@ public class AbrirPuerta : MonoBehaviour
         if (tipo == TipoPalanca.Presion)
         {
             puertaAbiertaEstado = false;
-            puertaAsociada.SetActive(false);
+            if (puertaAnimator != null)
+            {
+                puertaAnimator.SetBool("estaAbierta", false);
+            }
             ActualizarSprites();
         }
     }
@@ -76,11 +83,6 @@ public class AbrirPuerta : MonoBehaviour
     {
 
         spriteRenderer.sprite = puertaAbiertaEstado ? palancaInclinada : palanca;
-
-        if (puertaRenderer != null)
-        {
-            puertaRenderer.sprite = puertaAbiertaEstado ? puertaAbierta : puertaCerrada;
-        }
     }
 
     public bool EstaAbierta()
@@ -89,15 +91,13 @@ public class AbrirPuerta : MonoBehaviour
     }
 
     public void ForzarAbrir()
-{
-    puertaAbiertaEstado = true;
-
-    if (puertaAsociada != null)
     {
-        puertaAsociada.SetActive(true);
+        puertaAbiertaEstado = true;
+        if (puertaAnimator != null)
+        {
+            puertaAnimator.SetBool("estaAbierta", true);
+        }
+        ActualizarSprites();
     }
-
-    ActualizarSprites();
-}
 
 }
