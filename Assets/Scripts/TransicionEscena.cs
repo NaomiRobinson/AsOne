@@ -50,6 +50,7 @@ public class TransicionEscena : MonoBehaviour
         LeanTween.alphaCanvas(disolverCanvasGroup, 1f, tiempoDisolverSalida).setOnComplete(() =>
         {
             SceneManager.LoadScene(IndexEscena);
+            Debug.Log("Empezo un nivel");
         });
     }
 

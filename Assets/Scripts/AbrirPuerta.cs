@@ -36,6 +36,7 @@ public class AbrirPuerta : MonoBehaviour
     {
         if (tipo == TipoPalanca.Boton && estaJugador && Input.GetKeyDown(KeyCode.Space))
         {
+            Debug.Log("Interactuo con palanca");
             puertaAbiertaEstado = !puertaAbiertaEstado;
             if (puertaAnimator != null)
             {

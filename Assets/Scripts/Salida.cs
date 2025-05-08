@@ -79,10 +79,9 @@ public class Salida : MonoBehaviour
     private void PasarNivel()
     {
         Debug.Log("Ambos jugadores están en sus salidas");
+        Debug.Log("Completo un nivel");
 
         TransicionEscena.Instance.Disolversalida(SceneManager.GetActiveScene().buildIndex + 1);
-
-
 
     }
 

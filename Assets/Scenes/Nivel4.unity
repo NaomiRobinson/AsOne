@@ -13608,11 +13608,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1318008819886402947, guid: 633adf343c28d334db71e8c7477d0dd0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.23
+      value: 3.16
       objectReference: {fileID: 0}
     - target: {fileID: 1318008819886402947, guid: 633adf343c28d334db71e8c7477d0dd0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.79
+      value: 5.01
       objectReference: {fileID: 0}
     - target: {fileID: 1318008819886402947, guid: 633adf343c28d334db71e8c7477d0dd0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13652,11 +13652,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3034830734497109787, guid: 633adf343c28d334db71e8c7477d0dd0, type: 3}
       propertyPath: distanciaMax
-      value: 5.45
+      value: 2.99
       objectReference: {fileID: 0}
     - target: {fileID: 3034830734497109787, guid: 633adf343c28d334db71e8c7477d0dd0, type: 3}
       propertyPath: radioBusqueda
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3034830734497109787, guid: 633adf343c28d334db71e8c7477d0dd0, type: 3}
+      propertyPath: puntoInicial.x
+      value: 3.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3034830734497109787, guid: 633adf343c28d334db71e8c7477d0dd0, type: 3}
+      propertyPath: puntoInicial.y
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3034830734497109787, guid: 633adf343c28d334db71e8c7477d0dd0, type: 3}
       propertyPath: transformJugador
@@ -13664,11 +13672,11 @@ PrefabInstance:
       objectReference: {fileID: 1582898238}
     - target: {fileID: 3034830734497109787, guid: 633adf343c28d334db71e8c7477d0dd0, type: 3}
       propertyPath: distanciaBusquedaX
-      value: 4.6
+      value: 2.9
       objectReference: {fileID: 0}
     - target: {fileID: 3034830734497109787, guid: 633adf343c28d334db71e8c7477d0dd0, type: 3}
       propertyPath: distanciaBusquedaY
-      value: -1.04
+      value: -0.84
       objectReference: {fileID: 0}
     - target: {fileID: 8542423538924227152, guid: 633adf343c28d334db71e8c7477d0dd0, type: 3}
       propertyPath: m_Name
@@ -14190,7 +14198,7 @@ MonoBehaviour:
   LateralAdjustment: 0
   FovRange: {x: 1, y: 100}
   DollyRange: {x: -100, y: 100}
-  OrthoSizeRange: {x: 10, y: 20}
+  OrthoSizeRange: {x: 12, y: 30}
 --- !u!114 &1389401651
 MonoBehaviour:
   m_ObjectHideFlags: 0
