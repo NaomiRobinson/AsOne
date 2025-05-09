@@ -14,7 +14,6 @@ public class MenuManager : MonoBehaviour
     {
 
         SceneManager.LoadScene("Ayuda");
-        Debug.Log("Entro a ayuda");
     }
 
 

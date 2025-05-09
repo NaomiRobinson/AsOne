@@ -6,11 +6,6 @@ using AnalyticsEvent = Unity.Services.Analytics.Event;
 
 public class EventManager : MonoBehaviour
 {
-    public class ShowHelpEvent : AnalyticsEvent
-    {
-        public ShowHelpEvent() : base("ShowHelp") { }
-        public bool helpviewed { set { SetParameter("helpviewed", value); } }
-    }
 
     public class LevelStartEvent : AnalyticsEvent
     {
@@ -33,9 +28,9 @@ public class EventManager : MonoBehaviour
         public int death { set { SetParameter("death", value); } }
     }
 
-    public class DeathEvent : AnalyticsEvent
+    public class GameOverEvent : AnalyticsEvent
     {
-        public DeathEvent() : base("Death") { }
+        public GameOverEvent() : base("GameOver") { }
         public string type { set { SetParameter("type", value); } }
         public string name { set { SetParameter("name", value); } }
         public int level { set { SetParameter("level", value); } }
