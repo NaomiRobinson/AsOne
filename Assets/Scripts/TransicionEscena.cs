@@ -28,10 +28,30 @@ public class TransicionEscena : MonoBehaviour
     void Start()
     {
         DisolverEntrada();
-       
+
     }
-    void Update()
-    { }
+
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("LevelStart: " + scene.name);
+
+        if (scene.name == "Victoria")
+        {
+            Debug.Log("GameComplete");
+        }
+    }
+
 
     private void DisolverEntrada()
     {
@@ -50,8 +70,9 @@ public class TransicionEscena : MonoBehaviour
         LeanTween.alphaCanvas(disolverCanvasGroup, 1f, tiempoDisolverSalida).setOnComplete(() =>
         {
             SceneManager.LoadScene(IndexEscena);
-            Debug.Log("Empezo un nivel");
+
         });
     }
+
 
 }

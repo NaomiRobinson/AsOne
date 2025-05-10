@@ -28,7 +28,7 @@ public class BalaEnemigo : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Walls"))
         {
-            Debug.Log("baal toco apred");
+            Debug.Log("bala toco pared");
             Destroy(gameObject);
         }
 

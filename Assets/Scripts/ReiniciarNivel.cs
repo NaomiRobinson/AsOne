@@ -19,7 +19,7 @@ public class ReiniciarNivel : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Obstacle"))
         {
-            Debug.Log("Se murio");
+            Debug.Log("GameOver");
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
