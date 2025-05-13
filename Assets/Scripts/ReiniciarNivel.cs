@@ -4,25 +4,16 @@ using UnityEngine.SceneManagement;
 public class ReiniciarNivel : MonoBehaviour
 {
 
-    void Start()
-    {
-
-    }
-
-
-    void Update()
-    {
-
-    }
-
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Obstacle"))
         {
-            Debug.Log("GameOver");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+           Reiniciar();
         }
+    }
 
-
+    public void  Reiniciar(){
+          Debug.Log("GameOver");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

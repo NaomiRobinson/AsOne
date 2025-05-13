@@ -7,6 +7,7 @@ public class Salida : MonoBehaviour
     public GameObject jugadorAsignado;
 
     private Animator animPuerta;
+
     public AbrirPuerta palancaAsociada;
     private static int jugadoresEnSalida = 0;
 
@@ -30,14 +31,12 @@ public class Salida : MonoBehaviour
             }
             if (!requiereAbrir)
             {
-                if (animPuerta != null)
-                {
-                    animPuerta.SetBool("estaAbierta", true);
-                }
+               AnimacionesControlador.SetBool(animPuerta, "estaAbierta", true);
+
             }
             if (!requiereAbrir && palancaAsociada != null)
             {
-                palancaAsociada.ForzarAbrir();
+                palancaAsociada.Abrir();
 
             }
 

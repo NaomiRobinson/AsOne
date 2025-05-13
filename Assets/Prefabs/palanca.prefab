@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 7912735496654249498}
   - component: {fileID: 5550014778756185621}
   - component: {fileID: 3010992344254114104}
-  - component: {fileID: 7864340968658785622}
+  - component: {fileID: 123403694953448615}
+  - component: {fileID: -4953900936306403076}
   m_Layer: 0
   m_Name: palanca
   m_TagString: Untagged
@@ -163,7 +164,29 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.6923344, y: 1.1194235}
   m_EdgeRadius: 0
---- !u!114 &7864340968658785622
+--- !u!95 &123403694953448615
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3762424425714932323}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a305c0d19d15f6f4f9101b278da65981, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-4953900936306403076
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,5 +202,3 @@ MonoBehaviour:
   puertaAsociada: {fileID: 0}
   palanca: {fileID: -2415155851388967588, guid: 0fe530dade2e8114d8a38bddc5be9a86, type: 3}
   palancaInclinada: {fileID: -5118822128383393118, guid: b9652c344b4bc4d4489a37ec8fabf821, type: 3}
-  puertaCerrada: {fileID: -4454154477584399622, guid: d3f331351dee83f47afb6a2e6fb5d3ae, type: 3}
-  puertaAbierta: {fileID: 1393139507870537130, guid: 1ea28ae2e78b0624392c62b6534c58db, type: 3}

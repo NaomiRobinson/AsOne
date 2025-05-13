@@ -7,13 +7,7 @@ public class PlataformaMovil : MonoBehaviour
     [SerializeField] private float velocidad;
     private int siguientePlataforma = 1;
     private bool ordenPlataformas = true;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
+  
     private void Update()
     {
         if (ordenPlataformas && siguientePlataforma + 1 >= puntosMovimiento.Length)
@@ -40,13 +34,31 @@ public class PlataformaMovil : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, puntosMovimiento[siguientePlataforma].position, velocidad * Time.deltaTime);
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+   private void OnCollisionEnter2D(Collision2D other)
+{
+    if (other.gameObject.CompareTag("Player"))
     {
-        if (other.gameObject.CompareTag("Player"))
+        
+        foreach (ContactPoint2D contacto in other.contacts)
         {
-            other.transform.SetParent(this.transform);
+            if (contacto.normal.y > 0.5f) // El jugador toca desde abajo
+            {
+                Debug.Log("El jugador murió al tocar la plataforma desde abajo");
+
+                  other.gameObject.GetComponent<ReiniciarNivel>().Reiniciar();  
+          
+                other.transform.SetParent(null);
+                break;
+            }
+            else if (contacto.normal.y < -0.5f) 
+            {
+                other.transform.SetParent(this.transform);
+                break;
+            }
         }
     }
+}
+
 
     private void OnCollisionExit2D(Collision2D other)
     {

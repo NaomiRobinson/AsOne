@@ -4,62 +4,46 @@ public class AbrirPuerta : MonoBehaviour
 {
     public enum TipoPalanca { Boton, Presion }
     public TipoPalanca tipo = TipoPalanca.Boton;
+
     public GameObject puertaAsociada;
+    public GameObject palanca;
 
+     private Animator animPuerta;
+    private Animator animPalanca;
 
-    public Sprite palanca;
-    public Sprite palancaInclinada;
-
-
-    private SpriteRenderer spriteRenderer;
-    private Animator puertaAnimator;
     private bool estaJugador = false;
-
-    private bool puertaAbiertaEstado = false;
+    private bool puertaAbierta = false;
+    private bool palancaActivada = false;
 
     void Start()
     {
-
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        if (puertaAsociada != null)
-        {
-            puertaAnimator = puertaAsociada.GetComponent<Animator>();
-        }
-
-
-        ActualizarSprites();
+       animPuerta = puertaAsociada?.GetComponent<Animator>();
+        animPalanca = palanca?.GetComponent<Animator>();
     }
 
-
-    // Update is called once per frame
-    void Update()
+   void Update()
     {
         if (tipo == TipoPalanca.Boton && estaJugador && Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Interactuo con palanca");
-            puertaAbiertaEstado = !puertaAbiertaEstado;
-            if (puertaAnimator != null)
-            {
-                puertaAnimator.SetBool("estaAbierta", puertaAbiertaEstado);
-            }
-            ActualizarSprites();
+            palancaActivada = !palancaActivada;
+            puertaAbierta = !puertaAbierta;
+
+            AnimacionesControlador.SetBool(animPalanca, "estaActivada", palancaActivada);
+            AnimacionesControlador.SetBool(animPuerta, "estaAbierta", puertaAbierta);
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+
+   private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
-        Debug.Log("Jugador entró al trigger");
+
         estaJugador = true;
 
         if (tipo == TipoPalanca.Presion)
         {
-            puertaAbiertaEstado = true;
-            if (puertaAnimator != null)
-            {
-                puertaAnimator.SetBool("estaAbierta", true);
-            }
-            ActualizarSprites();
+            puertaAbierta = true;
+            AnimacionesControlador.SetBool(animPuerta, "estaAbierta", true);
         }
     }
 
@@ -71,34 +55,16 @@ public class AbrirPuerta : MonoBehaviour
 
         if (tipo == TipoPalanca.Presion)
         {
-            puertaAbiertaEstado = false;
-            if (puertaAnimator != null)
-            {
-                puertaAnimator.SetBool("estaAbierta", false);
-            }
-            ActualizarSprites();
+            puertaAbierta = false;
+            AnimacionesControlador.SetBool(animPuerta, "estaAbierta", false);
         }
     }
 
-    void ActualizarSprites()
+  public bool EstaAbierta() => puertaAbierta;
+
+    public void Abrir()
     {
-
-        spriteRenderer.sprite = puertaAbiertaEstado ? palancaInclinada : palanca;
+        puertaAbierta = true;
+         AnimacionesControlador.SetBool(animPuerta, "estaAbierta", true);
     }
-
-    public bool EstaAbierta()
-    {
-        return puertaAbiertaEstado;
-    }
-
-    public void ForzarAbrir()
-    {
-        puertaAbiertaEstado = true;
-        if (puertaAnimator != null)
-        {
-            puertaAnimator.SetBool("estaAbierta", true);
-        }
-        ActualizarSprites();
-    }
-
 }

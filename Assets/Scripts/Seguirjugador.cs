@@ -122,6 +122,6 @@ public class Seguirjugador : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.position, new Vector3(distanciaBusquedaX * 2, distanciaBusquedaY * 2, 0));
-        Gizmos.DrawWireSphere(puntoInicial, distanciaMax);
+        Gizmos.DrawWireCube(puntoInicial, new Vector3(distanciaMax, distanciaMax, 0));
     }
 }

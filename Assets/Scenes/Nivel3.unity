@@ -261,7 +261,7 @@ Transform:
   m_GameObject: {fileID: 195918616}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.49, y: -4.175, z: 0.10591778}
+  m_LocalPosition: {x: -13.52, y: -4.27, z: 0.10591778}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -368,7 +368,7 @@ Transform:
   m_GameObject: {fileID: 253664761}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.405, y: -4.175, z: 0.10591778}
+  m_LocalPosition: {x: -10.435, y: -4.27, z: 0.10591778}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -538,7 +538,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 8.716623
+  orthographic size: 8.715669
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -807,17 +807,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2117231752993962927, guid: f8d1deabd80d8494b918ee8656042849, type: 3}
   m_PrefabInstance: {fileID: 1864693175}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &669267189 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7864340968658785622, guid: 3a9395da6ab595b4c90ee29c841ba8c7, type: 3}
-  m_PrefabInstance: {fileID: 1158080088}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8bfcf6dd4ae83c4f92a386dbf1ab553, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &684597847 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2117231752993962927, guid: f8d1deabd80d8494b918ee8656042849, type: 3}
@@ -10204,11 +10193,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1131963506157383919, guid: a0c24b7eab0db65449d3c200902cb282, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.543
+      value: -10.573001
       objectReference: {fileID: 0}
     - target: {fileID: 1131963506157383919, guid: a0c24b7eab0db65449d3c200902cb282, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.183
+      value: -4.278
       objectReference: {fileID: 0}
     - target: {fileID: 1131963506157383919, guid: a0c24b7eab0db65449d3c200902cb282, type: 3}
       propertyPath: m_LocalPosition.z
@@ -10328,6 +10317,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4953900936306403076, guid: 3a9395da6ab595b4c90ee29c841ba8c7, type: 3}
+      propertyPath: palanca
+      value: 
+      objectReference: {fileID: 1158080090}
+    - target: {fileID: -4953900936306403076, guid: 3a9395da6ab595b4c90ee29c841ba8c7, type: 3}
+      propertyPath: puertaAsociada
+      value: 
+      objectReference: {fileID: 1543121121}
     - target: {fileID: 3762424425714932323, guid: 3a9395da6ab595b4c90ee29c841ba8c7, type: 3}
       propertyPath: m_Name
       value: palancaIzq
@@ -10381,6 +10378,22 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a9395da6ab595b4c90ee29c841ba8c7, type: 3}
+--- !u!114 &1158080089 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -4953900936306403076, guid: 3a9395da6ab595b4c90ee29c841ba8c7, type: 3}
+  m_PrefabInstance: {fileID: 1158080088}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158080090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8bfcf6dd4ae83c4f92a386dbf1ab553, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1158080090 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3762424425714932323, guid: 3a9395da6ab595b4c90ee29c841ba8c7, type: 3}
+  m_PrefabInstance: {fileID: 1158080088}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1207142195 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2117231752993962927, guid: f8d1deabd80d8494b918ee8656042849, type: 3}
@@ -10706,13 +10719,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+      propertyPath: requiereAbrir
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: puertaAsociada
       value: 
-      objectReference: {fileID: 1808691337}
+      objectReference: {fileID: 0}
     - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: jugadorAsignado
       value: 
       objectReference: {fileID: 252812881}
+    - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+      propertyPath: palancaAsociada
+      value: 
+      objectReference: {fileID: 1716181443}
     - target: {fileID: 8381649785619027962, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: m_Name
       value: PuertaIzq
@@ -10899,10 +10920,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b708fd8ddb7f1b4db59fd52b4ceb54b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jugador: {fileID: 0}
-  jugadorEspejado: {fileID: 0}
-  velocidadMovimiento: 5
-  tiempoEsperaColision: 0.5
 --- !u!1001 &1716181441
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10911,6 +10928,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4953900936306403076, guid: 3a9395da6ab595b4c90ee29c841ba8c7, type: 3}
+      propertyPath: palanca
+      value: 
+      objectReference: {fileID: 1716181442}
+    - target: {fileID: -4953900936306403076, guid: 3a9395da6ab595b4c90ee29c841ba8c7, type: 3}
+      propertyPath: puertaAsociada
+      value: 
+      objectReference: {fileID: 1365654061}
     - target: {fileID: 3762424425714932323, guid: 3a9395da6ab595b4c90ee29c841ba8c7, type: 3}
       propertyPath: m_Name
       value: palancaDer
@@ -10964,12 +10989,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a9395da6ab595b4c90ee29c841ba8c7, type: 3}
---- !u!114 &1808691337 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7864340968658785622, guid: 3a9395da6ab595b4c90ee29c841ba8c7, type: 3}
+--- !u!1 &1716181442 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3762424425714932323, guid: 3a9395da6ab595b4c90ee29c841ba8c7, type: 3}
   m_PrefabInstance: {fileID: 1716181441}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+--- !u!114 &1716181443 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -4953900936306403076, guid: 3a9395da6ab595b4c90ee29c841ba8c7, type: 3}
+  m_PrefabInstance: {fileID: 1716181441}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716181442}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8bfcf6dd4ae83c4f92a386dbf1ab553, type: 3}
@@ -11138,13 +11168,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+      propertyPath: requiereAbrir
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: puertaAsociada
       value: 
-      objectReference: {fileID: 669267189}
+      objectReference: {fileID: 0}
     - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: jugadorAsignado
       value: 
       objectReference: {fileID: 1318824666}
+    - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+      propertyPath: palancaAsociada
+      value: 
+      objectReference: {fileID: 1158080089}
     - target: {fileID: 8381649785619027962, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: m_Name
       value: PuertaDer
