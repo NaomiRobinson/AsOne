@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static StaticVariables;
 
 public class ReiniciarNivel : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class ReiniciarNivel : MonoBehaviour
 
     public void  Reiniciar(){
           Debug.Log("GameOver");
+          
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

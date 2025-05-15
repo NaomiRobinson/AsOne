@@ -30,6 +30,10 @@ public class AbrirPuerta : MonoBehaviour
 
             AnimacionesControlador.SetBool(animPalanca, "estaActivada", palancaActivada);
             AnimacionesControlador.SetBool(animPuerta, "estaAbierta", puertaAbierta);
+            if(gameObject.CompareTag("lever1")){
+                
+                 Debug.Log("La palanca ha sido activada.");
+            }
         }
     }
 

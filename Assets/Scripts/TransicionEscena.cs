@@ -1,6 +1,10 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Unity.Services.Analytics;
+using Unity.Services.Core;
+using static EventManager;
+using static StaticVariables;
 
 public class TransicionEscena : MonoBehaviour
 {
@@ -45,6 +49,15 @@ public class TransicionEscena : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log("LevelStart: " + scene.name);
+
+       
+        LevelStartEvent LevelStart = new LevelStartEvent
+        { 
+            level = SessionData.level
+        };
+
+        AnalyticsService.Instance.RecordEvent(LevelStart);
+
 
         if (scene.name == "Victoria")
         {

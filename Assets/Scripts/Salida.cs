@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static StaticVariables;
 
 public class Salida : MonoBehaviour
 {
@@ -79,7 +80,7 @@ public class Salida : MonoBehaviour
     {
         Debug.Log("Ambos jugadores están en sus salidas");
         Debug.Log("Completo un nivel");
-
+SessionData.level++;
         TransicionEscena.Instance.Disolversalida(SceneManager.GetActiveScene().buildIndex + 1);
 
     }
