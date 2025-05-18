@@ -3,9 +3,11 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    public int[] nivelesGrupo1 = { 3,4 };  //REVISAR BIEN EL BUILD PROFILE
+    public int[] nivelesGrupo1 = { 3, 4 };  //REVISAR BIEN EL BUILD PROFILE
     public int[] nivelesGrupo2 = { 5, 6 };
     public int grupoActual = 0;
+
+    public int final = 8;
 
     public int SeleccionNiveles = 3; //Index del selector de niveles
 
@@ -74,6 +76,11 @@ public class LevelManager : MonoBehaviour
 
         Debug.LogWarning("Nivel actual no encontrado en el grupo");
         return 0;
+    }
+
+    public void CargarFinal()
+    {
+        TransicionEscena.Instance.Disolversalida(final);
     }
 
 }

@@ -77,6 +77,11 @@ public class TransicionEscena : MonoBehaviour
 
     public void Disolversalida(int IndexEscena)
     {
+        if (IndexEscena <= 0 || IndexEscena >= SceneManager.sceneCountInBuildSettings)
+    {
+        Debug.LogError("Índice de escena inválido: " + IndexEscena);
+        return;
+    }
         disolverCanvasGroup.blocksRaycasts = true;
         disolverCanvasGroup.interactable = true;
 
