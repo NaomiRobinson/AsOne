@@ -10,7 +10,7 @@ public class KeyManager : MonoBehaviour
 
     void Start()
     {
-        if (PlayerPrefs.GetInt("llave" + id, 0) == 1)
+        if (PlayerPrefs.GetInt("llave_" + id, 0) == 1)
         {
             gameObject.gameObject.SetActive(false);
         }
@@ -21,16 +21,18 @@ public class KeyManager : MonoBehaviour
 
     }
 
-    private void OnTriggerEntert2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            PlayerPrefs.SetInt("llave" + id, 1);
+            PlayerPrefs.SetInt("llave_" + id, 1);
             PlayerPrefs.Save();
 
             Destroy(gameObject);
 
         }
     }
+
+
 
 }

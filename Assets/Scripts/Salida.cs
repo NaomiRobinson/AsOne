@@ -79,19 +79,25 @@ public class Salida : MonoBehaviour
     {
         int nivelActual = SceneManager.GetActiveScene().buildIndex;
         int siguiente;
+
         Debug.Log("Ambos jugadores están en sus salidas");
         Debug.Log("Completo un nivel");
-        // SessionData.level++;
-        if (LevelManager.Instance.EsUltimoNivel(nivelActual))
+
+        // Si estamos en el tutorial, ir a la escena "seleccionNiveles"
+        if (nivelActual == LevelManager.Instance.nivelTutorial)
         {
-            siguiente = LevelManager.Instance.SeleccionNiveles; ;
+            siguiente = LevelManager.Instance.SeleccionNiveles;
+        }
+        else if (LevelManager.Instance.EsUltimoNivel(nivelActual))
+        {
+            siguiente = LevelManager.Instance.SeleccionNiveles;
         }
         else
         {
             siguiente = LevelManager.Instance.ObtenerSiguienteNivel(nivelActual);
         }
-        TransicionEscena.Instance.Disolversalida(siguiente);
 
+        TransicionEscena.Instance.Disolversalida(siguiente);
     }
 
 }

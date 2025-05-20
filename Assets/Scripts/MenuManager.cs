@@ -7,7 +7,7 @@ public class MenuManager : MonoBehaviour
     public void PlayGame()
     {
         ReiniciarProgreso();
-        SceneManager.LoadScene("SeleccionNiveles");
+        SceneManager.LoadScene("Tutorial");
     }
 
     public void ShowHelp()

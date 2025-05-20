@@ -3,13 +3,14 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    public int[] nivelesGrupo1 = { 4, 5 };  //REVISAR BIEN EL BUILD PROFILE
-    public int[] nivelesGrupo2 = { 6, 7 };
-    public int grupoActual = 0;
+    public int[] nivelesGrupo1;  //REVISAR BIEN EL BUILD PROFILE
+    public int[] nivelesGrupo2;
+    [HideInInspector] public int grupoActual = 0;
 
-    public int final = 8; //Index de escena de victoria
+    public int nivelTutorial; //Index de escena del tutorial
+    public int final; //Index de escena de victoria
 
-    public int SeleccionNiveles = 3; //Index del selector de niveles
+    public int SeleccionNiveles; //Index del selector de niveles
 
     public static LevelManager Instance;
 
@@ -19,6 +20,12 @@ public class LevelManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            if (nivelesGrupo1 == null || nivelesGrupo1.Length == 0 ||
+           nivelesGrupo2 == null || nivelesGrupo2.Length == 0)
+            {
+                Debug.LogWarning("¡Los grupos de niveles no están configurados en el Inspector!");
+            }
         }
         else
         {
@@ -34,7 +41,11 @@ public class LevelManager : MonoBehaviour
 
     public void SeleccionarGrupo(int grupo)
     {
+        Debug.Log("Seleccionando grupo: " + grupo);
         grupoActual = grupo;
+
+        Debug.Log("nivelesGrupo1: " + string.Join(",", nivelesGrupo1));
+        Debug.Log("nivelesGrupo2: " + string.Join(",", nivelesGrupo2));
 
         int primerNivel = 0;
 
@@ -47,7 +58,7 @@ public class LevelManager : MonoBehaviour
                 primerNivel = nivelesGrupo2[0];
                 break;
         }
-
+        Debug.Log("Cargando nivel con índice: " + primerNivel);
         TransicionEscena.Instance.Disolversalida(primerNivel);
     }
 

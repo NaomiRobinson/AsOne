@@ -37,6 +37,7 @@ public class NivelSeleccionado : MonoBehaviour
         if (other.gameObject == jugadorAsignado)
         {
             estaEnPuerta = false;
+            yaSelecciono = false;
 
             if (animPuerta != null)
             {
@@ -57,29 +58,33 @@ public class NivelSeleccionado : MonoBehaviour
         if (estaEnPuerta && Input.GetKeyDown(KeyCode.Space) && !yaSelecciono)
         {
 
-            if (!esPuertaFinal || (esPuertaFinal && llavesRecolectadas))
+            yaSelecciono = true;
+            if (!esPuertaFinal)
             {
-                yaSelecciono = true;
-
                 AnimacionesControlador.SetBool(animPuerta, "estaAbierta", true);
-                jugadoresEnPuerta++;
-
-                if (jugadoresEnPuerta == 2)
-                {
-                    if (esPuertaFinal)
-                    {
-                        LevelManager.Instance.CargarFinal();
-                    }
-                    else
-                    {
-                        LevelManager.Instance.SeleccionarGrupo(grupoSeleccionado);
-                    }
-                }
             }
-            else
+
+            jugadoresEnPuerta++;
+
+            if (jugadoresEnPuerta == 2)
             {
-                Debug.Log("Faltan partes de la llave para abrir la puerta final");
+                if (esPuertaFinal)
+                {
+                    if (ChequeoLlaves.TodasRecolectadas())
+                    {
+                        AnimacionesControlador.SetBool(animPuerta, "estaAbierta", true);
+                        Debug.Log("¡Todas las llaves están recolectadas!");
+                        LevelManager.Instance.CargarFinal();
+
+                    }
+
+                }
+                else
+                {
+                    LevelManager.Instance.SeleccionarGrupo(grupoSeleccionado);
+                }
             }
         }
     }
 }
+
