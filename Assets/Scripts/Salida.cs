@@ -32,7 +32,7 @@ public class Salida : MonoBehaviour
             }
             if (!requiereAbrir)
             {
-               AnimacionesControlador.SetBool(animPuerta, "estaAbierta", true);
+                AnimacionesControlador.SetBool(animPuerta, "estaAbierta", true);
 
             }
             if (!requiereAbrir && palancaAsociada != null)
@@ -59,7 +59,6 @@ public class Salida : MonoBehaviour
     }
 
 
-
     private void OnTriggerExit2D(Collider2D other)
     {
         if (animPuerta != null)
@@ -78,11 +77,27 @@ public class Salida : MonoBehaviour
 
     private void PasarNivel()
     {
+        int nivelActual = SceneManager.GetActiveScene().buildIndex;
+        int siguiente;
+
         Debug.Log("Ambos jugadores están en sus salidas");
         Debug.Log("Completo un nivel");
-SessionData.level++;
-        TransicionEscena.Instance.Disolversalida(SceneManager.GetActiveScene().buildIndex + 1);
 
+        // Si estamos en el tutorial, ir a la escena "seleccionNiveles"
+        if (nivelActual == LevelManager.Instance.nivelTutorial)
+        {
+            siguiente = LevelManager.Instance.SeleccionNiveles;
+        }
+        else if (LevelManager.Instance.EsUltimoNivel(nivelActual))
+        {
+            siguiente = LevelManager.Instance.SeleccionNiveles;
+        }
+        else
+        {
+            siguiente = LevelManager.Instance.ObtenerSiguienteNivel(nivelActual);
+        }
+
+        TransicionEscena.Instance.Disolversalida(siguiente);
     }
 
 }

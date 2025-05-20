@@ -8,7 +8,7 @@ public class AbrirPuerta : MonoBehaviour
     public GameObject puertaAsociada;
     public GameObject palanca;
 
-     private Animator animPuerta;
+    private Animator animPuerta;
     private Animator animPalanca;
 
     private bool estaJugador = false;
@@ -17,11 +17,11 @@ public class AbrirPuerta : MonoBehaviour
 
     void Start()
     {
-       animPuerta = puertaAsociada?.GetComponent<Animator>();
+        animPuerta = puertaAsociada?.GetComponent<Animator>();
         animPalanca = palanca?.GetComponent<Animator>();
     }
 
-   void Update()
+    void Update()
     {
         if (tipo == TipoPalanca.Boton && estaJugador && Input.GetKeyDown(KeyCode.Space))
         {
@@ -30,15 +30,16 @@ public class AbrirPuerta : MonoBehaviour
 
             AnimacionesControlador.SetBool(animPalanca, "estaActivada", palancaActivada);
             AnimacionesControlador.SetBool(animPuerta, "estaAbierta", puertaAbierta);
-            if(gameObject.CompareTag("lever1")){
-                
-                 Debug.Log("La palanca ha sido activada.");
+            if (gameObject.CompareTag("lever1"))
+            {
+
+                Debug.Log("La palanca ha sido activada.");
             }
         }
     }
 
 
-   private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
 
@@ -64,11 +65,13 @@ public class AbrirPuerta : MonoBehaviour
         }
     }
 
-  public bool EstaAbierta() => puertaAbierta;
+    public bool EstaAbierta() => puertaAbierta;
 
     public void Abrir()
     {
         puertaAbierta = true;
-         AnimacionesControlador.SetBool(animPuerta, "estaAbierta", true);
+        AnimacionesControlador.SetBool(animPuerta, "estaAbierta", true);
     }
+    
+    
 }

@@ -6,8 +6,8 @@ public class MenuManager : MonoBehaviour
 
     public void PlayGame()
     {
-
-        SceneManager.LoadScene("Nivel1");
+        ReiniciarProgreso();
+        SceneManager.LoadScene("Tutorial");
     }
 
     public void ShowHelp()
@@ -22,6 +22,15 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene("Menu");
     }
 
+    public void ReiniciarProgreso()
+    {
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
+    }
 
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 
 }
