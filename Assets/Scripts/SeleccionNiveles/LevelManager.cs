@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    public int[] nivelesGrupo1 = { 3, 4 };  //REVISAR BIEN EL BUILD PROFILE
-    public int[] nivelesGrupo2 = { 5, 6 };
+    public int[] nivelesGrupo1 = { 4, 5 };  //REVISAR BIEN EL BUILD PROFILE
+    public int[] nivelesGrupo2 = { 6, 7 };
     public int grupoActual = 0;
 
-    public int final = 8;
+    public int final = 8; //Index de escena de victoria
 
     public int SeleccionNiveles = 3; //Index del selector de niveles
 

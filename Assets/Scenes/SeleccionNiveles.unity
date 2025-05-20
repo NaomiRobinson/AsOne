@@ -232,7 +232,10 @@ PrefabInstance:
     - {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8381649785619027962, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1544513998}
   m_SourcePrefab: {fileID: 100100000, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
 --- !u!1001 &309167257
 PrefabInstance:
@@ -325,6 +328,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grupoSeleccionado: 2
   jugadorAsignado: {fileID: 1600060879}
+  esPuertaFinal: 0
+  llavesRecolectadas: 0
 --- !u!1001 &366824612
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -639,7 +644,10 @@ PrefabInstance:
     - {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8381649785619027962, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1037171619}
   m_SourcePrefab: {fileID: 100100000, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
 --- !u!1001 &774281661
 PrefabInstance:
@@ -888,6 +896,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1037171618 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8381649785619027962, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+  m_PrefabInstance: {fileID: 666957332}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1037171619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037171618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa842b0943ecac749ab110dc6f6b3cf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grupoSeleccionado: 0
+  jugadorAsignado: {fileID: 309167260}
+  esPuertaFinal: 1
+  llavesRecolectadas: 1
 --- !u!1 &1130402946 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8381649785619027962, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
@@ -907,6 +936,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grupoSeleccionado: 1
   jugadorAsignado: {fileID: 309167260}
+  esPuertaFinal: 0
+  llavesRecolectadas: 0
 --- !u!1001 &1137668494
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -968,6 +999,63 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 362377777}
   m_SourcePrefab: {fileID: 100100000, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+--- !u!1001 &1295240842
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1901952544399599501, guid: e258c8bd4da940045b942b13d34ed585, type: 3}
+      propertyPath: m_Name
+      value: TransicionEscena 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2753586652055955547, guid: e258c8bd4da940045b942b13d34ed585, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.28600603
+      objectReference: {fileID: 0}
+    - target: {fileID: 2753586652055955547, guid: e258c8bd4da940045b942b13d34ed585, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.9933368
+      objectReference: {fileID: 0}
+    - target: {fileID: 2753586652055955547, guid: e258c8bd4da940045b942b13d34ed585, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.031660896
+      objectReference: {fileID: 0}
+    - target: {fileID: 2753586652055955547, guid: e258c8bd4da940045b942b13d34ed585, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2753586652055955547, guid: e258c8bd4da940045b942b13d34ed585, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2753586652055955547, guid: e258c8bd4da940045b942b13d34ed585, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2753586652055955547, guid: e258c8bd4da940045b942b13d34ed585, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2753586652055955547, guid: e258c8bd4da940045b942b13d34ed585, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2753586652055955547, guid: e258c8bd4da940045b942b13d34ed585, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2753586652055955547, guid: e258c8bd4da940045b942b13d34ed585, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e258c8bd4da940045b942b13d34ed585, type: 3}
 --- !u!1 &1419337328
 GameObject:
   m_ObjectHideFlags: 0
@@ -1138,6 +1226,27 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &1544513997 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8381649785619027962, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+  m_PrefabInstance: {fileID: 265203246}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1544513998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544513997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa842b0943ecac749ab110dc6f6b3cf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grupoSeleccionado: 0
+  jugadorAsignado: {fileID: 1600060879}
+  esPuertaFinal: 1
+  llavesRecolectadas: 1
 --- !u!1 &1546732497 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8381649785619027962, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
@@ -1157,6 +1266,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grupoSeleccionado: 0
   jugadorAsignado: {fileID: 0}
+  esPuertaFinal: 0
+  llavesRecolectadas: 0
 --- !u!1001 &1600060876
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5451,6 +5562,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grupoSeleccionado: 0
   jugadorAsignado: {fileID: 0}
+  esPuertaFinal: 0
+  llavesRecolectadas: 0
 --- !u!1 &2037023514
 GameObject:
   m_ObjectHideFlags: 0
@@ -5483,6 +5596,7 @@ MonoBehaviour:
   nivelesGrupo1: 0300000004000000
   nivelesGrupo2: 0500000006000000
   grupoActual: 0
+  final: 8
   SeleccionNiveles: 3
 --- !u!4 &2037023516
 Transform:
@@ -5518,6 +5632,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grupoSeleccionado: 1
   jugadorAsignado: {fileID: 1600060879}
+  esPuertaFinal: 0
+  llavesRecolectadas: 0
 --- !u!1 &2076598094 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8381649785619027962, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
@@ -5537,6 +5653,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grupoSeleccionado: 2
   jugadorAsignado: {fileID: 309167260}
+  esPuertaFinal: 0
+  llavesRecolectadas: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -5558,3 +5676,4 @@ SceneRoots:
   - {fileID: 265203246}
   - {fileID: 666957332}
   - {fileID: 2037023516}
+  - {fileID: 1295240842}
