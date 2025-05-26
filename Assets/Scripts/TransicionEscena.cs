@@ -22,6 +22,7 @@ public class TransicionEscena : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -50,13 +51,19 @@ public class TransicionEscena : MonoBehaviour
     {
         Debug.Log("LevelStart: " + scene.name);
 
-       
-        LevelStartEvent LevelStart = new LevelStartEvent
-        { 
-            level = SessionData.level
-        };
+        if (disolverCanvasGroup != null)
+        {
+            disolverCanvasGroup.alpha = 1f;
+            DisolverEntrada();
+        }
 
-        AnalyticsService.Instance.RecordEvent(LevelStart);
+
+        // LevelStartEvent LevelStart = new LevelStartEvent
+        // { 
+        //     level = SessionData.level
+        // };
+
+        //AnalyticsService.Instance.RecordEvent(LevelStart);
 
 
         if (scene.name == "Victoria")
@@ -77,6 +84,11 @@ public class TransicionEscena : MonoBehaviour
 
     public void Disolversalida(int IndexEscena)
     {
+        if (IndexEscena <= 0 || IndexEscena >= SceneManager.sceneCountInBuildSettings)
+        {
+            Debug.LogError("Índice de escena inválido: " + IndexEscena);
+            return;
+        }
         disolverCanvasGroup.blocksRaycasts = true;
         disolverCanvasGroup.interactable = true;
 
