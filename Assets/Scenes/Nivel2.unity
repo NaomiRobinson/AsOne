@@ -6660,7 +6660,7 @@ GameObject:
   - component: {fileID: 1372376166}
   m_Layer: 0
   m_Name: Obstaculos
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7452,8 +7452,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e32aa4c7e0a36ac4ca169e103ea11494, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jugador: {fileID: 188882161}
-  jugadorEspejado: {fileID: 1201819693}
+  jugadorIzq: {fileID: 0}
+  jugadorDer: {fileID: 0}
   velocidadX: 5
   particulasIzq: {fileID: 1887557775}
   particulasDer: {fileID: 116515955}
@@ -7565,6 +7565,30 @@ PrefabInstance:
       propertyPath: Target.TrackingTarget
       value: 
       objectReference: {fileID: 1201819697}
+    - target: {fileID: 1959983746066166401, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.7949829
+      objectReference: {fileID: 0}
+    - target: {fileID: 1959983746066166401, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.31070852
+      objectReference: {fileID: 0}
+    - target: {fileID: 4493433886065805347, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.232017
+      objectReference: {fileID: 0}
+    - target: {fileID: 4493433886065805347, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.732291
+      objectReference: {fileID: 0}
+    - target: {fileID: 5322303061146768634, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.7949829
+      objectReference: {fileID: 0}
+    - target: {fileID: 5322303061146768634, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.31070852
+      objectReference: {fileID: 0}
     - target: {fileID: 7678046806179603808, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.287983
@@ -7609,6 +7633,14 @@ PrefabInstance:
       propertyPath: Target.TrackingTarget
       value: 
       objectReference: {fileID: 188882165}
+    - target: {fileID: 8803061160040768657, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.232017
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803061160040768657, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.732291
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

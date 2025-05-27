@@ -2,39 +2,43 @@ using UnityEngine;
 
 public class BloquearInvertirGravedad : MonoBehaviour
 {
-    public enum AfectaA { JugadorIzq, JugadorDer }
-    public AfectaA afectaA; // Elegir desde el Inspector
+    private MovimientoJugador movimientoJugador;
 
-    public MovimientoJugador movimientoJugador;
+    private void Start()
+    {
+        movimientoJugador = FindObjectOfType<MovimientoJugador>();
+        if (movimientoJugador == null)
+        {
+            Debug.LogWarning($"[BloquearInvertirGravedad] No se encontró MovimientoJugador en la escena para {gameObject.name}");
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (EsPersonajeObjetivo(other.gameObject))
+        if (other.CompareTag("JugadorIzq"))
         {
-            Debug.Log($"[BloquearInvertirGravedad] Entró {other.name} a la zona {gameObject.name}");
-            movimientoJugador.PuedeInvertir(this, false);
+            movimientoJugador.PuedeInvertir(MovimientoJugador.Jugador.Izq, false);
+            Debug.Log($"[BloquearInvertirGravedad] JugadorIzq entró a la zona {gameObject.name}");
+        }
+        else if (other.CompareTag("JugadorDer"))
+        {
+            movimientoJugador.PuedeInvertir(MovimientoJugador.Jugador.Der, false);
+            Debug.Log($"[BloquearInvertirGravedad] JugadorDer entró a la zona {gameObject.name}");
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (EsPersonajeObjetivo(other.gameObject))
-        {
-            Debug.Log($"[BloquearInvertirGravedad] Salió {other.name} de la zona {gameObject.name}");
-            movimientoJugador.PuedeInvertir(this, true);
-        }
-    }
+        if (other.CompareTag("JugadorIzq"))
 
-    private bool EsPersonajeObjetivo(GameObject objeto)
-    {
-        switch (afectaA)
         {
-            case AfectaA.JugadorIzq:
-                return objeto == movimientoJugador.jugador;
-            case AfectaA.JugadorDer:
-                return objeto == movimientoJugador.jugadorEspejado;
-            default:
-                return false;
+            movimientoJugador.PuedeInvertir(MovimientoJugador.Jugador.Izq, true);
+            Debug.Log($"[BloquearInvertirGravedad] JugadorIzq salió de la zona {gameObject.name}");
+        }
+        else if (other.CompareTag("JugadorDer"))
+        {
+            movimientoJugador.PuedeInvertir(MovimientoJugador.Jugador.Der, true);
+            Debug.Log($"[BloquearInvertirGravedad] JugadorDer salió de la zona {gameObject.name}");
         }
     }
 }

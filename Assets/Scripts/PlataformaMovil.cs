@@ -36,7 +36,7 @@ public class PlataformaMovil : MonoBehaviour
 
    private void OnCollisionEnter2D(Collision2D other)
 {
-    if (other.gameObject.CompareTag("Player"))
+    if (other.gameObject.CompareTag("JugadorIzq") || other.gameObject.CompareTag("JugadorDer"))
     {
         
         foreach (ContactPoint2D contacto in other.contacts)
@@ -62,7 +62,7 @@ public class PlataformaMovil : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("JugadorIzq") || other.gameObject.CompareTag("JugadorDer"))
         {
             other.transform.SetParent(null);
         }

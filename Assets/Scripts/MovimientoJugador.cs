@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class MovimientoJugador : MonoBehaviour
 {
-    public GameObject jugador;
-    public GameObject jugadorEspejado;
+    public GameObject jugadorIzq;
+    public GameObject jugadorDer;
     private Rigidbody2D rb;
     private Rigidbody2D rbEspejado;
     float velocidadMaximaY = 10f;
@@ -17,12 +17,9 @@ public class MovimientoJugador : MonoBehaviour
     private bool puedeInvertirJugador = true;
     private bool puedeInvertirEspejado = true;
 
-    public bool gravedadInvertida = false;
-
     private bool estaIndicadorJugador = true;
 
-    public BloquearInvertirGravedad bloqueoJugador;
-    public BloquearInvertirGravedad bloqueoEspejado;
+    public enum Jugador { Izq, Der }
 
     private Animator animatorJugador;
     private Animator animatorEspejado;
@@ -30,11 +27,11 @@ public class MovimientoJugador : MonoBehaviour
 
     void Start()
     {
-        rb = jugador.GetComponent<Rigidbody2D>();
-        rbEspejado = jugadorEspejado.GetComponent<Rigidbody2D>();
+        rb = jugadorIzq.GetComponent<Rigidbody2D>();
+        rbEspejado = jugadorDer.GetComponent<Rigidbody2D>();
 
-        animatorJugador = jugador.GetComponent<Animator>();
-        animatorEspejado = jugadorEspejado.GetComponent<Animator>();
+        animatorJugador = jugadorIzq.GetComponent<Animator>();
+        animatorEspejado = jugadorDer.GetComponent<Animator>();
 
         rb.gravityScale = 1f;
         rbEspejado.gravityScale = 1f;
@@ -90,27 +87,27 @@ public class MovimientoJugador : MonoBehaviour
         rbEspejado.linearVelocity = new Vector2(-direccion * velocidadX, rbEspejado.linearVelocity.y);
 
         int flipX = direccion < 0 ? 1 : -1;
-        SetFlipX(jugador, flipX);
-        SetFlipX(jugadorEspejado, flipX);
+        SetFlipX(jugadorIzq, flipX);
+        SetFlipX(jugadorDer, flipX);
 
         desactivarIndicador();
     }
 
     void CambiarGravedad(bool invertir)
     {
-        gravedadInvertida = invertir;
+
         float gravedad = invertir ? -1f : 1f;
         int flipY = invertir ? -1 : 1;
 
         if (puedeInvertirJugador)
         {
             rb.gravityScale = gravedad;
-            SetFlipY(jugador, flipY);
+            SetFlipY(jugadorIzq, flipY);
         }
         if (puedeInvertirEspejado)
         {
             rbEspejado.gravityScale = gravedad;
-            SetFlipY(jugadorEspejado, flipY);
+            SetFlipY(jugadorDer, flipY);
         }
 
         if (puedeInvertirJugador || puedeInvertirEspejado)
@@ -169,19 +166,19 @@ public class MovimientoJugador : MonoBehaviour
 
     }
 
-    public void PuedeInvertir(BloquearInvertirGravedad quien, bool estado)
+   public void PuedeInvertir(Jugador jugador, bool estado)
+{
+    if (jugador == Jugador.Izq)
     {
-        if (quien == bloqueoJugador)
-        {
-            puedeInvertirJugador = estado;
-            Debug.Log($"[MovimientoJugador] bloqueoJugador puedeInvertirJugador = {estado}");
-        }
-        else if (quien == bloqueoEspejado)
-        {
-            puedeInvertirEspejado = estado;
-            Debug.Log($"[MovimientoJugador] bloqueoEspejado puedeInvertirEspejado = {estado}");
-        }
+        puedeInvertirJugador = estado;
+        Debug.Log($"[MovimientoJugador] puedeInvertirJugador = {estado}");
     }
+    else if (jugador == Jugador.Der)
+    {
+        puedeInvertirEspejado = estado;
+        Debug.Log($"[MovimientoJugador] puedeInvertirEspejado = {estado}");
+    }
+}
 
 
 }
