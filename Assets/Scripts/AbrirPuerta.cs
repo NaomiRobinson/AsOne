@@ -50,12 +50,12 @@ public class AbrirPuerta : MonoBehaviour
         
         
             if (!moverEste) return;
-        Debug.Log("Portón: " + porton + " | Moviendo hacia: " + (porton ? "B" : "A"));
+        Debug.Log("PortÃ³n: " + porton + " | Moviendo hacia: " + (porton ? "B" : "A"));
 
-        // Elegir el punto de destino según el estado de la variable
+        // Elegir el punto de destino segÃºn el estado de la variable
         target = porton ? puntoB.position : puntoA.position;
 
-            // Mover el rectángulo hacia el destino
+            // Mover el rectÃ¡ngulo hacia el destino
             //transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
             GetComponent<Rigidbody2D>().MovePosition(Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime));
 
@@ -68,7 +68,8 @@ public class AbrirPuerta : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") || !other.CompareTag("Caja")) return;
+
+        if (!(other.CompareTag("JugadorIzq") || other.CompareTag("JugadorDer") || other.CompareTag("Caja"))) return;
 
         estaJugador = true;
 
@@ -82,7 +83,11 @@ public class AbrirPuerta : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
+
+        if (!(other.CompareTag("JugadorIzq") || other.CompareTag("JugadorDer") || other.CompareTag("Caja"))) return;
+
         if (other.CompareTag("Player") || !other.CompareTag("Caja")) return;
+
 
         estaJugador = false;
 
