@@ -38,7 +38,7 @@ public class AbrirCompuerta : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag("Player")) return;
+        if (!(other.CompareTag("Player") || other.CompareTag("Caja"))) return;
 
         estaJugador = true;
 
@@ -51,7 +51,7 @@ public class AbrirCompuerta : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (!other.CompareTag("Player")) return;
+        if (!(other.CompareTag("Player") ||  other.CompareTag("Caja"))) return;
 
         estaJugador = false;
 
