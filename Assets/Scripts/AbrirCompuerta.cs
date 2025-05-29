@@ -37,7 +37,7 @@ public class AbrirCompuerta : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!(other.CompareTag("JugadorIzq") || other.CompareTag("JugadorDer") || other.CompareTag("Caja"))) return;
-
+        estaJugador = true;
         objetosEnPresion++;
 
         if (tipo == TipoPalanca.Presion && objetosEnPresion > 0)
@@ -50,7 +50,7 @@ public class AbrirCompuerta : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         if (!(other.CompareTag("JugadorIzq") || other.CompareTag("JugadorDer") || other.CompareTag("Caja"))) return;
-
+        estaJugador = false;
         objetosEnPresion = Mathf.Max(0, objetosEnPresion - 1); // por seguridad, no baja de cero
 
         if (tipo == TipoPalanca.Presion && objetosEnPresion == 0)
