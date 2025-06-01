@@ -36,7 +36,7 @@ public class TrampaMovimiento : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Walls"))
+        if (other.gameObject.CompareTag("Walls"))
         {
             rb2D.constraints = RigidbodyConstraints2D.FreezeAll;
 

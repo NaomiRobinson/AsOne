@@ -5,6 +5,9 @@ public class LevelManager : MonoBehaviour
 {
     public int[] nivelesGrupo1;  //REVISAR BIEN EL BUILD PROFILE
     public int[] nivelesGrupo2;
+    public int[] nivelesGrupo3;
+
+
     [HideInInspector] public int grupoActual = 0;
 
     public int nivelTutorial; //Index de escena del tutorial
@@ -21,10 +24,11 @@ public class LevelManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
-            if (nivelesGrupo1 == null || nivelesGrupo1.Length == 0 ||
-           nivelesGrupo2 == null || nivelesGrupo2.Length == 0)
+            if ((nivelesGrupo1 == null || nivelesGrupo1.Length == 0) ||
+                (nivelesGrupo2 == null || nivelesGrupo2.Length == 0) ||
+                (nivelesGrupo3 == null || nivelesGrupo3.Length == 0))
             {
-                Debug.LogWarning("¡Los grupos de niveles no están configurados en el Inspector!");
+                Debug.LogWarning("¡Uno o más grupos de niveles no están configurados en el Inspector!");
             }
         }
         else
@@ -35,8 +39,8 @@ public class LevelManager : MonoBehaviour
 
     public bool EsUltimoNivel(int nivelActual)
     {
-        int[] grupo = grupoActual == 1 ? nivelesGrupo1 : nivelesGrupo2;
-        return nivelActual == grupo[grupo.Length - 1];
+        int[] grupo = ObtenerGrupoActual();
+        return grupo.Length > 0 && nivelActual == grupo[grupo.Length - 1];
     }
 
     public void SeleccionarGrupo(int grupo)
@@ -46,6 +50,7 @@ public class LevelManager : MonoBehaviour
 
         Debug.Log("nivelesGrupo1: " + string.Join(",", nivelesGrupo1));
         Debug.Log("nivelesGrupo2: " + string.Join(",", nivelesGrupo2));
+        Debug.Log("nivelesGrupo3: " + string.Join(",", nivelesGrupo3));
 
         int primerNivel = 0;
 
@@ -57,6 +62,12 @@ public class LevelManager : MonoBehaviour
             case 2:
                 primerNivel = nivelesGrupo2[0];
                 break;
+            case 3:
+                primerNivel = nivelesGrupo3[0];
+                break;
+            default:
+                Debug.LogError("Grupo inválido seleccionado: " + grupo);
+                return;
         }
         Debug.Log("Cargando nivel con índice: " + primerNivel);
         TransicionEscena.Instance.Disolversalida(primerNivel);
@@ -68,9 +79,11 @@ public class LevelManager : MonoBehaviour
         {
             1 => nivelesGrupo1,
             2 => nivelesGrupo2,
+            3 => nivelesGrupo3,
             _ => new int[0],
         };
     }
+
 
 
     public int ObtenerSiguienteNivel(int nivelActual)
