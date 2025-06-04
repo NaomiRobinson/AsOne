@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class MovimientoJugador : MonoBehaviour
@@ -18,6 +19,9 @@ public class MovimientoJugador : MonoBehaviour
     private bool puedeInvertirEspejado = true;
 
     private bool estaIndicadorJugador = true;
+
+    //varaible de cheatmode
+    public bool modoInvencible = false;
 
     public enum Jugador { Izq, Der }
 
@@ -72,6 +76,20 @@ public class MovimientoJugador : MonoBehaviour
         {
             CambiarGravedad(false);
         }
+
+        //CHEAT MODE
+        if (Input.GetKey(KeyCode.I))
+        {
+            if (modoInvencible == true)
+            {
+                modoInvencible = false;
+                Debug.Log("modo invencible: " + modoInvencible);
+            }
+            modoInvencible = true;
+            Debug.Log("modo invencible: " + modoInvencible);
+
+        }
+
     }
 
     void FixedUpdate()

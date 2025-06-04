@@ -7,6 +7,8 @@ public class BalaEnemigo : MonoBehaviour
     public float velocidad;
     public int daño;
 
+    public bool modoInvencible { get; private set; }
+
     void Start()
     {
 
@@ -19,7 +21,7 @@ public class BalaEnemigo : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("JugadorIzq") || collision.gameObject.CompareTag("JugadorDer"))
+        if ((collision.gameObject.CompareTag("JugadorIzq")& modoInvencible == false )|| (collision.gameObject.CompareTag("JugadorDer") & modoInvencible == false))
         {
 
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
