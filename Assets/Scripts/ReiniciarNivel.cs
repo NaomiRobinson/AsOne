@@ -4,13 +4,17 @@ using static StaticVariables;
 
 public class ReiniciarNivel : MonoBehaviour
 {
-    public bool modoInvencible { get; private set; }
+    public MovimientoJugador movimientoJugador;
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if ((collision.gameObject.CompareTag("Enemy") ) & modoInvencible == false || (collision.gameObject.CompareTag("Obstacle") & modoInvencible == false))
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Obstacle"))
         {
-           Reiniciar();
+            if (movimientoJugador.modoInvencible == false)
+            {
+                Reiniciar();
+            }
+
         }
     }
 

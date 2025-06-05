@@ -8,7 +8,7 @@ public class PlataformaMovil : MonoBehaviour
     private int siguientePlataforma = 1;
     private bool ordenPlataformas = true;
 
-    public bool modoInvencible { get; private set; }
+    public MovimientoJugador movimientoJugador;
 
     private void Update()
     {
@@ -43,7 +43,7 @@ public class PlataformaMovil : MonoBehaviour
         
         foreach (ContactPoint2D contacto in other.contacts)
         {
-            if (contacto.normal.y > 0.5f & modoInvencible == false) // El jugador toca desde abajo
+            if (contacto.normal.y > 0.5f & movimientoJugador.modoInvencible == false) // El jugador toca desde abajo
             {
                 Debug.Log("El jugador murió al tocar la plataforma desde abajo");
 

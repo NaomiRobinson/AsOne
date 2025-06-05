@@ -21,7 +21,7 @@ public class MovimientoJugador : MonoBehaviour
     private bool estaIndicadorJugador = true;
 
     //varaible de cheatmode
-    public bool modoInvencible = false;
+    public bool modoInvencible { get; private set; } = false;
 
     public enum Jugador { Izq, Der }
 
@@ -78,17 +78,12 @@ public class MovimientoJugador : MonoBehaviour
         }
 
         //CHEAT MODE
-        if (Input.GetKey(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.I))
         {
-            if (modoInvencible == true)
-            {
-                modoInvencible = false;
-                Debug.Log("modo invencible: " + modoInvencible);
-            }
-            modoInvencible = true;
+            modoInvencible = !modoInvencible;
             Debug.Log("modo invencible: " + modoInvencible);
-
         }
+       
 
     }
 
