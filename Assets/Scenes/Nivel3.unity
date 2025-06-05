@@ -284,6 +284,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6902914912937275085, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
+      propertyPath: movimientoJugador
+      value: 
+      objectReference: {fileID: 1702877485}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11092,6 +11096,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1212816499475459998, guid: e085413049cdd354383103d7e69a3668, type: 3}
+      propertyPath: movimientoJugador
+      value: 
+      objectReference: {fileID: 1702877485}
     - target: {fileID: 4535517584813565001, guid: e085413049cdd354383103d7e69a3668, type: 3}
       propertyPath: m_CollisionDetection
       value: 1
@@ -11181,6 +11189,18 @@ PrefabInstance:
       propertyPath: Target.TrackingTarget
       value: 
       objectReference: {fileID: 1318824667}
+    - target: {fileID: 4493433886065805347, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.2953496
+      objectReference: {fileID: 0}
+    - target: {fileID: 4493433886065805347, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -6.5822916
+      objectReference: {fileID: 0}
+    - target: {fileID: 5322303061146768634, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.70466
+      objectReference: {fileID: 0}
     - target: {fileID: 6404191398316901274, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: BoundingShape2D
       value: 
@@ -11452,8 +11472,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e32aa4c7e0a36ac4ca169e103ea11494, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jugador: {fileID: 252812881}
-  jugadorEspejado: {fileID: 1318824666}
+  jugadorIzq: {fileID: 252812881}
+  jugadorDer: {fileID: 1318824666}
   velocidadX: 5
   particulasIzq: {fileID: 252812883}
   particulasDer: {fileID: 1318824668}
@@ -11854,6 +11874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf7e8eece65375341bd5384d484e992b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movimientoJugador: {fileID: 0}
 --- !u!66 &2134995088
 CompositeCollider2D:
   m_ObjectHideFlags: 0
