@@ -5,6 +5,7 @@ public class MenuPausa : MonoBehaviour
 {
     public GameObject PanelDePausa;
 
+
     private bool juegoPausado = false;
 
     public void PausarJuego()
@@ -19,6 +20,16 @@ public class MenuPausa : MonoBehaviour
         juegoPausado = false;
         Time.timeScale = 1f; //renauda el juego
         PanelDePausa.SetActive(false); //oculta el panel
+    }
+
+    public void RNivel()
+    {
+        juegoPausado = false;
+        Time.timeScale = 1f;
+        PanelDePausa.SetActive(false);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
     }
 
     public void VolverMenuPrin()
