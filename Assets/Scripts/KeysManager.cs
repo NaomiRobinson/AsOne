@@ -23,7 +23,7 @@ public class KeyManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("JugadorIzq") || other.CompareTag("JugadorDer"))
         {
             PlayerPrefs.SetInt("llave_" + id, 1);
             PlayerPrefs.Save();

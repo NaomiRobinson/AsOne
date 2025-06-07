@@ -14,6 +14,9 @@ public class Seguirjugador : MonoBehaviour
     public float velocidad;
 
     public float distanciaMax;
+    public Vector3 puntoA;
+    public Vector3 puntoB;
+    private Vector3 objetivoPatrulla;
 
     public Vector3 puntoInicial;
 
@@ -22,14 +25,17 @@ public class Seguirjugador : MonoBehaviour
 
     public enum EstadosMovimiento
     {
-        Esperando,
+        Patrullando,
         Siguiendo,
         Volviendo,
     }
 
     void Start()
     {
-        puntoInicial = transform.position;
+        puntoA = transform.position;
+        puntoB = puntoA + new Vector3(5f, 0f, 0f); // Distancia de patrullaje configurable
+        objetivoPatrulla = puntoB;
+        estadoActual = EstadosMovimiento.Patrullando;
     }
 
 
@@ -37,8 +43,8 @@ public class Seguirjugador : MonoBehaviour
     {
         switch (estadoActual)
         {
-            case EstadosMovimiento.Esperando:
-                EstadoEsperando();
+            case EstadosMovimiento.Patrullando:
+                EstadoPatrullando();
                 break;
             case EstadosMovimiento.Siguiendo:
                 EstadoSiguiendo();
@@ -48,12 +54,8 @@ public class Seguirjugador : MonoBehaviour
                 break;
         }
 
-    }
-
-    private void EstadoEsperando()
-    {
+        // Detectar jugador en cualquier estado
         Collider2D jugadorCollider = Physics2D.OverlapBox(transform.position, new Vector2(distanciaBusquedaX * 2, distanciaBusquedaY * 2), 0f, capaJugador);
-
         if (jugadorCollider)
         {
             transformJugador = jugadorCollider.transform;
@@ -61,6 +63,24 @@ public class Seguirjugador : MonoBehaviour
         }
     }
 
+    private void EstadoPatrullando()
+    {
+        rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+        // Mover hacia el objetivo actual de patrullaje
+        if (transform.position.x < objetivoPatrulla.x)
+            rb2D.linearVelocity = new Vector2(velocidad, rb2D.linearVelocity.y);
+        else
+            rb2D.linearVelocity = new Vector2(-velocidad, rb2D.linearVelocity.y);
+
+        GirarAObjetivo(objetivoPatrulla);
+
+        // Cambiar de dirección si llega al punto
+        if (Vector2.Distance(transform.position, objetivoPatrulla) < 0.1f)
+        {
+            objetivoPatrulla = (objetivoPatrulla == puntoA) ? puntoB : puntoA;
+        }
+    }
     private void EstadoSiguiendo()
     {
         rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -72,8 +92,7 @@ public class Seguirjugador : MonoBehaviour
 
         GirarAObjetivo(transformJugador.position);
 
-        if (Vector2.Distance(transform.position, puntoInicial) > distanciaMax ||
-            Vector2.Distance(transform.position, transformJugador.position) > distanciaMax)
+        if (Vector2.Distance(transform.position, transformJugador.position) > distanciaMax)
         {
             estadoActual = EstadosMovimiento.Volviendo;
             transformJugador = null;
@@ -84,18 +103,18 @@ public class Seguirjugador : MonoBehaviour
     {
         rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
 
-        if (transform.position.x < puntoInicial.x)
+        Vector3 objetivo = (Vector2.Distance(transform.position, puntoA) < Vector2.Distance(transform.position, puntoB)) ? puntoA : puntoB;
+
+        if (transform.position.x < objetivo.x)
             rb2D.linearVelocity = new Vector2(velocidad, rb2D.linearVelocity.y);
         else
             rb2D.linearVelocity = new Vector2(-velocidad, rb2D.linearVelocity.y);
 
-        GirarAObjetivo(puntoInicial);
+        GirarAObjetivo(objetivo);
 
-        if (Mathf.Abs(transform.position.x - puntoInicial.x) < 0.1f)
+        if (Vector2.Distance(transform.position, objetivo) < 0.1f)
         {
-            rb2D.linearVelocity = Vector2.zero;
-            rb2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
-            estadoActual = EstadosMovimiento.Esperando;
+            estadoActual = EstadosMovimiento.Patrullando;
         }
     }
 
@@ -115,13 +134,18 @@ public class Seguirjugador : MonoBehaviour
     private void Girar()
     {
         mirandoDer = !mirandoDer;
-        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + 180, 0);
+        Vector3 escala = transform.localScale;
+        escala.x *= -1;
+        transform.localScale = escala;
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.position, new Vector3(distanciaBusquedaX * 2, distanciaBusquedaY * 2, 0));
-        Gizmos.DrawWireCube(puntoInicial, new Vector3(distanciaMax, distanciaMax, 0));
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(puntoA, 0.2f);
+        Gizmos.DrawSphere(puntoB, 0.2f);
     }
 }

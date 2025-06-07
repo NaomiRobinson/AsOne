@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8076756888447139163}
   - component: {fileID: 488133381554012457}
   - component: {fileID: 2981384361896742741}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: ParticulasDer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4799,7 +4799,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 467012497
-  m_SortingLayer: 2
+  m_SortingLayer: 0
   m_SortingOrder: -1
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -4848,9 +4848,9 @@ GameObject:
   - component: {fileID: 4064564676918099105}
   - component: {fileID: 1212816499475459998}
   - component: {fileID: 5374062808057081019}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: JugadorDer
-  m_TagString: Player
+  m_TagString: JugadorDer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4865,7 +4865,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.4, y: -9.29, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8076756888447139163}
@@ -4913,7 +4913,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 467012497
-  m_SortingLayer: 2
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -3136775422526334604, guid: dfdd8ea88b7a5ce4683f80aa27075c9d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5012,7 +5012,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jugadorAsignado: {fileID: 5911614825838371142}
-  puertaAsociada: {fileID: 0}
+  palancaAsociada: {fileID: 0}
   requiereAbrir: 0
 --- !u!114 &1212816499475459998
 MonoBehaviour:

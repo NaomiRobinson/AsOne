@@ -6,14 +6,12 @@ public class AbrirCompuerta : MonoBehaviour
     public TipoPalanca tipo = TipoPalanca.Boton;
     public GameObject compuertaAsociada;
     public GameObject palanca;
-    // public Transform puntoA;
-    // public Transform puntoB;
-    // public float speed = 2f;
+
 
     private Animator animPalanca;
     private Animator animCompuerta;
 
-    private Vector3 target;
+    private int objetosEnPresion = 0;
 
     private bool estaJugador = false;
     private bool compuertaAbierta = false;
@@ -38,11 +36,11 @@ public class AbrirCompuerta : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag("Player")) return;
-
+        if (!(other.CompareTag("JugadorIzq") || other.CompareTag("JugadorDer") || other.CompareTag("Caja"))) return;
         estaJugador = true;
+        objetosEnPresion++;
 
-        if (tipo == TipoPalanca.Presion)
+        if (tipo == TipoPalanca.Presion && objetosEnPresion > 0)
         {
             compuertaAbierta = true;
             ActualizarEstado();
@@ -51,11 +49,11 @@ public class AbrirCompuerta : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (!other.CompareTag("Player")) return;
-
+        if (!(other.CompareTag("JugadorIzq") || other.CompareTag("JugadorDer") || other.CompareTag("Caja"))) return;
         estaJugador = false;
+        objetosEnPresion = Mathf.Max(0, objetosEnPresion - 1); // por seguridad, no baja de cero
 
-        if (tipo == TipoPalanca.Presion)
+        if (tipo == TipoPalanca.Presion && objetosEnPresion == 0)
         {
             compuertaAbierta = false;
             ActualizarEstado();
@@ -67,26 +65,26 @@ public class AbrirCompuerta : MonoBehaviour
     public void Cerrar()
     {
         compuertaAbierta = false;
-         ActualizarEstado();
+        ActualizarEstado();
     }
     public void Abrir()
     {
         compuertaAbierta = true;
-          ActualizarEstado();
+        ActualizarEstado();
 
     }
-    
+
     private void ActualizarEstado()
-{
-    if (animPalanca != null)
     {
-        AnimacionesControlador.SetBool(animPalanca, "estaActivada", compuertaAbierta);
-    }
+        if (animPalanca != null)
+        {
+            AnimacionesControlador.SetBool(animPalanca, "estaActivada", compuertaAbierta);
+        }
 
-    if (animCompuerta != null)
-    {
-        AnimacionesControlador.SetBool(animCompuerta, "estaAbierta", compuertaAbierta);
+        if (animCompuerta != null)
+        {
+            AnimacionesControlador.SetBool(animCompuerta, "estaAbierta", compuertaAbierta);
+        }
     }
-}
 
 }
