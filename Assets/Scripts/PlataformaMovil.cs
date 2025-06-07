@@ -7,7 +7,9 @@ public class PlataformaMovil : MonoBehaviour
     [SerializeField] private float velocidad;
     private int siguientePlataforma = 1;
     private bool ordenPlataformas = true;
-  
+
+    public MovimientoJugador movimientoJugador;
+
     private void Update()
     {
         if (ordenPlataformas && siguientePlataforma + 1 >= puntosMovimiento.Length)
@@ -36,12 +38,12 @@ public class PlataformaMovil : MonoBehaviour
 
    private void OnCollisionEnter2D(Collision2D other)
 {
-    if (other.gameObject.CompareTag("Player"))
+    if (other.gameObject.CompareTag("JugadorIzq") || other.gameObject.CompareTag("JugadorDer"))
     {
         
         foreach (ContactPoint2D contacto in other.contacts)
         {
-            if (contacto.normal.y > 0.5f) // El jugador toca desde abajo
+            if (contacto.normal.y > 0.5f & movimientoJugador.modoInvencible == false) // El jugador toca desde abajo
             {
                 Debug.Log("El jugador murió al tocar la plataforma desde abajo");
 
@@ -62,7 +64,7 @@ public class PlataformaMovil : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("JugadorIzq") || other.gameObject.CompareTag("JugadorDer"))
         {
             other.transform.SetParent(null);
         }

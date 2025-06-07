@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 
 public class MovimientoJugador : MonoBehaviour
 {
-    public GameObject jugador;
-    public GameObject jugadorEspejado;
+    public GameObject jugadorIzq;
+    public GameObject jugadorDer;
     private Rigidbody2D rb;
     private Rigidbody2D rbEspejado;
     float velocidadMaximaY = 10f;
@@ -14,9 +15,15 @@ public class MovimientoJugador : MonoBehaviour
 
     [SerializeField] private ParticleSystem indicadorJugador;
 
-    private bool gravedadInvertida = false;
+    private bool puedeInvertirJugador = true;
+    private bool puedeInvertirEspejado = true;
 
     private bool estaIndicadorJugador = true;
+
+    //varaible de cheatmode
+    public bool modoInvencible { get; private set; } = false;
+
+    public enum Jugador { Izq, Der }
 
     private Animator animatorJugador;
     private Animator animatorEspejado;
@@ -24,11 +31,11 @@ public class MovimientoJugador : MonoBehaviour
 
     void Start()
     {
-        rb = jugador.GetComponent<Rigidbody2D>();
-        rbEspejado = jugadorEspejado.GetComponent<Rigidbody2D>();
+        rb = jugadorIzq.GetComponent<Rigidbody2D>();
+        rbEspejado = jugadorDer.GetComponent<Rigidbody2D>();
 
-        animatorJugador = jugador.GetComponent<Animator>();
-        animatorEspejado = jugadorEspejado.GetComponent<Animator>();
+        animatorJugador = jugadorIzq.GetComponent<Animator>();
+        animatorEspejado = jugadorDer.GetComponent<Animator>();
 
         rb.gravityScale = 1f;
         rbEspejado.gravityScale = 1f;
@@ -38,67 +45,48 @@ public class MovimientoJugador : MonoBehaviour
 
     void Update()
     {
-
         float movimientoHorizontal = 0f;
 
-        // Movimiento en X (libre y espejado)
         if (Input.GetKey(KeyCode.A))
         {
             movimientoHorizontal = -1f;
-            rb.linearVelocity = new Vector2(movimientoHorizontal * velocidadX, rb.linearVelocity.y);
-            rbEspejado.linearVelocity = new Vector2(-movimientoHorizontal * velocidadX, rbEspejado.linearVelocity.y);
-
-            SetFlipX(jugador, 1);
-            SetFlipX(jugadorEspejado, 1);
-            desactivarIndicador();
+            MoverHorizontal(movimientoHorizontal);
         }
         else if (Input.GetKey(KeyCode.D))
         {
             movimientoHorizontal = 1f;
-            rb.linearVelocity = new Vector2(movimientoHorizontal * velocidadX, rb.linearVelocity.y);
-            rbEspejado.linearVelocity = new Vector2(-movimientoHorizontal * velocidadX, rbEspejado.linearVelocity.y);
-
-            SetFlipX(jugador, -1);
-            SetFlipX(jugadorEspejado, -1);
-            desactivarIndicador();
-
+            MoverHorizontal(movimientoHorizontal);
         }
         else
         {
-            // Frena en X si no está moviéndose
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
             rbEspejado.linearVelocity = new Vector2(0, rbEspejado.linearVelocity.y);
         }
 
-        // Invertir gravedad con W, restaurar con S
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            particulasIzq.Play();
-            particulasDer.Play();
-            InvertirGravedad(true);
-            SetFlipY(jugador, -1);
-            SetFlipY(jugadorEspejado, -1);
-            desactivarIndicador();
-
-        }
-        else if (Input.GetKeyDown(KeyCode.S))
-        {
-            particulasIzq.Play();
-            particulasDer.Play();
-            InvertirGravedad(false);
-            SetFlipY(jugador, 1);
-            SetFlipY(jugadorEspejado, 1);
-            desactivarIndicador();
-
-        }
-
-
+        // Actualizar animaciones correctamente
         animatorJugador.SetFloat("Horizontal", Mathf.Abs(movimientoHorizontal));
         animatorEspejado.SetFloat("Horizontal", Mathf.Abs(movimientoHorizontal));
 
+        // Invertir gravedad con W, restaurar con S
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            CambiarGravedad(true);
+        }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            CambiarGravedad(false);
+        }
 
+        //CHEAT MODE
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            modoInvencible = !modoInvencible;
+            Debug.Log("modo invencible: " + modoInvencible);
+        }
+       
 
     }
+
     void FixedUpdate()
     {
         // Limitar velocidad en Y
@@ -106,13 +94,48 @@ public class MovimientoJugador : MonoBehaviour
         rbEspejado.linearVelocity = new Vector2(rbEspejado.linearVelocity.x, Mathf.Clamp(rbEspejado.linearVelocity.y, -velocidadMaximaY, velocidadMaximaY));
     }
 
-    void InvertirGravedad(bool invertir)
+    void MoverHorizontal(float direccion)
     {
-        gravedadInvertida = invertir;
-        float gravedad = invertir ? -1f : 1f;
-        rb.gravityScale = gravedad;
-        rbEspejado.gravityScale = gravedad;
+        rb.linearVelocity = new Vector2(direccion * velocidadX, rb.linearVelocity.y);
+        rbEspejado.linearVelocity = new Vector2(-direccion * velocidadX, rbEspejado.linearVelocity.y);
+
+        int flipX = direccion < 0 ? 1 : -1;
+        SetFlipX(jugadorIzq, flipX);
+        SetFlipX(jugadorDer, flipX);
+
+        desactivarIndicador();
     }
+
+    void CambiarGravedad(bool invertir)
+    {
+
+        float gravedad = invertir ? -1f : 1f;
+        int flipY = invertir ? -1 : 1;
+
+        if (puedeInvertirJugador)
+        {
+            rb.gravityScale = gravedad;
+            SetFlipY(jugadorIzq, flipY);
+        }
+        if (puedeInvertirEspejado)
+        {
+            rbEspejado.gravityScale = gravedad;
+            SetFlipY(jugadorDer, flipY);
+        }
+
+        if (puedeInvertirJugador || puedeInvertirEspejado)
+        {
+            particulasIzq.Play();
+            particulasDer.Play();
+            desactivarIndicador();
+            Debug.Log($"[MovimientoJugador] Gravedad {(invertir ? "invertida: ARRIBA" : "restaurada: ABAJO")}");
+        }
+        else
+        {
+            Debug.Log("[MovimientoJugador] No se puede cambiar la gravedad: ambos jugadores están bloqueados.");
+        }
+    }
+
 
     void SetFlipX(GameObject obj, int direccion)
     {
@@ -155,6 +178,20 @@ public class MovimientoJugador : MonoBehaviour
         }
 
     }
+
+   public void PuedeInvertir(Jugador jugador, bool estado)
+{
+    if (jugador == Jugador.Izq)
+    {
+        puedeInvertirJugador = estado;
+        Debug.Log($"[MovimientoJugador] puedeInvertirJugador = {estado}");
+    }
+    else if (jugador == Jugador.Der)
+    {
+        puedeInvertirEspejado = estado;
+        Debug.Log($"[MovimientoJugador] puedeInvertirEspejado = {estado}");
+    }
+}
 
 
 }

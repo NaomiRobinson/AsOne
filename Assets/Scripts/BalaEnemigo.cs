@@ -7,6 +7,8 @@ public class BalaEnemigo : MonoBehaviour
     public float velocidad;
     public int daño;
 
+    public MovimientoJugador movimientoJugador;
+
     void Start()
     {
 
@@ -19,7 +21,7 @@ public class BalaEnemigo : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if ((collision.gameObject.CompareTag("JugadorIzq")& movimientoJugador.modoInvencible == false) || (collision.gameObject.CompareTag("JugadorDer") & movimientoJugador.modoInvencible == false))
         {
 
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
