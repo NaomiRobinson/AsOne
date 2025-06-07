@@ -9,6 +9,8 @@ public class MovimientoJugador : MonoBehaviour
     private Rigidbody2D rbEspejado;
     float velocidadMaximaY = 10f;
 
+     public static MovimientoJugador Instancia { get; private set; }
+
     [SerializeField] private float velocidadX = 5f;
     [SerializeField] private ParticleSystem particulasIzq;
     [SerializeField] private ParticleSystem particulasDer;
@@ -179,18 +181,23 @@ public class MovimientoJugador : MonoBehaviour
 
     }
 
-   public void PuedeInvertir(Jugador jugador, bool estado)
+    public void PuedeInvertir(Jugador jugador, bool estado)
+    {
+        if (jugador == Jugador.Izq)
+        {
+            puedeInvertirJugador = estado;
+            Debug.Log($"[MovimientoJugador] puedeInvertirJugador = {estado}");
+        }
+        else if (jugador == Jugador.Der)
+        {
+            puedeInvertirEspejado = estado;
+            Debug.Log($"[MovimientoJugador] puedeInvertirEspejado = {estado}");
+        }
+    }
+
+public bool GravedadInvertida
 {
-    if (jugador == Jugador.Izq)
-    {
-        puedeInvertirJugador = estado;
-        Debug.Log($"[MovimientoJugador] puedeInvertirJugador = {estado}");
-    }
-    else if (jugador == Jugador.Der)
-    {
-        puedeInvertirEspejado = estado;
-        Debug.Log($"[MovimientoJugador] puedeInvertirEspejado = {estado}");
-    }
+    get { return rb.gravityScale < 0f; }
 }
 
 

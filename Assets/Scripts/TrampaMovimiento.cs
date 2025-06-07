@@ -21,22 +21,22 @@ public class TrampaMovimiento : MonoBehaviour
 
     void Update()
     {
-        RaycastHit2D infoJugador = Physics2D.Raycast(transform.position, Vector3.down, distanciaLinea, capaJugador);
-
-        if (infoJugador && !estaSubiendo)
-        {
-            rb2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
-        }
         if (estaSubiendo)
         {
             transform.Translate(Time.deltaTime * velocidadSubida * Vector3.up);
+            return;
+        }
 
+        RaycastHit2D infoJugador = Physics2D.Raycast(transform.position, Vector3.down, distanciaLinea, capaJugador);
+
+        if (infoJugador)
+        {
+            rb2D.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
         }
     }
-
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Walls"))
+        if (other.gameObject.CompareTag("Walls"))
         {
             rb2D.constraints = RigidbodyConstraints2D.FreezeAll;
 

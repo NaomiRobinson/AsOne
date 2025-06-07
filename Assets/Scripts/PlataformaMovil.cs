@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class PlataformaMovil : MonoBehaviour
 {
-
     [SerializeField] private Transform[] puntosMovimiento;
     [SerializeField] private float velocidad;
     private int siguientePlataforma = 1;
@@ -33,34 +32,33 @@ public class PlataformaMovil : MonoBehaviour
                 siguientePlataforma -= 1;
             }
         }
+
         transform.position = Vector2.MoveTowards(transform.position, puntosMovimiento[siguientePlataforma].position, velocidad * Time.deltaTime);
     }
 
-   private void OnCollisionEnter2D(Collision2D other)
-{
-    if (other.gameObject.CompareTag("JugadorIzq") || other.gameObject.CompareTag("JugadorDer"))
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        
-        foreach (ContactPoint2D contacto in other.contacts)
+        if (other.gameObject.CompareTag("JugadorIzq") || other.gameObject.CompareTag("JugadorDer"))
         {
-            if (contacto.normal.y > 0.5f & movimientoJugador.modoInvencible == false) // El jugador toca desde abajo
+            foreach (ContactPoint2D contacto in other.contacts)
             {
-                Debug.Log("El jugador murió al tocar la plataforma desde abajo");
+                Vector2 normalLocal = transform.InverseTransformDirection(contacto.normal);
 
-                  other.gameObject.GetComponent<ReiniciarNivel>().Reiniciar();  
-          
-                other.transform.SetParent(null);
-                break;
-            }
-            else if (contacto.normal.y < -0.5f) 
-            {
-                other.transform.SetParent(this.transform);
-                break;
+                if (normalLocal.y > 0.5f && !movimientoJugador.modoInvencible) // Jugador cae desde arriba y no es invencible
+                {
+                    Debug.Log("El jugador murió al tocar la plataforma desde arriba");
+                    other.gameObject.GetComponent<ReiniciarNivel>().Reiniciar();
+                    other.transform.SetParent(null);
+                    break;
+                }
+                else if (normalLocal.y < -0.5f) // Jugador toca desde abajo
+                {
+                    other.transform.SetParent(this.transform);
+                    break;
+                }
             }
         }
     }
-}
-
 
     private void OnCollisionExit2D(Collision2D other)
     {
@@ -69,5 +67,4 @@ public class PlataformaMovil : MonoBehaviour
             other.transform.SetParent(null);
         }
     }
-
 }
