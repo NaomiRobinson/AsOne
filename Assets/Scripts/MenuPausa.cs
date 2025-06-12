@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MenuPausa : MonoBehaviour
 {
@@ -7,6 +8,15 @@ public class MenuPausa : MonoBehaviour
 
 
     private bool juegoPausado = false;
+    public TextMeshProUGUI nombreNivel;
+
+    private void Start()
+    {
+        if (nombreNivel !=null)
+        {
+            nombreNivel.text =  SceneManager.GetActiveScene().name;
+        }
+    }
 
     public void PausarJuego()
     {
@@ -21,7 +31,7 @@ public class MenuPausa : MonoBehaviour
         Time.timeScale = 1f; //renauda el juego
         PanelDePausa.SetActive(false); //oculta el panel
     }
-
+    //reiniciar el nivel
     public void RNivel()
     {
         juegoPausado = false;
@@ -31,7 +41,7 @@ public class MenuPausa : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
     }
-
+    //volver al menu principal
     public void VolverMenuPrin()
     {
         juegoPausado = false;
@@ -41,5 +51,26 @@ public class MenuPausa : MonoBehaviour
         SceneManager.LoadScene("Menu");
 
     }
+    //cambiar a un nivel anterior
+    public void NivelAnterior()
+    {
+        int escenaActual = SceneManager.GetActiveScene().buildIndex;
+        if (escenaActual > 0)
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(escenaActual - 1);
+        }
+    }
+    //cambiar a un nivel posterior
+    public void NivelSiguiente()
+    {
+        int escenaActual = SceneManager.GetActiveScene().buildIndex;
+        int totalEscenas = SceneManager.sceneCountInBuildSettings;
 
+        if (escenaActual < totalEscenas - 1)
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(escenaActual + 1);
+        }
+    }
 }
