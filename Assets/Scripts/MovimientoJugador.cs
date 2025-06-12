@@ -9,7 +9,7 @@ public class MovimientoJugador : MonoBehaviour
     private Rigidbody2D rbEspejado;
     float velocidadMaximaY = 10f;
 
-     public static MovimientoJugador Instancia { get; private set; }
+    public static MovimientoJugador Instancia { get; private set; }
 
     [SerializeField] private float velocidadX = 5f;
     [SerializeField] private ParticleSystem particulasIzq;
@@ -105,7 +105,7 @@ public class MovimientoJugador : MonoBehaviour
         SetFlipX(jugadorIzq, flipX);
         SetFlipX(jugadorDer, flipX);
 
-        desactivarIndicador();
+        //desactivarIndicador();
     }
 
     void CambiarGravedad(bool invertir)
@@ -129,7 +129,7 @@ public class MovimientoJugador : MonoBehaviour
         {
             particulasIzq.Play();
             particulasDer.Play();
-            desactivarIndicador();
+            // desactivarIndicador();
             Debug.Log($"[MovimientoJugador] Gravedad {(invertir ? "invertida: ARRIBA" : "restaurada: ABAJO")}");
         }
         else
@@ -195,10 +195,10 @@ public class MovimientoJugador : MonoBehaviour
         }
     }
 
-public bool GravedadInvertida
-{
-    get { return rb.gravityScale < 0f; }
-}
+    public bool GravedadInvertida
+    {
+        get { return rb.gravityScale < 0f; }
+    }
 
 
 }
