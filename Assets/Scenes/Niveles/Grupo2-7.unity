@@ -528,7 +528,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3762424425714932323, guid: 3a9395da6ab595b4c90ee29c841ba8c7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1389290950}
   m_SourcePrefab: {fileID: 100100000, guid: 3a9395da6ab595b4c90ee29c841ba8c7, type: 3}
 --- !u!1 &251307046
 GameObject:
@@ -16947,6 +16950,21 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3762424425714932323, guid: 3a9395da6ab595b4c90ee29c841ba8c7, type: 3}
   m_PrefabInstance: {fileID: 246566915}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1389290950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1389290949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53065eb96a85e9042970731c6b6095e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipo: 0
+  compuertaAsociada: {fileID: 1279819900}
+  palanca: {fileID: 1389290949}
 --- !u!1001 &1449491134
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17995,7 +18013,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4493433886065805347, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.5352116
+      value: 3.5410023
       objectReference: {fileID: 0}
     - target: {fileID: 4493433886065805347, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18003,7 +18021,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5322303061146768634, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.906972
+      value: -7.912796
       objectReference: {fileID: 0}
     - target: {fileID: 5322303061146768634, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_LocalPosition.y
