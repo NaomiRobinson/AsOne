@@ -1649,11 +1649,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4db14c4848078354bb37bc3f16f73d50, type: 3}
---- !u!198 &1074064162 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5193769322895981740, guid: 4db14c4848078354bb37bc3f16f73d50, type: 3}
-  m_PrefabInstance: {fileID: 1074064161}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1167565411
 GameObject:
   m_ObjectHideFlags: 0
@@ -2371,6 +2366,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1211029087925439274, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 8c5852627df1de74cad78b2ea4467283, type: 2}
     - target: {fileID: 4337106421553198087, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 20.4
@@ -7061,7 +7060,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 20
-      m_TileSpriteIndex: 26
+      m_TileSpriteIndex: 117
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -8212,8 +8211,8 @@ Tilemap:
     m_Data: {fileID: 16359672, guid: dd019952370a6e8458e158c21915c3ab, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: -593298574, guid: dd019952370a6e8458e158c21915c3ab, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -485450372, guid: dd019952370a6e8458e158c21915c3ab, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 4
     m_Data: {fileID: -365073664, guid: dd019952370a6e8458e158c21915c3ab, type: 3}
   - m_RefCount: 3
@@ -8394,8 +8393,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -485450372, guid: dd019952370a6e8458e158c21915c3ab, type: 3}
   - m_RefCount: 3
     m_Data: {fileID: 2143727437, guid: dd019952370a6e8458e158c21915c3ab, type: 3}
   - m_RefCount: 3
@@ -8536,7 +8535,7 @@ MonoBehaviour:
   velocidadX: 5
   particulasIzq: {fileID: 252812883}
   particulasDer: {fileID: 1318824668}
-  indicadorJugador: {fileID: 1074064162}
+  cooldownInversion: 0.25
 --- !u!114 &1702877486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10573,13 +10572,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1211029087925439274, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 8c5852627df1de74cad78b2ea4467283, type: 2}
     - target: {fileID: 4337106421553198087, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.6
+      value: 7.67
       objectReference: {fileID: 0}
     - target: {fileID: 4337106421553198087, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.44
+      value: -5.38
       objectReference: {fileID: 0}
     - target: {fileID: 4337106421553198087, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: m_LocalPosition.z

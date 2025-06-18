@@ -18,7 +18,7 @@ public class MovimientoJugador : MonoBehaviour
     [SerializeField] private ParticleSystem particulasIzq;
     [SerializeField] private ParticleSystem particulasDer;
 
-    [SerializeField] private ParticleSystem indicadorJugador;
+    // [SerializeField] private ParticleSystem indicadorJugador;
 
     [SerializeField] private float cooldownInversion = 0.25f;
 
@@ -46,7 +46,7 @@ public class MovimientoJugador : MonoBehaviour
 
         rb.gravityScale = 1f;
         rbEspejado.gravityScale = 1f;
-        indicadorJugador.Play();
+        //  indicadorJugador.Play();
 
     }
 
@@ -65,31 +65,34 @@ public class MovimientoJugador : MonoBehaviour
             rbEspejado.linearVelocity = new Vector2(0, rbEspejado.linearVelocity.y);
         }
 
-        // Actualizar animaciones correctamente
         animatorJugador.SetFloat("Horizontal", Mathf.Abs(movimientoHorizontal));
         animatorEspejado.SetFloat("Horizontal", Mathf.Abs(movimientoHorizontal));
 
+        bool cooldownListo = Time.time - tiempoUltimaInversion > cooldownInversion;
+        bool algunJugadorPuedeInvertir = puedeInvertirJugador || puedeInvertirEspejado;
 
-        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || movimientoVertical > 0.5f) &&
-      Time.time - tiempoUltimaInversion > cooldownInversion)
+        if (cooldownListo && algunJugadorPuedeInvertir)
         {
-            CambiarGravedad(true);
-            tiempoUltimaInversion = Time.time;
-        }
-        else if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow) || movimientoVertical < -0.5f) &&
-            Time.time - tiempoUltimaInversion > cooldownInversion)
-        {
-            CambiarGravedad(false);
-            tiempoUltimaInversion = Time.time;
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || movimientoVertical > 0.5f)
+            {
+                CambiarGravedad(true);
+                tiempoUltimaInversion = Time.time;
+            }
+            else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow) || movimientoVertical < -0.5f)
+            {
+                CambiarGravedad(false);
+                tiempoUltimaInversion = Time.time;
+            }
         }
 
-        // CHEAT MODE
         if (Input.GetKeyDown(KeyCode.I))
         {
             modoInvencible = !modoInvencible;
             Debug.Log("modo invencible: " + modoInvencible);
         }
     }
+
+
 
     void FixedUpdate()
     {
@@ -112,7 +115,11 @@ public class MovimientoJugador : MonoBehaviour
 
     void CambiarGravedad(bool invertir)
     {
-
+        if (!puedeInvertirJugador && !puedeInvertirEspejado)
+        {
+            Debug.Log("[MovimientoJugador] ¡Gravedad bloqueada! No se puede invertir.");
+            return;
+        }
         float gravedad = invertir ? -1f : 1f;
         int flipY = invertir ? -1 : 1;
 
@@ -174,16 +181,16 @@ public class MovimientoJugador : MonoBehaviour
         }
     }
 
-    void desactivarIndicador()
-    {
+    // void desactivarIndicador()
+    // {
 
-        if (estaIndicadorJugador)
-        {
-            estaIndicadorJugador = false;
-            indicadorJugador.Stop();
-        }
+    //     if (estaIndicadorJugador)
+    //     {
+    //         estaIndicadorJugador = false;
+    //         indicadorJugador.Stop();
+    //     }
 
-    }
+    // }
 
     public void PuedeInvertir(Jugador jugador, bool estado)
     {

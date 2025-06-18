@@ -11907,10 +11907,10 @@ GameObject:
   - component: {fileID: 773191329}
   - component: {fileID: 773191328}
   - component: {fileID: 773191327}
-  - component: {fileID: 773191326}
   - component: {fileID: 773191325}
+  - component: {fileID: 773191326}
   - component: {fileID: 773191324}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ZonaSinInvertir
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11944,6 +11944,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea57e57e38691f94881bbd379d89371b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  capaZonaSinInvertir:
+    serializedVersion: 2
+    m_Bits: 64
+  jugadorIzq: {fileID: 1582898233}
+  jugadorDer: {fileID: 430326079}
+  chequeoRadio: 0.5
 --- !u!50 &773191325
 Rigidbody2D:
   serializedVersion: 5
@@ -11969,7 +11975,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!66 &773191326
 CompositeCollider2D:
@@ -17785,7 +17791,6 @@ MonoBehaviour:
   velocidadX: 5
   particulasIzq: {fileID: 1922746928}
   particulasDer: {fileID: 1532596565}
-  indicadorJugador: {fileID: 0}
   cooldownInversion: 0.25
 --- !u!1 &1746325775
 GameObject:
@@ -17935,6 +17940,14 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: eafa14cb6733f9746abb8180c34ff9f9, type: 2}
+    - target: {fileID: 2167475106081849671, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
+      propertyPath: m_GravityScale
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2167475106081849671, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5603365124969246766, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
       propertyPath: m_Name
       value: JugadorIzq
@@ -18437,6 +18450,10 @@ PrefabInstance:
       propertyPath: requiereAbrir
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4535517584813565001, guid: e085413049cdd354383103d7e69a3668, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5911614825838371142, guid: e085413049cdd354383103d7e69a3668, type: 3}
       propertyPath: m_Name
       value: JugadorDer
@@ -18544,7 +18561,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4493433886065805347, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.249456
+      value: -11.253485
       objectReference: {fileID: 0}
     - target: {fileID: 4493433886065805347, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18552,7 +18569,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5322303061146768634, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -34.805336
+      value: -34.80132
       objectReference: {fileID: 0}
     - target: {fileID: 5322303061146768634, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_LocalPosition.y

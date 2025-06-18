@@ -20213,7 +20213,7 @@ MonoBehaviour:
   velocidadX: 5
   particulasIzq: {fileID: 1922746928}
   particulasDer: {fileID: 1532596565}
-  indicadorJugador: {fileID: 0}
+  cooldownInversion: 0.25
 --- !u!1 &1706627798
 GameObject:
   m_ObjectHideFlags: 0
@@ -21024,6 +21024,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea57e57e38691f94881bbd379d89371b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  capaZonaSinInvertir:
+    serializedVersion: 2
+    m_Bits: 64
+  jugadorIzq: {fileID: 1582898233}
+  jugadorDer: {fileID: 430326079}
+  chequeoRadio: 0.5
 --- !u!50 &1922498659
 Rigidbody2D:
   serializedVersion: 5
@@ -21508,7 +21514,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4493433886065805347, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -18.608479
+      value: -18.613916
       objectReference: {fileID: 0}
     - target: {fileID: 4493433886065805347, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_LocalPosition.y
@@ -21516,7 +21522,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5322303061146768634, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -35.91678
+      value: -35.911358
       objectReference: {fileID: 0}
     - target: {fileID: 5322303061146768634, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_LocalPosition.y
