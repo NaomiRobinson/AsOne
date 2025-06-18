@@ -541,7 +541,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2561485263395734475, guid: 4db14c4848078354bb37bc3f16f73d50, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.39
+      value: -1.32
       objectReference: {fileID: 0}
     - target: {fileID: 2561485263395734475, guid: 4db14c4848078354bb37bc3f16f73d50, type: 3}
       propertyPath: m_LocalPosition.z
@@ -17786,6 +17786,7 @@ MonoBehaviour:
   particulasIzq: {fileID: 1922746928}
   particulasDer: {fileID: 1532596565}
   indicadorJugador: {fileID: 0}
+  cooldownInversion: 0.25
 --- !u!1 &1746325775
 GameObject:
   m_ObjectHideFlags: 0
@@ -17930,6 +17931,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2167475106081849671, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: eafa14cb6733f9746abb8180c34ff9f9, type: 2}
     - target: {fileID: 5603365124969246766, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
       propertyPath: m_Name
       value: JugadorIzq
@@ -17988,7 +17993,7 @@ PrefabInstance:
       objectReference: {fileID: 1702877485}
     - target: {fileID: 7783787989169559425, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
