@@ -11,6 +11,14 @@ public class MovimientoJugador : MonoBehaviour
 
     public static MovimientoJugador Instancia { get; private set; }
 
+    /// <summary>
+    private bool juegoPausado = false;
+    public GameObject PanelDePausa;
+
+    /// </summary>
+
+
+
     [SerializeField] private float velocidadX = 5f;
     [SerializeField] private ParticleSystem particulasIzq;
     [SerializeField] private ParticleSystem particulasDer;
@@ -63,6 +71,13 @@ public class MovimientoJugador : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
             rbEspejado.linearVelocity = new Vector2(0, rbEspejado.linearVelocity.y);
+        }
+
+        if(Input.GetKeyDown(KeyCode.P)) 
+        {
+            juegoPausado = true;
+            Time.timeScale = 0f; //pausa el juego
+            PanelDePausa.SetActive(true); //muestra el panel de pausa
         }
 
         // Actualizar animaciones correctamente

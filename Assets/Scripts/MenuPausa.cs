@@ -6,6 +6,7 @@ public class MenuPausa : MonoBehaviour
 {
     public GameObject PanelDePausa;
 
+    public AudioSource musica;
 
     private bool juegoPausado = false;
     public TextMeshProUGUI nombreNivel;
@@ -72,5 +73,9 @@ public class MenuPausa : MonoBehaviour
             Time.timeScale = 1f;
             SceneManager.LoadScene(escenaActual + 1);
         }
+    }
+    public void ControlMusica()
+    {
+        musica.mute = !musica.mute;
     }
 }

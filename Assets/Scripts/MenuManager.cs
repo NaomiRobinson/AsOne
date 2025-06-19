@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
 
+    public AudioSource musica;
     public void PlayGame()
     {
         ReiniciarProgreso();
@@ -31,6 +32,11 @@ public class MenuManager : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void ControlMusica()
+    {
+        musica.mute = !musica.mute;
     }
 
 }
