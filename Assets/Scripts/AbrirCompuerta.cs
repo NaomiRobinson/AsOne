@@ -25,7 +25,7 @@ public class AbrirCompuerta : MonoBehaviour
 
     void Update()
     {
-        if (tipo == TipoPalanca.Boton && estaJugador && Input.GetKeyDown(KeyCode.Space) && !palancaActivada)
+        if (tipo == TipoPalanca.Boton && estaJugador && !palancaActivada)
         {
             palancaActivada = true;
             compuertaAbierta = true;
