@@ -90,6 +90,11 @@ public class Salida : MonoBehaviour
         }
         else if (LevelManager.Instance.EsUltimoNivel(nivelActual))
         {
+            Debug.Log("¡Es el último nivel del grupo!");
+
+            LevelManager.Instance.MarcarGrupoCompletado();
+            Debug.Log("Grupo desbloqueado tras completar: " + LevelManager.Instance.grupoDesbloqueado);
+
             siguiente = LevelManager.Instance.SeleccionNiveles;
         }
         else

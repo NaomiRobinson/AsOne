@@ -35,7 +35,10 @@ public class MovimientoJugador : MonoBehaviour
     private Animator animatorJugador;
     private Animator animatorEspejado;
 
-
+void Awake()
+{
+    Instancia = this;
+} 
     void Start()
     {
         rb = jugadorIzq.GetComponent<Rigidbody2D>();

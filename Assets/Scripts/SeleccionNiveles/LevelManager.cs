@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class LevelManager : MonoBehaviour
@@ -15,6 +16,8 @@ public class LevelManager : MonoBehaviour
 
     public int SeleccionNiveles; //Index del selector de niveles
 
+    public int grupoDesbloqueado = 1;
+
     public static LevelManager Instance;
 
     private void Awake()
@@ -23,6 +26,7 @@ public class LevelManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            grupoDesbloqueado = PlayerPrefs.GetInt("GrupoDesbloqueado", 1);
 
             if ((nivelesGrupo1 == null || nivelesGrupo1.Length == 0) ||
                 (nivelesGrupo2 == null || nivelesGrupo2.Length == 0) ||
@@ -40,39 +44,44 @@ public class LevelManager : MonoBehaviour
     public bool EsUltimoNivel(int nivelActual)
     {
         int[] grupo = ObtenerGrupoActual();
-        return grupo.Length > 0 && nivelActual == grupo[grupo.Length - 1];
-    }
+        Debug.Log($"EsUltimoNivel: grupoActual={grupoActual}, niveles en grupo={string.Join(",", grupo)}, nivelActual={nivelActual}");
+        if (grupo.Length == 0) return false;
 
+        return nivelActual == grupo[grupo.Length - 1];
+    }
     public void SeleccionarGrupo(int grupo)
     {
+        if (grupo > grupoDesbloqueado)
+        {
+            Debug.LogWarning($"¡No se puede seleccionar el grupo {grupo} porque el grupo anterior no está completo! Grupo desbloqueado actual: {grupoDesbloqueado}");
+            return;
+        }
+
         Debug.Log("Seleccionando grupo: " + grupo);
         grupoActual = grupo;
+        Debug.Log("grupoActual seteado a: " + grupoActual);
 
         Debug.Log("nivelesGrupo1: " + string.Join(",", nivelesGrupo1));
         Debug.Log("nivelesGrupo2: " + string.Join(",", nivelesGrupo2));
         Debug.Log("nivelesGrupo3: " + string.Join(",", nivelesGrupo3));
 
-        int primerNivel = 0;
-
-        switch (grupo)
+        int primerNivel = grupo switch
         {
-            case 1:
-                primerNivel = nivelesGrupo1[0];
-                break;
-            case 2:
-                primerNivel = nivelesGrupo2[0];
-                break;
-            case 3:
-                primerNivel = nivelesGrupo3[0];
-                break;
-            default:
-                Debug.LogError("Grupo inválido seleccionado: " + grupo);
-                return;
+            1 => nivelesGrupo1[0],
+            2 => nivelesGrupo2[0],
+            3 => nivelesGrupo3[0],
+            _ => -1,
+        };
+
+        if (primerNivel == -1)
+        {
+            Debug.LogError("Grupo inválido seleccionado: " + grupo);
+            return;
         }
-        Debug.Log("Cargando nivel con índice: " + primerNivel);
+
+        Debug.Log($"Cargando primer nivel del grupo {grupo}: {primerNivel}");
         TransicionEscena.Instance.Disolversalida(primerNivel);
     }
-
     private int[] ObtenerGrupoActual()
     {
         return grupoActual switch
@@ -95,11 +104,32 @@ public class LevelManager : MonoBehaviour
         for (int i = 0; i < grupo.Length - 1; i++)
         {
             if (grupo[i] == nivelActual)
+            {
+                Debug.Log($"Nivel actual {nivelActual} encontrado en el índice {i}, siguiente nivel: {grupo[i + 1]}");
                 return grupo[i + 1];
+            }
         }
 
         Debug.LogWarning("Nivel actual no encontrado en el grupo");
         return 0;
+    }
+
+    public void MarcarGrupoCompletado()
+    {
+        int nuevoGrupo = grupoActual + 1;
+        Debug.Log($"Intentando desbloquear nuevo grupo: {nuevoGrupo} (actual desbloqueado: {grupoDesbloqueado})");
+
+        if (nuevoGrupo > grupoDesbloqueado)
+        {
+            grupoDesbloqueado = nuevoGrupo;
+            PlayerPrefs.SetInt("GrupoDesbloqueado", grupoDesbloqueado);
+            PlayerPrefs.Save();
+            Debug.Log("Nuevo grupo desbloqueado y guardado: " + grupoDesbloqueado);
+        }
+        else
+        {
+            Debug.Log("No se desbloqueó ningún grupo nuevo porque ya estaba desbloqueado.");
+        }
     }
 
     public void CargarFinal()
