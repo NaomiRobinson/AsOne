@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MovimientoJugador : MonoBehaviour
 {
@@ -35,10 +36,27 @@ public class MovimientoJugador : MonoBehaviour
     private Animator animatorJugador;
     private Animator animatorEspejado;
 
-void Awake()
-{
-    Instancia = this;
-} 
+    private Controles controles;
+    private Vector2 inputMovimiento;
+    private bool inputGravedadArriba;
+    private bool inputGravedadAbajo;
+    private bool inputModoInvencible;
+
+    void Awake()
+    {
+        Instancia = this;
+        controles = new Controles();
+
+        controles.Jugador.Moverse.performed += ctx => inputMovimiento = ctx.ReadValue<Vector2>();
+        controles.Jugador.Moverse.canceled += ctx => inputMovimiento = Vector2.zero;
+
+        controles.Jugador.GravedadArriba.performed += ctx => inputGravedadArriba = true;
+        controles.Jugador.GravedadAbajo.performed += ctx => inputGravedadAbajo = true;
+        controles.Jugador.ModoInvencible.performed += ctx => inputModoInvencible = true;
+    }
+
+    void OnEnable() => controles.Enable();
+    void OnDisable() => controles.Disable();
     void Start()
     {
         rb = jugadorIzq.GetComponent<Rigidbody2D>();
@@ -55,8 +73,7 @@ void Awake()
 
     void Update()
     {
-        float movimientoHorizontal = Input.GetAxisRaw("Horizontal");
-        float movimientoVertical = Input.GetAxisRaw("Vertical");
+        float movimientoHorizontal = inputMovimiento.x;
 
         if (movimientoHorizontal != 0)
         {
@@ -71,27 +88,22 @@ void Awake()
         animatorJugador.SetFloat("Horizontal", Mathf.Abs(movimientoHorizontal));
         animatorEspejado.SetFloat("Horizontal", Mathf.Abs(movimientoHorizontal));
 
-        bool cooldownListo = Time.time - tiempoUltimaInversion > cooldownInversion;
-        bool algunJugadorPuedeInvertir = puedeInvertirJugador || puedeInvertirEspejado;
-
-        if (cooldownListo && algunJugadorPuedeInvertir)
+        // Gravedad
+        if ((inputGravedadArriba || inputGravedadAbajo) && Time.time - tiempoUltimaInversion > cooldownInversion)
         {
-            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || movimientoVertical > 0.5f)
-            {
-                CambiarGravedad(true);
-                tiempoUltimaInversion = Time.time;
-            }
-            else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow) || movimientoVertical < -0.5f)
-            {
-                CambiarGravedad(false);
-                tiempoUltimaInversion = Time.time;
-            }
+            CambiarGravedad(inputGravedadArriba);
+            tiempoUltimaInversion = Time.time;
         }
 
-        if (Input.GetKeyDown(KeyCode.I))
+        inputGravedadArriba = false;
+        inputGravedadAbajo = false;
+
+        // Modo Invencible
+        if (inputModoInvencible)
         {
             modoInvencible = !modoInvencible;
             Debug.Log("modo invencible: " + modoInvencible);
+            inputModoInvencible = false;
         }
     }
 
