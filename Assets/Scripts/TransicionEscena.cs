@@ -58,14 +58,6 @@ public class TransicionEscena : MonoBehaviour
         }
 
 
-        // LevelStartEvent LevelStart = new LevelStartEvent
-        // { 
-        //     level = SessionData.level
-        // };
-
-        //AnalyticsService.Instance.RecordEvent(LevelStart);
-
-
         if (scene.name == "Victoria")
         {
             Debug.Log("GameComplete");

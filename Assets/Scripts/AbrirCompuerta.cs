@@ -25,14 +25,14 @@ public class AbrirCompuerta : MonoBehaviour
 
     void Update()
     {
-        if (tipo == TipoPalanca.Boton && estaJugador && Input.GetKeyDown(KeyCode.Space))
+        if (tipo == TipoPalanca.Boton && estaJugador && !palancaActivada)
         {
-            palancaActivada = !palancaActivada;
-            compuertaAbierta = !compuertaAbierta;
-
+            palancaActivada = true;
+            compuertaAbierta = true;
             ActualizarEstado();
         }
     }
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
