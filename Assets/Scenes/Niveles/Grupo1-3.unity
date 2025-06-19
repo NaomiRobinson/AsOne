@@ -1399,11 +1399,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4db14c4848078354bb37bc3f16f73d50, type: 3}
---- !u!198 &1074064162 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5193769322895981740, guid: 4db14c4848078354bb37bc3f16f73d50, type: 3}
-  m_PrefabInstance: {fileID: 1074064161}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1226061204
 GameObject:
   m_ObjectHideFlags: 0
@@ -4219,7 +4214,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4493433886065805347, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 25.722605
+      value: 25.726109
       objectReference: {fileID: 0}
     - target: {fileID: 4493433886065805347, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4227,7 +4222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5322303061146768634, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.097412
+      value: 4.093874
       objectReference: {fileID: 0}
     - target: {fileID: 5322303061146768634, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4575,7 +4570,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4337106421553198087, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.49
+      value: -0.36
       objectReference: {fileID: 0}
     - target: {fileID: 4337106421553198087, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -15610,7 +15605,7 @@ MonoBehaviour:
   velocidadX: 5
   particulasIzq: {fileID: 252812883}
   particulasDer: {fileID: 1318824668}
-  indicadorJugador: {fileID: 1074064162}
+  cooldownInversion: 0.25
 --- !u!114 &1702877486
 MonoBehaviour:
   m_ObjectHideFlags: 0
