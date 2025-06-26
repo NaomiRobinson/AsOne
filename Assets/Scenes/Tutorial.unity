@@ -1046,7 +1046,7 @@ GameObject:
   - component: {fileID: 540028405}
   m_Layer: 5
   m_Name: Musica
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1116,8 +1116,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: ToggleMusica
+        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1294,7 +1294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicaMenu: {fileID: 8300000, guid: 90c3df531786c894cb9d8ebb4e2f7f62, type: 3}
   musicaJuego: {fileID: 8300000, guid: ba5db7afbd55bfe46a996cc691935fad, type: 3}
-  botonSonido: {fileID: 0}
+  botonSonido: {fileID: 540028405}
   iconoSonidoOn: {fileID: -5544848815530659312, guid: cd69080d287800a48b0feb143a7caae4, type: 3}
   iconoSonidoOff: {fileID: 7908075426004432792, guid: c6e74e69df0a51e4e80e2fea81e2e7fd, type: 3}
 --- !u!4 &571843488

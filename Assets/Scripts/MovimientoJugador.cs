@@ -83,8 +83,8 @@ public class MovimientoJugador : MonoBehaviour
 
     void Update()
     {
-         if (!puedeMoverse) return;
-         
+        if (!puedeMoverse) return;
+
         float movimientoHorizontal = inputMovimiento.x;
 
         if (movimientoHorizontal != 0)

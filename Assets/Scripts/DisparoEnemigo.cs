@@ -4,6 +4,7 @@ public class DisparoEnemigo : MonoBehaviour
 {
     public Transform controladorDisparo;
 
+    public GameObject EnemigoTorreta;
     public LayerMask capaJugador;
     public bool jugadorEnRango;
     public float tiempoEntreDisparos;
@@ -11,12 +12,13 @@ public class DisparoEnemigo : MonoBehaviour
     public GameObject bala;
 
     public float tiempoEsperaDisparo;
+    private Animator animTorreta;
 
     public float distancia;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        animTorreta = EnemigoTorreta.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -37,8 +39,15 @@ public class DisparoEnemigo : MonoBehaviour
 
     private void Disparar()
     {
-        Instantiate(bala, controladorDisparo.position, controladorDisparo.rotation);
+        if (animTorreta != null)
+        {
+            AnimacionesControlador.SetTriggerConCallback(this, animTorreta, "dispara", 0.5f, () =>
+            {
+                Instantiate(bala, controladorDisparo.position, controladorDisparo.rotation);
+            });
+        }
     }
+
 
     private void OnDrawGizmos()
     {
