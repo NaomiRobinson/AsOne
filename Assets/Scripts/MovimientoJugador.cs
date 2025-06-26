@@ -36,6 +36,8 @@ public class MovimientoJugador : MonoBehaviour
 
     private bool estaIndicadorJugador = true;
 
+    public bool puedeMoverse = true;
+
     //variable de cheatmode
     public bool modoInvencible { get; private set; } = false;
 
@@ -81,6 +83,8 @@ public class MovimientoJugador : MonoBehaviour
 
     void Update()
     {
+         if (!puedeMoverse) return;
+         
         float movimientoHorizontal = inputMovimiento.x;
 
         if (movimientoHorizontal != 0)
@@ -94,7 +98,7 @@ public class MovimientoJugador : MonoBehaviour
         }
 
 
-        if(Input.GetKeyDown(KeyCode.P)) 
+        if (Input.GetKeyDown(KeyCode.P))
         {
             juegoPausado = true;
             Time.timeScale = 0f; //pausa el juego
