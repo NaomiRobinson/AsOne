@@ -21100,6 +21100,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
+--- !u!4 &1102673333 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6848442707961279513, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
+  m_PrefabInstance: {fileID: 1102673332}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1152233435
 GameObject:
   m_ObjectHideFlags: 0
@@ -24533,7 +24538,7 @@ PrefabInstance:
     - target: {fileID: 8353208340778544931, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1102673333}
     - target: {fileID: 8803061160040768657, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.297983
@@ -25014,6 +25019,7 @@ MonoBehaviour:
   particulasIzq: {fileID: 43111874}
   particulasDer: {fileID: 1318824668}
   cooldownInversion: 0.25
+  puedeMoverse: 1
 --- !u!114 &1702877486
 MonoBehaviour:
   m_ObjectHideFlags: 0

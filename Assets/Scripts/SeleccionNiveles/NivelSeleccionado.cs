@@ -135,8 +135,28 @@ public class NivelSeleccionado : MonoBehaviour
 
             if (escenaActual == LevelManager.Instance.SeleccionNiveles)
             {
-                Debug.Log($"Intentando seleccionar grupo {grupoSeleccionado}");
-                LevelManager.Instance.SeleccionarGrupo(grupoSeleccionado);
+                if (grupoSeleccionado > 0)
+                {
+                    Debug.Log($"Intentando seleccionar grupo {grupoSeleccionado}");
+                    LevelManager.Instance.SeleccionarGrupo(grupoSeleccionado);
+                }
+                else if (esPuertaFinal)
+                {
+                    if (ChequeoLlaves.TodasRecolectadas())
+                    {
+                        AnimacionesControlador.SetBool(animPuerta, "estaAbierta", true);
+                        Debug.Log("¡Todas las llaves están recolectadas!");
+                        LevelManager.Instance.CargarFinal();
+                    }
+                    else
+                    {
+                        Debug.LogWarning("No todas las llaves están recolectadas, no se puede cargar final.");
+                    }
+                }
+                else
+                {
+                    Debug.LogError("Grupo inválido para selección: " + grupoSeleccionado);
+                }
             }
             else if (esPuertaFinal)
             {
@@ -173,4 +193,5 @@ public class NivelSeleccionado : MonoBehaviour
             }
         }
     }
+
 }
