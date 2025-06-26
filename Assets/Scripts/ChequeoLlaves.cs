@@ -14,4 +14,16 @@ public class ChequeoLlaves
         }
         return true;
     }
+
+    public static int LlavesFaltantes()
+    {
+        int faltantes = 0;
+        foreach (string id in idsLlaves)
+        {
+            if (PlayerPrefs.GetInt("llave_" + id, 0) != 1)
+                faltantes++;
+        }
+        return faltantes;
+    }
+
 }
