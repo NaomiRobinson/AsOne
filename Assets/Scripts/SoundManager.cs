@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
-   
+
     public AudioClip musicaMenu;
     public AudioClip musicaJuego;
     public Button botonSonido;
@@ -40,6 +40,16 @@ public class SoundManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         CambiarMusicaSegunEscena(scene.name);
+
+        // Buscar el botón en la nueva escena
+        GameObject botonGO = GameObject.FindWithTag("Audio");
+        if (botonGO != null)
+        {
+            botonSonido = botonGO.GetComponent<Button>();
+            botonSonido.onClick.RemoveAllListeners(); // Limpia listeners anteriores
+            botonSonido.onClick.AddListener(ToggleMusica); // Asigna función
+            ActualizarIcono();
+        }
     }
 
     void CambiarMusicaSegunEscena(string nombreEscena)
@@ -74,6 +84,8 @@ public class SoundManager : MonoBehaviour
     }
     public void ToggleMusica()
     {
+        Debug.Log("Click recibido en el botón de música");
+
         silenciado = !silenciado;
 
         if (silenciado)
@@ -87,6 +99,7 @@ public class SoundManager : MonoBehaviour
 
         ActualizarIcono();
     }
+
     void ActualizarIcono()
     {
         if (botonSonido != null)
@@ -98,4 +111,5 @@ public class SoundManager : MonoBehaviour
             }
         }
     }
+
 }
