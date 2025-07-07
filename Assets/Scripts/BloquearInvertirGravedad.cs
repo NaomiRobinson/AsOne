@@ -4,41 +4,51 @@ public class BloquearInvertirGravedad : MonoBehaviour
 {
     private MovimientoJugador movimientoJugador;
 
+    [SerializeField] private LayerMask capaZonaSinInvertir;
+    [SerializeField] private GameObject jugadorIzq;
+    [SerializeField] private GameObject jugadorDer;
+
+    private bool jugadorIzqDentro = false;
+    private bool jugadorDerDentro = false;
+
+    [SerializeField, Tooltip("Radio para chequeo de zona alrededor del jugador")]
+    private float chequeoRadio = 0.5f;
+
     private void Start()
     {
         movimientoJugador = FindObjectOfType<MovimientoJugador>();
         if (movimientoJugador == null)
-        {
-            Debug.LogWarning($"[BloquearInvertirGravedad] No se encontró MovimientoJugador en la escena para {gameObject.name}");
-        }
+            Debug.LogWarning("No se encontró MovimientoJugador en la escena.");
+
+        // Asignar jugadores si no están asignados en inspector
+        if (jugadorIzq == null && movimientoJugador != null)
+            jugadorIzq = movimientoJugador.jugadorIzq;
+
+        if (jugadorDer == null && movimientoJugador != null)
+            jugadorDer = movimientoJugador.jugadorDer;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void Update()
     {
-        if (other.CompareTag("JugadorIzq"))
-        {
-            movimientoJugador.PuedeInvertir(MovimientoJugador.Jugador.Izq, false);
-            Debug.Log($"[BloquearInvertirGravedad] JugadorIzq entró a la zona {gameObject.name}");
-        }
-        else if (other.CompareTag("JugadorDer"))
-        {
-            movimientoJugador.PuedeInvertir(MovimientoJugador.Jugador.Der, false);
-            Debug.Log($"[BloquearInvertirGravedad] JugadorDer entró a la zona {gameObject.name}");
-        }
-    }
+        // Guardar estado previo para detectar cambios
+        bool estabaDentroIzq = jugadorIzqDentro;
+        bool estabaDentroDer = jugadorDerDentro;
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("JugadorIzq"))
+        // Chequear si los jugadores están dentro de la zona (usando OverlapCircle)
+        jugadorIzqDentro = Physics2D.OverlapCircle(jugadorIzq.transform.position, chequeoRadio, capaZonaSinInvertir);
+        jugadorDerDentro = Physics2D.OverlapCircle(jugadorDer.transform.position, chequeoRadio, capaZonaSinInvertir);
 
+        // Si hubo cambio, actualizar permiso de invertir gravedad y loggear
+        if (jugadorIzqDentro != estabaDentroIzq)
         {
-            movimientoJugador.PuedeInvertir(MovimientoJugador.Jugador.Izq, true);
-            Debug.Log($"[BloquearInvertirGravedad] JugadorIzq salió de la zona {gameObject.name}");
+            movimientoJugador.PuedeInvertir(MovimientoJugador.Jugador.Izq, !jugadorIzqDentro);
+            Debug.Log($"[Zona] JugadorIzq dentro={jugadorIzqDentro}");
         }
-        else if (other.CompareTag("JugadorDer"))
+
+        if (jugadorDerDentro != estabaDentroDer)
         {
-            movimientoJugador.PuedeInvertir(MovimientoJugador.Jugador.Der, true);
-            Debug.Log($"[BloquearInvertirGravedad] JugadorDer salió de la zona {gameObject.name}");
+            movimientoJugador.PuedeInvertir(MovimientoJugador.Jugador.Der, !jugadorDerDentro);
+            Debug.Log($"[Zona] JugadorDer dentro={jugadorDerDentro}");
         }
     }
 }

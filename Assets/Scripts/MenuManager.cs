@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
 
+    public AudioSource musica;
     public void PlayGame()
     {
         ReiniciarProgreso();
@@ -25,12 +26,20 @@ public class MenuManager : MonoBehaviour
     public void ReiniciarProgreso()
     {
         PlayerPrefs.DeleteAll();
-        PlayerPrefs.Save();
+        PlayerPrefs.Save();if (LevelManager.Instance != null)
+    {
+        LevelManager.Instance.grupoDesbloqueado = 1;
+    }
     }
 
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void ControlMusica()
+    {
+        musica.mute = !musica.mute;
     }
 
 }

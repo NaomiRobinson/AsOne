@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class PlataformaMovil : MonoBehaviour
 {
-
     [SerializeField] private Transform[] puntosMovimiento;
     [SerializeField] private float velocidad;
     private int siguientePlataforma = 1;
     private bool ordenPlataformas = true;
+
+    public MovimientoJugador movimientoJugador;
 
     private void Update()
     {
@@ -31,25 +32,26 @@ public class PlataformaMovil : MonoBehaviour
                 siguientePlataforma -= 1;
             }
         }
+
         transform.position = Vector2.MoveTowards(transform.position, puntosMovimiento[siguientePlataforma].position, velocidad * Time.deltaTime);
     }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("JugadorIzq") || other.gameObject.CompareTag("JugadorDer"))
         {
             foreach (ContactPoint2D contacto in other.contacts)
             {
-                // Convertir la normal del contacto al espacio local de la plataforma
                 Vector2 normalLocal = transform.InverseTransformDirection(contacto.normal);
 
-                if (normalLocal.y > 0.5f) // El jugador toca desde ARRIBA
+                if (normalLocal.y > 0.5f && !movimientoJugador.modoInvencible) // Jugador cae desde arriba y no es invencible
                 {
                     Debug.Log("El jugador murió al tocar la plataforma desde arriba");
                     other.gameObject.GetComponent<ReiniciarNivel>().Reiniciar();
                     other.transform.SetParent(null);
                     break;
                 }
-                else if (normalLocal.y < -0.5f) // El jugador toca desde ABAJO (como si caminara en el techo)
+                else if (normalLocal.y < -0.5f) // Jugador toca desde abajo
                 {
                     other.transform.SetParent(this.transform);
                     break;
@@ -58,7 +60,6 @@ public class PlataformaMovil : MonoBehaviour
         }
     }
 
-
     private void OnCollisionExit2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("JugadorIzq") || other.gameObject.CompareTag("JugadorDer"))
@@ -66,5 +67,4 @@ public class PlataformaMovil : MonoBehaviour
             other.transform.SetParent(null);
         }
     }
-
 }

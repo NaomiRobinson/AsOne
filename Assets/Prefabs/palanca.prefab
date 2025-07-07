@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5550014778756185621}
   - component: {fileID: 3010992344254114104}
   - component: {fileID: 123403694953448615}
-  - component: {fileID: 9165381767519812749}
   m_Layer: 0
   m_Name: palanca
   m_TagString: Untagged
@@ -80,12 +79,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2415155851388967588, guid: 0fe530dade2e8114d8a38bddc5be9a86, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2c20f58537254b345b7f78b4c8825734, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.25, y: 1.24}
+  m_Size: {x: 1.63, y: 1.45}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -152,17 +151,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.0075360537, y: -0.06028825}
+  m_Offset: {x: -0.17448574, y: -0.046245396}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.25, y: 1.24}
-    newSize: {x: 1.25, y: 1.24}
+    oldSize: {x: 1.63, y: 1.45}
+    newSize: {x: 1.63, y: 1.45}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.6923344, y: 1.1194235}
+  m_Size: {x: 1.244671, y: 1.2723309}
   m_EdgeRadius: 0
 --- !u!95 &123403694953448615
 Animator:
@@ -186,18 +185,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &9165381767519812749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3762424425714932323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53065eb96a85e9042970731c6b6095e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tipo: 0
-  compuertaAsociada: {fileID: 0}
-  palanca: {fileID: 3762424425714932323}

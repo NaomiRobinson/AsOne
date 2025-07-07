@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4921862584084307918}
   - component: {fileID: 587635726800420831}
   - component: {fileID: 3034830734497109787}
+  - component: {fileID: 7350803540728395826}
   m_Layer: 0
   m_Name: Enemigo
   m_TagString: Enemy
@@ -79,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -944452227519639981, guid: 5c7398d5319da444ba0061812c3e89c9, type: 3}
+  m_Sprite: {fileID: 8732326760052573280, guid: caf619335baa69f499b7b2d1490ffb85, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 1
@@ -105,7 +106,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: -1
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -167,14 +168,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb2D: {fileID: 4921862584084307918}
-  distanciaBusquedaX: 0
-  distanciaBusquedaY: 0
+  distanciaBusquedaX: 3.36
+  distanciaBusquedaY: 0.43
   capaJugador:
     serializedVersion: 2
     m_Bits: 8
   transformJugador: {fileID: 0}
   estadoActual: 0
   velocidad: 1
-  distanciaMax: 5
-  puntoInicial: {x: 0, y: 0, z: 0}
-  mirandoDer: 1
+  distanciaMax: 2.5
+  puntoA: {x: -37.31, y: -12.31, z: 0}
+  puntoB: {x: -30.9, y: -12.31, z: 0}
+  puntoInicial: {x: -35.15, y: -12.13, z: 0}
+  mirandoDer: 0
+--- !u!95 &7350803540728395826
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8542423538924227152}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5e149bbbdacb58a45a7794ae0522150d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
