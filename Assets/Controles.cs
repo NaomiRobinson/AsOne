@@ -185,8 +185,19 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": """",
+                    ""id"": ""599032ea-90e5-4c20-b624-3850ca20f25e"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Moverse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
                     ""name"": ""Flechas"",
-                    ""id"": ""c229796a-e4a9-4e3f-a5df-bae42a94e38a"",
+                    ""id"": ""988c7fcd-d3f3-49eb-b820-ea7e3115d308"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -197,7 +208,7 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""up"",
-                    ""id"": ""6c4e90dd-63b0-4cf5-be9c-13bf503b180a"",
+                    ""id"": ""74a9f424-edec-4fd2-8967-12b773aa8457"",
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -208,7 +219,7 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""down"",
-                    ""id"": ""9a75c1dc-8957-4ceb-a429-0439f26b0e83"",
+                    ""id"": ""f3014b4c-ac3e-40a4-8975-9138dbba3e91"",
                     ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -219,7 +230,7 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""left"",
-                    ""id"": ""1743c6fb-1a6a-4b26-b8ee-428721935602"",
+                    ""id"": ""5a8a8ebb-3a2e-43a6-bebc-01c98eaa19d2"",
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -230,7 +241,7 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""right"",
-                    ""id"": ""c8380580-af37-43d2-8621-c3fcc7b3da47"",
+                    ""id"": ""07a59622-9387-469d-bf32-fcee64acfe49"",
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -238,17 +249,6 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                     ""action"": ""Moverse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""599032ea-90e5-4c20-b624-3850ca20f25e"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Moverse"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
