@@ -1,19 +1,25 @@
 using Unity.VisualScripting;
+using System.Collections;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Unity.Services.Analytics;
 using Unity.Services.Core;
 using static EventManager;
 using static StaticVariables;
+using TMPro;
 
 public class TransicionEscena : MonoBehaviour
 {
     public static TransicionEscena Instance;
-
-    //Disolver
-    public CanvasGroup disolverCanvasGroup;
+    public CanvasGroup disolverCanvas;
+    public CanvasGroup disolverTexto;
     public float tiempoDisolverEntrada;
+
+    public float tiempoDisolverTexto;
     public float tiempoDisolverSalida;
+
+    public TextMeshProUGUI nombreNivel;
 
 
 
@@ -32,7 +38,8 @@ public class TransicionEscena : MonoBehaviour
 
     void Start()
     {
-        DisolverEntrada();
+        string nombreEscena = SceneManager.GetActiveScene().name;
+        DisolverEntrada(nombreEscena);
 
     }
 
@@ -51,10 +58,11 @@ public class TransicionEscena : MonoBehaviour
     {
         Debug.Log("LevelStart: " + scene.name);
 
-        if (disolverCanvasGroup != null)
+        if (disolverCanvas != null)
         {
-            disolverCanvasGroup.alpha = 1f;
-            DisolverEntrada();
+
+            disolverCanvas.alpha = 1f;
+            DisolverEntrada(scene.name);
         }
 
 
@@ -65,15 +73,38 @@ public class TransicionEscena : MonoBehaviour
     }
 
 
-    private void DisolverEntrada()
+    private void DisolverEntrada(string nombreEscena)
     {
-        LeanTween.alphaCanvas(disolverCanvasGroup, 0f, tiempoDisolverEntrada).setOnComplete(() =>
-        {
-            disolverCanvasGroup.blocksRaycasts = false;
-            disolverCanvasGroup.interactable = false;
-        });
-    }
+        disolverCanvas.alpha = 1f;
+        disolverCanvas.blocksRaycasts = true;
+        disolverCanvas.interactable = true;
 
+        if (nombreEscena != "Menu" && nombreEscena != "Ayuda" && nombreEscena != "SeleccionNiveles" && nombreEscena != "Victoria")
+        {
+            nombreNivel.gameObject.SetActive(true);
+            disolverTexto.alpha = 1f;
+            nombreNivel.text = nombreEscena;
+
+            LeanTween.alphaCanvas(disolverTexto, 0f, tiempoDisolverTexto).setOnComplete(() =>
+            {
+                LeanTween.alphaCanvas(disolverCanvas, 0f, tiempoDisolverEntrada).setOnComplete(() =>
+                {
+                    disolverCanvas.blocksRaycasts = false;
+                    disolverCanvas.interactable = false;
+                    nombreNivel.gameObject.SetActive(false);
+                });
+            });
+        }
+        else
+        {
+            nombreNivel.gameObject.SetActive(false);
+            LeanTween.alphaCanvas(disolverCanvas, 0f, tiempoDisolverEntrada).setOnComplete(() =>
+            {
+                disolverCanvas.blocksRaycasts = false;
+                disolverCanvas.interactable = false;
+            });
+        }
+    }
     public void Disolversalida(int IndexEscena)
     {
         if (IndexEscena <= 0 || IndexEscena >= SceneManager.sceneCountInBuildSettings)
@@ -81,15 +112,17 @@ public class TransicionEscena : MonoBehaviour
             Debug.LogError("Índice de escena inválido: " + IndexEscena);
             return;
         }
-        disolverCanvasGroup.blocksRaycasts = true;
-        disolverCanvasGroup.interactable = true;
+        disolverCanvas.blocksRaycasts = true;
+        disolverCanvas.interactable = true;
 
-        LeanTween.alphaCanvas(disolverCanvasGroup, 1f, tiempoDisolverSalida).setOnComplete(() =>
+
+        LeanTween.alphaCanvas(disolverCanvas, 1f, tiempoDisolverSalida).setOnComplete(() =>
         {
             SceneManager.LoadScene(IndexEscena);
 
         });
     }
+
 
 
 }

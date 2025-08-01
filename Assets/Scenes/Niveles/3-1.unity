@@ -31933,9 +31933,12 @@ MonoBehaviour:
   jugadorDer: {fileID: 430326079}
   PanelDePausa: {fileID: 1779293588}
   velocidadX: 5
-  particulasIzq: {fileID: 1922746928}
-  particulasDer: {fileID: 1532596565}
+  velocidadMaximaY: 10
   cooldownInversion: 0.25
+  particulasArriba: {fileID: 1922746928}
+  particulasDer: {fileID: 1532596565}
+  indicadorArriba: {fileID: 0}
+  indicadorAbajo: {fileID: 0}
   puedeMoverse: 1
 --- !u!1 &1706627798
 GameObject:
@@ -33115,6 +33118,10 @@ PrefabInstance:
       propertyPath: movimientoJugador
       value: 
       objectReference: {fileID: 1702877485}
+    - target: {fileID: 4535517584813565001, guid: e085413049cdd354383103d7e69a3668, type: 3}
+      propertyPath: m_GravityScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5911614825838371142, guid: e085413049cdd354383103d7e69a3668, type: 3}
       propertyPath: m_Name
       value: JugadorDer
@@ -33125,11 +33132,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7209878981730550770, guid: e085413049cdd354383103d7e69a3668, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.7
+      value: 19.94
       objectReference: {fileID: 0}
     - target: {fileID: 7209878981730550770, guid: e085413049cdd354383103d7e69a3668, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.2800002
+      value: -3.62
       objectReference: {fileID: 0}
     - target: {fileID: 7209878981730550770, guid: e085413049cdd354383103d7e69a3668, type: 3}
       propertyPath: m_LocalPosition.z
@@ -33525,11 +33532,11 @@ PrefabInstance:
       objectReference: {fileID: 1582898238}
     - target: {fileID: 8803061160040768657, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.8620172
+      value: -3.622017
       objectReference: {fileID: 0}
     - target: {fileID: 8803061160040768657, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.002292
+      value: -3.3422914
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8024160483291169493, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
