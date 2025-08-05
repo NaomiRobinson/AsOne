@@ -19,6 +19,8 @@ public class SoundManager : MonoBehaviour
 
     void Awake()
     {
+        ActualizarIcono();
+
         if (instancia == null)
         {
             instancia = this;
@@ -35,6 +37,17 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
         ActualizarIcono();
+
+        if (silenciado)
+        {
+            audioSource.Pause();
+        }
+        else
+        {
+            audioSource.Play();
+        }
+
+        OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -72,7 +85,7 @@ public class SoundManager : MonoBehaviour
             audioSource.Play();
         }
     }
-
+    /*
     public void SilenciarMusica(bool silenciar)
     {
         audioSource.mute = silenciar;
@@ -82,9 +95,11 @@ public class SoundManager : MonoBehaviour
     {
         return audioSource.mute;
     }
+    */
     public void ToggleMusica()
     {
         Debug.Log("Click recibido en el botón de música");
+        
 
         silenciado = !silenciado;
 
