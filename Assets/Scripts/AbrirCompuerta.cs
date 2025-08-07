@@ -27,6 +27,7 @@ public class AbrirCompuerta : MonoBehaviour
     {
         if (tipo == TipoPalanca.Boton && estaJugador && !palancaActivada)
         {
+            SoundManager.instance.ReproducirSonido(SoundManager.instance.mecanismo_palanca);
             palancaActivada = true;
             compuertaAbierta = true;
             ActualizarEstado();
@@ -42,6 +43,7 @@ public class AbrirCompuerta : MonoBehaviour
 
         if (tipo == TipoPalanca.Presion && objetosEnPresion > 0)
         {
+            SoundManager.instance.ReproducirSonido(SoundManager.instance.mecanismo_palanca);
             compuertaAbierta = true;
             ActualizarEstado();
         }
@@ -78,11 +80,13 @@ public class AbrirCompuerta : MonoBehaviour
     {
         if (animPalanca != null)
         {
+            SoundManager.instance.ReproducirSonido(SoundManager.instance.mecanismo_compuerta);
             AnimacionesControlador.SetBool(animPalanca, "estaActivada", compuertaAbierta);
         }
 
         if (animCompuerta != null)
         {
+            SoundManager.instance.ReproducirSonido(SoundManager.instance.mecanismo_compuerta);
             AnimacionesControlador.SetBool(animCompuerta, "estaAbierta", compuertaAbierta);
         }
     }

@@ -12,6 +12,25 @@ public class SoundManager : MonoBehaviour
     public Sprite iconoSonidoOn;
     public Sprite iconoSonidoOff;
 
+    //sonidos
+    public static SoundManager instance;
+
+    public AudioSource sfxSource;
+
+    public AudioClip boton_interfaz_jugar;
+    public AudioClip boton_interfsz_generico;
+    public AudioClip cambiar_gravedad_01;
+    public AudioClip cambiar_gravedad_02;
+    public AudioClip cambiar_gravedad_03;
+    public AudioClip enemigo_disparo;
+    public AudioClip jugador_muerte;
+    public AudioClip llave_recolectada;
+    public AudioClip mecanismo_compuerta;
+    public AudioClip mecanismo_palanca;
+    public AudioClip portal_atravesarlo;
+    public AudioClip trampa_caer;
+
+    //
     private AudioSource audioSource;
     private static SoundManager instancia;
 
@@ -126,5 +145,12 @@ public class SoundManager : MonoBehaviour
             }
         }
     }
+
+    //sonidos/efectos especiales
+    public void ReproducirSonido(AudioClip clip)
+    {
+        sfxSource.PlayOneShot(clip);
+    }
+
 
 }

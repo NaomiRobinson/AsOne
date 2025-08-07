@@ -114,6 +114,7 @@ public class MovimientoJugador : MonoBehaviour
         // Gravedad
         if ((inputGravedadArriba || inputGravedadAbajo) && Time.time - tiempoUltimaInversion > cooldownInversion)
         {
+            SoundManager.instance.ReproducirSonido(SoundManager.instance.cambiar_gravedad_01);
             CambiarGravedad(inputGravedadArriba);
             tiempoUltimaInversion = Time.time;
         }

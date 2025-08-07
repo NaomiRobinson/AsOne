@@ -28,6 +28,7 @@ public class KeyManager : MonoBehaviour
             PlayerPrefs.SetInt("llave_" + id, 1);
             PlayerPrefs.Save();
 
+            SoundManager.instance.ReproducirSonido(SoundManager.instance.llave_recolectada);
             Destroy(gameObject);
 
         }
