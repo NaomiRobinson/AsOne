@@ -12,7 +12,7 @@ public class ReiniciarNivel : MonoBehaviour
         {
             if (movimientoJugador.modoInvencible == false)
             {
-                SoundManager.instance.ReproducirSonido(SoundManager.instance.jugador_muerte);
+                SoundManager.instancia.ReproducirSonido(SoundManager.instancia.jugador_muerte);
                 Reiniciar();
             }
 

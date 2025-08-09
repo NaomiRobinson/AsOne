@@ -40,6 +40,8 @@ public class TrampaMovimiento : MonoBehaviour
         {
             rb2D.constraints = RigidbodyConstraints2D.FreezeAll;
 
+            SoundManager.instancia.ReproducirSonido(SoundManager.instancia.trampa_caer);
+
             if (estaSubiendo)
             {
                 estaSubiendo = false;

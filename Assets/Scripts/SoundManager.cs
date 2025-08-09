@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
-
+    public static SoundManager instancia;
     public AudioClip musicaMenu;
     public AudioClip musicaJuego;
     public Button botonSonido;
@@ -13,7 +13,6 @@ public class SoundManager : MonoBehaviour
     public Sprite iconoSonidoOff;
 
     //sonidos
-    public static SoundManager instance;
 
     public AudioSource sfxSource;
 
@@ -32,7 +31,7 @@ public class SoundManager : MonoBehaviour
 
     //
     private AudioSource audioSource;
-    private static SoundManager instancia;
+    
 
     private bool silenciado = true;
 
