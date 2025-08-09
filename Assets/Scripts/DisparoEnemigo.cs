@@ -41,6 +41,7 @@ public class DisparoEnemigo : MonoBehaviour
     {
         if (animTorreta != null)
         {
+            SoundManager.instancia.ReproducirSonido(SoundManager.instancia.enemigo_disparo);
             AnimacionesControlador.SetTriggerConCallback(this, animTorreta, "dispara", 0.5f, () =>
             {
                 Instantiate(bala, controladorDisparo.position, controladorDisparo.rotation);

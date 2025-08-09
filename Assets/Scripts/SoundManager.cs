@@ -5,20 +5,40 @@ using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
-
+    public static SoundManager instancia;
     public AudioClip musicaMenu;
     public AudioClip musicaJuego;
     public Button botonSonido;
     public Sprite iconoSonidoOn;
     public Sprite iconoSonidoOff;
 
+    //sonidos
+
+    public AudioSource sfxSource;
+
+    public AudioClip boton_interfaz_jugar;
+    public AudioClip boton_interfsz_generico;
+    public AudioClip cambiar_gravedad_01;
+    public AudioClip cambiar_gravedad_02;
+    public AudioClip cambiar_gravedad_03;
+    public AudioClip enemigo_disparo;
+    public AudioClip jugador_muerte;
+    public AudioClip llave_recolectada;
+    public AudioClip mecanismo_compuerta;
+    public AudioClip mecanismo_palanca;
+    public AudioClip portal_atravesarlo;
+    public AudioClip trampa_caer;
+
+    //
     private AudioSource audioSource;
-    private static SoundManager instancia;
+    
 
     private bool silenciado = true;
 
     void Awake()
     {
+        ActualizarIcono();
+
         if (instancia == null)
         {
             instancia = this;
@@ -35,6 +55,17 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
         ActualizarIcono();
+
+        if (silenciado)
+        {
+            audioSource.Pause();
+        }
+        else
+        {
+            audioSource.Play();
+        }
+
+        OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -72,7 +103,7 @@ public class SoundManager : MonoBehaviour
             audioSource.Play();
         }
     }
-
+    /*
     public void SilenciarMusica(bool silenciar)
     {
         audioSource.mute = silenciar;
@@ -82,9 +113,11 @@ public class SoundManager : MonoBehaviour
     {
         return audioSource.mute;
     }
+    */
     public void ToggleMusica()
     {
         Debug.Log("Click recibido en el botón de música");
+        
 
         silenciado = !silenciado;
 
@@ -111,5 +144,12 @@ public class SoundManager : MonoBehaviour
             }
         }
     }
+
+    //sonidos/efectos especiales
+    public void ReproducirSonido(AudioClip clip)
+    {
+        sfxSource.PlayOneShot(clip);
+    }
+
 
 }
