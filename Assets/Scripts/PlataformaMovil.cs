@@ -40,23 +40,7 @@ public class PlataformaMovil : MonoBehaviour
     {
         if (other.gameObject.CompareTag("JugadorIzq") || other.gameObject.CompareTag("JugadorDer"))
         {
-            foreach (ContactPoint2D contacto in other.contacts)
-            {
-                Vector2 normalLocal = transform.InverseTransformDirection(contacto.normal);
-
-                if (normalLocal.y > 0.5f && !movimientoJugador.modoInvencible) // Jugador cae desde arriba y no es invencible
-                {
-                    Debug.Log("El jugador murió al tocar la plataforma desde arriba");
-                    other.gameObject.GetComponent<ReiniciarNivel>().Reiniciar();
-                    other.transform.SetParent(null);
-                    break;
-                }
-                else if (normalLocal.y < -0.5f) // Jugador toca desde abajo
-                {
-                    other.transform.SetParent(this.transform);
-                    break;
-                }
-            }
+            other.transform.SetParent(this.transform);
         }
     }
 

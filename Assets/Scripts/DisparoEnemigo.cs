@@ -15,13 +15,13 @@ public class DisparoEnemigo : MonoBehaviour
     private Animator animTorreta;
 
     public float distancia;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         animTorreta = EnemigoTorreta.GetComponent<Animator>();
     }
 
-    // Update is called once per frame
+
     private void Update()
     {
         jugadorEnRango = Physics2D.Raycast(controladorDisparo.position, transform.right, distancia, capaJugador);
@@ -44,7 +44,9 @@ public class DisparoEnemigo : MonoBehaviour
             SoundManager.instancia.ReproducirSonido(SoundManager.instancia.enemigo_disparo);
             AnimacionesControlador.SetTriggerConCallback(this, animTorreta, "dispara", 0.5f, () =>
             {
-                Instantiate(bala, controladorDisparo.position, controladorDisparo.rotation);
+                GameObject nuevaBala = Instantiate(bala, controladorDisparo.position, controladorDisparo.rotation);
+                nuevaBala.GetComponent<BalaEnemigo>().direccion = transform.right;
+
             });
         }
     }

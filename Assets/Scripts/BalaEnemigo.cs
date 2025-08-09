@@ -1,39 +1,37 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class BalaEnemigo : MonoBehaviour
 {
-    public float velocidad;
-    //public int daño;
+    public float velocidad = 5f;
+    private Rigidbody2D rb;
 
-    // public MovimientoJugador movimientoJugador;
+    [HideInInspector] public Vector2 direccion;
 
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     private void Update()
     {
-        transform.Translate(Time.deltaTime * velocidad * Vector2.right);
+        rb.MovePosition(rb.position + direccion * velocidad * Time.deltaTime);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Walls") || collision.CompareTag("Caja"))
+        {
+            Debug.Log("bala tocó pared o caja");
+            Destroy(gameObject);
+        }
+        else if (collision.CompareTag("JugadorIzq") || collision.CompareTag("JugadorDer"))
+        {
+            Debug.Log("bala tocó al jugador");
 
+            if (collision.TryGetComponent(out ReiniciarNivel reiniciar) && !reiniciar.movimientoJugador.modoInvencible)
+                reiniciar.Reiniciar();
 
-
-    /*   private void OnTriggerEnter2D(Collider2D collision)
-       {
-           if ((collision.gameObject.CompareTag("JugadorIzq") & movimientoJugador.modoInvencible == false) || (collision.gameObject.CompareTag("JugadorDer") & movimientoJugador.modoInvencible == false))
-           {
-
-               SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-           }
-
-
-           if (collision.gameObject.CompareTag("Walls"))
-           {
-               Debug.Log("bala toco pared");
-               Destroy(gameObject);
-           }
-
-
-       }
-   */
+            Destroy(gameObject);
+        }
+    }
 }

@@ -18,10 +18,10 @@ public class ReiniciarNivel : MonoBehaviour
 
         }
     }
+    public void Reiniciar()
+    {
+        Debug.Log("GameOver");
 
-    public void  Reiniciar(){
-          Debug.Log("GameOver");
-          
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

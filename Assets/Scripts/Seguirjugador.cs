@@ -1,121 +1,119 @@
 using UnityEngine;
 
-public class Seguirjugador : MonoBehaviour
+public class EnemigoPatrulla : MonoBehaviour
 {
-    public Rigidbody2D rb2D;
-    public float distanciaBusquedaX;
-    public float distanciaBusquedaY;
+    public float velocidad = 2f;
+    public Transform[] puntosMovimiento;
+    public float distanciaMinima = 0.1f;
+
+    public bool mirandoDer = true;
+
     public LayerMask capaJugador;
+    private Vector2 centroDeteccion;
+    private float distanciaBusquedaX;
+    public float distanciaBusquedaY = 1f;
 
-    public Transform transformJugador;
+    private Transform transformJugador;
+    private int siguientePunto = 0;
 
-    public EstadosMovimiento estadoActual;
+    private enum Estado { Patrullando, Siguiendo, Quieto }
+    private Estado estadoActual;
 
-    public float velocidad;
-
-    public float distanciaMax;
-    public Vector3 puntoA;
-    public Vector3 puntoB;
-    private Vector3 objetivoPatrulla;
-
-    public Vector3 puntoInicial;
-
-    public bool mirandoDer;
-
-
-    public enum EstadosMovimiento
+    private void Start()
     {
-        Patrullando,
-        Siguiendo,
-        Volviendo,
+        if (puntosMovimiento.Length >= 2)
+        {
+            centroDeteccion = (puntosMovimiento[0].position + puntosMovimiento[1].position) / 2f;
+            distanciaBusquedaX = Mathf.Abs(puntosMovimiento[1].position.x - puntosMovimiento[0].position.x) / 2f;
+        }
+        estadoActual = Estado.Patrullando;
     }
-
-    void Start()
-    {
-        puntoA = transform.position;
-        puntoB = puntoA + new Vector3(5f, 0f, 0f); // Distancia de patrullaje configurable
-        objetivoPatrulla = puntoB;
-        estadoActual = EstadosMovimiento.Patrullando;
-    }
-
 
     private void Update()
     {
         switch (estadoActual)
         {
-            case EstadosMovimiento.Patrullando:
-                EstadoPatrullando();
+            case Estado.Patrullando:
+                Patrullar();
+                BuscarJugador();
                 break;
-            case EstadosMovimiento.Siguiendo:
-                EstadoSiguiendo();
-                break;
-            case EstadosMovimiento.Volviendo:
-                EstadoVolviendo();
-                break;
-        }
 
-        // Detectar jugador en cualquier estado
-        Collider2D jugadorCollider = Physics2D.OverlapBox(transform.position, new Vector2(distanciaBusquedaX * 2, distanciaBusquedaY * 2), 0f, capaJugador);
-        if (jugadorCollider)
-        {
-            transformJugador = jugadorCollider.transform;
-            estadoActual = EstadosMovimiento.Siguiendo;
+            case Estado.Siguiendo:
+                SeguirJugador();
+                BuscarJugador();
+                break;
+
+
+            case Estado.Quieto:
+
+                break;
         }
     }
 
-    private void EstadoPatrullando()
+    private void Patrullar()
     {
-        rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+        Transform objetivo = puntosMovimiento[siguientePunto];
+        transform.position = Vector2.MoveTowards(transform.position, objetivo.position, velocidad * Time.deltaTime);
 
-        // Mover hacia el objetivo actual de patrullaje
-        if (transform.position.x < objetivoPatrulla.x)
-            rb2D.linearVelocity = new Vector2(velocidad, rb2D.linearVelocity.y);
-        else
-            rb2D.linearVelocity = new Vector2(-velocidad, rb2D.linearVelocity.y);
+        GirarAObjetivo(objetivo.position);
 
-        GirarAObjetivo(objetivoPatrulla);
-
-        // Cambiar de dirección si llega al punto
-        if (Vector2.Distance(transform.position, objetivoPatrulla) < 0.1f)
+        if (Vector2.Distance(transform.position, objetivo.position) < distanciaMinima)
         {
-            objetivoPatrulla = (objetivoPatrulla == puntoA) ? puntoB : puntoA;
-        }
-    }
-    private void EstadoSiguiendo()
-    {
-        rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
-
-        if (transform.position.x < transformJugador.position.x)
-            rb2D.linearVelocity = new Vector2(velocidad, rb2D.linearVelocity.y);
-        else
-            rb2D.linearVelocity = new Vector2(-velocidad, rb2D.linearVelocity.y);
-
-        GirarAObjetivo(transformJugador.position);
-
-        if (Vector2.Distance(transform.position, transformJugador.position) > distanciaMax)
-        {
-            estadoActual = EstadosMovimiento.Volviendo;
-            transformJugador = null;
+            Debug.Log("Cambio de punto");
+            siguientePunto = (siguientePunto + 1) % puntosMovimiento.Length;
         }
     }
 
-    private void EstadoVolviendo()
+
+    private void BuscarJugador()
     {
-        rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+        Vector2 tamaño = new Vector2(distanciaBusquedaX * 2f, distanciaBusquedaY * 2f);
+        Collider2D jugadorDetectado = Physics2D.OverlapBox(centroDeteccion, tamaño, 0f, capaJugador);
 
-        Vector3 objetivo = (Vector2.Distance(transform.position, puntoA) < Vector2.Distance(transform.position, puntoB)) ? puntoA : puntoB;
-
-        if (transform.position.x < objetivo.x)
-            rb2D.linearVelocity = new Vector2(velocidad, rb2D.linearVelocity.y);
-        else
-            rb2D.linearVelocity = new Vector2(-velocidad, rb2D.linearVelocity.y);
-
-        GirarAObjetivo(objetivo);
-
-        if (Vector2.Distance(transform.position, objetivo) < 0.1f)
+        if (jugadorDetectado != null)
         {
-            estadoActual = EstadosMovimiento.Patrullando;
+            transformJugador = jugadorDetectado.transform;
+            estadoActual = Estado.Siguiendo;
         }
+        else
+        {
+            if (estadoActual == Estado.Siguiendo)
+            {
+                estadoActual = Estado.Patrullando;
+                transformJugador = null;
+
+
+                Transform objetivo = puntosMovimiento[siguientePunto];
+                GirarAObjetivo(objetivo.position);
+            }
+        }
+    }
+
+
+    private void SeguirJugador()
+    {
+        if (transformJugador != null)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, transformJugador.position, velocidad * Time.deltaTime);
+            GirarAObjetivo(transformJugador.position);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Caja"))
+        {
+            estadoActual = Estado.Quieto;
+            gameObject.SetActive(false);
+        }
+    }
+
+    private void Girar()
+    {
+        mirandoDer = !mirandoDer;
+        Vector3 escala = transform.localScale;
+        escala.x *= -1;
+        transform.localScale = escala;
     }
 
     private void GirarAObjetivo(Vector3 objetivo)
@@ -131,21 +129,24 @@ public class Seguirjugador : MonoBehaviour
         }
     }
 
-    private void Girar()
+
+
+    private void OnDrawGizmosSelected()
     {
-        mirandoDer = !mirandoDer;
-        Vector3 escala = transform.localScale;
-        escala.x *= -1;
-        transform.localScale = escala;
+        if (puntosMovimiento != null && puntosMovimiento.Length >= 2)
+        {
+            Vector2 puntoA = puntosMovimiento[0].position;
+            Vector2 puntoB = puntosMovimiento[1].position;
+
+            Vector2 centro = (puntoA + puntoB) / 2f;
+            float distanciaX = Mathf.Abs(puntoB.x - puntoA.x) / 2f;
+
+            Vector2 tamaño = new Vector2(distanciaX * 2f, distanciaBusquedaY * 2f);
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(centro, tamaño);
+        }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, new Vector3(distanciaBusquedaX * 2, distanciaBusquedaY * 2, 0));
 
-        Gizmos.color = Color.green;
-        Gizmos.DrawSphere(puntoA, 0.2f);
-        Gizmos.DrawSphere(puntoB, 0.2f);
-    }
 }

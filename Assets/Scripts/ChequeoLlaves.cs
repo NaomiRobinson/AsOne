@@ -3,7 +3,7 @@ using UnityEngine;
 public class ChequeoLlaves
 {
 
-    private static readonly string[] idsLlaves = { "grupo1", "grupo2" };
+    private static readonly string[] idsLlaves = { "grupo1", "grupo2", "grupo3" };
 
     public static bool TodasRecolectadas()
     {
