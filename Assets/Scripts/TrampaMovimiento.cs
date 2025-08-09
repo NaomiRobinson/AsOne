@@ -21,13 +21,15 @@ public class TrampaMovimiento : MonoBehaviour
 
     void Update()
     {
+        Vector2 direccion = -transform.up;
+
         if (estaSubiendo)
         {
-            transform.Translate(Time.deltaTime * velocidadSubida * Vector3.up);
+            transform.Translate(-direccion * velocidadSubida * Time.deltaTime, Space.World);
             return;
         }
 
-        RaycastHit2D infoJugador = Physics2D.Raycast(transform.position, Vector3.down, distanciaLinea, capaJugador);
+        RaycastHit2D infoJugador = Physics2D.Raycast(transform.position, direccion, distanciaLinea, capaJugador);
 
         if (infoJugador)
         {
@@ -39,6 +41,8 @@ public class TrampaMovimiento : MonoBehaviour
         if (other.gameObject.CompareTag("Walls"))
         {
             rb2D.constraints = RigidbodyConstraints2D.FreezeAll;
+
+            //sonido de caida
 
             if (estaSubiendo)
             {
@@ -61,7 +65,8 @@ public class TrampaMovimiento : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        Vector2 direccion = -transform.up;
         Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * distanciaLinea);
+        Gizmos.DrawLine(transform.position, transform.position + (Vector3)(direccion * distanciaLinea));
     }
 }

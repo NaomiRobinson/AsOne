@@ -1,14 +1,21 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class MenuManager : MonoBehaviour
 {
 
+    public PlayerInput playerInput;
+
+    void Start()
+    {
+        Debug.Log("Mapa activo: " + playerInput.currentActionMap.name);
+    }
     public AudioSource musica;
     public void PlayGame()
     {
         ReiniciarProgreso();
-        SceneManager.LoadScene("Tutorial");
+        SceneManager.LoadScene("Invertidos");
     }
 
     public void ShowHelp()
@@ -26,10 +33,10 @@ public class MenuManager : MonoBehaviour
     public void ReiniciarProgreso()
     {
         PlayerPrefs.DeleteAll();
-        PlayerPrefs.Save();if (LevelManager.Instance != null)
-    {
-        LevelManager.Instance.grupoDesbloqueado = 1;
-    }
+        PlayerPrefs.Save(); if (LevelManager.Instance != null)
+        {
+            LevelManager.Instance.grupoDesbloqueado = 1;
+        }
     }
 
     public void ExitGame()

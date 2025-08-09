@@ -167,20 +167,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ad831d8fde9e8640aa3b386f73c7ec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb2D: {fileID: 4921862584084307918}
-  distanciaBusquedaX: 3.36
-  distanciaBusquedaY: 0.43
+  velocidad: 1
+  puntosMovimiento: []
+  distanciaMinima: 0.1
+  mirandoDer: 0
   capaJugador:
     serializedVersion: 2
     m_Bits: 8
-  transformJugador: {fileID: 0}
-  estadoActual: 0
-  velocidad: 1
-  distanciaMax: 2.5
-  puntoA: {x: -37.31, y: -12.31, z: 0}
-  puntoB: {x: -30.9, y: -12.31, z: 0}
-  puntoInicial: {x: -35.15, y: -12.13, z: 0}
-  mirandoDer: 0
+  distanciaBusquedaY: 0.43
 --- !u!95 &7350803540728395826
 Animator:
   serializedVersion: 7

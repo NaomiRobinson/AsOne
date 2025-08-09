@@ -133,13 +133,20 @@ public class EnemigoPatrulla : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if (puntosMovimiento.Length >= 2)
+        if (puntosMovimiento != null && puntosMovimiento.Length >= 2)
         {
-            Vector2 centro = (puntosMovimiento[0].position + puntosMovimiento[1].position) / 2f;
-            Vector2 tamaño = new Vector2(distanciaBusquedaX * 2f, distanciaBusquedaY * 2f);
+            Vector2 puntoA = puntosMovimiento[0].position;
+            Vector2 puntoB = puntosMovimiento[1].position;
+
+            Vector2 centro = (puntoA + puntoB) / 2f;
+            float distanciaX = Mathf.Abs(puntoB.x - puntoA.x) / 2f;
+
+            Vector2 tamaño = new Vector2(distanciaX * 2f, distanciaBusquedaY * 2f);
+
             Gizmos.color = Color.red;
             Gizmos.DrawWireCube(centro, tamaño);
         }
     }
+
 
 }
