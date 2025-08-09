@@ -5,12 +5,7 @@ using UnityEngine.InputSystem;
 public class MenuManager : MonoBehaviour
 {
 
-    public PlayerInput playerInput;
 
-    void Start()
-    {
-        Debug.Log("Mapa activo: " + playerInput.currentActionMap.name);
-    }
     public AudioSource musica;
     public void PlayGame()
     {
