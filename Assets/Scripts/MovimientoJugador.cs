@@ -23,10 +23,11 @@ public class MovimientoJugador : MonoBehaviour
     [SerializeField] private ParticleSystem indicadorArriba;
     [SerializeField] private ParticleSystem indicadorAbajo;
 
+
     private float tiempoUltimaInversion = 0f;
     private bool puedeInvertirJugador = true;
     private bool puedeInvertirEspejado = true;
-    private bool inputGravedadArriba, inputGravedadAbajo, inputModoInvencible;
+    private bool inputGravedadArriba, inputGravedadAbajo, inputModoInvencible, inputPausar;
     private Vector2 inputMovimiento;
     private bool juegoPausado = false;
     public bool puedeMoverse = true;
@@ -50,6 +51,7 @@ public class MovimientoJugador : MonoBehaviour
         controles.Jugador.GravedadArriba.performed += _ => inputGravedadArriba = true;
         controles.Jugador.GravedadAbajo.performed += _ => inputGravedadAbajo = true;
         controles.Jugador.ModoInvencible.performed += _ => inputModoInvencible = true;
+        controles.Jugador.Pausar.performed += _ => inputPausar = true;
     }
 
     void OnEnable() => controles.Enable();
@@ -108,11 +110,13 @@ public class MovimientoJugador : MonoBehaviour
             Debug.Log("Modo invencible: " + modoInvencible);
         }
 
-        if (Input.GetKeyDown(KeyCode.P))
+        if (inputPausar)
         {
-            juegoPausado = true;
-            Time.timeScale = 0f;
-            PanelDePausa.SetActive(true);
+            if (MenuPausa.Instancia.juegoPausado)
+                MenuPausa.Instancia.RenaudarJuego();
+            else
+                MenuPausa.Instancia.PausarJuego();
+            inputPausar = false;
         }
 
         inputGravedadArriba = inputGravedadAbajo = inputModoInvencible = false;

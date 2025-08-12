@@ -7,12 +7,21 @@ using UnityEngine.EventSystems;
 
 public class MenuPausa : MonoBehaviour
 {
+    public static MenuPausa Instancia { get; private set; }
     public GameObject PanelDePausa;
 
     public AudioSource musica;
 
-    private bool juegoPausado = false;
+    public bool juegoPausado = false;
     public TextMeshProUGUI nombreNivel;
+
+    private void Awake()
+    {
+        if (Instancia == null)
+        {
+            Instancia = this;
+        }
+    }
 
     private void Start()
     {
@@ -38,8 +47,8 @@ public class MenuPausa : MonoBehaviour
     //reiniciar el nivel
     public void RNivel()
     {
-        juegoPausado = false;
         Time.timeScale = 1f;
+        juegoPausado = false;
         PanelDePausa.SetActive(false);
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
