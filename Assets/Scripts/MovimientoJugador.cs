@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class MovimientoJugador : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class MovimientoJugador : MonoBehaviour
     [SerializeField] private ParticleSystem particulasDer;
     [SerializeField] private ParticleSystem indicadorArriba;
     [SerializeField] private ParticleSystem indicadorAbajo;
+    [SerializeField] private GameObject textoModoInvencible;
 
 
     private float tiempoUltimaInversion = 0f;
@@ -71,7 +73,6 @@ public class MovimientoJugador : MonoBehaviour
         rb.gravityScale = 1f;
         rbEspejado.gravityScale = 1f;
 
-        LogControlesActivos();
     }
 
     void Update()
@@ -115,6 +116,9 @@ public class MovimientoJugador : MonoBehaviour
         {
             modoInvencible = !modoInvencible;
             Debug.Log("Modo invencible: " + modoInvencible);
+
+            if (textoModoInvencible != null)
+                textoModoInvencible.SetActive(modoInvencible);
         }
 
         inputGravedadArriba = inputGravedadAbajo = inputModoInvencible = false;
@@ -198,16 +202,30 @@ public class MovimientoJugador : MonoBehaviour
 
     void DetectarEsquemaControl()
     {
-        EsquemaDeControl esquemaDetectado = EsquemaDeControl.Ninguno;
+        var nuevoEsquema = esquemaActual;
 
-        if (Keyboard.current.wKey.isPressed || Keyboard.current.aKey.isPressed || Keyboard.current.sKey.isPressed || Keyboard.current.dKey.isPressed)
-            esquemaDetectado = EsquemaDeControl.WASD;
-        else if (Keyboard.current.upArrowKey.isPressed || Keyboard.current.downArrowKey.isPressed || Keyboard.current.leftArrowKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
-            esquemaDetectado = EsquemaDeControl.Flechas;
-
-        if (esquemaDetectado != EsquemaDeControl.Ninguno && esquemaDetectado != esquemaActual)
+        if (Keyboard.current != null)
         {
-            esquemaActual = esquemaDetectado;
+            if (Keyboard.current.wKey.isPressed || Keyboard.current.aKey.isPressed ||
+                Keyboard.current.sKey.isPressed || Keyboard.current.dKey.isPressed)
+                nuevoEsquema = EsquemaDeControl.WASD;
+            else if (Keyboard.current.upArrowKey.isPressed || Keyboard.current.downArrowKey.isPressed ||
+                     Keyboard.current.leftArrowKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
+                nuevoEsquema = EsquemaDeControl.Flechas;
+        }
+
+        if (Gamepad.current != null)
+        {
+            if (Gamepad.current.leftStick.ReadValue().magnitude > 0.2f)
+                nuevoEsquema = EsquemaDeControl.WASD;
+            else if (Gamepad.current.rightStick.ReadValue().magnitude > 0.2f)
+                nuevoEsquema = EsquemaDeControl.Flechas;
+        }
+
+        if (nuevoEsquema != esquemaActual)
+        {
+            esquemaActual = nuevoEsquema;
+            Debug.Log("Esquema detectado: " + esquemaActual);
             ActualizarIndicadorVisual();
         }
     }
@@ -240,13 +258,7 @@ public class MovimientoJugador : MonoBehaviour
 
 
 
-    private void LogControlesActivos()
-    {
-        foreach (var map in controles.asset.actionMaps)
-        {
-            Debug.Log($"{map.name} está {(map.enabled ? "HABILITADO" : "DESHABILITADO")}");
-        }
-    }
+
 
 
 }
