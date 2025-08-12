@@ -1,12 +1,28 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class MenuManager : MonoBehaviour
 {
-
-
     public AudioSource musica;
+    public GameObject botonPorDefecto;
+
+    void Start()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(botonPorDefecto);
+    }
+
+
+    void Update()
+    {
+        if (EventSystem.current.currentSelectedGameObject == null)
+        {
+            EventSystem.current.SetSelectedGameObject(botonPorDefecto);
+        }
+    }
+
     public void PlayGame()
     {
         SoundManager.instancia.ReproducirSonido(SoundManager.instancia.boton_interfaz_jugar);
@@ -16,7 +32,7 @@ public class MenuManager : MonoBehaviour
 
     public void ShowHelp()
     {
-            SoundManager.instancia.ReproducirSonido(SoundManager.instancia.boton_interfsz_generico);
+        SoundManager.instancia.ReproducirSonido(SoundManager.instancia.boton_interfsz_generico);
         SceneManager.LoadScene("Ayuda");
     }
 

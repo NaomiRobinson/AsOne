@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
+
 
 public class MenuPausa : MonoBehaviour
 {
@@ -13,9 +16,9 @@ public class MenuPausa : MonoBehaviour
 
     private void Start()
     {
-        if (nombreNivel !=null)
+        if (nombreNivel != null)
         {
-            nombreNivel.text =  SceneManager.GetActiveScene().name;
+            nombreNivel.text = SceneManager.GetActiveScene().name;
         }
     }
 
