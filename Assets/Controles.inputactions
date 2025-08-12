@@ -99,8 +99,19 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "",
+                    "id": "599032ea-90e5-4c20-b624-3850ca20f25e",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Moverse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "Flechas",
-                    "id": "c229796a-e4a9-4e3f-a5df-bae42a94e38a",
+                    "id": "988c7fcd-d3f3-49eb-b820-ea7e3115d308",
                     "path": "2DVector",
                     "interactions": "",
                     "processors": "",
@@ -111,7 +122,7 @@
                 },
                 {
                     "name": "up",
-                    "id": "6c4e90dd-63b0-4cf5-be9c-13bf503b180a",
+                    "id": "74a9f424-edec-4fd2-8967-12b773aa8457",
                     "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
@@ -122,7 +133,7 @@
                 },
                 {
                     "name": "down",
-                    "id": "9a75c1dc-8957-4ceb-a429-0439f26b0e83",
+                    "id": "f3014b4c-ac3e-40a4-8975-9138dbba3e91",
                     "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
@@ -133,7 +144,7 @@
                 },
                 {
                     "name": "left",
-                    "id": "1743c6fb-1a6a-4b26-b8ee-428721935602",
+                    "id": "5a8a8ebb-3a2e-43a6-bebc-01c98eaa19d2",
                     "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
@@ -144,7 +155,7 @@
                 },
                 {
                     "name": "right",
-                    "id": "c8380580-af37-43d2-8621-c3fcc7b3da47",
+                    "id": "07a59622-9387-469d-bf32-fcee64acfe49",
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
@@ -152,17 +163,6 @@
                     "action": "Moverse",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "599032ea-90e5-4c20-b624-3850ca20f25e",
-                    "path": "<Gamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Moverse",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 },
                 {
                     "name": "",
@@ -271,6 +271,169 @@
                     "processors": "",
                     "groups": "",
                     "action": "ModoInvencible",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "45be9726-ddc3-4b1d-bcf6-2b6b908cfa41",
+            "actions": [
+                {
+                    "name": "Navigate",
+                    "type": "Value",
+                    "id": "a6354616-1267-44c1-a5c5-661392cd5613",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Submit",
+                    "type": "Button",
+                    "id": "9b850da7-362d-4d05-a363-99a3a71cfe10",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Point",
+                    "type": "Value",
+                    "id": "6cf523d1-16ca-40c9-9cef-49c0a3fd360c",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Click",
+                    "type": "Button",
+                    "id": "7a0456da-b8c2-47c2-b623-e6752d24ded6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Cancel",
+                    "type": "Button",
+                    "id": "aaecb9a1-4ae2-4c34-85dd-56e7fda7b9b6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "58f489e9-fcb6-4ea0-9c61-1527efb23a8f",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Navigate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Flechas",
+                    "id": "4ec04c13-c81e-45dc-989e-04be46c741e6",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Navigate",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "e83f480f-1d4e-4fd2-be5e-3faace20592d",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Navigate",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "4cdbf572-eae3-4c07-8219-1655688595cf",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Navigate",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "ad7edfab-271e-4238-ba87-0c487709b468",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "079b532a-96ab-42e9-9b77-2cb49c582929",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "90cd3ed8-df0e-48f4-9495-1dcdd1cbf294",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Point",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9af80961-af1a-477e-9a0b-5d5df5555be6",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3db1a981-8fe3-4d97-9e3c-8f560639a095",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "40d10b66-bef4-487b-ad58-27fd98d0afcd",
+                    "path": "<Keyboard>/{Back}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cancel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

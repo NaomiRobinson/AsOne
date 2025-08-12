@@ -12,15 +12,16 @@ public class ReiniciarNivel : MonoBehaviour
         {
             if (movimientoJugador.modoInvencible == false)
             {
+                SoundManager.instancia.ReproducirSonido(SoundManager.instancia.jugador_muerte);
                 Reiniciar();
             }
 
         }
     }
+    public void Reiniciar()
+    {
+        Debug.Log("GameOver");
 
-    public void  Reiniciar(){
-          Debug.Log("GameOver");
-          
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

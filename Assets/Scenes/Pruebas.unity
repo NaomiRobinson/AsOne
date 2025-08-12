@@ -284,6 +284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PanelDePausa: {fileID: 80436352}
+  musica: {fileID: 0}
   nombreNivel: {fileID: 0}
 --- !u!114 &80436354
 MonoBehaviour:
@@ -5458,7 +5459,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -5905,6 +5906,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 326850661}
   m_CullTransparentMesh: 1
+--- !u!1001 &498644758
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2362994887055033432, guid: 1932de72233b7a94fbd26c38709edffb, type: 3}
+      propertyPath: m_Name
+      value: Caja (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4970802031572647028, guid: 1932de72233b7a94fbd26c38709edffb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 4970802031572647028, guid: 1932de72233b7a94fbd26c38709edffb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -6.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 4970802031572647028, guid: 1932de72233b7a94fbd26c38709edffb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4970802031572647028, guid: 1932de72233b7a94fbd26c38709edffb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4970802031572647028, guid: 1932de72233b7a94fbd26c38709edffb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4970802031572647028, guid: 1932de72233b7a94fbd26c38709edffb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4970802031572647028, guid: 1932de72233b7a94fbd26c38709edffb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4970802031572647028, guid: 1932de72233b7a94fbd26c38709edffb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4970802031572647028, guid: 1932de72233b7a94fbd26c38709edffb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4970802031572647028, guid: 1932de72233b7a94fbd26c38709edffb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8748461482691950975, guid: 1932de72233b7a94fbd26c38709edffb, type: 3}
+      propertyPath: m_GravityScale
+      value: -1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1932de72233b7a94fbd26c38709edffb, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -11584,7 +11646,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -12441,10 +12503,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jugadorIzq: {fileID: 188882161}
   jugadorDer: {fileID: 1201819693}
+  PanelDePausa: {fileID: 0}
   velocidadX: 5
-  particulasIzq: {fileID: 1887557775}
+  velocidadMaximaY: 10
+  cooldownInversion: 0.25
+  particulasArriba: {fileID: 0}
   particulasDer: {fileID: 116515955}
-  indicadorJugador: {fileID: 1887557775}
+  indicadorArriba: {fileID: 0}
+  indicadorAbajo: {fileID: 0}
+  puedeMoverse: 1
 --- !u!114 &1702877486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18297,6 +18364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PanelDePausa: {fileID: 80436352}
+  musica: {fileID: 0}
   nombreNivel: {fileID: 0}
 --- !u!4 &2145735534
 Transform:
@@ -18510,11 +18578,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1318008819886402947, guid: 633adf343c28d334db71e8c7477d0dd0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.12
+      value: 2.32
       objectReference: {fileID: 0}
     - target: {fileID: 1318008819886402947, guid: 633adf343c28d334db71e8c7477d0dd0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.41
+      value: -6.65
       objectReference: {fileID: 0}
     - target: {fileID: 1318008819886402947, guid: 633adf343c28d334db71e8c7477d0dd0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -18551,6 +18619,10 @@ PrefabInstance:
     - target: {fileID: 3034830734497109787, guid: 633adf343c28d334db71e8c7477d0dd0, type: 3}
       propertyPath: capaJugador.m_Bits
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4921862584084307918, guid: 633adf343c28d334db71e8c7477d0dd0, type: 3}
+      propertyPath: m_GravityScale
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8542423538924227152, guid: 633adf343c28d334db71e8c7477d0dd0, type: 3}
       propertyPath: m_Name
@@ -18590,3 +18662,4 @@ SceneRoots:
   - {fileID: 1865686766}
   - {fileID: 1658041785}
   - {fileID: 2145735534}
+  - {fileID: 498644758}

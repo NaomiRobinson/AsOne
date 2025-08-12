@@ -48,6 +48,7 @@ public class Salida : MonoBehaviour
             {
                 if (!requiereAbrir || (palancaAsociada != null && palancaAsociada.EstaAbierta()))
                 {
+                    SoundManager.instancia.ReproducirSonido(SoundManager.instancia.portal_atravesarlo);
                     PasarNivel();
                 }
                 else
