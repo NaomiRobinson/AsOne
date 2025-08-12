@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class MovimientoJugador : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class MovimientoJugador : MonoBehaviour
     private Animator animatorJugador;
     private Animator animatorEspejado;
 
+    public bool GravedadInvertida => rb.gravityScale < 0f;
+
     [SerializeField] private float velocidadX = 5f;
     [SerializeField] private float velocidadMaximaY = 10f;
     [SerializeField] private float cooldownInversion = 0.25f;
@@ -22,14 +25,16 @@ public class MovimientoJugador : MonoBehaviour
     [SerializeField] private ParticleSystem particulasDer;
     [SerializeField] private ParticleSystem indicadorArriba;
     [SerializeField] private ParticleSystem indicadorAbajo;
+    [SerializeField] private GameObject textoModoInvencible;
+
 
     private float tiempoUltimaInversion = 0f;
     private bool puedeInvertirJugador = true;
     private bool puedeInvertirEspejado = true;
-    private bool inputGravedadArriba, inputGravedadAbajo, inputModoInvencible;
+    private bool inputGravedadArriba, inputGravedadAbajo, inputModoInvencible, inputPausar;
     private Vector2 inputMovimiento;
-    private bool juegoPausado = false;
-    public bool puedeMoverse = true;
+    [HideInInspector] public bool juegoPausado = false;
+    [HideInInspector] public bool puedeMoverse = true;
     public bool modoInvencible { get; private set; } = false;
 
     private Controles controles;
@@ -52,6 +57,7 @@ public class MovimientoJugador : MonoBehaviour
         controles.Jugador.GravedadArriba.performed += _ => inputGravedadArriba = true;
         controles.Jugador.GravedadAbajo.performed += _ => inputGravedadAbajo = true;
         controles.Jugador.ModoInvencible.performed += _ => inputModoInvencible = true;
+        controles.Jugador.Pausar.performed += _ => MenuPausa.Instancia.inputPausar();
     }
 
     void OnEnable() => controles.Enable();
@@ -59,6 +65,8 @@ public class MovimientoJugador : MonoBehaviour
 
     void Start()
     {
+        controles.UI.Disable();
+        controles.Jugador.Enable();
         rb = jugadorIzq.GetComponent<Rigidbody2D>();
         rbEspejado = jugadorDer.GetComponent<Rigidbody2D>();
         animatorJugador = jugadorIzq.GetComponent<Animator>();
@@ -66,12 +74,14 @@ public class MovimientoJugador : MonoBehaviour
 
         rb.gravityScale = 1f;
         rbEspejado.gravityScale = 1f;
+
     }
 
     void Update()
     {
         DetectarEsquemaControl();
 
+        if (MenuPausa.Instancia.juegoPausado) return;
         if (!puedeMoverse) return;
 
         float movimiento = inputMovimiento.x;
@@ -108,13 +118,9 @@ public class MovimientoJugador : MonoBehaviour
         {
             modoInvencible = !modoInvencible;
             Debug.Log("Modo invencible: " + modoInvencible);
-        }
 
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            juegoPausado = true;
-            Time.timeScale = 0f;
-            PanelDePausa.SetActive(true);
+            if (textoModoInvencible != null)
+                textoModoInvencible.SetActive(modoInvencible);
         }
 
         inputGravedadArriba = inputGravedadAbajo = inputModoInvencible = false;
@@ -252,5 +258,9 @@ public class MovimientoJugador : MonoBehaviour
             puedeInvertirEspejado = estado;
     }
 
-    public bool GravedadInvertida => rb.gravityScale < 0f;
+
+
+
+
+
 }

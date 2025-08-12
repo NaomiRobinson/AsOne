@@ -126,6 +126,15 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pausar"",
+                    ""type"": ""Button"",
+                    ""id"": ""9b7d7fd2-0e23-4cb4-8185-d3d69be01fa0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -197,7 +206,7 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c68e7fca-7352-4619-bde5-0f72be990a87"",
+                    ""id"": ""04e50ef1-8db1-44f0-bce0-106c837840aa"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -307,7 +316,7 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""a514efc4-5cea-48ac-b03b-4a42d2ce458a"",
+                    ""id"": ""2aadc694-98a5-4b03-8a95-b471792abfb6"",
                     ""path"": ""<Gamepad>/rightStick/up"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -390,6 +399,39 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ModoInvencible"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3af34a5e-34e3-47c8-b3fc-6f630ac40f56"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pausar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c19cae53-b88f-46d4-a427-14d3ab3bd1a2"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pausar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""408dd807-340c-4131-8748-e2c43666df59"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pausar"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -567,6 +609,7 @@ public partial class @Controles: IInputActionCollection2, IDisposable
         m_Jugador_GravedadArriba = m_Jugador.FindAction("GravedadArriba", throwIfNotFound: true);
         m_Jugador_GravedadAbajo = m_Jugador.FindAction("GravedadAbajo", throwIfNotFound: true);
         m_Jugador_ModoInvencible = m_Jugador.FindAction("ModoInvencible", throwIfNotFound: true);
+        m_Jugador_Pausar = m_Jugador.FindAction("Pausar", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -659,6 +702,7 @@ public partial class @Controles: IInputActionCollection2, IDisposable
     private readonly InputAction m_Jugador_GravedadArriba;
     private readonly InputAction m_Jugador_GravedadAbajo;
     private readonly InputAction m_Jugador_ModoInvencible;
+    private readonly InputAction m_Jugador_Pausar;
     /// <summary>
     /// Provides access to input actions defined in input action map "Jugador".
     /// </summary>
@@ -686,6 +730,10 @@ public partial class @Controles: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Jugador/ModoInvencible".
         /// </summary>
         public InputAction @ModoInvencible => m_Wrapper.m_Jugador_ModoInvencible;
+        /// <summary>
+        /// Provides access to the underlying input action "Jugador/Pausar".
+        /// </summary>
+        public InputAction @Pausar => m_Wrapper.m_Jugador_Pausar;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -724,6 +772,9 @@ public partial class @Controles: IInputActionCollection2, IDisposable
             @ModoInvencible.started += instance.OnModoInvencible;
             @ModoInvencible.performed += instance.OnModoInvencible;
             @ModoInvencible.canceled += instance.OnModoInvencible;
+            @Pausar.started += instance.OnPausar;
+            @Pausar.performed += instance.OnPausar;
+            @Pausar.canceled += instance.OnPausar;
         }
 
         /// <summary>
@@ -747,6 +798,9 @@ public partial class @Controles: IInputActionCollection2, IDisposable
             @ModoInvencible.started -= instance.OnModoInvencible;
             @ModoInvencible.performed -= instance.OnModoInvencible;
             @ModoInvencible.canceled -= instance.OnModoInvencible;
+            @Pausar.started -= instance.OnPausar;
+            @Pausar.performed -= instance.OnPausar;
+            @Pausar.canceled -= instance.OnPausar;
         }
 
         /// <summary>
@@ -955,6 +1009,13 @@ public partial class @Controles: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnModoInvencible(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Pausar" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPausar(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

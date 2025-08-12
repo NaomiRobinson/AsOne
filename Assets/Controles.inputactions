@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Pausar",
+                    "type": "Button",
+                    "id": "9b7d7fd2-0e23-4cb4-8185-d3d69be01fa0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -111,7 +120,7 @@
                 },
                 {
                     "name": "",
-                    "id": "c68e7fca-7352-4619-bde5-0f72be990a87",
+                    "id": "04e50ef1-8db1-44f0-bce0-106c837840aa",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
@@ -221,7 +230,7 @@
                 },
                 {
                     "name": "",
-                    "id": "a514efc4-5cea-48ac-b03b-4a42d2ce458a",
+                    "id": "2aadc694-98a5-4b03-8a95-b471792abfb6",
                     "path": "<Gamepad>/rightStick/up",
                     "interactions": "",
                     "processors": "",
@@ -304,6 +313,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "ModoInvencible",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3af34a5e-34e3-47c8-b3fc-6f630ac40f56",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pausar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c19cae53-b88f-46d4-a427-14d3ab3bd1a2",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pausar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "408dd807-340c-4131-8748-e2c43666df59",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pausar",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
