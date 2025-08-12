@@ -40,6 +40,8 @@ public class MovimientoJugador : MonoBehaviour
 
     public enum Jugador { Izq, Der }
 
+
+
     void Awake()
     {
         Instancia = this;
@@ -130,7 +132,7 @@ public class MovimientoJugador : MonoBehaviour
 
         if (direccion != 0)
         {
-            int flipX = direccion < 0 ? 1 : -1;
+            int flipX = direccion < 0 ? -1 : 1;
             SetFlipX(obj, flipX * direccionVisual);
         }
     }
@@ -196,16 +198,30 @@ public class MovimientoJugador : MonoBehaviour
 
     void DetectarEsquemaControl()
     {
-        EsquemaDeControl esquemaDetectado = EsquemaDeControl.Ninguno;
+        var nuevoEsquema = esquemaActual;
 
-        if (Keyboard.current.wKey.isPressed || Keyboard.current.aKey.isPressed || Keyboard.current.sKey.isPressed || Keyboard.current.dKey.isPressed)
-            esquemaDetectado = EsquemaDeControl.WASD;
-        else if (Keyboard.current.upArrowKey.isPressed || Keyboard.current.downArrowKey.isPressed || Keyboard.current.leftArrowKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
-            esquemaDetectado = EsquemaDeControl.Flechas;
-
-        if (esquemaDetectado != EsquemaDeControl.Ninguno && esquemaDetectado != esquemaActual)
+        if (Keyboard.current != null)
         {
-            esquemaActual = esquemaDetectado;
+            if (Keyboard.current.wKey.isPressed || Keyboard.current.aKey.isPressed ||
+                Keyboard.current.sKey.isPressed || Keyboard.current.dKey.isPressed)
+                nuevoEsquema = EsquemaDeControl.WASD;
+            else if (Keyboard.current.upArrowKey.isPressed || Keyboard.current.downArrowKey.isPressed ||
+                     Keyboard.current.leftArrowKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
+                nuevoEsquema = EsquemaDeControl.Flechas;
+        }
+
+        if (Gamepad.current != null)
+        {
+            if (Gamepad.current.leftStick.ReadValue().magnitude > 0.2f)
+                nuevoEsquema = EsquemaDeControl.WASD;
+            else if (Gamepad.current.rightStick.ReadValue().magnitude > 0.2f)
+                nuevoEsquema = EsquemaDeControl.Flechas;
+        }
+
+        if (nuevoEsquema != esquemaActual)
+        {
+            esquemaActual = nuevoEsquema;
+            Debug.Log("Esquema detectado: " + esquemaActual);
             ActualizarIndicadorVisual();
         }
     }
