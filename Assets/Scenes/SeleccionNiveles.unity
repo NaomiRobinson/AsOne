@@ -171,6 +171,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4703983598039598397, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -4330073353838754858, guid: ab896b4d50775984eb4458072338c907, type: 3}
     - target: {fileID: 8381649785619027962, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: m_Name
       value: Grupo2 Izq
@@ -476,6 +480,10 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4703983598039598397, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5445991052073259549, guid: c6cdec99aa3002e42a7d0da1d6123013, type: 3}
     - target: {fileID: 8381649785619027962, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: m_Name
       value: 'Grupo3 Der '
@@ -877,7 +885,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PanelDePausa: {fileID: 285729030}
+  botonPorDefecto: {fileID: 0}
   musica: {fileID: 0}
+  juegoPausado: 0
   nombreNivel: {fileID: 0}
 --- !u!114 &285729032
 MonoBehaviour:
@@ -2070,6 +2080,10 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4703983598039598397, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5445991052073259549, guid: c6cdec99aa3002e42a7d0da1d6123013, type: 3}
     - target: {fileID: 8381649785619027962, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: m_Name
       value: PuertaFinal Der
@@ -4870,7 +4884,7 @@ PrefabInstance:
     - target: {fileID: 4703983598039598397, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -19271035234818961, guid: c6cdec99aa3002e42a7d0da1d6123013, type: 3}
+      objectReference: {fileID: 5676813530487872819, guid: 3810b7086bbc8fd4ca6f153865e40289, type: 3}
     - target: {fileID: 8381649785619027962, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: m_Name
       value: PuertaFinal Izq
@@ -5767,6 +5781,10 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4703983598039598397, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5445991052073259549, guid: c6cdec99aa3002e42a7d0da1d6123013, type: 3}
     - target: {fileID: 8381649785619027962, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: m_Name
       value: Grupo2 Der
@@ -6217,6 +6235,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4703983598039598397, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1679455137827715565, guid: ab896b4d50775984eb4458072338c907, type: 3}
     - target: {fileID: 8381649785619027962, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: m_Name
       value: Grupo3 Izq
@@ -6285,6 +6307,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4703983598039598397, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 2884452202080266040, guid: ab896b4d50775984eb4458072338c907, type: 3}
     - target: {fileID: 8381649785619027962, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: m_Name
       value: Grupo1 Izq
@@ -6635,6 +6661,19 @@ MonoBehaviour:
   botonSonido: {fileID: 0}
   iconoSonidoOn: {fileID: -5544848815530659312, guid: cd69080d287800a48b0feb143a7caae4, type: 3}
   iconoSonidoOff: {fileID: 7908075426004432792, guid: c6e74e69df0a51e4e80e2fea81e2e7fd, type: 3}
+  sfxSource: {fileID: 0}
+  boton_interfaz_jugar: {fileID: 0}
+  boton_interfsz_generico: {fileID: 0}
+  cambiar_gravedad_01: {fileID: 0}
+  cambiar_gravedad_02: {fileID: 0}
+  cambiar_gravedad_03: {fileID: 0}
+  enemigo_disparo: {fileID: 0}
+  jugador_muerte: {fileID: 0}
+  llave_recolectada: {fileID: 0}
+  mecanismo_compuerta: {fileID: 0}
+  mecanismo_palanca: {fileID: 0}
+  portal_atravesarlo: {fileID: 0}
+  trampa_caer: {fileID: 0}
 --- !u!4 &1501139827
 Transform:
   m_ObjectHideFlags: 0
@@ -6758,7 +6797,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PanelDePausa: {fileID: 285729030}
+  botonPorDefecto: {fileID: 0}
   musica: {fileID: 0}
+  juegoPausado: 0
   nombreNivel: {fileID: 0}
 --- !u!4 &1611284227
 Transform:
@@ -7277,7 +7318,10 @@ MonoBehaviour:
   particulasDer: {fileID: 1318824668}
   indicadorArriba: {fileID: 1882704344}
   indicadorAbajo: {fileID: 1729621574}
+  textoModoInvencible: {fileID: 0}
+  juegoPausado: 0
   puedeMoverse: 1
+  esquemaActual: 0
 --- !u!114 &1702877486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19830,6 +19874,10 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4703983598039598397, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5445991052073259549, guid: c6cdec99aa3002e42a7d0da1d6123013, type: 3}
     - target: {fileID: 8381649785619027962, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: m_Name
       value: Grupo1 Der

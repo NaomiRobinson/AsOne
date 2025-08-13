@@ -38,6 +38,9 @@ public class TransicionEscena : MonoBehaviour
 
     void Start()
     {
+        if (disolverCanvas != null) disolverCanvas.alpha = 0f;
+        if (disolverTexto != null) disolverTexto.alpha = 0f;
+
         string nombreEscena = SceneManager.GetActiveScene().name;
         DisolverEntrada(nombreEscena);
 
@@ -81,9 +84,11 @@ public class TransicionEscena : MonoBehaviour
 
         if (nombreEscena != "Menu" && nombreEscena != "Ayuda" && nombreEscena != "SeleccionNiveles" && nombreEscena != "Victoria")
         {
-            nombreNivel.gameObject.SetActive(true);
-            disolverTexto.alpha = 1f;
             nombreNivel.text = nombreEscena;
+
+            // Aseguramos que el CanvasGroup del texto esté activo
+            if (disolverTexto != null)
+                disolverTexto.alpha = 1f;
 
             LeanTween.alphaCanvas(disolverTexto, 0f, tiempoDisolverTexto).setOnComplete(() =>
             {
@@ -91,13 +96,11 @@ public class TransicionEscena : MonoBehaviour
                 {
                     disolverCanvas.blocksRaycasts = false;
                     disolverCanvas.interactable = false;
-                    nombreNivel.gameObject.SetActive(false);
                 });
             });
         }
         else
         {
-            nombreNivel.gameObject.SetActive(false);
             LeanTween.alphaCanvas(disolverCanvas, 0f, tiempoDisolverEntrada).setOnComplete(() =>
             {
                 disolverCanvas.blocksRaycasts = false;

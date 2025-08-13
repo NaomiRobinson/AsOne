@@ -932,11 +932,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6848442707961279513, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
   m_PrefabInstance: {fileID: 252812880}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &252812883 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 510867101542543471, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
-  m_PrefabInstance: {fileID: 252812880}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &284036813
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14037,6 +14032,19 @@ MonoBehaviour:
   botonSonido: {fileID: 458331685}
   iconoSonidoOn: {fileID: 4840934775598319947, guid: 5c29e424c113593489f48ca2daae800e, type: 3}
   iconoSonidoOff: {fileID: 7908075426004432792, guid: c6e74e69df0a51e4e80e2fea81e2e7fd, type: 3}
+  sfxSource: {fileID: 0}
+  boton_interfaz_jugar: {fileID: 0}
+  boton_interfsz_generico: {fileID: 0}
+  cambiar_gravedad_01: {fileID: 0}
+  cambiar_gravedad_02: {fileID: 0}
+  cambiar_gravedad_03: {fileID: 0}
+  enemigo_disparo: {fileID: 0}
+  jugador_muerte: {fileID: 0}
+  llave_recolectada: {fileID: 0}
+  mecanismo_compuerta: {fileID: 0}
+  mecanismo_palanca: {fileID: 0}
+  portal_atravesarlo: {fileID: 0}
+  trampa_caer: {fileID: 0}
 --- !u!82 &845748147
 AudioSource:
   m_ObjectHideFlags: 0
@@ -15465,7 +15473,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PanelDePausa: {fileID: 988051952}
+  botonPorDefecto: {fileID: 0}
   musica: {fileID: 0}
+  juegoPausado: 0
   nombreNivel: {fileID: 0}
 --- !u!114 &988051955
 MonoBehaviour:
@@ -15735,11 +15745,142 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7209878981730550770, guid: e085413049cdd354383103d7e69a3668, type: 3}
   m_PrefabInstance: {fileID: 1318824665}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &1318824668 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 488133381554012457, guid: e085413049cdd354383103d7e69a3668, type: 3}
-  m_PrefabInstance: {fileID: 1318824665}
+--- !u!1 &1324676345
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1324676346}
+  - component: {fileID: 1324676348}
+  - component: {fileID: 1324676347}
+  m_Layer: 5
+  m_Name: Invencible
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1324676346
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324676345}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1504823839}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0.00012207031}
+  m_SizeDelta: {x: 318.949, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1324676347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324676345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Modo Invencible
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 906683546aa8c9f4886cc6d319a7f09c, type: 2}
+  m_sharedMaterial: {fileID: 6087007039329733532, guid: 906683546aa8c9f4886cc6d319a7f09c, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4284818176
+  m_fontColor: {r: 0, g: 0.13763326, b: 0.3962264, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18.96
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1324676348
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324676345}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1421636972
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16011,6 +16152,7 @@ RectTransform:
   - {fileID: 458331684}
   - {fileID: 988051953}
   - {fileID: 654341081}
+  - {fileID: 1324676346}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -27946,11 +28088,12 @@ MonoBehaviour:
   velocidadX: 4
   velocidadMaximaY: 10
   cooldownInversion: 0.5
-  particulasArriba: {fileID: 252812883}
-  particulasDer: {fileID: 1318824668}
   indicadorArriba: {fileID: 1074064162}
   indicadorAbajo: {fileID: 658421702}
+  textoModoInvencible: {fileID: 1324676345}
+  juegoPausado: 0
   puedeMoverse: 1
+  esquemaActual: 0
 --- !u!114 &1702877486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27993,7 +28136,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PanelDePausa: {fileID: 988051952}
+  botonPorDefecto: {fileID: 0}
   musica: {fileID: 0}
+  juegoPausado: 0
   nombreNivel: {fileID: 0}
 --- !u!4 &1948204222
 Transform:
