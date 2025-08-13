@@ -48,6 +48,8 @@ public class MovimientoJugador : MonoBehaviour
 
     public enum Jugador { Izq, Der }
 
+
+
     void Awake()
     {
         Instancia = this;
@@ -146,7 +148,7 @@ public class MovimientoJugador : MonoBehaviour
 
         if (direccion != 0)
         {
-            int flipX = direccion < 0 ? 1 : -1;
+            int flipX = direccion < 0 ? -1 : 1;
             SetFlipX(obj, flipX * direccionVisual);
         }
     }
