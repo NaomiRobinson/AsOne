@@ -2,6 +2,8 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using System.Collections;
+
 
 public class MovimientoJugador : MonoBehaviour
 {
@@ -16,13 +18,14 @@ public class MovimientoJugador : MonoBehaviour
     private Animator animatorJugador;
     private Animator animatorEspejado;
 
+    private TrailRenderer trail;
+    private TrailRenderer trailEspejado;
     public bool GravedadInvertida => rb.gravityScale < 0f;
 
     [SerializeField] private float velocidadX = 5f;
     [SerializeField] private float velocidadMaximaY = 10f;
     [SerializeField] private float cooldownInversion = 0.25f;
-    [SerializeField] private ParticleSystem particulasArriba;
-    [SerializeField] private ParticleSystem particulasDer;
+
     [SerializeField] private ParticleSystem indicadorArriba;
     [SerializeField] private ParticleSystem indicadorAbajo;
     [SerializeField] private GameObject textoModoInvencible;
@@ -38,8 +41,8 @@ public class MovimientoJugador : MonoBehaviour
     public bool modoInvencible { get; private set; } = false;
 
     private Controles controles;
-    private enum EsquemaDeControl { Ninguno, WASD, Flechas }
-    private EsquemaDeControl esquemaActual = EsquemaDeControl.Ninguno;
+    [HideInInspector] public enum EsquemaDeControl { Ninguno, WASD, Flechas }
+    [HideInInspector] public EsquemaDeControl esquemaActual = EsquemaDeControl.Ninguno;
     private enum IndicadorActivo { Ninguno, Arriba, Abajo }
     private IndicadorActivo indicadorActual = IndicadorActivo.Ninguno;
 
@@ -65,14 +68,21 @@ public class MovimientoJugador : MonoBehaviour
     {
         controles.UI.Disable();
         controles.Jugador.Enable();
+
         rb = jugadorIzq.GetComponent<Rigidbody2D>();
         rbEspejado = jugadorDer.GetComponent<Rigidbody2D>();
+
         animatorJugador = jugadorIzq.GetComponent<Animator>();
         animatorEspejado = jugadorDer.GetComponent<Animator>();
+
+        trail = jugadorIzq.GetComponent<TrailRenderer>();
+        trailEspejado = jugadorDer.GetComponent<TrailRenderer>();
 
         rb.gravityScale = 1f;
         rbEspejado.gravityScale = 1f;
 
+        trail.emitting = false;
+        trailEspejado.emitting = false;
     }
 
     void Update()
@@ -168,8 +178,12 @@ public class MovimientoJugador : MonoBehaviour
 
         if (puedeInvertirJugador || puedeInvertirEspejado)
         {
-            particulasArriba.Play();
-            particulasDer.Play();
+            trail.emitting = true;
+            trailEspejado.emitting = true;
+
+            StartCoroutine(DesactivarTrail(trail, 0.4f));
+            StartCoroutine(DesactivarTrail(trailEspejado, 0.4f));
+
             Debug.Log($"Gravedad {(invertir ? "invertida" : "normal")}");
         }
     }
@@ -256,7 +270,11 @@ public class MovimientoJugador : MonoBehaviour
             puedeInvertirEspejado = estado;
     }
 
-
+    private IEnumerator DesactivarTrail(TrailRenderer trail, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        trail.emitting = false;
+    }
 
 
 

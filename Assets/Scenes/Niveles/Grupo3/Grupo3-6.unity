@@ -1688,6 +1688,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CompuertaDer (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3241938846286343536, guid: 2a8f9454e81bd984a87ae51e69f906a7, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: c63819e2bf300334bb547e08dbf0b43e, type: 2}
     - target: {fileID: 3514989299413914871, guid: 2a8f9454e81bd984a87ae51e69f906a7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 28.24
@@ -1728,6 +1732,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5028717630374384831, guid: 2a8f9454e81bd984a87ae51e69f906a7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 65a0c4b9278255b45b46ce7b0c0de14c, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2666,7 +2674,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PanelDePausa: {fileID: 621646077}
+  botonPorDefecto: {fileID: 0}
   musica: {fileID: 0}
+  juegoPausado: 0
   nombreNivel: {fileID: 0}
 --- !u!114 &621646080
 MonoBehaviour:
@@ -19209,7 +19219,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PanelDePausa: {fileID: 621646077}
+  botonPorDefecto: {fileID: 0}
   musica: {fileID: 0}
+  juegoPausado: 0
   nombreNivel: {fileID: 0}
 --- !u!4 &867422153
 Transform:
@@ -36892,6 +36904,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 876546948892368000, guid: 3c7c0450a9c0adf46a135170405f85da, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: c9d6418fb26b53a4d82c9bdb23237836, type: 2}
+    - target: {fileID: 1284268811644108335, guid: 3c7c0450a9c0adf46a135170405f85da, type: 3}
+      propertyPath: m_Size.x
+      value: 1.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284268811644108335, guid: 3c7c0450a9c0adf46a135170405f85da, type: 3}
+      propertyPath: m_Size.y
+      value: 0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284268811644108335, guid: 3c7c0450a9c0adf46a135170405f85da, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4caf932a027ea574daf7da245ba2dc68, type: 3}
+    - target: {fileID: 1284268811644108335, guid: 3c7c0450a9c0adf46a135170405f85da, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1961551886164526741, guid: 3c7c0450a9c0adf46a135170405f85da, type: 3}
       propertyPath: m_Name
       value: PlacaPresion
@@ -37000,7 +37032,10 @@ MonoBehaviour:
   particulasDer: {fileID: 1099853322}
   indicadorArriba: {fileID: 1005106458}
   indicadorAbajo: {fileID: 343421970}
+  textoModoInvencible: {fileID: 0}
+  juegoPausado: 0
   puedeMoverse: 1
+  esquemaActual: 0
 --- !u!114 &1702877486
 MonoBehaviour:
   m_ObjectHideFlags: 0
