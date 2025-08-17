@@ -183,8 +183,8 @@ public class MovimientoJugador : MonoBehaviour
             trail.emitting = true;
             trailEspejado.emitting = true;
 
-            StartCoroutine(DesactivarTrail(trail, 0.4f));
-            StartCoroutine(DesactivarTrail(trailEspejado, 0.4f));
+            StartCoroutine(DesactivarTrail(trail, 0.5f));
+            StartCoroutine(DesactivarTrail(trailEspejado, 0.5f));
 
             Debug.Log($"Gravedad {(invertir ? "invertida" : "normal")}");
         }
