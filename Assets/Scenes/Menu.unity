@@ -622,19 +622,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 268326785}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 615390829}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: ToggleMusica
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &268326785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -648,14 +636,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8941177, g: 0.7372549, b: 0.1764706, a: 1}
+  m_Color: {r: 1, g: 0.93298274, b: 0.6933962, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 4840934775598319947, guid: 5c29e424c113593489f48ca2daae800e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9b57ddf87b9e5984ba385f02cbf8606f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -952,8 +940,8 @@ MonoBehaviour:
   musicaMenu: {fileID: 8300000, guid: 90c3df531786c894cb9d8ebb4e2f7f62, type: 3}
   musicaJuego: {fileID: 8300000, guid: ba5db7afbd55bfe46a996cc691935fad, type: 3}
   botonSonido: {fileID: 268326784}
-  iconoSonidoOn: {fileID: -5544848815530659312, guid: cd69080d287800a48b0feb143a7caae4, type: 3}
-  iconoSonidoOff: {fileID: 7908075426004432792, guid: c6e74e69df0a51e4e80e2fea81e2e7fd, type: 3}
+  iconoSonidoOn: {fileID: 21300000, guid: 9b57ddf87b9e5984ba385f02cbf8606f, type: 3}
+  iconoSonidoOff: {fileID: 21300000, guid: 2489f27e5e8ca934e9f6ec6635954e93, type: 3}
   sfxSource: {fileID: 615390832}
   boton_interfaz_jugar: {fileID: 8300000, guid: 452e35db79ddf6440aa63dbc27bcf315, type: 3}
   boton_interfsz_generico: {fileID: 8300000, guid: 74744b693cdd262499c745d8625506f1, type: 3}
@@ -1343,10 +1331,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nivelesGrupo1: 0400000005000000060000000700000008000000090000000a000000
   nivelesGrupo2: 0b0000000c0000000d0000000e0000000f0000001000000011000000
-  nivelesGrupo3: 
+  nivelesGrupo3: 12000000130000001400000015000000160000001700000018000000
   grupoActual: 0
   nivelTutorial: 2
-  final: 18
+  final: 25
   SeleccionNiveles: 3
   grupoDesbloqueado: 1
 --- !u!4 &729581123
@@ -1750,7 +1738,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1398713097
 MonoBehaviour:
   m_ObjectHideFlags: 0

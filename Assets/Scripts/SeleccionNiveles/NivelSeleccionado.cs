@@ -109,7 +109,7 @@ public class NivelSeleccionado : MonoBehaviour
         {
             puertaBloqueada = true;
 
-            int faltantes = ChequeoLlaves.LlavesFaltantes(); // <-- NECESITÁS ESTE MÉTODO
+            int faltantes = ChequeoLlaves.LlavesFaltantes();
             textoEstado.text = faltantes == 1 ? "Falta 1 fragmento" : $"Faltan {faltantes} fragmentos";
 
             textoEstado.gameObject.SetActive(true);
