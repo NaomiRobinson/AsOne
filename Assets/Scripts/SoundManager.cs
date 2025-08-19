@@ -31,13 +31,12 @@ public class SoundManager : MonoBehaviour
 
     //
     private AudioSource audioSource;
-    
 
-    private bool silenciado = true;
+
+    private bool silenciado = false;
 
     void Awake()
     {
-        ActualizarIcono();
 
         if (instancia == null)
         {
@@ -55,16 +54,7 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
         ActualizarIcono();
-
-        if (silenciado)
-        {
-            audioSource.Pause();
-        }
-        else
-        {
-            audioSource.Play();
-        }
-
+        audioSource.mute = silenciado;
         OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
 
@@ -77,8 +67,8 @@ public class SoundManager : MonoBehaviour
         if (botonGO != null)
         {
             botonSonido = botonGO.GetComponent<Button>();
-            botonSonido.onClick.RemoveAllListeners(); // Limpia listeners anteriores
-            botonSonido.onClick.AddListener(ToggleMusica); // Asigna función
+            botonSonido.onClick.RemoveAllListeners();
+            botonSonido.onClick.AddListener(ToggleMusica);
             ActualizarIcono();
         }
     }
@@ -87,7 +77,8 @@ public class SoundManager : MonoBehaviour
     {
         AudioClip clipAUsar = null;
 
-        if (nombreEscena == "Menu" || nombreEscena == "Tutorial" || nombreEscena == "SeleccionNiveles" || nombreEscena == "Ayuda")
+        if (nombreEscena == "Menu" || nombreEscena == "Invertidos" ||
+            nombreEscena == "SeleccionNiveles" || nombreEscena == "Ayuda")
         {
             clipAUsar = musicaMenu;
         }
@@ -100,9 +91,11 @@ public class SoundManager : MonoBehaviour
         {
             audioSource.clip = clipAUsar;
             audioSource.loop = true;
+            audioSource.mute = silenciado;
             audioSource.Play();
         }
     }
+
     /*
     public void SilenciarMusica(bool silenciar)
     {
@@ -117,21 +110,23 @@ public class SoundManager : MonoBehaviour
     public void ToggleMusica()
     {
         Debug.Log("Click recibido en el botón de música");
-        
 
         silenciado = !silenciado;
+        audioSource.mute = silenciado;
 
         if (silenciado)
         {
-            audioSource.Pause();
+            Debug.Log("Música silenciada");
         }
         else
         {
-            audioSource.Play();
+            Debug.Log("Música activada");
         }
+
 
         ActualizarIcono();
     }
+
 
     void ActualizarIcono()
     {
