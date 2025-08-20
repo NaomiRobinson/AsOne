@@ -91,7 +91,8 @@ public class MovimientoJugador : MonoBehaviour
     {
         DetectarEsquemaControl();
 
-        if (MenuPausa.Instancia.juegoPausado) return;
+        if (MenuPausa.Instancia != null && MenuPausa.Instancia.juegoPausado) return;
+
         if (!puedeMoverse) return;
 
         float movimiento = inputMovimiento.x;
