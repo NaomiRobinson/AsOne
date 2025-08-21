@@ -28,8 +28,10 @@ public class BalaEnemigo : MonoBehaviour
         {
             Debug.Log("bala tocó al jugador");
 
-            if (collision.TryGetComponent(out ReiniciarNivel reiniciar) && !reiniciar.movimientoJugador.modoInvencible)
+            if (collision.TryGetComponent(out ReiniciarNivel reiniciar) && !MovimientoJugador.Instancia.ModoInvencible)
+            {
                 reiniciar.Reiniciar();
+            }
 
             Destroy(gameObject);
         }

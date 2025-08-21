@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class BloquearInvertirGravedad : MonoBehaviour
 {
-    private MovimientoJugador movimientoJugador;
+    [SerializeField] private LayerMask capaZona;       // Capa de la zona que bloquea la gravedad
+    [SerializeField] private GameObject jugadorIzq;    // Jugador izquierdo
+    [SerializeField] private GameObject jugadorDer;    // Jugador derecho
 
-    [SerializeField] private LayerMask capaZonaSinInvertir;
-    [SerializeField] private GameObject jugadorIzq;
-    [SerializeField] private GameObject jugadorDer;
+    private MovimientoJugador movimientoJugador;
 
     private bool jugadorIzqDentro = false;
     private bool jugadorDerDentro = false;
@@ -20,7 +20,6 @@ public class BloquearInvertirGravedad : MonoBehaviour
         if (movimientoJugador == null)
             Debug.LogWarning("No se encontró MovimientoJugador en la escena.");
 
-        // Asignar jugadores si no están asignados en inspector
         if (jugadorIzq == null && movimientoJugador != null)
             jugadorIzq = movimientoJugador.jugadorIzq;
 
@@ -34,11 +33,11 @@ public class BloquearInvertirGravedad : MonoBehaviour
         bool estabaDentroIzq = jugadorIzqDentro;
         bool estabaDentroDer = jugadorDerDentro;
 
-        // Chequear si los jugadores están dentro de la zona (usando OverlapCircle)
-        jugadorIzqDentro = Physics2D.OverlapCircle(jugadorIzq.transform.position, chequeoRadio, capaZonaSinInvertir);
-        jugadorDerDentro = Physics2D.OverlapCircle(jugadorDer.transform.position, chequeoRadio, capaZonaSinInvertir);
+        // Chequear si los jugadores están dentro de la zona usando OverlapCircle y capa Player
+        jugadorIzqDentro = Physics2D.OverlapCircle(jugadorIzq.transform.position, chequeoRadio, capaZona);
+        jugadorDerDentro = Physics2D.OverlapCircle(jugadorDer.transform.position, chequeoRadio, capaZona);
 
-        // Si hubo cambio, actualizar permiso de invertir gravedad y loggear
+        // Actualizar bloqueo solo si cambió el estado
         if (jugadorIzqDentro != estabaDentroIzq)
         {
             movimientoJugador.PuedeInvertir(MovimientoJugador.Jugador.Izq, !jugadorIzqDentro);
@@ -49,6 +48,22 @@ public class BloquearInvertirGravedad : MonoBehaviour
         {
             movimientoJugador.PuedeInvertir(MovimientoJugador.Jugador.Der, !jugadorDerDentro);
             Debug.Log($"[Zona] JugadorDer dentro={jugadorDerDentro}");
+        }
+    }
+
+    // Opcional: visualizar el radio en la escena
+    private void OnDrawGizmosSelected()
+    {
+        if (jugadorIzq != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(jugadorIzq.transform.position, chequeoRadio);
+        }
+
+        if (jugadorDer != null)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(jugadorDer.transform.position, chequeoRadio);
         }
     }
 }

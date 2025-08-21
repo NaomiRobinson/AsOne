@@ -14,7 +14,7 @@ public class MenuPausa : MonoBehaviour
     public GameObject botonPorDefecto;
     public AudioSource musica;
 
-
+    public TextMeshProUGUI textoModoInvencible;
     public TextMeshProUGUI nombreNivel;
     private Controles controles;
 
@@ -23,30 +23,46 @@ public class MenuPausa : MonoBehaviour
 
     private void Awake()
     {
-        string nombreEscena = SceneManager.GetActiveScene().name;
-
-        // Destruir este objeto si es un menú
-        if (nombreEscena == "Menu" || nombreEscena == "Ayuda" || nombreEscena == "Victoria")
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        // Singleton para mantener persistencia en niveles
         if (Instancia == null)
         {
             Instancia = this;
             DontDestroyOnLoad(gameObject);
+
             controles = new Controles();
             controles.Jugador.Enable();
             controles.UI.Disable();
         }
-        else
+        else if (Instancia != this)
         {
             Destroy(gameObject);
             return;
         }
+
+
+        // Suscribirse al evento de cambio de escena
+        SceneManager.sceneLoaded += OnEscenaCargada;
     }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnEscenaCargada;
+    }
+
+    private void OnEscenaCargada(Scene escena, LoadSceneMode modo)
+    {
+        if (escena.name == "Menu" || escena.name == "Ayuda" || escena.name == "Victoria")
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            gameObject.SetActive(true);
+
+            ActualizarNombreNivel();
+            ActualizarTextoInvencible();
+        }
+    }
+
 
     private void Start()
     {
@@ -73,30 +89,55 @@ public class MenuPausa : MonoBehaviour
         }
 
         if (nombreNivel != null) { nombreNivel.text = SceneManager.GetActiveScene().name; }
-
+        ActualizarTextoInvencible();
 
     }
 
     public void inputPausar()
     {
-        if (juegoPausado) ReanudarJuego();
-        else PausarJuego();
+        if (TransicionEscena.Instance != null && TransicionEscena.Instance.TransicionEnCurso)
+        {
+            Debug.Log("No se puede pausar durante la transición.");
+            return;
+        }
+
+        if (juegoPausado)
+            ReanudarJuego();
+        else
+            PausarJuego();
     }
 
     private void PausarJuego()
     {
         juegoPausado = true;
         Time.timeScale = 0f;
-
+        ActualizarTextoInvencible();
         if (PanelDePausa != null)
         {
             controles.Jugador.Disable();
             controles.UI.Enable();
             PanelDePausa.SetActive(true);
 
+            int indice = SceneManager.GetActiveScene().buildIndex;
+            int total = SceneManager.sceneCountInBuildSettings;
+
             Button botonNivelAnterior = PanelDePausa.transform.Find("NivelA")?.GetComponent<Button>();
             if (botonNivelAnterior != null)
-                botonNivelAnterior.interactable = SceneManager.GetActiveScene().buildIndex != 2;
+            {
+                bool esSeleccion = SceneManager.GetActiveScene().name == "SeleccionNiveles";
+                bool esPrimer = LevelManager.Instance.EsPrimerNivel(indice);
+
+                botonNivelAnterior.interactable = !esSeleccion && !esPrimer;
+            }
+
+            Button botonNivelSiguiente = PanelDePausa.transform.Find("NivelP")?.GetComponent<Button>();
+            if (botonNivelSiguiente != null)
+            {
+                bool esSeleccion = SceneManager.GetActiveScene().name == "SeleccionNiveles";
+                bool esUltimo = LevelManager.Instance.EsUltimoNivel(indice);
+
+                botonNivelSiguiente.interactable = !esSeleccion && !esUltimo && indice < total - 1;
+            }
 
             StartCoroutine(SeleccionarBotonPorDefecto());
         }
@@ -137,16 +178,25 @@ public class MenuPausa : MonoBehaviour
     private void NivelAnterior()
     {
         int indice = SceneManager.GetActiveScene().buildIndex;
-        if (indice > 0)
+
+        // Evitar retroceder en SeleccionNiveles o si es el primer nivel del grupo
+        if (SceneManager.GetActiveScene().name == "SeleccionNiveles" ||
+            LevelManager.Instance.EsPrimerNivel(indice))
         {
-            if (PanelDePausa != null) PanelDePausa.SetActive(false);
-            juegoPausado = false;
-            Time.timeScale = 1f;
-            controles.UI.Disable();
-            controles.Jugador.Enable();
-            EventSystem.current.SetSelectedGameObject(null);
-            SceneManager.LoadScene(indice - 1);
+            Debug.Log("No se puede retroceder: primer nivel del grupo o SeleccionNiveles.");
+            return;
         }
+
+        if (PanelDePausa != null) PanelDePausa.SetActive(false);
+        juegoPausado = false;
+        Time.timeScale = 1f;
+        controles.UI.Disable();
+        controles.Jugador.Enable();
+        EventSystem.current.SetSelectedGameObject(null);
+
+        // Cargar nivel anterior dentro del grupo
+        int anterior = LevelManager.Instance.ObtenerNivelAnterior(indice);
+        SceneManager.LoadScene(anterior);
     }
 
     private void NivelSiguiente()
@@ -184,6 +234,21 @@ public class MenuPausa : MonoBehaviour
         foreach (var map in controles.asset.actionMaps)
         {
             Debug.Log($"{map.name} está {(map.enabled ? "HABILITADO" : "DESHABILITADO")}");
+        }
+    }
+
+    public void ActualizarNombreNivel()
+    {
+        if (nombreNivel != null)
+            nombreNivel.text = "Nivel: " + SceneManager.GetActiveScene().name;
+    }
+
+    public void ActualizarTextoInvencible()
+    {
+        if (textoModoInvencible != null && MovimientoJugador.Instancia != null)
+        {
+            // Activar o desactivar el GameObject del texto según modoInvencible
+            textoModoInvencible.gameObject.SetActive(MovimientoJugador.Instancia.ModoInvencible);
         }
     }
 }

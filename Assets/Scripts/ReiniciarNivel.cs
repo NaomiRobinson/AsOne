@@ -10,7 +10,7 @@ public class ReiniciarNivel : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Obstacle"))
         {
-            if (movimientoJugador.modoInvencible == false)
+            if (!MovimientoJugador.Instancia.ModoInvencible)
             {
                 SoundManager.instancia.ReproducirSonido(SoundManager.instancia.jugador_muerte);
                 Reiniciar();
