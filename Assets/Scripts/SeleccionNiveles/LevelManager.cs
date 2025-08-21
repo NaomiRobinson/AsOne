@@ -137,6 +137,31 @@ public class LevelManager : MonoBehaviour
         TransicionEscena.Instance.Disolversalida(final);
     }
 
+    public bool EsPrimerNivel(int buildIndex)
+    {
+        if (nivelesGrupo1.Length > 0 && nivelesGrupo1[0] == buildIndex) return true;
+        if (nivelesGrupo2.Length > 0 && nivelesGrupo2[0] == buildIndex) return true;
+        if (nivelesGrupo3.Length > 0 && nivelesGrupo3[0] == buildIndex) return true;
+        return false;
+    }
+
+    public int ObtenerNivelAnterior(int buildIndex)
+    {
+        // Buscar en grupo 1
+        int idx = System.Array.IndexOf(nivelesGrupo1, buildIndex);
+        if (idx > 0) return nivelesGrupo1[idx - 1];
+
+        // Buscar en grupo 2
+        idx = System.Array.IndexOf(nivelesGrupo2, buildIndex);
+        if (idx > 0) return nivelesGrupo2[idx - 1];
+
+        // Buscar en grupo 3
+        idx = System.Array.IndexOf(nivelesGrupo3, buildIndex);
+        if (idx > 0) return nivelesGrupo3[idx - 1];
+
+        // Si no lo encuentra o está en primera posición → se queda en el mismo
+        return buildIndex;
+    }
 }
 
 

@@ -21,6 +21,8 @@ public class TransicionEscena : MonoBehaviour
 
     public TextMeshProUGUI nombreNivel;
 
+    public bool TransicionEnCurso { get; private set; } = false;
+
 
 
     private void Awake()
@@ -78,6 +80,8 @@ public class TransicionEscena : MonoBehaviour
 
     private void DisolverEntrada(string nombreEscena)
     {
+          TransicionEnCurso = true;
+
         disolverCanvas.alpha = 1f;
         disolverCanvas.blocksRaycasts = true;
         disolverCanvas.interactable = true;
@@ -96,6 +100,7 @@ public class TransicionEscena : MonoBehaviour
                 {
                     disolverCanvas.blocksRaycasts = false;
                     disolverCanvas.interactable = false;
+                     TransicionEnCurso = false; 
                 });
             });
         }
@@ -105,6 +110,7 @@ public class TransicionEscena : MonoBehaviour
             {
                 disolverCanvas.blocksRaycasts = false;
                 disolverCanvas.interactable = false;
+                 TransicionEnCurso = false; 
             });
         }
     }
@@ -115,6 +121,7 @@ public class TransicionEscena : MonoBehaviour
             Debug.LogError("Índice de escena inválido: " + IndexEscena);
             return;
         }
+        TransicionEnCurso = true;
         disolverCanvas.blocksRaycasts = true;
         disolverCanvas.interactable = true;
 

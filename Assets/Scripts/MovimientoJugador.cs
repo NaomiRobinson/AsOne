@@ -38,8 +38,7 @@ public class MovimientoJugador : MonoBehaviour
     private Vector2 inputMovimiento;
     [HideInInspector] public bool juegoPausado = false;
     [HideInInspector] public bool puedeMoverse = true;
-    public bool modoInvencible { get; private set; } = false;
-
+    public bool ModoInvencible { get; private set; } = false;
     private Controles controles;
     [HideInInspector] public enum EsquemaDeControl { Ninguno, WASD, Flechas }
     [HideInInspector] public EsquemaDeControl esquemaActual = EsquemaDeControl.Ninguno;
@@ -90,8 +89,21 @@ public class MovimientoJugador : MonoBehaviour
     void Update()
     {
         DetectarEsquemaControl();
+        if (TransicionEscena.Instance != null && TransicionEscena.Instance.TransicionEnCurso)
+        {
+            controles.Jugador.Disable();
+        }
+        else
+        {
+            controles.Jugador.Enable();
+        }
 
-        if (MenuPausa.Instancia != null && MenuPausa.Instancia.juegoPausado) return;
+        if ((MenuPausa.Instancia != null && MenuPausa.Instancia.juegoPausado) ||
+      (TransicionEscena.Instance != null && TransicionEscena.Instance.TransicionEnCurso))
+        {
+            DetenerMovimiento();
+            return;
+        }
 
         if (!puedeMoverse) return;
 
@@ -127,11 +139,12 @@ public class MovimientoJugador : MonoBehaviour
 
         if (inputModoInvencible)
         {
-            modoInvencible = !modoInvencible;
-            Debug.Log("Modo invencible: " + modoInvencible);
+            ModoInvencible = !ModoInvencible;
+            Debug.Log("Modo invencible: " + ModoInvencible);
 
-            if (textoModoInvencible != null)
-                textoModoInvencible.SetActive(modoInvencible);
+
+            if (MenuPausa.Instancia != null)
+                MenuPausa.Instancia.ActualizarTextoInvencible();
         }
 
         inputGravedadArriba = inputGravedadAbajo = inputModoInvencible = false;
