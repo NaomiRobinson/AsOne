@@ -128,7 +128,7 @@ public class SoundManager : MonoBehaviour
     }
 
 
-    void ActualizarIcono()
+    public void ActualizarIcono()
     {
         if (botonSonido != null)
         {

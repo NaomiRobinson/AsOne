@@ -74,6 +74,22 @@ public class MenuPausa : MonoBehaviour
         if (botonPausar != null)
             botonPausar.onClick.AddListener(inputPausar);
 
+        Button botonMute = transform.Find("Musica")?.GetComponent<Button>();
+        
+        if (botonMute != null)
+        {
+            botonMute.onClick.RemoveAllListeners();
+            botonMute.onClick.AddListener(() =>
+            {
+                if (SoundManager.instancia != null)
+                    SoundManager.instancia.ToggleMusica();
+            });
+
+            // Actualizar icono al cargar la escena
+            if (SoundManager.instancia != null)
+                SoundManager.instancia.ActualizarIcono();
+        }
+
         // Botones dentro del panel
         if (PanelDePausa != null)
         {
@@ -217,10 +233,11 @@ public class MenuPausa : MonoBehaviour
 
     public void ControlMusica()
     {
-        if (musica != null)
-            musica.mute = !musica.mute;
+        if (SoundManager.instancia != null)
+        {
+            SoundManager.instancia.ToggleMusica();
+        }
     }
-
     private IEnumerator SeleccionarBotonPorDefecto()
     {
         yield return null;
