@@ -30,6 +30,22 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene("Invertidos");
     }
 
+    public void ContinueGame()
+    {
+        SoundManager.instancia.ReproducirSonido(SoundManager.instancia.boton_interfaz_jugar);
+
+        if (PlayerPrefs.HasKey("GrupoDesbloqueado"))
+        {
+
+            SceneManager.LoadScene(LevelManager.Instance.SeleccionNiveles);
+        }
+        else
+        {
+
+            SceneManager.LoadScene("Invertidos");
+        }
+    }
+
     public void ShowHelp()
     {
         SoundManager.instancia.ReproducirSonido(SoundManager.instancia.boton_interfsz_generico);
@@ -47,7 +63,9 @@ public class MenuManager : MonoBehaviour
     {
         SoundManager.instancia.ReproducirSonido(SoundManager.instancia.boton_interfsz_generico);
         PlayerPrefs.DeleteAll();
-        PlayerPrefs.Save(); if (LevelManager.Instance != null)
+        PlayerPrefs.Save();
+
+        if (LevelManager.Instance != null)
         {
             LevelManager.Instance.grupoDesbloqueado = 1;
         }
@@ -58,10 +76,5 @@ public class MenuManager : MonoBehaviour
         SoundManager.instancia.ReproducirSonido(SoundManager.instancia.boton_interfsz_generico);
         Application.Quit();
     }
-    /*
-    public void ControlMusica()
-    {
-        musica.mute = !musica.mute;
-    }
-    */
+
 }
