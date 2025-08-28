@@ -17,6 +17,12 @@ public class NivelSeleccionado : MonoBehaviour
 
     public TMP_Text textoEstado;
 
+    public GameObject indAbierto;
+    public GameObject indBloqueado;
+    public GameObject indCompleto;
+
+
+
     private bool puertaBloqueada = false;
 
     void Start()
@@ -35,6 +41,7 @@ public class NivelSeleccionado : MonoBehaviour
         {
             estaEnPuerta = true;
             RevisarEstadoPuerta(); // <- Revisa si está bloqueada
+
 
             if (!puertaBloqueada && !yaSelecciono)
             {
@@ -95,29 +102,41 @@ public class NivelSeleccionado : MonoBehaviour
     void RevisarEstadoPuerta()
     {
         textoEstado.gameObject.SetActive(false);
+        indAbierto.SetActive(false);
+        indBloqueado.SetActive(false);
+        indCompleto.SetActive(false);
+
         puertaBloqueada = false;
 
-        // Si es una puerta de grupo bloqueado
+        // Si la puerta está bloqueada por grupo
         if (grupoSeleccionado > LevelManager.Instance.grupoDesbloqueado)
         {
             puertaBloqueada = true;
+            indBloqueado.SetActive(true);
             textoEstado.text = "Bloqueado";
             textoEstado.gameObject.SetActive(true);
         }
-        // Si es la puerta final y no tiene todas las llaves
+        // Si es puerta final pero faltan fragmentos
         else if (esPuertaFinal && !ChequeoLlaves.TodasRecolectadas())
         {
             puertaBloqueada = true;
+            indBloqueado.SetActive(true);
 
             int faltantes = ChequeoLlaves.LlavesFaltantes();
             textoEstado.text = faltantes == 1 ? "Falta 1 fragmento" : $"Faltan {faltantes} fragmentos";
-
             textoEstado.gameObject.SetActive(true);
         }
         else
         {
-            puertaBloqueada = false;
-            textoEstado.gameObject.SetActive(false);
+            // --- Aquí chequeamos si ya fue completado ---
+            if (FueCompletado(grupoSeleccionado))
+            {
+                indCompleto.SetActive(true);
+            }
+            else
+            {
+                indAbierto.SetActive(true);
+            }
         }
     }
     void EjecutarCargaNivel()
@@ -193,5 +212,12 @@ public class NivelSeleccionado : MonoBehaviour
             }
         }
     }
+
+    private bool FueCompletado(int grupo)
+    {
+        return PlayerPrefs.GetInt($"GrupoCompletado_{grupo}", 0) == 1;
+    }
+
+
 
 }

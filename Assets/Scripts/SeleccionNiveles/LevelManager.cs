@@ -20,6 +20,8 @@ public class LevelManager : MonoBehaviour
 
     public static LevelManager Instance;
 
+    
+
     private void Awake()
     {
         if (Instance == null)
@@ -117,20 +119,20 @@ public class LevelManager : MonoBehaviour
     public void MarcarGrupoCompletado()
     {
         int nuevoGrupo = grupoActual + 1;
-        Debug.Log($"Intentando desbloquear nuevo grupo: {nuevoGrupo} (actual desbloqueado: {grupoDesbloqueado})");
+        Debug.Log($"Intentando desbloquear nuevo grupo: {nuevoGrupo}");
+
+        // Marca como completado el grupo actual
+        PlayerPrefs.SetInt($"GrupoCompletado_{grupoActual}", 1);
 
         if (nuevoGrupo > grupoDesbloqueado)
         {
             grupoDesbloqueado = nuevoGrupo;
             PlayerPrefs.SetInt("GrupoDesbloqueado", grupoDesbloqueado);
-            PlayerPrefs.Save();
-            Debug.Log("Nuevo grupo desbloqueado y guardado: " + grupoDesbloqueado);
         }
-        else
-        {
-            Debug.Log("No se desbloqueó ningún grupo nuevo porque ya estaba desbloqueado.");
-        }
+
+        PlayerPrefs.Save();
     }
+
 
     public void CargarFinal()
     {
@@ -162,6 +164,10 @@ public class LevelManager : MonoBehaviour
         // Si no lo encuentra o está en primera posición → se queda en el mismo
         return buildIndex;
     }
+
+
+
+
 }
 
 

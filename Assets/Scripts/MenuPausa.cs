@@ -85,7 +85,6 @@ public class MenuPausa : MonoBehaviour
                     SoundManager.instancia.ToggleMusica();
             });
 
-            // Actualizar icono al cargar la escena
             if (SoundManager.instancia != null)
                 SoundManager.instancia.ActualizarIcono();
         }
