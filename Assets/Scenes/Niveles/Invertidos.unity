@@ -827,7 +827,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000015258789, y: -57}
+  m_AnchoredPosition: {x: 0, y: -64}
   m_SizeDelta: {x: 276.0112, y: 51.7521}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &458729060
@@ -1395,6 +1395,19 @@ MonoBehaviour:
   botonSonido: {fileID: 540028405}
   iconoSonidoOn: {fileID: -5544848815530659312, guid: cd69080d287800a48b0feb143a7caae4, type: 3}
   iconoSonidoOff: {fileID: 7908075426004432792, guid: c6e74e69df0a51e4e80e2fea81e2e7fd, type: 3}
+  sfxSource: {fileID: 0}
+  boton_interfaz_jugar: {fileID: 0}
+  boton_interfsz_generico: {fileID: 0}
+  cambiar_gravedad_01: {fileID: 0}
+  cambiar_gravedad_02: {fileID: 0}
+  cambiar_gravedad_03: {fileID: 0}
+  enemigo_disparo: {fileID: 0}
+  jugador_muerte: {fileID: 0}
+  llave_recolectada: {fileID: 0}
+  mecanismo_compuerta: {fileID: 0}
+  mecanismo_palanca: {fileID: 0}
+  portal_atravesarlo: {fileID: 0}
+  trampa_caer: {fileID: 0}
 --- !u!4 &571843488
 Transform:
   m_ObjectHideFlags: 0
@@ -1543,7 +1556,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -144}
+  m_AnchoredPosition: {x: 0, y: -224}
   m_SizeDelta: {x: 276.0112, y: 51.7521}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &601616691
@@ -3469,8 +3482,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d17eb67134edfcd43b0ecaa527abbf92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 0}
   musica: {fileID: 938014564}
+  botonPorDefecto: {fileID: 0}
 --- !u!4 &1345067712
 Transform:
   m_ObjectHideFlags: 0

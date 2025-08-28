@@ -26,7 +26,7 @@ public class MenuManager : MonoBehaviour
     public void PlayGame()
     {
         SoundManager.instancia.ReproducirSonido(SoundManager.instancia.boton_interfaz_jugar);
-        ReiniciarProgreso();
+        //ReiniciarProgreso();
         SceneManager.LoadScene("Invertidos");
     }
 
@@ -51,6 +51,7 @@ public class MenuManager : MonoBehaviour
         {
             LevelManager.Instance.grupoDesbloqueado = 1;
         }
+        SceneManager.LoadScene("Invertidos");
     }
 
     public void ExitGame()
@@ -58,6 +59,16 @@ public class MenuManager : MonoBehaviour
         SoundManager.instancia.ReproducirSonido(SoundManager.instancia.boton_interfsz_generico);
         Application.Quit();
     }
+
+   
+
+    public void Creditos()
+    {
+        SoundManager.instancia.ReproducirSonido(SoundManager.instancia.boton_interfsz_generico);
+        SceneManager.LoadScene("Creditos");
+    }
+
+
     /*
     public void ControlMusica()
     {

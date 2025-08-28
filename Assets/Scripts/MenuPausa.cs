@@ -81,4 +81,12 @@ public class MenuPausa : MonoBehaviour
     {
         musica.mute = !musica.mute;
     }
+
+    //voler al selector de niveles
+    public void VolverAlSelector()
+    {
+        //SoundManager.instancia.ReproducirSonido(SoundManager.instancia.boton_interfsz_generico);
+        SceneManager.LoadScene("Seleccion Niveles");
+
+    }
 }
