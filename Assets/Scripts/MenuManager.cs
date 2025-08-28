@@ -26,7 +26,7 @@ public class MenuManager : MonoBehaviour
     public void PlayGame()
     {
         SoundManager.instancia.ReproducirSonido(SoundManager.instancia.boton_interfaz_jugar);
-        //ReiniciarProgreso();
+        ReiniciarProgreso();
         SceneManager.LoadScene("Invertidos");
     }
 
