@@ -180,8 +180,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 906683546aa8c9f4886cc6d319a7f09c, type: 2}
-  m_sharedMaterial: {fileID: 6087007039329733532, guid: 906683546aa8c9f4886cc6d319a7f09c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 35cc29bad4a8ab3449cfa08a52ce0ec1, type: 2}
+  m_sharedMaterial: {fileID: 1272497551095840435, guid: 35cc29bad4a8ab3449cfa08a52ce0ec1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -569,10 +569,14 @@ MonoBehaviour:
   jugadorDer: {fileID: 1832913726}
   PanelDePausa: {fileID: 0}
   velocidadX: 5
-  particulasIzq: {fileID: 1802498093}
-  particulasDer: {fileID: 1072260391}
+  velocidadMaximaY: 10
   cooldownInversion: 0.25
+  indicadorArriba: {fileID: 0}
+  indicadorAbajo: {fileID: 0}
+  textoModoInvencible: {fileID: 0}
+  juegoPausado: 0
   puedeMoverse: 1
+  esquemaActual: 0
 --- !u!114 &302656997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9944,11 +9948,6 @@ Transform:
   - {fileID: 1259814380}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!198 &1072260391 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 488133381554012457, guid: e085413049cdd354383103d7e69a3668, type: 3}
-  m_PrefabInstance: {fileID: 241357938}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1074651761
 GameObject:
   m_ObjectHideFlags: 0
@@ -10008,8 +10007,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Continuara..
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 906683546aa8c9f4886cc6d319a7f09c, type: 2}
-  m_sharedMaterial: {fileID: 6087007039329733532, guid: 906683546aa8c9f4886cc6d319a7f09c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 35cc29bad4a8ab3449cfa08a52ce0ec1, type: 2}
+  m_sharedMaterial: {fileID: 1272497551095840435, guid: 35cc29bad4a8ab3449cfa08a52ce0ec1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -14609,11 +14608,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7678046806179603808, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
   m_PrefabInstance: {fileID: 235528256}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &1802498093 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 510867101542543471, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
-  m_PrefabInstance: {fileID: 923562490}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1832913726 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5911614825838371142, guid: e085413049cdd354383103d7e69a3668, type: 3}
@@ -14849,6 +14843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musica: {fileID: 0}
+  botonPorDefecto: {fileID: 0}
 --- !u!4 &2090974795
 Transform:
   m_ObjectHideFlags: 0
@@ -14927,7 +14922,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 7.5373154
+  orthographic size: 7.541047
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -14952,7 +14947,7 @@ Transform:
   m_GameObject: {fileID: 2101160268}
   serializedVersion: 2
   m_LocalRotation: {x: 0.07291493, y: -0.012166442, z: 0.00088954956, w: 0.99726355}
-  m_LocalPosition: {x: 15.253417, y: 6.7516003, z: -9.769841}
+  m_LocalPosition: {x: 15.253414, y: 6.7523756, z: -9.769727}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

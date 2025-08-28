@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class TeclasTutorial : MonoBehaviour
 {
-    public enum Direccion { Arriba, Abajo, Izquierda, Derecha }
+    public enum Direccion { Arriba, Abajo, Izquierda, Derecha, TeclaA, TeclaD }
 
     [SerializeField] private Direccion direccion;
     [SerializeField] private Sprite spriteNormal;
@@ -24,10 +24,16 @@ public class TeclasTutorial : MonoBehaviour
                 presionada = Keyboard.current.sKey.isPressed || Keyboard.current.downArrowKey.isPressed;
                 break;
             case Direccion.Izquierda:
-                presionada = Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed;
+                presionada = Keyboard.current.dKey.isPressed || Keyboard.current.leftArrowKey.isPressed;
                 break;
             case Direccion.Derecha:
-                presionada = Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed;
+                presionada = Keyboard.current.aKey.isPressed || Keyboard.current.rightArrowKey.isPressed;
+                break;
+            case Direccion.TeclaA:
+                presionada = Keyboard.current.aKey.isPressed || Keyboard.current.rightArrowKey.isPressed;
+                break;
+            case Direccion.TeclaD:
+                presionada = Keyboard.current.dKey.isPressed || Keyboard.current.leftArrowKey.isPressed;
                 break;
         }
 

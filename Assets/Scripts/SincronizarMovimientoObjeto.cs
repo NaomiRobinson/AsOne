@@ -12,7 +12,11 @@ public class SincronizarMovimientoObjeto : MonoBehaviour
         posicionAnterior = objetoOriginal.position;
 
         Collider2D colliderCaja = GetComponent<Collider2D>();
-        Physics2D.IgnoreCollision(colliderCaja, ignorarCollider);
+        if (ignorarCollider != null)
+        {
+            Physics2D.IgnoreCollision(colliderCaja, ignorarCollider);
+        }
+
     }
 
     void Update()

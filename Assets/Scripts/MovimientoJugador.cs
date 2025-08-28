@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
+using System.Collections;
+
 
 public class MovimientoJugador : MonoBehaviour
 {
@@ -15,30 +18,36 @@ public class MovimientoJugador : MonoBehaviour
     private Animator animatorJugador;
     private Animator animatorEspejado;
 
+    private TrailRenderer trail;
+    private TrailRenderer trailEspejado;
+    public bool GravedadInvertida => rb.gravityScale < 0f;
+
     [SerializeField] private float velocidadX = 5f;
     [SerializeField] private float velocidadMaximaY = 10f;
     [SerializeField] private float cooldownInversion = 0.25f;
-    [SerializeField] private ParticleSystem particulasArriba;
-    [SerializeField] private ParticleSystem particulasDer;
+
     [SerializeField] private ParticleSystem indicadorArriba;
     [SerializeField] private ParticleSystem indicadorAbajo;
+    [SerializeField] private GameObject textoModoInvencible;
+
 
     private float tiempoUltimaInversion = 0f;
     private bool puedeInvertirJugador = true;
     private bool puedeInvertirEspejado = true;
-    private bool inputGravedadArriba, inputGravedadAbajo, inputModoInvencible;
+    private bool inputGravedadArriba, inputGravedadAbajo, inputModoInvencible, inputPausar;
     private Vector2 inputMovimiento;
-    private bool juegoPausado = false;
-    public bool puedeMoverse = true;
-    public bool modoInvencible { get; private set; } = false;
-
+    [HideInInspector] public bool juegoPausado = false;
+    [HideInInspector] public bool puedeMoverse = true;
+    public bool ModoInvencible { get; private set; } = false;
     private Controles controles;
-    private enum EsquemaDeControl { Ninguno, WASD, Flechas }
-    private EsquemaDeControl esquemaActual = EsquemaDeControl.Ninguno;
+    [HideInInspector] public enum EsquemaDeControl { Ninguno, WASD, Flechas }
+    [HideInInspector] public EsquemaDeControl esquemaActual = EsquemaDeControl.Ninguno;
     private enum IndicadorActivo { Ninguno, Arriba, Abajo }
     private IndicadorActivo indicadorActual = IndicadorActivo.Ninguno;
 
     public enum Jugador { Izq, Der }
+
+
 
     void Awake()
     {
@@ -50,6 +59,7 @@ public class MovimientoJugador : MonoBehaviour
         controles.Jugador.GravedadArriba.performed += _ => inputGravedadArriba = true;
         controles.Jugador.GravedadAbajo.performed += _ => inputGravedadAbajo = true;
         controles.Jugador.ModoInvencible.performed += _ => inputModoInvencible = true;
+        controles.Jugador.Pausar.performed += _ => MenuPausa.Instancia.inputPausar();
     }
 
     void OnEnable() => controles.Enable();
@@ -57,18 +67,43 @@ public class MovimientoJugador : MonoBehaviour
 
     void Start()
     {
+        controles.UI.Disable();
+        controles.Jugador.Enable();
+
         rb = jugadorIzq.GetComponent<Rigidbody2D>();
         rbEspejado = jugadorDer.GetComponent<Rigidbody2D>();
+
         animatorJugador = jugadorIzq.GetComponent<Animator>();
         animatorEspejado = jugadorDer.GetComponent<Animator>();
 
+        trail = jugadorIzq.GetComponent<TrailRenderer>();
+        trailEspejado = jugadorDer.GetComponent<TrailRenderer>();
+
         rb.gravityScale = 1f;
         rbEspejado.gravityScale = 1f;
+
+        trail.emitting = false;
+        trailEspejado.emitting = false;
     }
 
     void Update()
     {
         DetectarEsquemaControl();
+        if (TransicionEscena.Instance != null && TransicionEscena.Instance.TransicionEnCurso)
+        {
+            controles.Jugador.Disable();
+        }
+        else
+        {
+            controles.Jugador.Enable();
+        }
+
+        if ((MenuPausa.Instancia != null && MenuPausa.Instancia.juegoPausado) ||
+      (TransicionEscena.Instance != null && TransicionEscena.Instance.TransicionEnCurso))
+        {
+            DetenerMovimiento();
+            return;
+        }
 
         if (!puedeMoverse) return;
 
@@ -97,22 +132,20 @@ public class MovimientoJugador : MonoBehaviour
 
         if ((inputGravedadArriba || inputGravedadAbajo) && Time.time - tiempoUltimaInversion > cooldownInversion)
         {
-            SoundManager.instancia.ReproducirSonido(SoundManager.instancia.cambiar_gravedad_01);
+            if (SoundManager.instancia != null)
+                SoundManager.instancia.ReproducirSonido(SoundManager.instancia.cambiar_gravedad_01);
             CambiarGravedad(inputGravedadArriba);
             tiempoUltimaInversion = Time.time;
         }
 
         if (inputModoInvencible)
         {
-            modoInvencible = !modoInvencible;
-            Debug.Log("Modo invencible: " + modoInvencible);
-        }
+            ModoInvencible = !ModoInvencible;
+            Debug.Log("Modo invencible: " + ModoInvencible);
 
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            juegoPausado = true;
-            Time.timeScale = 0f;
-            PanelDePausa.SetActive(true);
+
+            if (MenuPausa.Instancia != null)
+                MenuPausa.Instancia.ActualizarTextoInvencible();
         }
 
         inputGravedadArriba = inputGravedadAbajo = inputModoInvencible = false;
@@ -130,7 +163,7 @@ public class MovimientoJugador : MonoBehaviour
 
         if (direccion != 0)
         {
-            int flipX = direccion < 0 ? 1 : -1;
+            int flipX = direccion < 0 ? -1 : 1;
             SetFlipX(obj, flipX * direccionVisual);
         }
     }
@@ -162,8 +195,12 @@ public class MovimientoJugador : MonoBehaviour
 
         if (puedeInvertirJugador || puedeInvertirEspejado)
         {
-            particulasArriba.Play();
-            particulasDer.Play();
+            trail.emitting = true;
+            trailEspejado.emitting = true;
+
+            StartCoroutine(DesactivarTrail(trail, 0.5f));
+            StartCoroutine(DesactivarTrail(trailEspejado, 0.5f));
+
             Debug.Log($"Gravedad {(invertir ? "invertida" : "normal")}");
         }
     }
@@ -196,16 +233,30 @@ public class MovimientoJugador : MonoBehaviour
 
     void DetectarEsquemaControl()
     {
-        EsquemaDeControl esquemaDetectado = EsquemaDeControl.Ninguno;
+        var nuevoEsquema = esquemaActual;
 
-        if (Keyboard.current.wKey.isPressed || Keyboard.current.aKey.isPressed || Keyboard.current.sKey.isPressed || Keyboard.current.dKey.isPressed)
-            esquemaDetectado = EsquemaDeControl.WASD;
-        else if (Keyboard.current.upArrowKey.isPressed || Keyboard.current.downArrowKey.isPressed || Keyboard.current.leftArrowKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
-            esquemaDetectado = EsquemaDeControl.Flechas;
-
-        if (esquemaDetectado != EsquemaDeControl.Ninguno && esquemaDetectado != esquemaActual)
+        if (Keyboard.current != null)
         {
-            esquemaActual = esquemaDetectado;
+            if (Keyboard.current.wKey.isPressed || Keyboard.current.aKey.isPressed ||
+                Keyboard.current.sKey.isPressed || Keyboard.current.dKey.isPressed)
+                nuevoEsquema = EsquemaDeControl.WASD;
+            else if (Keyboard.current.upArrowKey.isPressed || Keyboard.current.downArrowKey.isPressed ||
+                     Keyboard.current.leftArrowKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
+                nuevoEsquema = EsquemaDeControl.Flechas;
+        }
+
+        if (Gamepad.current != null)
+        {
+            if (Gamepad.current.leftStick.ReadValue().magnitude > 0.2f)
+                nuevoEsquema = EsquemaDeControl.WASD;
+            else if (Gamepad.current.rightStick.ReadValue().magnitude > 0.2f)
+                nuevoEsquema = EsquemaDeControl.Flechas;
+        }
+
+        if (nuevoEsquema != esquemaActual)
+        {
+            esquemaActual = nuevoEsquema;
+            Debug.Log("Esquema detectado: " + esquemaActual);
             ActualizarIndicadorVisual();
         }
     }
@@ -236,5 +287,13 @@ public class MovimientoJugador : MonoBehaviour
             puedeInvertirEspejado = estado;
     }
 
-    public bool GravedadInvertida => rb.gravityScale < 0f;
+    private IEnumerator DesactivarTrail(TrailRenderer trail, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        trail.emitting = false;
+    }
+
+
+
+
 }

@@ -20,6 +20,8 @@ public class LevelManager : MonoBehaviour
 
     public static LevelManager Instance;
 
+    
+
     private void Awake()
     {
         if (Instance == null)
@@ -117,25 +119,54 @@ public class LevelManager : MonoBehaviour
     public void MarcarGrupoCompletado()
     {
         int nuevoGrupo = grupoActual + 1;
-        Debug.Log($"Intentando desbloquear nuevo grupo: {nuevoGrupo} (actual desbloqueado: {grupoDesbloqueado})");
+        Debug.Log($"Intentando desbloquear nuevo grupo: {nuevoGrupo}");
+
+        // Marca como completado el grupo actual
+        PlayerPrefs.SetInt($"GrupoCompletado_{grupoActual}", 1);
 
         if (nuevoGrupo > grupoDesbloqueado)
         {
             grupoDesbloqueado = nuevoGrupo;
             PlayerPrefs.SetInt("GrupoDesbloqueado", grupoDesbloqueado);
-            PlayerPrefs.Save();
-            Debug.Log("Nuevo grupo desbloqueado y guardado: " + grupoDesbloqueado);
         }
-        else
-        {
-            Debug.Log("No se desbloqueó ningún grupo nuevo porque ya estaba desbloqueado.");
-        }
+
+        PlayerPrefs.Save();
     }
+
 
     public void CargarFinal()
     {
         TransicionEscena.Instance.Disolversalida(final);
     }
+
+    public bool EsPrimerNivel(int buildIndex)
+    {
+        if (nivelesGrupo1.Length > 0 && nivelesGrupo1[0] == buildIndex) return true;
+        if (nivelesGrupo2.Length > 0 && nivelesGrupo2[0] == buildIndex) return true;
+        if (nivelesGrupo3.Length > 0 && nivelesGrupo3[0] == buildIndex) return true;
+        return false;
+    }
+
+    public int ObtenerNivelAnterior(int buildIndex)
+    {
+        // Buscar en grupo 1
+        int idx = System.Array.IndexOf(nivelesGrupo1, buildIndex);
+        if (idx > 0) return nivelesGrupo1[idx - 1];
+
+        // Buscar en grupo 2
+        idx = System.Array.IndexOf(nivelesGrupo2, buildIndex);
+        if (idx > 0) return nivelesGrupo2[idx - 1];
+
+        // Buscar en grupo 3
+        idx = System.Array.IndexOf(nivelesGrupo3, buildIndex);
+        if (idx > 0) return nivelesGrupo3[idx - 1];
+
+        // Si no lo encuentra o está en primera posición → se queda en el mismo
+        return buildIndex;
+    }
+
+
+
 
 }
 
