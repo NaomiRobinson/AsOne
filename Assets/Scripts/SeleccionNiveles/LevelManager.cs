@@ -8,6 +8,9 @@ public class LevelManager : MonoBehaviour
     public int[] nivelesGrupo2;
     public int[] nivelesGrupo3;
 
+    public int[] nivelesGrupo4;
+
+
 
     [HideInInspector] public int grupoActual = 0;
 
@@ -20,7 +23,7 @@ public class LevelManager : MonoBehaviour
 
     public static LevelManager Instance;
 
-    
+
 
     private void Awake()
     {
@@ -32,7 +35,10 @@ public class LevelManager : MonoBehaviour
 
             if ((nivelesGrupo1 == null || nivelesGrupo1.Length == 0) ||
                 (nivelesGrupo2 == null || nivelesGrupo2.Length == 0) ||
-                (nivelesGrupo3 == null || nivelesGrupo3.Length == 0))
+                (nivelesGrupo3 == null || nivelesGrupo3.Length == 0) ||
+                (nivelesGrupo4 == null || nivelesGrupo4.Length == 0
+                ))
+
             {
                 Debug.LogWarning("¡Uno o más grupos de niveles no están configurados en el Inspector!");
             }
@@ -66,12 +72,17 @@ public class LevelManager : MonoBehaviour
         Debug.Log("nivelesGrupo1: " + string.Join(",", nivelesGrupo1));
         Debug.Log("nivelesGrupo2: " + string.Join(",", nivelesGrupo2));
         Debug.Log("nivelesGrupo3: " + string.Join(",", nivelesGrupo3));
+        Debug.Log("nivelesGrupo4: " + string.Join(",", nivelesGrupo4
+        ));
+
+
 
         int primerNivel = grupo switch
         {
             1 => nivelesGrupo1[0],
             2 => nivelesGrupo2[0],
             3 => nivelesGrupo3[0],
+            4 => nivelesGrupo4[0],
             _ => -1,
         };
 
@@ -91,6 +102,7 @@ public class LevelManager : MonoBehaviour
             1 => nivelesGrupo1,
             2 => nivelesGrupo2,
             3 => nivelesGrupo3,
+            4 => nivelesGrupo4,
             _ => new int[0],
         };
     }
@@ -144,6 +156,7 @@ public class LevelManager : MonoBehaviour
         if (nivelesGrupo1.Length > 0 && nivelesGrupo1[0] == buildIndex) return true;
         if (nivelesGrupo2.Length > 0 && nivelesGrupo2[0] == buildIndex) return true;
         if (nivelesGrupo3.Length > 0 && nivelesGrupo3[0] == buildIndex) return true;
+        if (nivelesGrupo4.Length > 0 && nivelesGrupo4[0] == buildIndex) return true;
         return false;
     }
 
@@ -160,6 +173,9 @@ public class LevelManager : MonoBehaviour
         // Buscar en grupo 3
         idx = System.Array.IndexOf(nivelesGrupo3, buildIndex);
         if (idx > 0) return nivelesGrupo3[idx - 1];
+
+        idx = System.Array.IndexOf(nivelesGrupo4, buildIndex);
+        if (idx > 0) return nivelesGrupo4[idx - 1];
 
         // Si no lo encuentra o está en primera posición → se queda en el mismo
         return buildIndex;

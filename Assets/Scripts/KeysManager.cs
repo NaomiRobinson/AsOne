@@ -29,6 +29,11 @@ public class KeyManager : MonoBehaviour
             PlayerPrefs.Save();
 
             SoundManager.instancia.ReproducirSonido(SoundManager.instancia.llave_recolectada);
+            foreach (var ranura in FindObjectsOfType<RanurasGemas>())
+            {
+                ranura.ActualizarRanuras();
+            }
+
             Destroy(gameObject);
 
         }

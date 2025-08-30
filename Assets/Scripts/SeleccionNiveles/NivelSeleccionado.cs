@@ -101,34 +101,27 @@ public class NivelSeleccionado : MonoBehaviour
 
     void RevisarEstadoPuerta()
     {
-        textoEstado.gameObject.SetActive(false);
         indAbierto.SetActive(false);
         indBloqueado.SetActive(false);
         indCompleto.SetActive(false);
 
         puertaBloqueada = false;
 
-        // Si la puerta está bloqueada por grupo
+        // Bloqueado por grupo
         if (grupoSeleccionado > LevelManager.Instance.grupoDesbloqueado)
         {
             puertaBloqueada = true;
             indBloqueado.SetActive(true);
-            textoEstado.text = "Bloqueado";
-            textoEstado.gameObject.SetActive(true);
         }
-        // Si es puerta final pero faltan fragmentos
+        // Puerta final pero faltan fragmentos
         else if (esPuertaFinal && !ChequeoLlaves.TodasRecolectadas())
         {
             puertaBloqueada = true;
             indBloqueado.SetActive(true);
-
-            int faltantes = ChequeoLlaves.LlavesFaltantes();
-            textoEstado.text = faltantes == 1 ? "Falta 1 fragmento" : $"Faltan {faltantes} fragmentos";
-            textoEstado.gameObject.SetActive(true);
         }
         else
         {
-            // --- Aquí chequeamos si ya fue completado ---
+            // Chequeamos si ya fue completado
             if (FueCompletado(grupoSeleccionado))
             {
                 indCompleto.SetActive(true);
