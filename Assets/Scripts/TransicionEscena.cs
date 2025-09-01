@@ -63,13 +63,21 @@ public class TransicionEscena : MonoBehaviour
     {
         Debug.Log("LevelStart: " + scene.name);
 
+        // Guardar el NivelActual si es un nivel jugable
+        if (scene.buildIndex != LevelManager.Instance.SeleccionNiveles &&
+            scene.buildIndex != LevelManager.Instance.final &&
+            scene.name != "Menu" && scene.name != "Ayuda")
+        {
+            PlayerPrefs.SetInt("NivelActual", scene.buildIndex);
+            PlayerPrefs.Save();
+            Debug.Log("Guardando NivelActual: " + scene.buildIndex);
+        }
+
         if (disolverCanvas != null)
         {
-
             disolverCanvas.alpha = 1f;
             DisolverEntrada(scene.name);
         }
-
 
         if (scene.name == "Victoria")
         {
@@ -78,9 +86,10 @@ public class TransicionEscena : MonoBehaviour
     }
 
 
+
     private void DisolverEntrada(string nombreEscena)
     {
-          TransicionEnCurso = true;
+        TransicionEnCurso = true;
 
         disolverCanvas.alpha = 1f;
         disolverCanvas.blocksRaycasts = true;
@@ -100,7 +109,7 @@ public class TransicionEscena : MonoBehaviour
                 {
                     disolverCanvas.blocksRaycasts = false;
                     disolverCanvas.interactable = false;
-                     TransicionEnCurso = false; 
+                    TransicionEnCurso = false;
                 });
             });
         }
@@ -110,7 +119,7 @@ public class TransicionEscena : MonoBehaviour
             {
                 disolverCanvas.blocksRaycasts = false;
                 disolverCanvas.interactable = false;
-                 TransicionEnCurso = false; 
+                TransicionEnCurso = false;
             });
         }
     }

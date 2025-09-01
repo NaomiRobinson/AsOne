@@ -21,8 +21,6 @@ public class NivelSeleccionado : MonoBehaviour
     public GameObject indBloqueado;
     public GameObject indCompleto;
 
-
-
     private bool puertaBloqueada = false;
 
     void Start()
@@ -30,17 +28,16 @@ public class NivelSeleccionado : MonoBehaviour
         animPuerta = GetComponent<Animator>();
         RevisarEstadoPuerta();
         textoEstado.gameObject.SetActive(false);
-    }
 
-    void Update()
-    { }
+
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject == jugadorAsignado)
         {
             estaEnPuerta = true;
-            RevisarEstadoPuerta(); // <- Revisa si está bloqueada
+            RevisarEstadoPuerta();
 
 
             if (!puertaBloqueada && !yaSelecciono)
@@ -57,7 +54,7 @@ public class NivelSeleccionado : MonoBehaviour
             estaEnPuerta = false;
             yaSelecciono = false;
             StopAllCoroutines();
-            textoEstado.gameObject.SetActive(false); // <- Oculta el texto al salir
+            textoEstado.gameObject.SetActive(false);
             textoEstado.text = "";
 
             if (animPuerta != null)
@@ -78,8 +75,8 @@ public class NivelSeleccionado : MonoBehaviour
         for (int i = 3; i > 0; i--)
         {
             textoEstado.text = i.ToString();
-            yield return StartCoroutine(FadeTextOut(textoEstado, 1f)); // 1 segundo para el fade out
-            if (!estaEnPuerta) yield break; // si sale antes del timer, cancela el conteo
+            yield return StartCoroutine(FadeTextOut(textoEstado, 1f));
+            if (!estaEnPuerta) yield break;
         }
 
         textoEstado.gameObject.SetActive(false);
@@ -104,107 +101,80 @@ public class NivelSeleccionado : MonoBehaviour
         indAbierto.SetActive(false);
         indBloqueado.SetActive(false);
         indCompleto.SetActive(false);
-
         puertaBloqueada = false;
 
-        // Bloqueado por grupo
-        if (grupoSeleccionado > LevelManager.Instance.grupoDesbloqueado)
+        if (grupoSeleccionado > LevelManager.Instance.grupoDesbloqueado ||
+            (esPuertaFinal && !ChequeoLlaves.TodasRecolectadas()))
         {
             puertaBloqueada = true;
             indBloqueado.SetActive(true);
         }
-        // Puerta final pero faltan fragmentos
-        else if (esPuertaFinal && !ChequeoLlaves.TodasRecolectadas())
+        else if (FueCompletado(grupoSeleccionado))
         {
-            puertaBloqueada = true;
-            indBloqueado.SetActive(true);
+            indCompleto.SetActive(true);
         }
         else
         {
-            // Chequeamos si ya fue completado
-            if (FueCompletado(grupoSeleccionado))
-            {
-                indCompleto.SetActive(true);
-            }
-            else
-            {
-                indAbierto.SetActive(true);
-            }
+            indAbierto.SetActive(true);
         }
     }
+
     void EjecutarCargaNivel()
     {
         if (animPuerta != null && !esPuertaFinal)
             AnimacionesControlador.SetBool(animPuerta, "estaAbierta", true);
 
         jugadoresEnPuerta++;
-        Debug.Log($"Jugadores en puerta incrementado a: {jugadoresEnPuerta}");
+        if (jugadoresEnPuerta < 2) return;
 
-        if (jugadoresEnPuerta == 2)
+        int escenaActual = SceneManager.GetActiveScene().buildIndex;
+        int nivelACargar = -1;
+
+        if (escenaActual == LevelManager.Instance.SeleccionNiveles && grupoSeleccionado > 0)
         {
-            int escenaActual = SceneManager.GetActiveScene().buildIndex;
-            Debug.Log($"Escena actual buildIndex: {escenaActual}");
-
-            if (escenaActual == LevelManager.Instance.SeleccionNiveles)
+            nivelACargar = grupoSeleccionado switch
             {
-                if (grupoSeleccionado > 0)
-                {
-                    Debug.Log($"Intentando seleccionar grupo {grupoSeleccionado}");
-                    LevelManager.Instance.SeleccionarGrupo(grupoSeleccionado);
-                }
-                else if (esPuertaFinal)
-                {
-                    if (ChequeoLlaves.TodasRecolectadas())
-                    {
-                        AnimacionesControlador.SetBool(animPuerta, "estaAbierta", true);
-                        Debug.Log("¡Todas las llaves están recolectadas!");
-                        LevelManager.Instance.CargarFinal();
-                    }
-                    else
-                    {
-                        Debug.LogWarning("No todas las llaves están recolectadas, no se puede cargar final.");
-                    }
-                }
-                else
-                {
-                    Debug.LogError("Grupo inválido para selección: " + grupoSeleccionado);
-                }
+                1 => LevelManager.Instance.nivelesGrupo1[0],
+                2 => LevelManager.Instance.nivelesGrupo2[0],
+                3 => LevelManager.Instance.nivelesGrupo3[0],
+                4 => LevelManager.Instance.nivelesGrupo4[0],
+                _ => -1
+            };
+            if (nivelACargar == -1) { Debug.LogError("Grupo inválido"); return; }
+            LevelManager.Instance.SeleccionarGrupo(grupoSeleccionado);
+        }
+        else if (esPuertaFinal)
+        {
+            if (!ChequeoLlaves.TodasRecolectadas())
+            {
+                Debug.LogWarning("No todas las llaves están recolectadas, no se puede cargar final.");
+                return;
             }
-            else if (esPuertaFinal)
+            LevelManager.Instance.CargarFinal();
+            return;
+        }
+        else
+        {
+            if (!LevelManager.Instance.EsUltimoNivel(escenaActual))
             {
-                if (ChequeoLlaves.TodasRecolectadas())
-                {
-                    AnimacionesControlador.SetBool(animPuerta, "estaAbierta", true);
-                    Debug.Log("¡Todas las llaves están recolectadas!");
-                    LevelManager.Instance.CargarFinal();
-                }
-                else
-                {
-                    Debug.LogWarning("No todas las llaves están recolectadas, no se puede cargar final.");
-                }
+                nivelACargar = LevelManager.Instance.ObtenerSiguienteNivel(escenaActual);
             }
             else
             {
-                Debug.Log("Entrando en flujo de niveles dentro de un grupo.");
-                int nivelActual = escenaActual;
-
-                Debug.Log("Es último nivel? " + LevelManager.Instance.EsUltimoNivel(nivelActual));
-                if (LevelManager.Instance.EsUltimoNivel(nivelActual))
-                {
-                    Debug.Log("Último nivel detectado. Marcando grupo como completado.");
-                    LevelManager.Instance.MarcarGrupoCompletado();
-                    Debug.Log("Grupo desbloqueado tras completar: " + LevelManager.Instance.grupoDesbloqueado);
-                    TransicionEscena.Instance.Disolversalida(LevelManager.Instance.SeleccionNiveles);
-                }
-                else
-                {
-                    int siguiente = LevelManager.Instance.ObtenerSiguienteNivel(nivelActual);
-                    Debug.Log($"Siguiente nivel a cargar: {siguiente}");
-                    TransicionEscena.Instance.Disolversalida(siguiente);
-                }
+                LevelManager.Instance.MarcarGrupoCompletado();
+                nivelACargar = LevelManager.Instance.SeleccionNiveles;
             }
         }
+
+        if (nivelACargar <= 0 || nivelACargar >= SceneManager.sceneCountInBuildSettings)
+        {
+            Debug.LogError($"Índice de escena inválido: {nivelACargar}");
+            return;
+        }
+
+        TransicionEscena.Instance.Disolversalida(nivelACargar);
     }
+
 
     private bool FueCompletado(int grupo)
     {

@@ -25,6 +25,8 @@ public class LevelManager : MonoBehaviour
 
 
 
+
+
     private void Awake()
     {
         if (Instance == null)
@@ -64,34 +66,19 @@ public class LevelManager : MonoBehaviour
             Debug.LogWarning($"¡No se puede seleccionar el grupo {grupo} porque el grupo anterior no está completo! Grupo desbloqueado actual: {grupoDesbloqueado}");
             return;
         }
-
         Debug.Log("Seleccionando grupo: " + grupo);
         grupoActual = grupo;
         Debug.Log("grupoActual seteado a: " + grupoActual);
-
         Debug.Log("nivelesGrupo1: " + string.Join(",", nivelesGrupo1));
         Debug.Log("nivelesGrupo2: " + string.Join(",", nivelesGrupo2));
         Debug.Log("nivelesGrupo3: " + string.Join(",", nivelesGrupo3));
-        Debug.Log("nivelesGrupo4: " + string.Join(",", nivelesGrupo4
-        ));
-
-
-
-        int primerNivel = grupo switch
-        {
-            1 => nivelesGrupo1[0],
-            2 => nivelesGrupo2[0],
-            3 => nivelesGrupo3[0],
-            4 => nivelesGrupo4[0],
-            _ => -1,
-        };
-
+        Debug.Log("nivelesGrupo4: " + string.Join(",", nivelesGrupo4));
+        int primerNivel = grupo switch { 1 => nivelesGrupo1[0], 2 => nivelesGrupo2[0], 3 => nivelesGrupo3[0], 4 => nivelesGrupo4[0], _ => -1, };
         if (primerNivel == -1)
         {
             Debug.LogError("Grupo inválido seleccionado: " + grupo);
             return;
         }
-
         Debug.Log($"Cargando primer nivel del grupo {grupo}: {primerNivel}");
         TransicionEscena.Instance.Disolversalida(primerNivel);
     }
@@ -133,7 +120,6 @@ public class LevelManager : MonoBehaviour
         int nuevoGrupo = grupoActual + 1;
         Debug.Log($"Intentando desbloquear nuevo grupo: {nuevoGrupo}");
 
-        // Marca como completado el grupo actual
         PlayerPrefs.SetInt($"GrupoCompletado_{grupoActual}", 1);
 
         if (nuevoGrupo > grupoDesbloqueado)
@@ -177,11 +163,21 @@ public class LevelManager : MonoBehaviour
         idx = System.Array.IndexOf(nivelesGrupo4, buildIndex);
         if (idx > 0) return nivelesGrupo4[idx - 1];
 
-        // Si no lo encuentra o está en primera posición → se queda en el mismo
+
         return buildIndex;
     }
 
-
+    public int ObtenerPrimerNivel(int grupo)
+    {
+        return grupo switch
+        {
+            1 when nivelesGrupo1.Length > 0 => nivelesGrupo1[0],
+            2 when nivelesGrupo2.Length > 0 => nivelesGrupo2[0],
+            3 when nivelesGrupo3.Length > 0 => nivelesGrupo3[0],
+            4 when nivelesGrupo4.Length > 0 => nivelesGrupo4[0],
+            _ => -1
+        };
+    }
 
 
 }

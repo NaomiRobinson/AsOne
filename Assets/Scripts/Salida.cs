@@ -9,10 +9,10 @@ public class Salida : MonoBehaviour
 
     private Animator animPuerta;
 
-    public AbrirPuerta palancaAsociada;
+    public RecolectarFragmento fragmentoAsociado;
     private static int jugadoresEnSalida = 0;
 
-    public bool requiereAbrir = false;
+    public bool requiereFragmento = false;
 
 
     void Start()
@@ -25,28 +25,20 @@ public class Salida : MonoBehaviour
         if (other.gameObject == jugadorAsignado)
         {
 
-            if (requiereAbrir && palancaAsociada != null && !palancaAsociada.EstaAbierta())
+            if (requiereFragmento && fragmentoAsociado != null && fragmentoAsociado.juntoFragmento == false)
             {
                 Debug.Log("La puerta está cerrada, no puedes pasar.");
                 return;
             }
-            if (!requiereAbrir)
+
+            if (!requiereFragmento || (fragmentoAsociado != null && fragmentoAsociado.juntoFragmento == true))
             {
-                AnimacionesControlador.SetBool(animPuerta, "estaAbierta", true);
-
+                jugadoresEnSalida++;
             }
-            if (!requiereAbrir && palancaAsociada != null)
-            {
-                palancaAsociada.Abrir();
-
-            }
-
-            jugadoresEnSalida++;
-
 
             if (jugadoresEnSalida == 2)
             {
-                if (!requiereAbrir || (palancaAsociada != null && palancaAsociada.EstaAbierta()))
+                if (!requiereFragmento || (fragmentoAsociado != null && fragmentoAsociado.juntoFragmento == true))
                 {
                     SoundManager.instancia.ReproducirSonido(SoundManager.instancia.portal_atravesarlo);
                     PasarNivel();

@@ -32,19 +32,19 @@ public class MenuManager : MonoBehaviour
 
     public void ContinueGame()
     {
-        SoundManager.instancia.ReproducirSonido(SoundManager.instancia.boton_interfaz_jugar);
-
-        if (PlayerPrefs.HasKey("GrupoDesbloqueado"))
+        if (PlayerPrefs.HasKey("NivelActual"))
         {
-
-            SceneManager.LoadScene(LevelManager.Instance.SeleccionNiveles);
+            int nivel = PlayerPrefs.GetInt("NivelActual");
+            Debug.Log("Continuar: cargando NivelActual = " + nivel);
+            SceneManager.LoadScene(nivel);
         }
         else
         {
-
             SceneManager.LoadScene("Invertidos");
         }
     }
+
+
 
     public void ShowHelp()
     {
