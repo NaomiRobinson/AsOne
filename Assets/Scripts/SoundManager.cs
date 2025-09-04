@@ -6,13 +6,20 @@ using UnityEngine.UI;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instancia;
+    //música
     public AudioClip musicaMenu;
     public AudioClip musicaJuego;
     public Button botonSonido;
     public Sprite iconoSonidoOn;
     public Sprite iconoSonidoOff;
 
-    //sonidos
+    //sonidos o sfx dasd
+
+    public Button botonSfx;
+    public Sprite iconoSfxOn;
+    public Sprite iconoSfxOff;
+
+    private bool sfxSilenciado = false;
 
     public AudioSource sfxSource;
 
@@ -71,6 +78,17 @@ public class SoundManager : MonoBehaviour
             botonSonido.onClick.AddListener(ToggleMusica);
             ActualizarIcono();
         }
+
+        // Botón de sonidos (SFX)
+        GameObject botonSfxGO = GameObject.FindWithTag("AudioSFX");
+        if (botonSfxGO != null)
+        {
+            botonSfx = botonSfxGO.GetComponent<Button>();
+            botonSfx.onClick.RemoveAllListeners();
+            botonSfx.onClick.AddListener(ToggleSonidos);
+            ActualizarIconoSonidos();
+        }
+
     }
 
     void CambiarMusicaSegunEscena(string nombreEscena)
@@ -127,6 +145,22 @@ public class SoundManager : MonoBehaviour
         ActualizarIcono();
     }
 
+    public void ToggleSonidos()
+    {
+        Debug.Log("Click recibido en el botón de SFX");
+
+        sfxSilenciado = !sfxSilenciado;
+        sfxSource.mute = sfxSilenciado;
+
+        if (sfxSilenciado)
+            Debug.Log("Sonidos silenciados");
+        else
+            Debug.Log("Sonidos activados");
+
+        ActualizarIconoSonidos();
+    }
+
+
 
     public void ActualizarIcono()
     {
@@ -140,11 +174,28 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    public void ActualizarIconoSonidos()
+    {
+        if (botonSfx != null)
+        {
+            Image imagenBoton = botonSfx.GetComponent<Image>();
+            if (imagenBoton != null)
+            {
+                imagenBoton.sprite = sfxSilenciado ? iconoSfxOff : iconoSfxOn;
+            }
+        }
+    }
+
+
     //sonidos/efectos especiales
     public void ReproducirSonido(AudioClip clip)
     {
-        sfxSource.PlayOneShot(clip);
+        if (!sfxSilenciado && clip != null)
+        {
+            sfxSource.PlayOneShot(clip);
+        }
     }
+
 
 
 }
