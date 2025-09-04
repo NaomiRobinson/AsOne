@@ -39,7 +39,6 @@ public class MenuPausa : MonoBehaviour
         }
 
 
-        // Suscribirse al evento de cambio de escena
         SceneManager.sceneLoaded += OnEscenaCargada;
     }
 
@@ -60,6 +59,7 @@ public class MenuPausa : MonoBehaviour
 
             ActualizarNombreNivel();
             ActualizarTextoInvencible();
+            PanelDePausa.SetActive(false);
         }
     }
 
@@ -69,13 +69,13 @@ public class MenuPausa : MonoBehaviour
         if (PanelDePausa != null)
             PanelDePausa.SetActive(false);
 
-        // Botón de pausa
+
         Button botonPausar = transform.Find("BotonPausa")?.GetComponent<Button>();
         if (botonPausar != null)
             botonPausar.onClick.AddListener(inputPausar);
 
         Button botonMute = transform.Find("Musica")?.GetComponent<Button>();
-        
+
         if (botonMute != null)
         {
             botonMute.onClick.RemoveAllListeners();
@@ -142,7 +142,7 @@ public class MenuPausa : MonoBehaviour
                 bool esSeleccion = SceneManager.GetActiveScene().name == "SeleccionNiveles";
                 bool esPrimer = LevelManager.Instance.EsPrimerNivel(indice);
 
-                botonNivelAnterior.interactable = !esSeleccion && !esPrimer;
+                botonNivelAnterior.interactable = !esSeleccion;
             }
 
             Button botonNivelSiguiente = PanelDePausa.transform.Find("NivelP")?.GetComponent<Button>();
@@ -151,7 +151,7 @@ public class MenuPausa : MonoBehaviour
                 bool esSeleccion = SceneManager.GetActiveScene().name == "SeleccionNiveles";
                 bool esUltimo = LevelManager.Instance.EsUltimoNivel(indice);
 
-                botonNivelSiguiente.interactable = !esSeleccion && !esUltimo && indice < total - 1;
+                botonNivelSiguiente.interactable = !esSeleccion && indice < total - 1;
             }
 
             StartCoroutine(SeleccionarBotonPorDefecto());
@@ -194,12 +194,16 @@ public class MenuPausa : MonoBehaviour
     {
         int indice = SceneManager.GetActiveScene().buildIndex;
 
-        // Evitar retroceder en SeleccionNiveles o si es el primer nivel del grupo
-        if (SceneManager.GetActiveScene().name == "SeleccionNiveles" ||
-            LevelManager.Instance.EsPrimerNivel(indice))
+        if (LevelManager.Instance.EsPrimerNivel(indice))
         {
-            Debug.Log("No se puede retroceder: primer nivel del grupo o SeleccionNiveles.");
+            juegoPausado = false;
+            Time.timeScale = 1f;
+            controles.UI.Disable();
+            controles.Jugador.Enable();
+            EventSystem.current.SetSelectedGameObject(null);
+            SceneManager.LoadScene("SeleccionNiveles");
             return;
+
         }
 
         if (PanelDePausa != null) PanelDePausa.SetActive(false);
@@ -209,7 +213,7 @@ public class MenuPausa : MonoBehaviour
         controles.Jugador.Enable();
         EventSystem.current.SetSelectedGameObject(null);
 
-        // Cargar nivel anterior dentro del grupo
+
         int anterior = LevelManager.Instance.ObtenerNivelAnterior(indice);
         SceneManager.LoadScene(anterior);
     }
@@ -218,14 +222,30 @@ public class MenuPausa : MonoBehaviour
     {
         int indice = SceneManager.GetActiveScene().buildIndex;
         int total = SceneManager.sceneCountInBuildSettings;
+
         if (indice < total - 1)
         {
-            if (PanelDePausa != null) PanelDePausa.SetActive(false);
-            juegoPausado = false;
+
+            if (LevelManager.Instance.EsUltimoNivel(indice))
+            {
+                LevelManager.Instance.MarcarGrupoCompletado();
+                Time.timeScale = 1f;
+                juegoPausado = false;
+                controles.UI.Disable();
+                controles.Jugador.Enable();
+                EventSystem.current.SetSelectedGameObject(null);
+
+                SceneManager.LoadScene(LevelManager.Instance.SeleccionNiveles);
+                return;
+            }
+
+            // Pasar al siguiente nivel
             Time.timeScale = 1f;
+            juegoPausado = false;
             controles.UI.Disable();
             controles.Jugador.Enable();
             EventSystem.current.SetSelectedGameObject(null);
+
             SceneManager.LoadScene(indice + 1);
         }
     }
@@ -256,7 +276,7 @@ public class MenuPausa : MonoBehaviour
     public void ActualizarNombreNivel()
     {
         if (nombreNivel != null)
-            nombreNivel.text = "Nivel: " + SceneManager.GetActiveScene().name;
+            nombreNivel.text = SceneManager.GetActiveScene().name;
     }
 
     public void ActualizarTextoInvencible()

@@ -63,7 +63,7 @@ public class TransicionEscena : MonoBehaviour
     {
         Debug.Log("LevelStart: " + scene.name);
 
-        // Guardar el NivelActual si es un nivel jugable
+        
         if (scene.buildIndex != LevelManager.Instance.SeleccionNiveles &&
             scene.buildIndex != LevelManager.Instance.final &&
             scene.name != "Menu" && scene.name != "Ayuda")

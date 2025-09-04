@@ -327,6 +327,17 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""85382af6-079b-40ee-8ef1-d6ef8238842c"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GravedadArriba"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""d72f6ca3-4664-4b13-92c0-37cdacdf1e84"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
@@ -373,6 +384,17 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""75fe3657-967d-4d9c-8258-edee5343bb78"",
                     ""path"": ""<Gamepad>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GravedadAbajo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a47df53-7624-4419-996a-afd16ce49b35"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

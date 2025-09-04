@@ -104,7 +104,7 @@ public class NivelSeleccionado : MonoBehaviour
         puertaBloqueada = false;
 
         if (grupoSeleccionado > LevelManager.Instance.grupoDesbloqueado ||
-            (esPuertaFinal && !ChequeoLlaves.TodasRecolectadas()))
+     (esPuertaFinal && !TodosLosGruposCompletados()))
         {
             puertaBloqueada = true;
             indBloqueado.SetActive(true);
@@ -145,9 +145,9 @@ public class NivelSeleccionado : MonoBehaviour
         }
         else if (esPuertaFinal)
         {
-            if (!ChequeoLlaves.TodasRecolectadas())
+            if (!TodosLosGruposCompletados())
             {
-                Debug.LogWarning("No todas las llaves están recolectadas, no se puede cargar final.");
+                Debug.LogWarning("No todos los grupos fueron completados, no se puede cargar final.");
                 return;
             }
             LevelManager.Instance.CargarFinal();
@@ -181,6 +181,16 @@ public class NivelSeleccionado : MonoBehaviour
         return PlayerPrefs.GetInt($"GrupoCompletado_{grupo}", 0) == 1;
     }
 
+    private bool TodosLosGruposCompletados()
+    {
+
+        for (int i = 1; i <= 4; i++)
+        {
+            if (PlayerPrefs.GetInt($"GrupoCompletado_{i}", 0) == 0)
+                return false;
+        }
+        return true;
+    }
 
 
 }

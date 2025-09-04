@@ -2,39 +2,49 @@ using UnityEngine;
 
 public class RanurasGemas : MonoBehaviour
 {
+
     [System.Serializable]
-    public class Ranura
+    public class Grupo
     {
-        public string idLlave;       // Ej: "grupo1", "grupo2"
-        public GameObject ranuraVacia; // Objeto que representa la ranura vacía
-        public GameObject gemaLlena;   // Objeto que representa la gema puesta
+        public string idGrupo;
+        public Transform contenedorRanuras; // Objeto vacío con todas las ranuras
+        public Transform contenedorGemas;   // Objeto vacío con todas las gemas que reemplazan las ranuras
+        [HideInInspector] public GameObject[] ranuras;
+        [HideInInspector] public GameObject[] gemas;
     }
 
-    public Ranura[] ranuras;
+    public Grupo[] grupos;
 
     void Start()
     {
+        // Inicializar arrays automáticamente
+        foreach (var g in grupos)
+        {
+            int cantidad = Mathf.Min(g.contenedorRanuras.childCount, g.contenedorGemas.childCount);
+
+            g.ranuras = new GameObject[cantidad];
+            g.gemas = new GameObject[cantidad];
+
+            for (int i = 0; i < cantidad; i++)
+            {
+                g.ranuras[i] = g.contenedorRanuras.GetChild(i).gameObject;
+                g.gemas[i] = g.contenedorGemas.GetChild(i).gameObject;
+            }
+        }
+
         ActualizarRanuras();
     }
 
     public void ActualizarRanuras()
     {
-
-        foreach (var r in ranuras)
+        foreach (var g in grupos)
         {
-            r.gemaLlena.SetActive(false);
-            r.ranuraVacia.SetActive(false);
-            int estado = PlayerPrefs.GetInt("llave_" + r.idLlave, 0);
+            bool estado = PlayerPrefs.GetInt($"GrupoCompletado_{g.idGrupo}", 0) == 1;
 
-            if (estado == 1)
+            for (int i = 0; i < g.ranuras.Length; i++)
             {
-                r.gemaLlena.SetActive(true);
-                r.ranuraVacia.SetActive(false);
-            }
-            else
-            {
-                r.gemaLlena.SetActive(false);
-                r.ranuraVacia.SetActive(true);
+                g.ranuras[i].SetActive(!estado);
+                g.gemas[i].SetActive(estado);
             }
         }
     }
