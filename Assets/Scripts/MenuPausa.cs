@@ -89,6 +89,24 @@ public class MenuPausa : MonoBehaviour
                 SoundManager.instancia.ActualizarIcono();
         }
 
+        // Botón de sonidos
+        
+        Button botonMuteSonidos = transform.Find("Sonidos")?.GetComponent<Button>();
+        
+        if (botonMuteSonidos != null)
+        {
+            botonMuteSonidos.onClick.RemoveAllListeners();
+            botonMuteSonidos.onClick.AddListener(() =>
+            {
+                if (SoundManager.instancia != null)
+                    SoundManager.instancia.ToggleSonidos();
+            });
+        }
+
+        if (SoundManager.instancia != null)
+            SoundManager.instancia.ActualizarIconoSonidos();
+
+
         // Botones dentro del panel
         if (PanelDePausa != null)
         {
