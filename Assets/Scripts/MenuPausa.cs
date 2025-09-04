@@ -90,9 +90,9 @@ public class MenuPausa : MonoBehaviour
         }
 
         // Botón de sonidos
-        
+
         Button botonMuteSonidos = transform.Find("Sonidos")?.GetComponent<Button>();
-        
+
         if (botonMuteSonidos != null)
         {
             botonMuteSonidos.onClick.RemoveAllListeners();
@@ -203,12 +203,12 @@ public class MenuPausa : MonoBehaviour
     public void VolverAlSelector()
     {
         //SoundManager.instancia.ReproducirSonido(SoundManager.instancia.boton_interfsz_generico);
-        Time.timeScale = 1f;
         juegoPausado = false;
+        Time.timeScale = 1f;
         controles.UI.Disable();
-        controles.Jugador.Disable();
-        Destroy(gameObject);
-        SceneManager.LoadScene("Seleccion Niveles");
+        controles.Jugador.Enable();
+        EventSystem.current.SetSelectedGameObject(null);
+        SceneManager.LoadScene("SeleccionNiveles");
     }
     private void VolverMenu()
     {
@@ -318,5 +318,5 @@ public class MenuPausa : MonoBehaviour
         }
     }
 
-    
+
 }
