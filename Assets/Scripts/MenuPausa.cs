@@ -101,6 +101,8 @@ public class MenuPausa : MonoBehaviour
             panel.Find("NivelA")?.GetComponent<Button>()?.onClick.AddListener(NivelAnterior);
 
             panel.Find("NivelP")?.GetComponent<Button>()?.onClick.AddListener(NivelSiguiente);
+
+            panel.Find("Selector")?.GetComponent<Button>()?.onClick.AddListener(VolverAlSelector);
         }
 
         if (nombreNivel != null) { nombreNivel.text = SceneManager.GetActiveScene().name; }
@@ -179,7 +181,17 @@ public class MenuPausa : MonoBehaviour
         controles.Jugador.Disable();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-
+    //voler al selector de niveles
+    public void VolverAlSelector()
+    {
+        //SoundManager.instancia.ReproducirSonido(SoundManager.instancia.boton_interfsz_generico);
+        Time.timeScale = 1f;
+        juegoPausado = false;
+        controles.UI.Disable();
+        controles.Jugador.Disable();
+        Destroy(gameObject);
+        SceneManager.LoadScene("Seleccion Niveles");
+    }
     private void VolverMenu()
     {
         Time.timeScale = 1f;
@@ -268,11 +280,5 @@ public class MenuPausa : MonoBehaviour
         }
     }
 
-    //voler al selector de niveles
-    public void VolverAlSelector()
-    {
-        //SoundManager.instancia.ReproducirSonido(SoundManager.instancia.boton_interfsz_generico);
-        SceneManager.LoadScene("Seleccion Niveles");
-
-    }
+    
 }
