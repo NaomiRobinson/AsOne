@@ -2,6 +2,8 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static StaticVariables;
+using Unity.Cinemachine;
+
 
 public class Salida : MonoBehaviour
 {
@@ -14,16 +16,25 @@ public class Salida : MonoBehaviour
 
     public bool requiereFragmento = false;
 
+    public ZoomCamara zoomScript;
+    public float zoomOrthoSize = 3f;
 
-    void Start()
+
+
+    private void Start()
     {
         animPuerta = GetComponent<Animator>();
+
+        if (zoomScript == null)
+            Debug.LogError("No se asignó ZoomCamara en el inspector.");
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
 
         if (other.gameObject == jugadorAsignado)
         {
+            zoomScript.zoomOrthoSize = zoomOrthoSize;
+            zoomScript.ActivarZoom(jugadorAsignado.transform);
 
             if (requiereFragmento && fragmentoAsociado != null && fragmentoAsociado.juntoFragmento == false)
             {
@@ -60,6 +71,7 @@ public class Salida : MonoBehaviour
         }
         if (other.gameObject == jugadorAsignado)
         {
+            zoomScript.RestaurarZoom();
             if (jugadoresEnSalida > 0)
             {
                 jugadoresEnSalida--;
@@ -76,7 +88,6 @@ public class Salida : MonoBehaviour
         Debug.Log("Ambos jugadores están en sus salidas");
         Debug.Log("Completo un nivel");
 
-        // Si estamos en el tutorial, ir a la escena "seleccionNiveles"
         if (nivelActual == LevelManager.Instance.nivelTutorial)
         {
             siguiente = LevelManager.Instance.SeleccionNiveles;

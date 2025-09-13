@@ -23,6 +23,9 @@ public class NivelSeleccionado : MonoBehaviour
 
     private bool puertaBloqueada = false;
 
+    public ZoomCamara zoomScript;
+    public float zoomOrthoSize = 3f;
+
     void Start()
     {
         animPuerta = GetComponent<Animator>();
@@ -36,6 +39,10 @@ public class NivelSeleccionado : MonoBehaviour
     {
         if (other.gameObject == jugadorAsignado)
         {
+
+            zoomScript.zoomOrthoSize = zoomOrthoSize;
+            if (zoomScript != null)
+                zoomScript.ActivarZoom(jugadorAsignado.transform);
             estaEnPuerta = true;
             RevisarEstadoPuerta();
 
@@ -51,6 +58,9 @@ public class NivelSeleccionado : MonoBehaviour
     {
         if (other.gameObject == jugadorAsignado)
         {
+            if (zoomScript != null)
+                zoomScript.RestaurarZoom();
+
             estaEnPuerta = false;
             yaSelecciono = false;
             StopAllCoroutines();

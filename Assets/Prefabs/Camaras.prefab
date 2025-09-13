@@ -51,6 +51,7 @@ GameObject:
   - component: {fileID: 979439826289223258}
   - component: {fileID: 8102166381365892849}
   - component: {fileID: 7930608743313948003}
+  - component: {fileID: 4130284168592244344}
   m_Layer: 8
   m_Name: Vcam2
   m_TagString: Untagged
@@ -179,6 +180,21 @@ MonoBehaviour:
     MaxWindowSize: 0
     Padding: 0
   m_LegacyMaxWindowSize: -2
+--- !u!114 &4130284168592244344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004417956363834813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c3944a22583e4844b909ad0b03fae25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomOrthoSize: 1.5
+  zoomVelocidad: 2
+  moveVelocidad: 3
 --- !u!1 &3159805189656145141
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,6 +283,7 @@ GameObject:
   - component: {fileID: 1138198774052281987}
   - component: {fileID: 3955285049347309723}
   - component: {fileID: 6404191398316901274}
+  - component: {fileID: 518669132641659482}
   m_Layer: 7
   m_Name: Vcam1
   m_TagString: Untagged
@@ -395,6 +412,21 @@ MonoBehaviour:
     MaxWindowSize: 0
     Padding: 0
   m_LegacyMaxWindowSize: -2
+--- !u!114 &518669132641659482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3511904820522232165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c3944a22583e4844b909ad0b03fae25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomOrthoSize: 1.5
+  zoomVelocidad: 2
+  moveVelocidad: 3
 --- !u!1 &3565861548089461529
 GameObject:
   m_ObjectHideFlags: 0

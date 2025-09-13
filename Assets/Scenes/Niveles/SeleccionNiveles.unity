@@ -598,6 +598,8 @@ MonoBehaviour:
   indAbierto: {fileID: 609742866}
   indBloqueado: {fileID: 1105533166}
   indCompleto: {fileID: 76171733}
+  zoomScript: {fileID: 1978081326}
+  zoomOrthoSize: 2
 --- !u!1 &21952946
 GameObject:
   m_ObjectHideFlags: 0
@@ -1162,6 +1164,8 @@ MonoBehaviour:
   indAbierto: {fileID: 1518921523}
   indBloqueado: {fileID: 2001860826}
   indCompleto: {fileID: 1186858467}
+  zoomScript: {fileID: 360503719}
+  zoomOrthoSize: 2
 --- !u!1 &53602188
 GameObject:
   m_ObjectHideFlags: 0
@@ -4050,6 +4054,7 @@ GameObject:
   - component: {fileID: 360503718}
   - component: {fileID: 360503717}
   - component: {fileID: 360503716}
+  - component: {fileID: 360503719}
   m_Layer: 8
   m_Name: Vcam2
   m_TagString: Untagged
@@ -4126,7 +4131,7 @@ MonoBehaviour:
   Priority:
     Enabled: 0
     m_Value: 0
-  OutputChannel: 5
+  OutputChannel: 2
   StandbyUpdate: 2
   m_StreamingVersion: 20241001
   m_LegacyPriority: 0
@@ -4154,6 +4159,20 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
+--- !u!114 &360503719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360503714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c3944a22583e4844b909ad0b03fae25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomOrthoSize: 3
+  zoomVelocidad: 2
 --- !u!1 &385974111
 GameObject:
   m_ObjectHideFlags: 0
@@ -6661,6 +6680,8 @@ MonoBehaviour:
   indAbierto: {fileID: 1466117148}
   indBloqueado: {fileID: 908554644}
   indCompleto: {fileID: 643855328}
+  zoomScript: {fileID: 360503719}
+  zoomOrthoSize: 2
 --- !u!1 &676412220
 GameObject:
   m_ObjectHideFlags: 0
@@ -9369,6 +9390,8 @@ MonoBehaviour:
   indAbierto: {fileID: 1799428142}
   indBloqueado: {fileID: 1428248837}
   indCompleto: {fileID: 1472366088}
+  zoomScript: {fileID: 1978081326}
+  zoomOrthoSize: 2
 --- !u!1 &977829597
 GameObject:
   m_ObjectHideFlags: 0
@@ -9703,6 +9726,8 @@ MonoBehaviour:
   indAbierto: {fileID: 690071099}
   indBloqueado: {fileID: 1509625716}
   indCompleto: {fileID: 886918828}
+  zoomScript: {fileID: 1978081326}
+  zoomOrthoSize: 2
 --- !u!1 &1022505160
 GameObject:
   m_ObjectHideFlags: 0
@@ -10367,6 +10392,8 @@ MonoBehaviour:
   indAbierto: {fileID: 242588555}
   indBloqueado: {fileID: 1113757473}
   indCompleto: {fileID: 110684931}
+  zoomScript: {fileID: 1978081326}
+  zoomOrthoSize: 2
 --- !u!1 &1094855436
 GameObject:
   m_ObjectHideFlags: 0
@@ -12761,6 +12788,8 @@ MonoBehaviour:
   indAbierto: {fileID: 1315316461}
   indBloqueado: {fileID: 29870537}
   indCompleto: {fileID: 1094855436}
+  zoomScript: {fileID: 360503719}
+  zoomOrthoSize: 2
 --- !u!1 &1315316461
 GameObject:
   m_ObjectHideFlags: 0
@@ -14204,6 +14233,10 @@ PrefabInstance:
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 2606999290579344908, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
+      propertyPath: ChannelMask
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3159805189656145141, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -14227,6 +14260,10 @@ PrefabInstance:
     - target: {fileID: 5322303061146768634, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.9626033
+      objectReference: {fileID: 0}
+    - target: {fileID: 6001152938902751136, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
+      propertyPath: ChannelMask
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6023269419379726166, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: orthographic size
@@ -14765,6 +14802,8 @@ MonoBehaviour:
   indAbierto: {fileID: 1744108990}
   indBloqueado: {fileID: 2078046069}
   indCompleto: {fileID: 990173856}
+  zoomScript: {fileID: 1978081326}
+  zoomOrthoSize: 2
 --- !u!1 &1446495422
 GameObject:
   m_ObjectHideFlags: 0
@@ -16987,6 +17026,8 @@ MonoBehaviour:
   indAbierto: {fileID: 735885032}
   indBloqueado: {fileID: 1288864896}
   indCompleto: {fileID: 1536813173}
+  zoomScript: {fileID: 360503719}
+  zoomOrthoSize: 2
 --- !u!1 &1853229601
 GameObject:
   m_ObjectHideFlags: 0
@@ -30635,6 +30676,7 @@ GameObject:
   - component: {fileID: 1978081325}
   - component: {fileID: 1978081324}
   - component: {fileID: 1978081323}
+  - component: {fileID: 1978081326}
   m_Layer: 7
   m_Name: Vcam1
   m_TagString: Untagged
@@ -30711,7 +30753,7 @@ MonoBehaviour:
   Priority:
     Enabled: 0
     m_Value: 0
-  OutputChannel: 3
+  OutputChannel: 1
   StandbyUpdate: 2
   m_StreamingVersion: 20241001
   m_LegacyPriority: 0
@@ -30739,6 +30781,20 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
+--- !u!114 &1978081326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978081321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c3944a22583e4844b909ad0b03fae25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomOrthoSize: 3
+  zoomVelocidad: 2
 --- !u!1 &1982561887
 GameObject:
   m_ObjectHideFlags: 0
@@ -38400,6 +38456,8 @@ MonoBehaviour:
   indAbierto: {fileID: 1732863033}
   indBloqueado: {fileID: 526425038}
   indCompleto: {fileID: 1758225979}
+  zoomScript: {fileID: 360503719}
+  zoomOrthoSize: 2
 --- !u!1 &2078046069
 GameObject:
   m_ObjectHideFlags: 0
