@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.Rendering;
-using Cinemachine;
+using Unity.Cinemachine;
 
 public class TrampaMovimiento : MonoBehaviour
 {

@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 8803061160040768657}
   - component: {fileID: 1691812580808109883}
   - component: {fileID: 979439826289223258}
+  - component: {fileID: 8102166381365892849}
   - component: {fileID: 7930608743313948003}
   m_Layer: 8
   m_Name: Vcam2
@@ -134,6 +135,30 @@ MonoBehaviour:
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
   FollowOffset: {x: 0, y: 1.47, z: -10}
+--- !u!114 &8102166381365892849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004417956363834813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ApplyAfter: 2
+  ChannelMask: 2
+  Gain: 1
+  Use2DDistance: 0
+  UseCameraSpace: 1
+  SignalCombinationMode: 0
+  ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!114 &7930608743313948003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,6 +265,7 @@ GameObject:
   - component: {fileID: 1959983746066166401}
   - component: {fileID: 8353208340778544931}
   - component: {fileID: 1138198774052281987}
+  - component: {fileID: 3955285049347309723}
   - component: {fileID: 6404191398316901274}
   m_Layer: 7
   m_Name: Vcam1
@@ -325,6 +351,30 @@ MonoBehaviour:
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
   FollowOffset: {x: 0, y: 1.47, z: -10}
+--- !u!114 &3955285049347309723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3511904820522232165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ApplyAfter: 2
+  ChannelMask: 1
+  Gain: 1
+  Use2DDistance: 0
+  UseCameraSpace: 1
+  SignalCombinationMode: 0
+  ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!114 &6404191398316901274
 MonoBehaviour:
   m_ObjectHideFlags: 0

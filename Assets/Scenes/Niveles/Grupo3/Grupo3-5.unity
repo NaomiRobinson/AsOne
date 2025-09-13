@@ -431,6 +431,9 @@ MonoBehaviour:
   botonSonido: {fileID: 0}
   iconoSonidoOn: {fileID: 4840934775598319947, guid: 5c29e424c113593489f48ca2daae800e, type: 3}
   iconoSonidoOff: {fileID: 7908075426004432792, guid: c6e74e69df0a51e4e80e2fea81e2e7fd, type: 3}
+  botonSfx: {fileID: 0}
+  iconoSfxOn: {fileID: 0}
+  iconoSfxOff: {fileID: 0}
   sfxSource: {fileID: 0}
   boton_interfaz_jugar: {fileID: 0}
   boton_interfsz_generico: {fileID: 0}
@@ -7500,7 +7503,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 144
-      m_TileSpriteIndex: 183
+      m_TileSpriteIndex: 192
       m_TileMatrixIndex: 1
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -11020,7 +11023,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 96
-      m_TileSpriteIndex: 174
+      m_TileSpriteIndex: 183
       m_TileMatrixIndex: 1
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -16010,7 +16013,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 140
-      m_TileSpriteIndex: 168
+      m_TileSpriteIndex: 174
       m_TileMatrixIndex: 1
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -16020,7 +16023,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 139
-      m_TileSpriteIndex: 167
+      m_TileSpriteIndex: 168
       m_TileMatrixIndex: 1
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -16920,7 +16923,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 132
-      m_TileSpriteIndex: 164
+      m_TileSpriteIndex: 167
       m_TileMatrixIndex: 1
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -21633,16 +21636,16 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 25
     m_Data: {fileID: 1500086837, guid: 13f41bbe262280e43a63e586bba68cc6, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -391747691, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 3
     m_Data: {fileID: -1206091504, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 1100500468, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
+    m_Data: {fileID: -391747691, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: -1547825113, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
+    m_Data: {fileID: 1100500468, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
   - m_RefCount: 3
     m_Data: {fileID: -2063705471, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
   - m_RefCount: 7
@@ -21654,7 +21657,7 @@ Tilemap:
   - m_RefCount: 25
     m_Data: {fileID: 712701812, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 2143727437, guid: dd019952370a6e8458e158c21915c3ab, type: 3}
+    m_Data: {fileID: -1547825113, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 1352907147, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
   - m_RefCount: 4
@@ -21672,7 +21675,7 @@ Tilemap:
   - m_RefCount: 2
     m_Data: {fileID: -1218064680, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: -1861711537, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
+    m_Data: {fileID: 2143727437, guid: dd019952370a6e8458e158c21915c3ab, type: 3}
   - m_RefCount: 17
     m_Data: {fileID: -2020322092, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
   - m_RefCount: 25
@@ -21689,8 +21692,8 @@ Tilemap:
     m_Data: {fileID: -403605838, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -1275789720, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -1861711537, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: -1025257467, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
   - m_RefCount: 1
@@ -41890,6 +41893,10 @@ PrefabInstance:
     - target: {fileID: 5973869236094996234, guid: 3d59e679515ca6d4bab72c193559fddf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6059338931140994985, guid: 3d59e679515ca6d4bab72c193559fddf, type: 3}
+      propertyPath: ImpulseDefinition.ImpulseChannel
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7034117025645215837, guid: 3d59e679515ca6d4bab72c193559fddf, type: 3}
       propertyPath: distanciaLinea

@@ -1245,7 +1245,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 192
-      m_TileSpriteIndex: 187
+      m_TileSpriteIndex: 192
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -5385,7 +5385,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 151
-      m_TileSpriteIndex: 176
+      m_TileSpriteIndex: 187
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -6855,7 +6855,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 185
-      m_TileSpriteIndex: 179
+      m_TileSpriteIndex: 185
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -9975,7 +9975,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 188
-      m_TileSpriteIndex: 182
+      m_TileSpriteIndex: 183
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -13692,30 +13692,30 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: -403605838, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 2
     m_Data: {fileID: 1100500468, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: 757213666, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -704485768, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 6
     m_Data: {fileID: 197955006, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
   - m_RefCount: 15
     m_Data: {fileID: 506253290, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 1352907147, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   - m_RefCount: 5
     m_Data: {fileID: 1566830446, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -704485768, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
   - m_RefCount: 6
     m_Data: {fileID: -496895557, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 2013394409, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
+    m_Data: {fileID: -403605838, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
   - m_RefCount: 3
     m_Data: {fileID: -329089541, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
   - m_RefCount: 23
@@ -13724,8 +13724,8 @@ Tilemap:
     m_Data: {fileID: -234760786, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 196281054, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 2013394409, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -391747691, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
   - m_RefCount: 8
@@ -18612,6 +18612,9 @@ MonoBehaviour:
   botonSonido: {fileID: 0}
   iconoSonidoOn: {fileID: 4840934775598319947, guid: 5c29e424c113593489f48ca2daae800e, type: 3}
   iconoSonidoOff: {fileID: 7908075426004432792, guid: c6e74e69df0a51e4e80e2fea81e2e7fd, type: 3}
+  botonSfx: {fileID: 0}
+  iconoSfxOn: {fileID: 0}
+  iconoSfxOff: {fileID: 0}
   sfxSource: {fileID: 0}
   boton_interfaz_jugar: {fileID: 0}
   boton_interfsz_generico: {fileID: 0}
@@ -30871,6 +30874,10 @@ PrefabInstance:
     - target: {fileID: 5973869236094996234, guid: 3d59e679515ca6d4bab72c193559fddf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6059338931140994985, guid: 3d59e679515ca6d4bab72c193559fddf, type: 3}
+      propertyPath: ImpulseDefinition.ImpulseChannel
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7034117025645215837, guid: 3d59e679515ca6d4bab72c193559fddf, type: 3}
       propertyPath: capaJugador.m_Bits
