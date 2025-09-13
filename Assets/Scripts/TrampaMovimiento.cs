@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.Rendering;
+using Cinemachine;
 
 public class TrampaMovimiento : MonoBehaviour
 {
@@ -43,6 +44,7 @@ public class TrampaMovimiento : MonoBehaviour
             rb2D.constraints = RigidbodyConstraints2D.FreezeAll;
 
             SoundManager.instancia.ReproducirSonido(SoundManager.instancia.trampa_caer);
+            GetComponent<CinemachineImpulseSource>().GenerateImpulse();
 
             if (estaSubiendo)
             {
