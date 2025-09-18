@@ -17,6 +17,9 @@ public class AnimacionCompletoGrupo : MonoBehaviour
 
 
     public float tiempoAnim = 0.5f;
+
+    public static event System.Action OnAnimacionGemasTerminada;
+
     void Start()
     {
         StartCoroutine(EsperarTransicionYMostrar());
@@ -117,5 +120,7 @@ public class AnimacionCompletoGrupo : MonoBehaviour
         }
 
         Debug.Log("[CerrarAnimacion] Finalizado, todo desactivado y juego reanudado.");
+        OnAnimacionGemasTerminada?.Invoke();
+
     }
 }

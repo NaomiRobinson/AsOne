@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System.Collections;
+using Unity.Cinemachine;
 
 public class NivelSeleccionado : MonoBehaviour
 {
@@ -23,8 +24,12 @@ public class NivelSeleccionado : MonoBehaviour
 
     private bool puertaBloqueada = false;
 
-    public ZoomCamara zoomScript;
-    public float zoomOrthoSize = 3f;
+    public CinemachineCamera vcJugador;
+    public CinemachineCamera vcPortal;
+    public int prioridadPortal = 20;
+    private int prioridadOriginalPortal;
+    private int prioridadOriginalJugador;
+
 
     void Start()
     {
@@ -32,6 +37,11 @@ public class NivelSeleccionado : MonoBehaviour
         RevisarEstadoPuerta();
         textoEstado.gameObject.SetActive(false);
 
+        if (vcJugador == null) Debug.LogError("No asignaste VC Jugador");
+        if (vcPortal == null) Debug.LogError("No asignaste VC Portal");
+
+        prioridadOriginalPortal = vcPortal.Priority;
+        prioridadOriginalJugador = vcJugador.Priority;
 
     }
 
@@ -40,9 +50,8 @@ public class NivelSeleccionado : MonoBehaviour
         if (other.gameObject == jugadorAsignado)
         {
 
-            zoomScript.zoomOrthoSize = zoomOrthoSize;
-            if (zoomScript != null)
-                zoomScript.ActivarZoom(jugadorAsignado.transform);
+            vcPortal.Priority = prioridadPortal;
+            Debug.Log($"[Enter] Prioridad VC Portal: {vcPortal.Priority}, VC Jugador: {vcJugador.Priority}");
             estaEnPuerta = true;
             RevisarEstadoPuerta();
 
@@ -58,8 +67,12 @@ public class NivelSeleccionado : MonoBehaviour
     {
         if (other.gameObject == jugadorAsignado)
         {
-            if (zoomScript != null)
-                zoomScript.RestaurarZoom();
+            vcPortal.Priority = prioridadOriginalPortal;
+
+
+            vcJugador.Priority = prioridadOriginalJugador + 1;
+            StartCoroutine(RestorePlayerPriority());
+            Debug.Log($"[Exit] Prioridad VC Portal restaurada: {vcPortal.Priority}, VC Jugador: {vcJugador.Priority}");
 
             estaEnPuerta = false;
             yaSelecciono = false;
@@ -191,7 +204,7 @@ public class NivelSeleccionado : MonoBehaviour
         return PlayerPrefs.GetInt($"GrupoCompletado_{grupo}", 0) == 1;
     }
 
-    private bool TodosLosGruposCompletados()
+    public static bool TodosLosGruposCompletados()
     {
 
         for (int i = 1; i <= 4; i++)
@@ -200,6 +213,12 @@ public class NivelSeleccionado : MonoBehaviour
                 return false;
         }
         return true;
+    }
+
+    private IEnumerator RestorePlayerPriority()
+    {
+        yield return new WaitForSeconds(0.1f);
+        vcJugador.Priority = prioridadOriginalJugador;
     }
 
 

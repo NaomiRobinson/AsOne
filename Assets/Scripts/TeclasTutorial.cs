@@ -15,6 +15,7 @@ public class TeclasTutorial : MonoBehaviour
     void Update()
     {
         bool presionada = false;
+        
         switch (direccion)
         {
             case Direccion.Arriba:

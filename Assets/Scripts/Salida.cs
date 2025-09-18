@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using static StaticVariables;
 using Unity.Cinemachine;
+using System.Collections;
 
 
 public class Salida : MonoBehaviour
@@ -16,8 +17,16 @@ public class Salida : MonoBehaviour
 
     public bool requiereFragmento = false;
 
-    public ZoomCamara zoomScript;
+
     public float zoomOrthoSize = 3f;
+
+    public CinemachineCamera vcJugador;
+    public CinemachineCamera vcSalida;
+
+    public int prioridadSalida = 20;
+
+    private int prioridadOriginalSalida;
+    private int prioridadOriginalJugador;
 
 
 
@@ -25,60 +34,63 @@ public class Salida : MonoBehaviour
     {
         animPuerta = GetComponent<Animator>();
 
-        if (zoomScript == null)
-            Debug.LogError("No se asignó ZoomCamara en el inspector.");
+        if (vcJugador == null)
+            Debug.LogError("No se asignó Virtual Camera del jugador en el inspector.");
+        if (vcSalida == null)
+            Debug.LogError("No se asignó Virtual Camera de salida en el inspector.");
+
+        prioridadOriginalJugador = vcJugador.Priority;
+        prioridadOriginalSalida = vcSalida.Priority;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject != jugadorAsignado) return;
 
-        if (other.gameObject == jugadorAsignado)
+        // Activar zoom usando prioridad
+        if (vcSalida != null)
+            vcSalida.Priority = prioridadSalida;
+
+        Debug.Log($"[Enter] {jugadorAsignado.name} entró a la salida");
+        Debug.Log($"Prioridad VC Jugador: {vcJugador.Priority}");
+        Debug.Log($"Prioridad VC Salida: {vcSalida.Priority}");
+
+        if (requiereFragmento && fragmentoAsociado != null && fragmentoAsociado.juntoFragmento == false)
         {
-            zoomScript.zoomOrthoSize = zoomOrthoSize;
-            zoomScript.ActivarZoom(jugadorAsignado.transform);
+            Debug.Log("La puerta está cerrada, no puedes pasar.");
+            return;
+        }
 
-            if (requiereFragmento && fragmentoAsociado != null && fragmentoAsociado.juntoFragmento == false)
-            {
-                Debug.Log("La puerta está cerrada, no puedes pasar.");
-                return;
-            }
+        if (!requiereFragmento || (fragmentoAsociado != null && fragmentoAsociado.juntoFragmento == true))
+        {
+            jugadoresEnSalida++;
+        }
 
-            if (!requiereFragmento || (fragmentoAsociado != null && fragmentoAsociado.juntoFragmento == true))
-            {
-                jugadoresEnSalida++;
-            }
-
-            if (jugadoresEnSalida == 2)
-            {
-                if (!requiereFragmento || (fragmentoAsociado != null && fragmentoAsociado.juntoFragmento == true))
-                {
-                    SoundManager.instancia.ReproducirSonido(SoundManager.instancia.portal_atravesarlo);
-                    PasarNivel();
-                }
-                else
-                {
-                    Debug.Log("Ambos están en la salida, pero la puerta aún está cerrada.");
-                }
-            }
+        if (jugadoresEnSalida == 2)
+        {
+            SoundManager.instancia.ReproducirSonido(SoundManager.instancia.portal_atravesarlo);
+            PasarNivel();
         }
     }
-
 
     private void OnTriggerExit2D(Collider2D other)
     {
         if (animPuerta != null)
-        {
             animPuerta.SetBool("estaAbierta", false);
-        }
-        if (other.gameObject == jugadorAsignado)
-        {
-            zoomScript.RestaurarZoom();
-            if (jugadoresEnSalida > 0)
-            {
-                jugadoresEnSalida--;
-            }
-            Debug.Log($"{jugadorAsignado.name} salió de la salida. Jugadores en salida: {jugadoresEnSalida}");
-        }
+
+        if (other.gameObject != jugadorAsignado) return;
+
+        vcSalida.Priority = prioridadOriginalSalida;
+
+        vcJugador.Priority = prioridadOriginalJugador + 1;
+        StartCoroutine(RestorePlayerPriority());
+        Debug.Log($"[Exit] {jugadorAsignado.name} salió de la salida");
+        Debug.Log($"Prioridad VC Jugador: {vcJugador.Priority}");
+        Debug.Log($"Prioridad VC Salida: {vcSalida.Priority}");
+
+        if (jugadoresEnSalida > 0)
+            jugadoresEnSalida--;
     }
+
 
     private void PasarNivel()
     {
@@ -107,6 +119,14 @@ public class Salida : MonoBehaviour
         }
 
         TransicionEscena.Instance.Disolversalida(siguiente);
+    }
+
+
+
+    private IEnumerator RestorePlayerPriority()
+    {
+        yield return new WaitForSeconds(0.1f);
+        vcJugador.Priority = prioridadOriginalJugador;
     }
 
 }
