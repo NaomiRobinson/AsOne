@@ -30965,6 +30965,10 @@ PrefabInstance:
       value: Camaras
       objectReference: {fileID: 0}
     - target: {fileID: 1691812580808109883, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
+      propertyPath: OutputChannel
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1691812580808109883, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: Lens.OrthographicSize
       value: 5
       objectReference: {fileID: 0}
@@ -30979,6 +30983,14 @@ PrefabInstance:
     - target: {fileID: 1959983746066166401, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_LocalPosition.y
       value: 3.7077084
+      objectReference: {fileID: 0}
+    - target: {fileID: 2423661396787756412, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
+      propertyPath: OutputChannel
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2606999290579344908, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
+      propertyPath: ChannelMask
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3565861548089461529, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_IsActive
@@ -31016,6 +31028,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 3.7077081
       objectReference: {fileID: 0}
+    - target: {fileID: 5322303061146768634, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.03284931
+      objectReference: {fileID: 0}
     - target: {fileID: 5603828444951573684, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_LocalPosition.x
       value: -16.77
@@ -31023,6 +31039,10 @@ PrefabInstance:
     - target: {fileID: 5603828444951573684, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_LocalPosition.y
       value: -11.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 6001152938902751136, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
+      propertyPath: ChannelMask
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6023269419379726166, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: orthographic size
@@ -31051,6 +31071,10 @@ PrefabInstance:
     - target: {fileID: 6023269419379726166, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6201323426839956206, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
+      propertyPath: OutputChannel
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6552232404473758544, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_LocalPosition.x
@@ -31115,6 +31139,10 @@ PrefabInstance:
     - target: {fileID: 7678046806179603808, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8353208340778544931, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
+      propertyPath: OutputChannel
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8353208340778544931, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: Lens.OrthographicSize
@@ -31217,6 +31245,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 619394802}
+  - {fileID: 6165797097342448352}
   - {fileID: 921466803}
   - {fileID: 1702877484}
   - {fileID: 2005900475}
@@ -31232,7 +31261,6 @@ SceneRoots:
   - {fileID: 959510033}
   - {fileID: 64416384}
   - {fileID: 981044953}
-  - {fileID: 6165797097342448352}
   - {fileID: 1279819899}
   - {fileID: 1151338636}
   - {fileID: 927827873}

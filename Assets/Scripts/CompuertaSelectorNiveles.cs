@@ -8,20 +8,31 @@ public class CompuertaSelectorNiveles : MonoBehaviour
     private Animator animador;
 
     public bool esUltimaCompuerta;
+    public bool generarImpulsoCamara;
 
     private NivelSeleccionado nivelSeleccionado;
+
+    void Awake()
+    {
+        animador = GetComponent<Animator>();
+
+
+
+    }
 
     void Start()
     {
         animador = GetComponent<Animator>();
         nivelSeleccionado = GetComponent<NivelSeleccionado>();
 
-        if (nivelSeleccionado == null)
+        if (PlayerPrefs.GetInt($"CompuertaAbierta_{grupoNiveles}", 0) == 1)
         {
-            Debug.LogWarning($"El GameObject {gameObject.name} no tiene el componente NivelSeleccionado.");
+            AnimacionesControlador.SetBool(animador, "estaAbierta", true);
         }
-
-        RevisarCompuerta();
+        else
+        {
+            RevisarCompuerta();
+        }
     }
 
     void OnEnable()
@@ -50,8 +61,22 @@ public class CompuertaSelectorNiveles : MonoBehaviour
         }
 
         AnimacionesControlador.SetBool(animador, "estaAbierta", !compuertaBloqueada);
-        GetComponent<CinemachineImpulseSource>().GenerateImpulse();
+
+        if (!compuertaBloqueada)
+        {
+            PlayerPrefs.SetInt($"CompuertaAbierta_{grupoNiveles}", 1);
+
+            if (generarImpulsoCamara)
+            {
+                var impulso = GetComponent<CinemachineImpulseSource>();
+                if (impulso != null)
+                    impulso.GenerateImpulse();
+            }
+        }
     }
+
+
+
 
 
 }

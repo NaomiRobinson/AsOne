@@ -30,10 +30,19 @@ public class NivelSeleccionado : MonoBehaviour
     private int prioridadOriginalPortal;
     private int prioridadOriginalJugador;
 
-
+    void Awake()
+    {
+        if (vcJugador != null)
+            vcJugador.Priority = prioridadOriginalJugador + 10;
+        if (vcPortal != null)
+            vcPortal.Priority = prioridadOriginalPortal;
+    }
     void Start()
     {
         animPuerta = GetComponent<Animator>();
+
+        LevelManager.Instance.grupoActual = Mathf.Min(grupoSeleccionado, LevelManager.Instance.grupoDesbloqueado);
+
         RevisarEstadoPuerta();
         textoEstado.gameObject.SetActive(false);
 
@@ -42,6 +51,7 @@ public class NivelSeleccionado : MonoBehaviour
 
         prioridadOriginalPortal = vcPortal.Priority;
         prioridadOriginalJugador = vcJugador.Priority;
+        StartCoroutine(RestaurarPrioridadJugador(0f));
 
     }
 
@@ -71,7 +81,7 @@ public class NivelSeleccionado : MonoBehaviour
 
 
             vcJugador.Priority = prioridadOriginalJugador + 1;
-            StartCoroutine(RestorePlayerPriority());
+            StartCoroutine(RestaurarPrioridadJugador(0.1f));
             Debug.Log($"[Exit] Prioridad VC Portal restaurada: {vcPortal.Priority}, VC Jugador: {vcJugador.Priority}");
 
             estaEnPuerta = false;
@@ -119,28 +129,31 @@ public class NivelSeleccionado : MonoBehaviour
         text.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0f);
     }
 
-    void RevisarEstadoPuerta()
-    {
-        indAbierto.SetActive(false);
-        indBloqueado.SetActive(false);
-        indCompleto.SetActive(false);
-        puertaBloqueada = false;
+   void RevisarEstadoPuerta()
+{
+    indAbierto.SetActive(false);
+    indBloqueado.SetActive(false);
+    indCompleto.SetActive(false);
+    puertaBloqueada = false;
 
-        if (grupoSeleccionado > LevelManager.Instance.grupoDesbloqueado ||
-     (esPuertaFinal && !TodosLosGruposCompletados()))
-        {
-            puertaBloqueada = true;
-            indBloqueado.SetActive(true);
-        }
-        else if (FueCompletado(grupoSeleccionado))
-        {
-            indCompleto.SetActive(true);
-        }
-        else
-        {
-            indAbierto.SetActive(true);
-        }
+    bool todosCompletos = NivelSeleccionado.TodosLosGruposCompletados();
+    bool grupoCompletado = PlayerPrefs.GetInt($"GrupoCompletado_{grupoSeleccionado}", 0) == 1;
+
+    if (grupoSeleccionado > LevelManager.Instance.grupoDesbloqueado ||
+        (esPuertaFinal && !todosCompletos))
+    {
+        puertaBloqueada = true;
+        indBloqueado.SetActive(true);
     }
+    else if (grupoCompletado)
+    {
+        indCompleto.SetActive(true);
+    }
+    else
+    {
+        indAbierto.SetActive(true);
+    }
+}
 
     void EjecutarCargaNivel()
     {
@@ -215,9 +228,9 @@ public class NivelSeleccionado : MonoBehaviour
         return true;
     }
 
-    private IEnumerator RestorePlayerPriority()
+    private IEnumerator RestaurarPrioridadJugador(float delay)
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(delay);
         vcJugador.Priority = prioridadOriginalJugador;
     }
 

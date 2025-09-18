@@ -118,8 +118,6 @@ public class LevelManager : MonoBehaviour
     public void MarcarGrupoCompletado()
     {
         int nuevoGrupo = grupoActual + 1;
-        Debug.Log($"Intentando desbloquear nuevo grupo: {nuevoGrupo}");
-
         PlayerPrefs.SetInt($"GrupoCompletado_{grupoActual}", 1);
 
         if (nuevoGrupo > grupoDesbloqueado)
@@ -128,8 +126,15 @@ public class LevelManager : MonoBehaviour
             PlayerPrefs.SetInt("GrupoDesbloqueado", grupoDesbloqueado);
         }
 
+        int primerNivelSiguienteGrupo = ObtenerPrimerNivel(nuevoGrupo);
+        if (primerNivelSiguienteGrupo != -1)
+            PlayerPrefs.SetInt("NivelActual", primerNivelSiguienteGrupo);
+        else
+            PlayerPrefs.SetInt("NivelActual", SeleccionNiveles); // volver al selector
+
         PlayerPrefs.Save();
     }
+
 
 
     public void CargarFinal()
@@ -177,6 +182,15 @@ public class LevelManager : MonoBehaviour
             4 when nivelesGrupo4.Length > 0 => nivelesGrupo4[0],
             _ => -1
         };
+    }
+
+    public int ObtenerGrupoDeNivel(int buildIndex)
+    {
+        if (System.Array.Exists(nivelesGrupo1, n => n == buildIndex)) return 1;
+        if (System.Array.Exists(nivelesGrupo2, n => n == buildIndex)) return 2;
+        if (System.Array.Exists(nivelesGrupo3, n => n == buildIndex)) return 3;
+        if (System.Array.Exists(nivelesGrupo4, n => n == buildIndex)) return 4;
+        return 0;
     }
 
 

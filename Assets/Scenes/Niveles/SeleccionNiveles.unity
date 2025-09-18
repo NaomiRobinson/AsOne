@@ -4196,7 +4196,6 @@ GameObject:
   - component: {fileID: 360503718}
   - component: {fileID: 360503717}
   - component: {fileID: 360503716}
-  - component: {fileID: 360503719}
   - component: {fileID: 360503720}
   m_Layer: 8
   m_Name: Vcam2
@@ -4302,22 +4301,6 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
---- !u!114 &360503719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 360503714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c3944a22583e4844b909ad0b03fae25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
-  zoomOrthoSize: 3
-  zoomVelocidad: 2
-  moveVelocidad: 5
 --- !u!114 &360503720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33106,7 +33089,6 @@ GameObject:
   - component: {fileID: 1978081325}
   - component: {fileID: 1978081324}
   - component: {fileID: 1978081323}
-  - component: {fileID: 1978081326}
   - component: {fileID: 1978081327}
   m_Layer: 7
   m_Name: Vcam1
@@ -33212,22 +33194,6 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
---- !u!114 &1978081326
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1978081321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c3944a22583e4844b909ad0b03fae25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
-  zoomOrthoSize: 3
-  zoomVelocidad: 2
-  moveVelocidad: 5
 --- !u!114 &1978081327
 MonoBehaviour:
   m_ObjectHideFlags: 0

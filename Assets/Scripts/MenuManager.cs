@@ -35,7 +35,8 @@ public class MenuManager : MonoBehaviour
         if (PlayerPrefs.HasKey("NivelActual"))
         {
             int nivel = PlayerPrefs.GetInt("NivelActual");
-            Debug.Log("Continuar: cargando NivelActual = " + nivel);
+            int grupo = LevelManager.Instance.ObtenerGrupoDeNivel(nivel);
+            LevelManager.Instance.grupoActual = grupo;
             SceneManager.LoadScene(nivel);
         }
         else

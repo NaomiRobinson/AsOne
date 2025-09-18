@@ -32,6 +32,7 @@ public class Salida : MonoBehaviour
 
     private void Start()
     {
+        jugadoresEnSalida = 0;
         animPuerta = GetComponent<Animator>();
 
         if (vcJugador == null)
@@ -41,12 +42,16 @@ public class Salida : MonoBehaviour
 
         prioridadOriginalJugador = vcJugador.Priority;
         prioridadOriginalSalida = vcSalida.Priority;
+
+        vcJugador.Priority = prioridadOriginalJugador + 10;
+        vcSalida.Priority = prioridadOriginalSalida;
+
+        StartCoroutine(RestaurarPrioridadJugador(0f));
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject != jugadorAsignado) return;
 
-        // Activar zoom usando prioridad
         if (vcSalida != null)
             vcSalida.Priority = prioridadSalida;
 
@@ -82,7 +87,7 @@ public class Salida : MonoBehaviour
         vcSalida.Priority = prioridadOriginalSalida;
 
         vcJugador.Priority = prioridadOriginalJugador + 1;
-        StartCoroutine(RestorePlayerPriority());
+        StartCoroutine(RestaurarPrioridadJugador(0.1f));
         Debug.Log($"[Exit] {jugadorAsignado.name} salió de la salida");
         Debug.Log($"Prioridad VC Jugador: {vcJugador.Priority}");
         Debug.Log($"Prioridad VC Salida: {vcSalida.Priority}");
@@ -123,10 +128,13 @@ public class Salida : MonoBehaviour
 
 
 
-    private IEnumerator RestorePlayerPriority()
+    private IEnumerator RestaurarPrioridadJugador(float delay)
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(delay);
         vcJugador.Priority = prioridadOriginalJugador;
     }
+
+
+
 
 }
