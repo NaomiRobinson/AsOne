@@ -52,7 +52,6 @@ public class AnimacionCompletoGrupo : MonoBehaviour
         panelOscuro.SetActive(true);
         Time.timeScale = 0f;
 
-        // Solo desactivar fragmentos y gemas de todos los grupos
         foreach (var grupo in grupos)
         {
             foreach (var f in grupo.fragmentos)
@@ -68,10 +67,8 @@ public class AnimacionCompletoGrupo : MonoBehaviour
         {
             if (f != null)
             {
-                // 🔹 Guardar escala original antes de tocarla
                 Vector3 escalaOriginal = f.transform.localScale;
 
-                // 🔹 Empezar desde cero
                 f.transform.localScale = Vector3.zero;
                 f.SetActive(true);
 

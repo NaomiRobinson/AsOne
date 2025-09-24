@@ -16,8 +16,6 @@ public class CompuertaSelectorNiveles : MonoBehaviour
     {
         animador = GetComponent<Animator>();
 
-
-
     }
 
     void Start()
@@ -74,9 +72,6 @@ public class CompuertaSelectorNiveles : MonoBehaviour
             }
         }
     }
-
-
-
 
 
 }

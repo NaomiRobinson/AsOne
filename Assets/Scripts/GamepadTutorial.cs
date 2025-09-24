@@ -53,13 +53,13 @@ public class GamepadTutorial : MonoBehaviour
 
         switch (direccion)
         {
-            // Stick izquierdo
+            
             case Direccion.LeftArriba: return left.y > 0.2f;
             case Direccion.LeftAbajo: return left.y < -0.2f;
             case Direccion.LeftIzquierda: return left.x < -0.2f;
             case Direccion.LeftDerecha: return left.x > 0.2f;
 
-            // Stick derecho
+            
             case Direccion.RightArriba: return right.y > 0.2f;
             case Direccion.RightAbajo: return right.y < -0.2f;
             case Direccion.RightIzquierda: return right.x < -0.2f;

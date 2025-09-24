@@ -6,11 +6,9 @@ public class DeteccionInput : MonoBehaviour
     public GameObject teclado;
     public GameObject gamepad;
 
-    private PlayerInput playerInput;
-
     void Update()
     {
-        // --- Teclado ---
+       
         if (Keyboard.current != null)
         {
             if (Keyboard.current.anyKey.wasPressedThisFrame)
@@ -20,7 +18,7 @@ public class DeteccionInput : MonoBehaviour
             }
         }
 
-        // --- Gamepad (solo sticks) ---
+       
         if (Gamepad.current != null)
         {
             if (Gamepad.current.leftStick.ReadValue().magnitude > 0.2f ||
