@@ -9,6 +9,7 @@ using System.Collections;
 public class Salida : MonoBehaviour
 {
     public GameObject jugadorAsignado;
+    // public GameObject popupFaltaFragmento;
 
     private Animator animPuerta;
 
@@ -18,15 +19,7 @@ public class Salida : MonoBehaviour
     public bool requiereFragmento = false;
 
 
-    public float zoomOrthoSize = 3f;
 
-    public CinemachineCamera vcJugador;
-    public CinemachineCamera vcSalida;
-
-    public int prioridadSalida = 20;
-
-    private int prioridadOriginalSalida;
-    private int prioridadOriginalJugador;
 
 
 
@@ -35,33 +28,27 @@ public class Salida : MonoBehaviour
         jugadoresEnSalida = 0;
         animPuerta = GetComponent<Animator>();
 
-        if (vcJugador == null)
-            Debug.LogError("No se asignó Virtual Camera del jugador en el inspector.");
-        if (vcSalida == null)
-            Debug.LogError("No se asignó Virtual Camera de salida en el inspector.");
 
-        prioridadOriginalJugador = vcJugador.Priority;
-        prioridadOriginalSalida = vcSalida.Priority;
-
-        vcJugador.Priority = prioridadOriginalJugador + 10;
-        vcSalida.Priority = prioridadOriginalSalida;
-
-        StartCoroutine(RestaurarPrioridadJugador(0f));
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject != jugadorAsignado) return;
 
-        if (vcSalida != null)
-            vcSalida.Priority = prioridadSalida;
+
 
         Debug.Log($"[Enter] {jugadorAsignado.name} entró a la salida");
-        Debug.Log($"Prioridad VC Jugador: {vcJugador.Priority}");
-        Debug.Log($"Prioridad VC Salida: {vcSalida.Priority}");
+
 
         if (requiereFragmento && fragmentoAsociado != null && fragmentoAsociado.juntoFragmento == false)
         {
             Debug.Log("La puerta está cerrada, no puedes pasar.");
+
+            // if (popupFaltaFragmento != null)
+            // {
+            //     popupFaltaFragmento.SetActive(true);
+
+            // }
+
             return;
         }
 
@@ -84,13 +71,9 @@ public class Salida : MonoBehaviour
 
         if (other.gameObject != jugadorAsignado) return;
 
-        vcSalida.Priority = prioridadOriginalSalida;
 
-        vcJugador.Priority = prioridadOriginalJugador + 1;
-        StartCoroutine(RestaurarPrioridadJugador(0.1f));
         Debug.Log($"[Exit] {jugadorAsignado.name} salió de la salida");
-        Debug.Log($"Prioridad VC Jugador: {vcJugador.Priority}");
-        Debug.Log($"Prioridad VC Salida: {vcSalida.Priority}");
+
 
         if (jugadoresEnSalida > 0)
             jugadoresEnSalida--;
@@ -128,11 +111,6 @@ public class Salida : MonoBehaviour
 
 
 
-    private IEnumerator RestaurarPrioridadJugador(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        vcJugador.Priority = prioridadOriginalJugador;
-    }
 
 
 

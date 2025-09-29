@@ -15,7 +15,7 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public int grupoActual = 0;
 
     public int nivelTutorial; //Index de escena del tutorial
-    public int final; //Index de escena de victoria
+    public int final; //Index de escena del ultimo nivel
 
     public int SeleccionNiveles; //Index del selector de niveles
 

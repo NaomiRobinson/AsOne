@@ -6,7 +6,7 @@ using System.Collections;
 public class Final : MonoBehaviour
 {
     public GameObject jugador;
-    public GameObject canvasFinal;  // Aquí asignás el Canvas que contiene TODO lo visual final
+    public GameObject canvasFinal;  
 
     public float tiempoMostrarTexto = 2f;
     public float tiempoAntesDeMostrarBoton = 1f;
