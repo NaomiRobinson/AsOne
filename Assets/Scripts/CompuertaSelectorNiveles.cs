@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity.Cinemachine;
+using System.Collections;
 
 public class CompuertaSelectorNiveles : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class CompuertaSelectorNiveles : MonoBehaviour
     private Animator animador;
 
     public bool esUltimaCompuerta;
-    public bool generarImpulsoCamara;
+    bool generarImpulsoCamara = true;
 
     private NivelSeleccionado nivelSeleccionado;
 
@@ -26,21 +27,35 @@ public class CompuertaSelectorNiveles : MonoBehaviour
         if (PlayerPrefs.GetInt($"CompuertaAbierta_{grupoNiveles}", 0) == 1)
         {
             AnimacionesControlador.SetBool(animador, "estaAbierta", true);
-        }
-        else
-        {
-            RevisarCompuerta();
+            generarImpulsoCamara = false;
         }
     }
 
     void OnEnable()
     {
-        AnimacionCompletoGrupo.OnAnimacionGemasTerminada += RevisarCompuerta;
+        AnimacionCompletoGrupo.OnAnimacionGemasTerminada += AbrirCompuertaDespuesAnimacion;
     }
 
     void OnDisable()
     {
-        AnimacionCompletoGrupo.OnAnimacionGemasTerminada -= RevisarCompuerta;
+        AnimacionCompletoGrupo.OnAnimacionGemasTerminada -= AbrirCompuertaDespuesAnimacion;
+    }
+
+    private void AbrirCompuertaDespuesAnimacion()
+    {
+        RevisarCompuerta();
+        StartCoroutine(ImpulsoConRetraso(animador.GetCurrentAnimatorStateInfo(0).length));
+    }
+
+    private void ActivarImpulsoCamara()
+    {
+        if (!generarImpulsoCamara) return;
+
+        var impulso = GetComponent<CinemachineImpulseSource>();
+        if (impulso != null)
+            impulso.GenerateImpulse();
+
+        generarImpulsoCamara = false;
     }
 
     public void RevisarCompuerta()
@@ -63,15 +78,13 @@ public class CompuertaSelectorNiveles : MonoBehaviour
         if (!compuertaBloqueada)
         {
             PlayerPrefs.SetInt($"CompuertaAbierta_{grupoNiveles}", 1);
-
-            if (generarImpulsoCamara)
-            {
-                var impulso = GetComponent<CinemachineImpulseSource>();
-                if (impulso != null)
-                    impulso.GenerateImpulse();
-            }
         }
     }
 
+    private IEnumerator ImpulsoConRetraso(float delay)
+    {
+        yield return new WaitForSeconds(delay * 0.1f); // 10% de la animación, ajustable
+        ActivarImpulsoCamara();
+    }
 
 }
