@@ -21,7 +21,9 @@ public class ReiniciarNivel : MonoBehaviour
     public void Reiniciar()
     {
         Debug.Log("GameOver");
-
+        EstadoDeJuego.ReinicioPorMuerte = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+
 }

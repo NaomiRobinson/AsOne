@@ -49,7 +49,7 @@ public class MenuPausa : MonoBehaviour
 
     private void OnEscenaCargada(Scene escena, LoadSceneMode modo)
     {
-        if (escena.name == "Menu" || escena.name == "Ayuda" || escena.name == "Victoria")
+        if (escena.name == "Menu" || escena.name == "Ayuda" || escena.name == "Victoria"|| escena.name == "Creditos")
         {
             gameObject.SetActive(false);
         }

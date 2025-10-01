@@ -63,10 +63,10 @@ public class TransicionEscena : MonoBehaviour
     {
         Debug.Log("LevelStart: " + scene.name);
 
-        
+
         if (scene.buildIndex != LevelManager.Instance.SeleccionNiveles &&
             scene.buildIndex != LevelManager.Instance.final &&
-            scene.name != "Menu" && scene.name != "Ayuda")
+            scene.name != "Menu" && scene.name != "Ayuda" && scene.name != "Creditos" && scene.name != "Victoria")
         {
             PlayerPrefs.SetInt("NivelActual", scene.buildIndex);
             PlayerPrefs.Save();
@@ -85,8 +85,6 @@ public class TransicionEscena : MonoBehaviour
         }
     }
 
-
-
     private void DisolverEntrada(string nombreEscena)
     {
         TransicionEnCurso = true;
@@ -95,15 +93,39 @@ public class TransicionEscena : MonoBehaviour
         disolverCanvas.blocksRaycasts = true;
         disolverCanvas.interactable = true;
 
-        if (nombreEscena != "Menu" && nombreEscena != "Ayuda" && nombreEscena != "SeleccionNiveles" && nombreEscena != "Victoria")
+        if (EstadoDeJuego.ReinicioPorMuerte)
         {
-            nombreNivel.text = nombreEscena;
 
-            // Aseguramos que el CanvasGroup del texto esté activo
-            if (disolverTexto != null)
-                disolverTexto.alpha = 1f;
+            LeanTween.alphaCanvas(disolverCanvas, 0f, tiempoDisolverEntrada / 2f).setOnComplete(() =>
+            {
+                disolverCanvas.blocksRaycasts = false;
+                disolverCanvas.interactable = false;
+                TransicionEnCurso = false;
 
-            LeanTween.alphaCanvas(disolverTexto, 0f, tiempoDisolverTexto).setOnComplete(() =>
+                EstadoDeJuego.ReinicioPorMuerte = false;
+            });
+        }
+        else
+        {
+
+            if (nombreEscena != "Menu" && nombreEscena != "Ayuda" && nombreEscena != "SeleccionNiveles" && nombreEscena != "Victoria" && nombreEscena != "Creditos")
+            {
+                nombreNivel.text = nombreEscena;
+
+                if (disolverTexto != null)
+                    disolverTexto.alpha = 1f;
+
+                LeanTween.alphaCanvas(disolverTexto, 0f, tiempoDisolverTexto).setOnComplete(() =>
+                {
+                    LeanTween.alphaCanvas(disolverCanvas, 0f, tiempoDisolverEntrada).setOnComplete(() =>
+                    {
+                        disolverCanvas.blocksRaycasts = false;
+                        disolverCanvas.interactable = false;
+                        TransicionEnCurso = false;
+                    });
+                });
+            }
+            else
             {
                 LeanTween.alphaCanvas(disolverCanvas, 0f, tiempoDisolverEntrada).setOnComplete(() =>
                 {
@@ -111,16 +133,7 @@ public class TransicionEscena : MonoBehaviour
                     disolverCanvas.interactable = false;
                     TransicionEnCurso = false;
                 });
-            });
-        }
-        else
-        {
-            LeanTween.alphaCanvas(disolverCanvas, 0f, tiempoDisolverEntrada).setOnComplete(() =>
-            {
-                disolverCanvas.blocksRaycasts = false;
-                disolverCanvas.interactable = false;
-                TransicionEnCurso = false;
-            });
+            }
         }
     }
     public void Disolversalida(int IndexEscena)

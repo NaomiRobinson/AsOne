@@ -24,19 +24,7 @@ public class NivelSeleccionado : MonoBehaviour
 
     private bool puertaBloqueada = false;
 
-    public CinemachineCamera vcJugador;
-    public CinemachineCamera vcPortal;
-    public int prioridadPortal = 20;
-    private int prioridadOriginalPortal;
-    private int prioridadOriginalJugador;
 
-    void Awake()
-    {
-        if (vcJugador != null)
-            vcJugador.Priority = prioridadOriginalJugador + 10;
-        if (vcPortal != null)
-            vcPortal.Priority = prioridadOriginalPortal;
-    }
     void Start()
     {
         animPuerta = GetComponent<Animator>();
@@ -46,25 +34,15 @@ public class NivelSeleccionado : MonoBehaviour
         RevisarEstadoPuerta();
         textoEstado.gameObject.SetActive(false);
 
-        if (vcJugador == null) Debug.LogError("No asignaste VC Jugador");
-        if (vcPortal == null) Debug.LogError("No asignaste VC Portal");
-
-        prioridadOriginalPortal = vcPortal.Priority;
-        prioridadOriginalJugador = vcJugador.Priority;
-        StartCoroutine(RestaurarPrioridadJugador(0f));
-
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject == jugadorAsignado)
         {
-
-            vcPortal.Priority = prioridadPortal;
-            Debug.Log($"[Enter] Prioridad VC Portal: {vcPortal.Priority}, VC Jugador: {vcJugador.Priority}");
+            
             estaEnPuerta = true;
             RevisarEstadoPuerta();
-
 
             if (!puertaBloqueada && !yaSelecciono)
             {
@@ -76,13 +54,7 @@ public class NivelSeleccionado : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject == jugadorAsignado)
-        {
-            vcPortal.Priority = prioridadOriginalPortal;
-
-
-            vcJugador.Priority = prioridadOriginalJugador + 1;
-            StartCoroutine(RestaurarPrioridadJugador(0.1f));
-            Debug.Log($"[Exit] Prioridad VC Portal restaurada: {vcPortal.Priority}, VC Jugador: {vcJugador.Priority}");
+        { 
 
             estaEnPuerta = false;
             yaSelecciono = false;
@@ -228,11 +200,5 @@ public class NivelSeleccionado : MonoBehaviour
         return true;
     }
 
-    private IEnumerator RestaurarPrioridadJugador(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        vcJugador.Priority = prioridadOriginalJugador;
-    }
-
-
+   
 }

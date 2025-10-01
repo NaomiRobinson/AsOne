@@ -9,7 +9,7 @@ public class ZonaConZoom : MonoBehaviour
     public CinemachineCamera vcJugador;
     public CinemachineCamera vcSalida;
 
-    public int prioridadSalida = 20;
+    public int prioridadSalida = 25;
 
     private int prioridadOriginalSalida;
     private int prioridadOriginalJugador;
@@ -24,10 +24,9 @@ public class ZonaConZoom : MonoBehaviour
         prioridadOriginalJugador = vcJugador.Priority;
         prioridadOriginalSalida = vcSalida.Priority;
 
+        // Jugador arranca con prioridad máxima
         vcJugador.Priority = prioridadOriginalJugador + 10;
         vcSalida.Priority = prioridadOriginalSalida;
-
-        StartCoroutine(RestaurarPrioridadJugador(0f));
     }
 
     void Update()
@@ -39,29 +38,24 @@ public class ZonaConZoom : MonoBehaviour
     {
         if (collision.CompareTag("JugadorIzq") || collision.CompareTag("JugadorDer"))
         {
+            // Subimos salida y bajamos jugador
+            vcSalida.Priority = prioridadSalida;
+            vcJugador.Priority = prioridadOriginalJugador;
 
-            if (vcSalida != null)
-                vcSalida.Priority = prioridadSalida;
-
-
-            Debug.Log($"Prioridad VC Jugador: {vcJugador.Priority}");
-            Debug.Log($"Prioridad VC Salida: {vcSalida.Priority}");
+            Debug.Log($"[ENTER] Jugador: {vcJugador.Priority} | Salida: {vcSalida.Priority}");
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
         if (!(other.CompareTag("JugadorIzq") || other.CompareTag("JugadorDer"))) return;
+
+        // Restauramos: salida vuelve a su prioridad original y jugador vuelve a mandar
         vcSalida.Priority = prioridadOriginalSalida;
+        vcJugador.Priority = prioridadOriginalJugador + 10;
 
-
-        vcJugador.Priority = prioridadOriginalJugador + 1;
-        StartCoroutine(RestaurarPrioridadJugador(0.1f));
-
-        Debug.Log($"Prioridad VC Jugador: {vcJugador.Priority}");
-        Debug.Log($"Prioridad VC Salida: {vcSalida.Priority}");
+        Debug.Log($"[EXIT] Jugador: {vcJugador.Priority} | Salida: {vcSalida.Priority}");
     }
-
     private IEnumerator RestaurarPrioridadJugador(float delay)
     {
         yield return new WaitForSeconds(delay);
