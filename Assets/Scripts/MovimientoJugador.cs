@@ -134,7 +134,8 @@ public class MovimientoJugador : MonoBehaviour
         {
             if (SoundManager.instancia != null)
                 SoundManager.instancia.ReproducirSonido(SoundManager.instancia.cambiar_gravedad_01);
-            CambiarGravedad(inputGravedadArriba);
+            animatorEspejado.SetTrigger("squash");
+            StartCoroutine(InvertirGravedadCoroutine(inputGravedadArriba));
             tiempoUltimaInversion = Time.time;
         }
 
@@ -174,8 +175,15 @@ public class MovimientoJugador : MonoBehaviour
         rbEspejado.linearVelocity = new Vector2(0, rbEspejado.linearVelocity.y);
     }
 
-    void CambiarGravedad(bool invertir)
+    IEnumerator InvertirGravedadCoroutine(bool invertir)
     {
+
+        //animatorJugador.SetTrigger("squash");
+        //  animatorEspejado.SetTrigger("squash");
+
+
+        yield return new WaitForSeconds(0.05f);
+
         float gravedad = invertir ? -1f : 1f;
         int flipY = invertir ? -1 : 1;
 
@@ -193,18 +201,12 @@ public class MovimientoJugador : MonoBehaviour
             SetFlipY(jugadorDer, flipY);
         }
 
-        if (puedeInvertirJugador || puedeInvertirEspejado)
-        {
-            trail.emitting = true;
-            trailEspejado.emitting = true;
-
-            StartCoroutine(DesactivarTrail(trail, 0.5f));
-            StartCoroutine(DesactivarTrail(trailEspejado, 0.5f));
-
-            Debug.Log($"Gravedad {(invertir ? "invertida" : "normal")}");
-        }
+        // Trail
+        trail.emitting = true;
+        trailEspejado.emitting = true;
+        StartCoroutine(DesactivarTrail(trail, 0.5f));
+        StartCoroutine(DesactivarTrail(trailEspejado, 0.5f));
     }
-
     void SetFlipX(GameObject obj, int direccion)
     {
         Vector3 scale = obj.transform.localScale;
