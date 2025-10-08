@@ -11,6 +11,10 @@ public class CompuertaSelectorNiveles : MonoBehaviour
     public bool esUltimaCompuerta;
     bool generarImpulsoCamara = true;
 
+    public GameObject prefabGemaBoomerang;
+    public Transform jugador;
+    public Transform sensorCompuerta;
+
     private NivelSeleccionado nivelSeleccionado;
 
     void Awake()
@@ -41,11 +45,25 @@ public class CompuertaSelectorNiveles : MonoBehaviour
         AnimacionCompletoGrupo.OnAnimacionGemasTerminada -= AbrirCompuertaDespuesAnimacion;
     }
 
-    private void AbrirCompuertaDespuesAnimacion()
+    private void LanzarGemaAnimacion()
     {
-        RevisarCompuerta();
-        StartCoroutine(ImpulsoConRetraso(animador.GetCurrentAnimatorStateInfo(0).length));
+        // Instanciamos la gema física después de la animación del grupo
+        if (prefabGemaBoomerang != null && jugador != null && sensorCompuerta != null)
+        {
+            var gema = Instantiate(prefabGemaBoomerang, jugador.position, Quaternion.identity);
+            var anim = gema.GetComponent<AnimacionGemaCompuerta>();
+            anim.jugador = jugador;
+            anim.sensorCompuerta = sensorCompuerta;
+
+            Debug.Log("💎 Gema boomerang lanzada hacia la compuerta");
+        }
+        else
+        {
+            Debug.LogWarning("⚠️ Falta asignar el prefab o referencias en la compuerta.");
+        }
     }
+
+
 
     private void ActivarImpulsoCamara()
     {
@@ -85,6 +103,12 @@ public class CompuertaSelectorNiveles : MonoBehaviour
     {
         yield return new WaitForSeconds(delay * 0.1f); // 10% de la animación, ajustable
         ActivarImpulsoCamara();
+    }
+
+    private void AbrirCompuertaDespuesAnimacion()
+    {
+        Debug.Log($"✨ Animación de grupo completada. Lanzando gema hacia la compuerta {grupoNiveles}.");
+        LanzarGemaAnimacion();
     }
 
 }
