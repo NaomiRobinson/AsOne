@@ -4296,9 +4296,49 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6902914912937275085, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
+      propertyPath: jugadorDer
+      value: 
+      objectReference: {fileID: 1318824670}
+    - target: {fileID: 6902914912937275085, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
+      propertyPath: jugadorIzq
+      value: 
+      objectReference: {fileID: 252812890}
+    - target: {fileID: 6902914912937275085, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
+      propertyPath: panelNegro
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6902914912937275085, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
+      propertyPath: huecoJugador
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6902914912937275085, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
+      propertyPath: camJugadorDer
+      value: 
+      objectReference: {fileID: 1421636976}
+    - target: {fileID: 6902914912937275085, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
+      propertyPath: camJugadorIzq
+      value: 
+      objectReference: {fileID: 1421636978}
+    - target: {fileID: 6902914912937275085, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
+      propertyPath: vCamJugadorDer
+      value: 
+      objectReference: {fileID: 1421636976}
+    - target: {fileID: 6902914912937275085, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
+      propertyPath: vCamJugadorIzq
+      value: 
+      objectReference: {fileID: 1421636978}
+    - target: {fileID: 6902914912937275085, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
       propertyPath: movimientoJugador
       value: 
       objectReference: {fileID: 1702877485}
+    - target: {fileID: 6902914912937275085, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
+      propertyPath: camFisicaJugadorDer
+      value: 
+      objectReference: {fileID: 1421636976}
+    - target: {fileID: 6902914912937275085, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
+      propertyPath: camFisicaJugadorIzq
+      value: 
+      objectReference: {fileID: 1421636978}
     - target: {fileID: 7783787989169559425, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
       propertyPath: m_SortingOrder
       value: 5
@@ -4316,6 +4356,11 @@ GameObject:
 --- !u!198 &252812882 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 7981907068824147355, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
+  m_PrefabInstance: {fileID: 252812880}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &252812890 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6848442707961279513, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
   m_PrefabInstance: {fileID: 252812880}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &368502332
@@ -6609,7 +6654,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.8
+  m_Intensity: 0.6
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 00000000
@@ -6628,8 +6673,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.72695005, y: -1.87785, z: 0}
-    m_Extent: {x: 2.78645, y: 2.44425, z: 0}
+    m_Center: {x: 0.729, y: -1.8778, z: 0}
+    m_Extent: {x: 2.8863, y: 2.5446, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 1.5
@@ -6637,7 +6682,7 @@ MonoBehaviour:
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
-  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffSize: 0.6
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
   - {x: 1.4907262, y: -3.7294, z: 0}
@@ -7485,7 +7530,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.8
+  m_Intensity: 0.6
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 00000000
@@ -7504,8 +7549,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.5193001, y: -3.5062, z: 0}
-    m_Extent: {x: 2.6653, y: 4.7185, z: 0}
+    m_Center: {x: 0.5202, y: -3.5069, z: 0}
+    m_Extent: {x: 2.7646, y: 4.8197002, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 1.5
@@ -7513,7 +7558,7 @@ MonoBehaviour:
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
-  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffSize: 0.6
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
   - {x: 0.24719879, y: -7.725723, z: 0}
@@ -7580,7 +7625,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.8
+  m_Intensity: 0.6
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 00000000
@@ -7599,8 +7644,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.04124999, y: -2.8259, z: 0}
-    m_Extent: {x: 2.74565, y: 2.4078999, z: 0}
+    m_Center: {x: 0.04250002, y: -2.82555, z: 0}
+    m_Extent: {x: 2.8454, y: 2.5079498, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 1.5
@@ -7608,7 +7653,7 @@ MonoBehaviour:
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
-  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffSize: 0.6
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
   - {x: 0.34577927, y: -4.371104, z: 0}
@@ -7969,7 +8014,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.8
+  m_Intensity: 0.6
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 00000000
@@ -7988,8 +8033,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.10304999, y: -4.1462502, z: 0}
-    m_Extent: {x: 2.08515, y: 4.88755, z: 0}
+    m_Center: {x: -0.10204995, y: -4.14625, z: 0}
+    m_Extent: {x: 2.1858501, y: 4.98765, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 1.5
@@ -7997,7 +8042,7 @@ MonoBehaviour:
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
-  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffSize: 0.6
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
   - {x: 0.24783027, y: -6.497641, z: 0}
@@ -8165,9 +8210,49 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1212816499475459998, guid: e085413049cdd354383103d7e69a3668, type: 3}
+      propertyPath: jugadorDer
+      value: 
+      objectReference: {fileID: 1318824670}
+    - target: {fileID: 1212816499475459998, guid: e085413049cdd354383103d7e69a3668, type: 3}
+      propertyPath: jugadorIzq
+      value: 
+      objectReference: {fileID: 252812890}
+    - target: {fileID: 1212816499475459998, guid: e085413049cdd354383103d7e69a3668, type: 3}
+      propertyPath: panelNegro
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1212816499475459998, guid: e085413049cdd354383103d7e69a3668, type: 3}
+      propertyPath: huecoJugador
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1212816499475459998, guid: e085413049cdd354383103d7e69a3668, type: 3}
+      propertyPath: camJugadorDer
+      value: 
+      objectReference: {fileID: 1421636976}
+    - target: {fileID: 1212816499475459998, guid: e085413049cdd354383103d7e69a3668, type: 3}
+      propertyPath: camJugadorIzq
+      value: 
+      objectReference: {fileID: 1421636978}
+    - target: {fileID: 1212816499475459998, guid: e085413049cdd354383103d7e69a3668, type: 3}
+      propertyPath: vCamJugadorDer
+      value: 
+      objectReference: {fileID: 1421636976}
+    - target: {fileID: 1212816499475459998, guid: e085413049cdd354383103d7e69a3668, type: 3}
+      propertyPath: vCamJugadorIzq
+      value: 
+      objectReference: {fileID: 1421636978}
+    - target: {fileID: 1212816499475459998, guid: e085413049cdd354383103d7e69a3668, type: 3}
       propertyPath: movimientoJugador
       value: 
       objectReference: {fileID: 1702877485}
+    - target: {fileID: 1212816499475459998, guid: e085413049cdd354383103d7e69a3668, type: 3}
+      propertyPath: camFisicaJugadorDer
+      value: 
+      objectReference: {fileID: 1421636976}
+    - target: {fileID: 1212816499475459998, guid: e085413049cdd354383103d7e69a3668, type: 3}
+      propertyPath: camFisicaJugadorIzq
+      value: 
+      objectReference: {fileID: 1421636978}
     - target: {fileID: 4535517584813565001, guid: e085413049cdd354383103d7e69a3668, type: 3}
       propertyPath: m_CollisionDetection
       value: 1
@@ -8175,6 +8260,14 @@ PrefabInstance:
     - target: {fileID: 5911614825838371142, guid: e085413049cdd354383103d7e69a3668, type: 3}
       propertyPath: m_Name
       value: JugadorDer
+      objectReference: {fileID: 0}
+    - target: {fileID: 7209878981730550770, guid: e085413049cdd354383103d7e69a3668, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.029999997
+      objectReference: {fileID: 0}
+    - target: {fileID: 7209878981730550770, guid: e085413049cdd354383103d7e69a3668, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.030000001
       objectReference: {fileID: 0}
     - target: {fileID: 7209878981730550770, guid: e085413049cdd354383103d7e69a3668, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8217,8 +8310,40 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8908756109737263384, guid: e085413049cdd354383103d7e69a3668, type: 3}
+      propertyPath: m_Size.x
+      value: 32.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908756109737263384, guid: e085413049cdd354383103d7e69a3668, type: 3}
+      propertyPath: m_Size.y
+      value: 34.510437
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908756109737263384, guid: e085413049cdd354383103d7e69a3668, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908756109737263384, guid: e085413049cdd354383103d7e69a3668, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908756109737263384, guid: e085413049cdd354383103d7e69a3668, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908756109737263384, guid: e085413049cdd354383103d7e69a3668, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908756109737263384, guid: e085413049cdd354383103d7e69a3668, type: 3}
+      propertyPath: m_DrawMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908756109737263384, guid: e085413049cdd354383103d7e69a3668, type: 3}
       propertyPath: m_SortingOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908756109737263384, guid: e085413049cdd354383103d7e69a3668, type: 3}
+      propertyPath: m_MaskInteraction
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8233,6 +8358,11 @@ GameObject:
 --- !u!198 &1318824667 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 3102961608335823829, guid: e085413049cdd354383103d7e69a3668, type: 3}
+  m_PrefabInstance: {fileID: 1318824665}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1318824670 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7209878981730550770, guid: e085413049cdd354383103d7e69a3668, type: 3}
   m_PrefabInstance: {fileID: 1318824665}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1399989556
@@ -8778,7 +8908,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.8
+  m_Intensity: 0.6
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 00000000
@@ -8806,7 +8936,7 @@ MonoBehaviour:
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
-  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffSize: 0.6
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
   - {x: -1.2251043, y: -8.506305, z: 0}
@@ -18779,7 +18909,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.8
+  m_Intensity: 0.6
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 00000000
@@ -18807,7 +18937,7 @@ MonoBehaviour:
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
-  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffSize: 0.6
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
   - {x: -1.2251043, y: -8.506305, z: 0}
@@ -19036,7 +19166,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.8
+  m_Intensity: 0.6
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 00000000
@@ -19064,7 +19194,7 @@ MonoBehaviour:
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
-  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffSize: 0.6
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
   - {x: -1.2251043, y: -8.506305, z: 0}
@@ -19340,7 +19470,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.8
+  m_Intensity: 0.6
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 00000000
@@ -19368,7 +19498,7 @@ MonoBehaviour:
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
-  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffSize: 0.6
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
   - {x: -1.2251043, y: -8.506305, z: 0}

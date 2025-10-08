@@ -34,6 +34,8 @@ public class MovimientoJugador : MonoBehaviour
     private float tiempoUltimaInversion = 0f;
     private bool puedeInvertirJugador = true;
     private bool puedeInvertirEspejado = true;
+ 
+
     private bool inputGravedadArriba, inputGravedadAbajo, inputModoInvencible, inputPausar;
     private Vector2 inputMovimiento;
     [HideInInspector] public bool juegoPausado = false;
@@ -47,7 +49,7 @@ public class MovimientoJugador : MonoBehaviour
 
     public enum Jugador { Izq, Der }
 
-
+    private bool esperandoSquash = false;
 
     void Awake()
     {
@@ -89,17 +91,9 @@ public class MovimientoJugador : MonoBehaviour
     void Update()
     {
         DetectarEsquemaControl();
-        if (TransicionEscena.Instance != null && TransicionEscena.Instance.TransicionEnCurso)
-        {
-            controles.Jugador.Disable();
-        }
-        else
-        {
-            controles.Jugador.Enable();
-        }
 
         if ((MenuPausa.Instancia != null && MenuPausa.Instancia.juegoPausado) ||
-      (TransicionEscena.Instance != null && TransicionEscena.Instance.TransicionEnCurso))
+            (TransicionEscena.Instance != null && TransicionEscena.Instance.TransicionEnCurso))
         {
             DetenerMovimiento();
             return;
@@ -134,7 +128,7 @@ public class MovimientoJugador : MonoBehaviour
         {
             if (SoundManager.instancia != null)
                 SoundManager.instancia.ReproducirSonido(SoundManager.instancia.cambiar_gravedad_01);
-            animatorEspejado.SetTrigger("squash");
+
             StartCoroutine(InvertirGravedadCoroutine(inputGravedadArriba));
             tiempoUltimaInversion = Time.time;
         }
@@ -142,9 +136,6 @@ public class MovimientoJugador : MonoBehaviour
         if (inputModoInvencible)
         {
             ModoInvencible = !ModoInvencible;
-            Debug.Log("Modo invencible: " + ModoInvencible);
-
-
             if (MenuPausa.Instancia != null)
                 MenuPausa.Instancia.ActualizarTextoInvencible();
         }
@@ -177,12 +168,7 @@ public class MovimientoJugador : MonoBehaviour
 
     IEnumerator InvertirGravedadCoroutine(bool invertir)
     {
-
-        //animatorJugador.SetTrigger("squash");
-        //  animatorEspejado.SetTrigger("squash");
-
-
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.1f); 
 
         float gravedad = invertir ? -1f : 1f;
         int flipY = invertir ? -1 : 1;
@@ -192,6 +178,8 @@ public class MovimientoJugador : MonoBehaviour
             rb.gravityScale = gravedad;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
             SetFlipY(jugadorIzq, flipY);
+            animatorJugador.ResetTrigger("stretch");
+            animatorJugador.SetTrigger("stretch"); // jugador izquierdo
         }
 
         if (puedeInvertirEspejado)
@@ -199,7 +187,11 @@ public class MovimientoJugador : MonoBehaviour
             rbEspejado.gravityScale = gravedad;
             rbEspejado.linearVelocity = new Vector2(rbEspejado.linearVelocity.x, 0f);
             SetFlipY(jugadorDer, flipY);
+            animatorEspejado.ResetTrigger("stretch"); // CORRECTO: usar animatorEspejado
+            animatorEspejado.SetTrigger("stretch");   // CORRECTO: jugador derecho
         }
+
+        esperandoSquash = true;
 
         // Trail
         trail.emitting = true;
@@ -207,6 +199,7 @@ public class MovimientoJugador : MonoBehaviour
         StartCoroutine(DesactivarTrail(trail, 0.5f));
         StartCoroutine(DesactivarTrail(trailEspejado, 0.5f));
     }
+
     void SetFlipX(GameObject obj, int direccion)
     {
         Vector3 scale = obj.transform.localScale;
@@ -221,14 +214,30 @@ public class MovimientoJugador : MonoBehaviour
         obj.transform.localScale = scale;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    public void HandleCollision(Collision2D collision)
     {
+        // Solo colisiones con "Walls"
+        if (!collision.gameObject.CompareTag("Walls"))
+            return;
+
+        float velocidadCaida = Mathf.Abs(rb.linearVelocity.y); // rb del jugador correspondiente
+
+        bool caidaFuerte = velocidadCaida > 6f; // por ejemplo, si cae más rápido que 5 unidades/s
+
         foreach (var contacto in collision.contacts)
         {
             Vector2 normal = contacto.normal;
-            if (Vector2.Angle(normal, Vector2.right) < 10f || Vector2.Angle(normal, Vector2.left) < 10f)
+            bool contactoVertical = Vector2.Angle(normal, Vector2.up) < 50f ||
+                                    Vector2.Angle(normal, Vector2.down) < 50f;
+
+            if (contactoVertical && (esperandoSquash || caidaFuerte))
             {
-                DetenerMovimiento();
+                animatorJugador.ResetTrigger("squash");
+                animatorEspejado.ResetTrigger("squash");
+                animatorJugador.SetTrigger("squash");
+                animatorEspejado.SetTrigger("squash");
+                esperandoSquash = false;
+                break;
             }
         }
     }

@@ -17,7 +17,7 @@ public class BalaEnemigo : MonoBehaviour
         rb.MovePosition(rb.position + direccion * velocidad * Time.deltaTime);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+   private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Walls") || collision.CompareTag("Caja"))
         {
@@ -28,9 +28,9 @@ public class BalaEnemigo : MonoBehaviour
         {
             Debug.Log("bala tocó al jugador");
 
-            if (collision.TryGetComponent(out ReiniciarNivel reiniciar) && !MovimientoJugador.Instancia.ModoInvencible)
+            if (collision.TryGetComponent(out ReiniciarNivel reiniciar))
             {
-                reiniciar.Reiniciar();
+                reiniciar.Morir(); 
             }
 
             Destroy(gameObject);
