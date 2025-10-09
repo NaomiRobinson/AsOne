@@ -17,21 +17,23 @@ public class CompuertaSelectorNiveles : MonoBehaviour
 
     private NivelSeleccionado nivelSeleccionado;
 
+    public static event System.Action<int> OnAnimacionGemasTerminada;
+
     void Awake()
     {
         animador = GetComponent<Animator>();
-
     }
 
     void Start()
     {
-        animador = GetComponent<Animator>();
         nivelSeleccionado = GetComponent<NivelSeleccionado>();
 
+        // Si ya estaba abierta de antes
         if (PlayerPrefs.GetInt($"CompuertaAbierta_{grupoNiveles}", 0) == 1)
         {
             AnimacionesControlador.SetBool(animador, "estaAbierta", true);
             generarImpulsoCamara = false;
+            Debug.Log($"✅ Compureta {grupoNiveles} abierta desde PlayerPrefs");
         }
     }
 
@@ -45,35 +47,36 @@ public class CompuertaSelectorNiveles : MonoBehaviour
         AnimacionCompletoGrupo.OnAnimacionGemasTerminada -= AbrirCompuertaDespuesAnimacion;
     }
 
-    private void LanzarGemaAnimacion()
+    private void AbrirCompuertaDespuesAnimacion(int grupoTerminado)
     {
-        // Instanciamos la gema física después de la animación del grupo
+        if (grupoTerminado == grupoNiveles)
+        {
+            Debug.Log($"✨ Grupo {grupoTerminado} completado → lanzando gema hacia compuerta {grupoNiveles}");
+            LanzarGemaAnimacion();
+        }
+    }
+
+    public void LanzarGemaAnimacion()
+    {
         if (prefabGemaBoomerang != null && jugador != null && sensorCompuerta != null)
         {
             var gema = Instantiate(prefabGemaBoomerang, jugador.position, Quaternion.identity);
             var anim = gema.GetComponent<AnimacionGemaCompuerta>();
-            anim.jugador = jugador;
-            anim.sensorCompuerta = sensorCompuerta;
-
-            Debug.Log("💎 Gema boomerang lanzada hacia la compuerta");
+            anim.Inicializar(jugador, sensorCompuerta);
+            Debug.Log($"💎 Gema lanzada hacia compuerta {grupoNiveles}");
         }
         else
         {
-            Debug.LogWarning("⚠️ Falta asignar el prefab o referencias en la compuerta.");
+            Debug.LogWarning($"⚠️ Faltan referencias en compuerta {grupoNiveles}");
         }
     }
 
-
-
-    private void ActivarImpulsoCamara()
+    // 🔹 Llamado por la gema al llegar al sensor
+    public void GemaLlegoAlSensor()
     {
-        if (!generarImpulsoCamara) return;
-
-        var impulso = GetComponent<CinemachineImpulseSource>();
-        if (impulso != null)
-            impulso.GenerateImpulse();
-
-        generarImpulsoCamara = false;
+        Debug.Log($"💥 La gema llegó al sensor de la compuerta {grupoNiveles} → abriendo compuerta...");
+        RevisarCompuerta();
+        StartCoroutine(ImpulsoConRetraso(animador.GetCurrentAnimatorStateInfo(0).length));
     }
 
     public void RevisarCompuerta()
@@ -94,21 +97,23 @@ public class CompuertaSelectorNiveles : MonoBehaviour
         AnimacionesControlador.SetBool(animador, "estaAbierta", !compuertaBloqueada);
 
         if (!compuertaBloqueada)
-        {
             PlayerPrefs.SetInt($"CompuertaAbierta_{grupoNiveles}", 1);
-        }
     }
 
     private IEnumerator ImpulsoConRetraso(float delay)
     {
-        yield return new WaitForSeconds(delay * 0.1f); // 10% de la animación, ajustable
+        yield return new WaitForSeconds(delay * 0.1f); // 10% del tiempo de animación
         ActivarImpulsoCamara();
     }
 
-    private void AbrirCompuertaDespuesAnimacion()
+    private void ActivarImpulsoCamara()
     {
-        Debug.Log($"✨ Animación de grupo completada. Lanzando gema hacia la compuerta {grupoNiveles}.");
-        LanzarGemaAnimacion();
-    }
+        if (!generarImpulsoCamara) return;
 
+        var impulso = GetComponent<CinemachineImpulseSource>();
+        if (impulso != null)
+            impulso.GenerateImpulse();
+
+        generarImpulsoCamara = false;
+    }
 }

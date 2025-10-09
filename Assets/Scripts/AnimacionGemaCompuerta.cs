@@ -3,82 +3,57 @@ using System.Collections;
 
 public class AnimacionGemaCompuerta : MonoBehaviour
 {
-    public Transform jugador; // el jugador desde donde sale y a donde vuelve
-    public Transform sensorCompuerta; // punto hacia donde debe volar
-    public float velocidad = 5f;
-    public float escalaMaxima = 1.5f;
-    public float escalaMinima = 0.3f;
-    public float tiempoEscala = 0.3f;
+    public Transform objetivo;
+    public Transform jugador;
+    private Transform sensor;
 
-    private Vector3 posicionInicial;
-    private bool yendoALaCompuerta = true;
-    private bool regreso = false;
-    private bool compuertaActivada = false;
+    private bool enMovimiento = false;
+    public float velocidad = 8f;
+    private bool yendoAlSensor = true;
 
-    void Start()
+    private CompuertaSelectorNiveles compuerta;
+
+    public void Inicializar(Transform jugador, Transform sensor)
     {
-        posicionInicial = jugador.position - jugador.transform.right * 0.5f; // aparece detrás del jugador
-        transform.position = posicionInicial;
-        StartCoroutine(MovimientoBoomerang());
+        this.jugador = jugador;
+        this.sensor = sensor;
+        this.objetivo = sensor;
+
+        compuerta = sensor.GetComponentInParent<CompuertaSelectorNiveles>();
     }
 
-    IEnumerator MovimientoBoomerang()
+    void Update()
     {
-        // 1️⃣ Mover hacia la compuerta
-        while (yendoALaCompuerta)
+        if (objetivo == null) return;
+
+        transform.position = Vector3.MoveTowards(transform.position, objetivo.position, velocidad * Time.unscaledDeltaTime);
+
+        // Si llegó al objetivo actual
+        if (Vector3.Distance(transform.position, objetivo.position) < 0.05f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, sensorCompuerta.position, velocidad * Time.deltaTime);
-            if (Vector3.Distance(transform.position, sensorCompuerta.position) < 0.05f)
+            if (yendoAlSensor)
             {
-                yendoALaCompuerta = false;
-                StartCoroutine(EscalaEfecto(true));
-                ActivarCompuerta();
-                yield return new WaitForSeconds(0.3f);
-                regreso = true;
-            }
-            yield return null;
-        }
+                // Llamar a la compuerta para abrirla
+                compuerta.GemaLlegoAlSensor();
 
-        // 2️⃣ Regresar al jugador
-        while (regreso)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, jugador.position, velocidad * 1.5f * Time.deltaTime);
-            if (Vector3.Distance(transform.position, jugador.position) < 0.1f)
+                // Ahora la gema vuelve al jugador
+                yendoAlSensor = false;
+                objetivo = jugador;
+
+                // Puedes hacer que vuelva más rápido o más lento
+                velocidad *= 1.2f;
+            }
+            else
             {
-                StartCoroutine(EscalaEfecto(false));
-                yield return new WaitForSeconds(0.3f);
-                Destroy(gameObject); // desaparece
-                break;
+                // Cuando llega de nuevo al jugador, desaparece
+                StartCoroutine(DestruirConRetraso());
             }
-            yield return null;
         }
     }
 
-    IEnumerator EscalaEfecto(bool agrandar)
+    private IEnumerator DestruirConRetraso()
     {
-        float t = 0;
-        Vector3 escalaInicial = transform.localScale;
-        Vector3 escalaObjetivo = agrandar ? Vector3.one * escalaMaxima : Vector3.one * escalaMinima;
-
-        while (t < tiempoEscala)
-        {
-            t += Time.deltaTime;
-            transform.localScale = Vector3.Lerp(escalaInicial, escalaObjetivo, t / tiempoEscala);
-            yield return null;
-        }
-    }
-
-    void ActivarCompuerta()
-    {
-        if (compuertaActivada) return;
-        compuertaActivada = true;
-
-        CompuertaSelectorNiveles compuerta = sensorCompuerta.GetComponentInParent<CompuertaSelectorNiveles>();
-        if (compuerta != null)
-        {
-            compuerta.RevisarCompuerta();
-        }
-
-        Debug.Log("✨ Gema activó la compuerta!");
+        yield return new WaitForSeconds(0.3f);
+        Destroy(gameObject);
     }
 }
