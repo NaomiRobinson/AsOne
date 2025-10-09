@@ -16,6 +16,8 @@ public class DisparoEnemigo : MonoBehaviour
 
     public float distancia;
 
+    
+
     void Start()
     {
         animTorreta = EnemigoTorreta.GetComponent<Animator>();

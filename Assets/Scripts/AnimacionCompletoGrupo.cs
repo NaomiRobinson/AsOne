@@ -15,12 +15,14 @@ public class AnimacionCompletoGrupo : MonoBehaviour
         public GameObject gemaCompleta;
 
         public AudioClip[] sonidosFragmentos;
+        public CompuertaSelectorNiveles compuertaJugador1;
+        public CompuertaSelectorNiveles compuertaJugador2;
     }
 
-
+    public CompuertaSelectorNiveles[] compuertas;
     public float tiempoAnim = 0.5f;
 
-    public static event System.Action OnAnimacionGemasTerminada;
+    public static event System.Action<int> OnAnimacionGemasTerminada;
 
     void Start()
     {
@@ -29,7 +31,6 @@ public class AnimacionCompletoGrupo : MonoBehaviour
 
     private IEnumerator EsperarTransicionYMostrar()
     {
-        // Esperar hasta que TransicionEscena haya terminado
         while (TransicionEscena.Instance != null && TransicionEscena.Instance.TransicionEnCurso)
             yield return null;
 
@@ -49,29 +50,34 @@ public class AnimacionCompletoGrupo : MonoBehaviour
 
         panelOscuro.SetActive(false);
     }
+
     void MostrarAnimacionGrupo(GrupoFragmentos g)
     {
         panelOscuro.SetActive(true);
         Time.timeScale = 0f;
 
+        // Ocultar todas las gemas y fragmentos
         foreach (var grupo in grupos)
         {
             foreach (var f in grupo.fragmentos)
                 if (f != null) f.SetActive(false);
-            if (grupo.gemaCompleta != null) grupo.gemaCompleta.SetActive(false);
+            if (grupo.gemaCompleta != null)
+                grupo.gemaCompleta.SetActive(false);
         }
 
         StartCoroutine(AnimarGrupoCoroutine(g));
     }
+
     private IEnumerator AnimarGrupoCoroutine(GrupoFragmentos g)
     {
         for (int i = 0; i < g.fragmentos.Length; i++)
+        // Aparecen los fragmentos uno a uno
+        foreach (var f in g.fragmentos)
         {
             GameObject f = g.fragmentos[i];
             if (f != null)
             {
                 Vector3 escalaOriginal = f.transform.localScale;
-
                 f.transform.localScale = Vector3.zero;
                 f.SetActive(true);
 
@@ -93,6 +99,7 @@ public class AnimacionCompletoGrupo : MonoBehaviour
             }
         }
 
+        // Aparece la gema completa
         if (g.gemaCompleta != null)
         {
             Vector3 escalaOriginal = g.gemaCompleta.transform.localScale;
@@ -107,28 +114,32 @@ public class AnimacionCompletoGrupo : MonoBehaviour
         }
 
         Debug.Log("[AnimarGrupo] Animación completa → cerrando");
-        CerrarAnimacion();
+        CerrarAnimacion(g);
     }
 
-    public void CerrarAnimacion()
+    private void CerrarAnimacion(GrupoFragmentos g)
     {
-        Debug.Log("[CerrarAnimacion] Cerrando animación → desactivando panel y objetos.");
-
         panelOscuro.SetActive(false);
         Time.timeScale = 1f;
 
-        foreach (var grupo in grupos)
+        foreach (var f in g.fragmentos)
+            if (f != null) f.SetActive(false);
+        if (g.gemaCompleta != null)
+            g.gemaCompleta.SetActive(false);
+
+        // 🔹 Lanzar gema hacia ambas compuertas
+        if (g.compuertaJugador1 != null)
+            g.compuertaJugador1.LanzarGemaAnimacion();
+
+        if (g.compuertaJugador2 != null)
+            g.compuertaJugador2.LanzarGemaAnimacion();
+
+        // ⚡ NUEVO: avisar a las compuertas que el grupo terminó
+        int grupoTerminado = 0;
+        if (int.TryParse(g.idLlave, out grupoTerminado))
         {
-            foreach (var f in grupo.fragmentos)
-            {
-                if (f != null) f.SetActive(false);
-            }
-            if (grupo.gemaCompleta != null)
-                grupo.gemaCompleta.SetActive(false);
+            Debug.Log($"📣 Evento OnAnimacionGemasTerminada lanzado para grupo {grupoTerminado}");
+            OnAnimacionGemasTerminada?.Invoke(grupoTerminado);
         }
-
-        Debug.Log("[CerrarAnimacion] Finalizado, todo desactivado y juego reanudado.");
-        OnAnimacionGemasTerminada?.Invoke();
-
     }
 }

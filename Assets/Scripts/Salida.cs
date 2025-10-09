@@ -9,7 +9,8 @@ using System.Collections;
 public class Salida : MonoBehaviour
 {
     public GameObject jugadorAsignado;
-    // public GameObject popupFaltaFragmento;
+    public GameObject popupFaltaFragmento;
+    public GameObject popupFaltaJugador;
 
     private Animator animPuerta;
 
@@ -18,49 +19,48 @@ public class Salida : MonoBehaviour
 
     public bool requiereFragmento = false;
 
-
-
-
-
+    private static bool nivelCompletandose = false;
 
     private void Start()
     {
         jugadoresEnSalida = 0;
+        nivelCompletandose = false;
         animPuerta = GetComponent<Animator>();
 
+        if (requiereFragmento && popupFaltaFragmento != null)
+            popupFaltaFragmento.SetActive(false);
+        if (popupFaltaJugador != null)
+            popupFaltaJugador.SetActive(false);
 
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject != jugadorAsignado) return;
-
-
+        if (nivelCompletandose) return;
 
         Debug.Log($"[Enter] {jugadorAsignado.name} entró a la salida");
 
-
-        if (requiereFragmento && fragmentoAsociado != null && fragmentoAsociado.juntoFragmento == false)
+        if (requiereFragmento && fragmentoAsociado != null && !fragmentoAsociado.juntoFragmento)
         {
-            Debug.Log("La puerta está cerrada, no puedes pasar.");
+            Debug.Log("Falta el fragmento, puerta cerrada.");
 
-            // if (popupFaltaFragmento != null)
-            // {
-            //     popupFaltaFragmento.SetActive(true);
-
-            // }
+            if (popupFaltaFragmento != null)
+                popupFaltaFragmento.SetActive(true);
 
             return;
         }
 
-        if (!requiereFragmento || (fragmentoAsociado != null && fragmentoAsociado.juntoFragmento == true))
+        jugadoresEnSalida++;
+
+        if (jugadoresEnSalida == 1)
         {
-            jugadoresEnSalida++;
+            StartCoroutine(MostrarPopupFaltaJugadorConRetraso());
+
         }
 
         if (jugadoresEnSalida == 2)
         {
-            SoundManager.instancia.ReproducirSonido(SoundManager.instancia.portal_atravesarlo);
-            PasarNivel();
+            StartCoroutine(DesactivarPopupsYCambiarNivel());
         }
     }
 
@@ -71,12 +71,15 @@ public class Salida : MonoBehaviour
 
         if (other.gameObject != jugadorAsignado) return;
 
-
         Debug.Log($"[Exit] {jugadorAsignado.name} salió de la salida");
-
 
         if (jugadoresEnSalida > 0)
             jugadoresEnSalida--;
+
+        if (popupFaltaJugador != null)
+            popupFaltaJugador.SetActive(false);
+        if (popupFaltaFragmento != null)
+            popupFaltaFragmento.SetActive(false);
     }
 
 
@@ -110,6 +113,24 @@ public class Salida : MonoBehaviour
     }
 
 
+    private IEnumerator DesactivarPopupsYCambiarNivel()
+    {
+        nivelCompletandose = true;
+        if (popupFaltaJugador != null) popupFaltaJugador.SetActive(false);
+        if (popupFaltaFragmento != null) popupFaltaFragmento.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
+        SoundManager.instancia.ReproducirSonido(SoundManager.instancia.portal_atravesarlo);
+        PasarNivel();
+    }
+
+    private IEnumerator MostrarPopupFaltaJugadorConRetraso()
+    {
+        yield return new WaitForSeconds(0.3f); // ⏱ espera un poco por si entra el otro jugador enseguida
+
+        if (nivelCompletandose) yield break; // si ya está terminando el nivel, no mostrar nada
+        if (jugadoresEnSalida == 1 && popupFaltaJugador != null)
+            popupFaltaJugador.SetActive(true);
+    }
 
 
 

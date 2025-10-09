@@ -26,8 +26,17 @@ public class MenuManager : MonoBehaviour
     public void PlayGame()
     {
         SoundManager.instancia.ReproducirSonido(SoundManager.instancia.boton_interfaz_jugar);
+
         ReiniciarProgreso();
-        SceneManager.LoadScene("Invertidos");
+
+        if (!PlayerPrefs.HasKey("CinematicaVista"))
+        {
+            SceneManager.LoadScene("Cinematica");
+        }
+        else
+        {
+            SceneManager.LoadScene("Invertidos");
+        }
     }
 
     public void ContinueGame()
@@ -63,6 +72,7 @@ public class MenuManager : MonoBehaviour
     public void ReiniciarProgreso()
     {
         SoundManager.instancia.ReproducirSonido(SoundManager.instancia.boton_interfsz_generico);
+
         PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
 
@@ -70,7 +80,6 @@ public class MenuManager : MonoBehaviour
         {
             LevelManager.Instance.grupoDesbloqueado = 1;
         }
-        SceneManager.LoadScene("Invertidos");
     }
 
     public void ExitGame()
