@@ -23,6 +23,7 @@ public class NivelSeleccionado : MonoBehaviour
     public GameObject indCompleto;
 
     private bool puertaBloqueada = false;
+    private bool estabaBloqueadaAntes = true; // para detectar desbloqueo
 
 
     void Start()
@@ -80,6 +81,9 @@ public class NivelSeleccionado : MonoBehaviour
         for (int i = 3; i > 0; i--)
         {
             textoEstado.text = i.ToString();
+
+            SoundManager.instancia.ReproducirSonido(SoundManager.instancia.contador); // sonido del contador
+
             yield return StartCoroutine(FadeTextOut(textoEstado, 1f));
             if (!estaEnPuerta) yield break;
         }
@@ -125,7 +129,14 @@ public class NivelSeleccionado : MonoBehaviour
     {
         indAbierto.SetActive(true);
     }
-}
+
+        //reproducir sonido cuando la puerta se caba de desbloquear
+        if (estabaBloqueadaAntes && !puertaBloqueada)
+        {
+            SoundManager.instancia.ReproducirSonido(SoundManager.instancia.portal_activandose);
+        }
+
+    }
 
     void EjecutarCargaNivel()
     {
@@ -134,6 +145,9 @@ public class NivelSeleccionado : MonoBehaviour
 
         jugadoresEnPuerta++;
         if (jugadoresEnPuerta < 2) return;
+
+        //reproducir sonido cuando los jugadores pasan de escena
+        SoundManager.instancia.ReproducirSonido(SoundManager.instancia.portal_viajando);
 
         int escenaActual = SceneManager.GetActiveScene().buildIndex;
         int nivelACargar = -1;

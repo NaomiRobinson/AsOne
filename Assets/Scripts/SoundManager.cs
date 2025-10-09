@@ -35,9 +35,13 @@ public class SoundManager : MonoBehaviour
     public AudioClip mecanismo_palanca;
     public AudioClip portal_atravesarlo;
     public AudioClip trampa_caer;
+    public AudioClip contador;
+    public AudioClip portal_activandose;
+    public AudioClip portal_viajando;
 
     //
     private AudioSource audioSource;
+
 
 
     private bool silenciado = false;
