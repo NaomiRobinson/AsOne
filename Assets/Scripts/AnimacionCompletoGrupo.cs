@@ -13,6 +13,8 @@ public class AnimacionCompletoGrupo : MonoBehaviour
         public GameObject[] fragmentos;
 
         public GameObject gemaCompleta;
+
+        public AudioClip[] sonidosFragmentos;
     }
 
 
@@ -63,8 +65,9 @@ public class AnimacionCompletoGrupo : MonoBehaviour
     }
     private IEnumerator AnimarGrupoCoroutine(GrupoFragmentos g)
     {
-        foreach (var f in g.fragmentos)
+        for (int i = 0; i < g.fragmentos.Length; i++)
         {
+            GameObject f = g.fragmentos[i];
             if (f != null)
             {
                 Vector3 escalaOriginal = f.transform.localScale;
@@ -74,6 +77,14 @@ public class AnimacionCompletoGrupo : MonoBehaviour
 
                 Debug.Log($"[AnimarGrupo] Animando fragmento {f.name}");
 
+                if (g.sonidosFragmentos != null && i < g.sonidosFragmentos.Length)
+                {
+                    AudioClip clip = g.sonidosFragmentos[i];
+                    if (clip != null && SoundManager.instancia != null)
+                    {
+                        SoundManager.instancia.ReproducirSonido(clip);
+                    }
+                }
                 LeanTween.scale(f, escalaOriginal, tiempoAnim)
                     .setEaseOutBack()
                     .setIgnoreTimeScale(true);
