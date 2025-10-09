@@ -19,14 +19,12 @@ public class Salida : MonoBehaviour
 
     public bool requiereFragmento = false;
 
-
-
-
-
+    private static bool nivelCompletandose = false;
 
     private void Start()
     {
         jugadoresEnSalida = 0;
+        nivelCompletandose = false;
         animPuerta = GetComponent<Animator>();
 
         if (requiereFragmento && popupFaltaFragmento != null)
@@ -38,6 +36,7 @@ public class Salida : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject != jugadorAsignado) return;
+        if (nivelCompletandose) return;
 
         Debug.Log($"[Enter] {jugadorAsignado.name} entró a la salida");
 
@@ -55,8 +54,8 @@ public class Salida : MonoBehaviour
 
         if (jugadoresEnSalida == 1)
         {
-            if (popupFaltaJugador != null)
-                popupFaltaJugador.SetActive(true);
+            StartCoroutine(MostrarPopupFaltaJugadorConRetraso());
+
         }
 
         if (jugadoresEnSalida == 2)
@@ -116,14 +115,22 @@ public class Salida : MonoBehaviour
 
     private IEnumerator DesactivarPopupsYCambiarNivel()
     {
+        nivelCompletandose = true;
         if (popupFaltaJugador != null) popupFaltaJugador.SetActive(false);
         if (popupFaltaFragmento != null) popupFaltaFragmento.SetActive(false);
-        yield return null; // asegura que Unity actualice el frame
+        yield return new WaitForSeconds(0.5f);
         SoundManager.instancia.ReproducirSonido(SoundManager.instancia.portal_atravesarlo);
         PasarNivel();
     }
 
+    private IEnumerator MostrarPopupFaltaJugadorConRetraso()
+    {
+        yield return new WaitForSeconds(0.3f); // ⏱ espera un poco por si entra el otro jugador enseguida
 
+        if (nivelCompletandose) yield break; // si ya está terminando el nivel, no mostrar nada
+        if (jugadoresEnSalida == 1 && popupFaltaJugador != null)
+            popupFaltaJugador.SetActive(true);
+    }
 
 
 
