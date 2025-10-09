@@ -22,6 +22,9 @@ public class NivelSeleccionado : MonoBehaviour
     public GameObject indBloqueado;
     public GameObject indCompleto;
 
+    public Transform idCheckpoint;
+    public int checkpointID;
+
     private bool puertaBloqueada = false;
 
 
@@ -33,6 +36,13 @@ public class NivelSeleccionado : MonoBehaviour
 
         RevisarEstadoPuerta();
         textoEstado.gameObject.SetActive(false);
+        int checkpointGrupoGuardado = PlayerPrefs.GetInt("CheckpointGrupo", -1);
+        int checkpointIDGuardado = PlayerPrefs.GetInt("CheckpointID", -1);
+
+        if (checkpointGrupoGuardado == grupoSeleccionado && checkpointIDGuardado == checkpointID)
+        {
+            jugadorAsignado.transform.position = idCheckpoint.position;
+        }
 
     }
 
@@ -40,7 +50,7 @@ public class NivelSeleccionado : MonoBehaviour
     {
         if (other.gameObject == jugadorAsignado)
         {
-            
+
             estaEnPuerta = true;
             RevisarEstadoPuerta();
 
@@ -54,7 +64,7 @@ public class NivelSeleccionado : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject == jugadorAsignado)
-        { 
+        {
 
             estaEnPuerta = false;
             yaSelecciono = false;
@@ -101,34 +111,36 @@ public class NivelSeleccionado : MonoBehaviour
         text.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0f);
     }
 
-   void RevisarEstadoPuerta()
-{
-    indAbierto.SetActive(false);
-    indBloqueado.SetActive(false);
-    indCompleto.SetActive(false);
-    puertaBloqueada = false;
+    void RevisarEstadoPuerta()
+    {
+        indAbierto.SetActive(false);
+        indBloqueado.SetActive(false);
+        indCompleto.SetActive(false);
+        puertaBloqueada = false;
 
-    bool todosCompletos = NivelSeleccionado.TodosLosGruposCompletados();
-    bool grupoCompletado = PlayerPrefs.GetInt($"GrupoCompletado_{grupoSeleccionado}", 0) == 1;
+        bool todosCompletos = NivelSeleccionado.TodosLosGruposCompletados();
+        bool grupoCompletado = PlayerPrefs.GetInt($"GrupoCompletado_{grupoSeleccionado}", 0) == 1;
 
-    if (grupoSeleccionado > LevelManager.Instance.grupoDesbloqueado ||
-        (esPuertaFinal && !todosCompletos))
-    {
-        puertaBloqueada = true;
-        indBloqueado.SetActive(true);
+        if (grupoSeleccionado > LevelManager.Instance.grupoDesbloqueado ||
+            (esPuertaFinal && !todosCompletos))
+        {
+            puertaBloqueada = true;
+            indBloqueado.SetActive(true);
+        }
+        else if (grupoCompletado)
+        {
+            indCompleto.SetActive(true);
+        }
+        else
+        {
+            indAbierto.SetActive(true);
+        }
     }
-    else if (grupoCompletado)
-    {
-        indCompleto.SetActive(true);
-    }
-    else
-    {
-        indAbierto.SetActive(true);
-    }
-}
 
     void EjecutarCargaNivel()
     {
+        PlayerPrefs.SetInt("CheckpointGrupo", grupoSeleccionado);
+        PlayerPrefs.SetInt("CheckpointID", checkpointID);
         if (animPuerta != null && !esPuertaFinal)
             AnimacionesControlador.SetBool(animPuerta, "estaAbierta", true);
 
@@ -200,5 +212,5 @@ public class NivelSeleccionado : MonoBehaviour
         return true;
     }
 
-   
+
 }

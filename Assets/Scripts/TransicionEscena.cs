@@ -1,6 +1,5 @@
 using Unity.VisualScripting;
 using System.Collections;
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Unity.Services.Analytics;
@@ -108,7 +107,7 @@ public class TransicionEscena : MonoBehaviour
         else
         {
 
-            if (nombreEscena != "Menu" && nombreEscena != "Ayuda" && nombreEscena != "SeleccionNiveles" && nombreEscena != "Victoria" && nombreEscena != "Creditos")
+            if (nombreEscena != "Menu" && nombreEscena != "Ayuda" && nombreEscena != "SeleccionNiveles" && nombreEscena != "Victoria" && nombreEscena != "Creditos" && nombreEscena != "Cinematica")
             {
                 nombreNivel.text = nombreEscena;
 

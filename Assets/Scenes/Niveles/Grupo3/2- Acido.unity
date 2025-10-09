@@ -33036,6 +33036,10 @@ PrefabInstance:
       propertyPath: jugadorAsignado
       value: 
       objectReference: {fileID: 690226269}
+    - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+      propertyPath: popupFaltaJugador
+      value: 
+      objectReference: {fileID: 4802588376437909788}
     - target: {fileID: 8381649785619027962, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: m_Name
       value: Puerta (2)
@@ -52715,7 +52719,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6450326976405295990, guid: 0e1f0572130cd154491e0c1f907dea28, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.168
+      value: -3.162
       objectReference: {fileID: 0}
     - target: {fileID: 6450326976405295990, guid: 0e1f0572130cd154491e0c1f907dea28, type: 3}
       propertyPath: m_LocalPosition.z
@@ -52752,6 +52756,10 @@ PrefabInstance:
     - target: {fileID: 8060527635033682734, guid: 0e1f0572130cd154491e0c1f907dea28, type: 3}
       propertyPath: m_SortingOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8060527635033682734, guid: 0e1f0572130cd154491e0c1f907dea28, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -54871,9 +54879,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 614494479}
     - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+      propertyPath: popupFaltaJugador
+      value: 
+      objectReference: {fileID: 3288987556766156352}
+    - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: requiereFragmento
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+      propertyPath: popupFaltaFragmento
+      value: 
+      objectReference: {fileID: 3288987556766156353}
     - target: {fileID: 8381649785619027962, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: m_Name
       value: PuertaDer
@@ -55305,6 +55321,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: JugadorDer
       objectReference: {fileID: 0}
+    - target: {fileID: 6462744968861033694, guid: e085413049cdd354383103d7e69a3668, type: 3}
+      propertyPath: m_Name
+      value: FaltaJugIzq
+      objectReference: {fileID: 0}
     - target: {fileID: 7209878981730550770, guid: e085413049cdd354383103d7e69a3668, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.51
@@ -55357,6 +55377,16 @@ PrefabInstance:
 --- !u!198 &3288987556766156351 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 3102961608335823829, guid: e085413049cdd354383103d7e69a3668, type: 3}
+  m_PrefabInstance: {fileID: 3288987556766156350}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3288987556766156352 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6462744968861033694, guid: e085413049cdd354383103d7e69a3668, type: 3}
+  m_PrefabInstance: {fileID: 3288987556766156350}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3288987556766156353 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9184717854388333174, guid: e085413049cdd354383103d7e69a3668, type: 3}
   m_PrefabInstance: {fileID: 3288987556766156350}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4802588376437909786
@@ -55427,6 +55457,11 @@ PrefabInstance:
 --- !u!198 &4802588376437909787 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 7981907068824147355, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
+  m_PrefabInstance: {fileID: 4802588376437909786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4802588376437909788 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7607089780468000887, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
   m_PrefabInstance: {fileID: 4802588376437909786}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7499410428721999076
