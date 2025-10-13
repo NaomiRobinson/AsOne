@@ -71,8 +71,6 @@ public class AnimacionCompletoGrupo : MonoBehaviour
     private IEnumerator AnimarGrupoCoroutine(GrupoFragmentos g)
     {
         for (int i = 0; i < g.fragmentos.Length; i++)
-        // Aparecen los fragmentos uno a uno
-        foreach (var f in g.fragmentos)
         {
             GameObject f = g.fragmentos[i];
             if (f != null)
@@ -138,7 +136,7 @@ public class AnimacionCompletoGrupo : MonoBehaviour
         int grupoTerminado = 0;
         if (int.TryParse(g.idLlave, out grupoTerminado))
         {
-            Debug.Log($"📣 Evento OnAnimacionGemasTerminada lanzado para grupo {grupoTerminado}");
+            Debug.Log($"Evento OnAnimacionGemasTerminada lanzado para grupo {grupoTerminado}");
             OnAnimacionGemasTerminada?.Invoke(grupoTerminado);
         }
     }

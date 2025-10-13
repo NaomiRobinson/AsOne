@@ -139,24 +139,15 @@ public class NivelSeleccionado : MonoBehaviour
         {
             indAbierto.SetActive(true);
         }
-    }
-    else if (grupoCompletado)
-    {
-        indCompleto.SetActive(true);
-    }
-    else
-    {
-        indAbierto.SetActive(true);
-    }
 
-        //reproducir sonido cuando la puerta se caba de desbloquear
+        // reproducir sonido cuando la puerta se acaba de desbloquear
         if (estabaBloqueadaAntes && !puertaBloqueada)
         {
             SoundManager.instancia.ReproducirSonido(SoundManager.instancia.portal_activandose);
         }
 
+        estabaBloqueadaAntes = puertaBloqueada;
     }
-
     void EjecutarCargaNivel()
     {
         PlayerPrefs.SetInt("CheckpointGrupo", grupoSeleccionado);
@@ -234,6 +225,5 @@ public class NivelSeleccionado : MonoBehaviour
         }
         return true;
     }
-
 
 }
