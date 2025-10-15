@@ -1336,10 +1336,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicaMenu: {fileID: 8300000, guid: 90c3df531786c894cb9d8ebb4e2f7f62, type: 3}
-  musicaGrupo1: {fileID: 0}
-  musicaGrupo2: {fileID: 0}
-  musicaGrupo3: {fileID: 0}
-  musicaGrupo4: {fileID: 0}
+  musicaGrupo1: {fileID: 8300000, guid: f55fdffed46240543a9f7d05ec46b4c5, type: 3}
+  musicaGrupo2: {fileID: 8300000, guid: e79346549fca3594882509709574f16c, type: 3}
+  musicaGrupo3: {fileID: 8300000, guid: 57be39b30b331414a8849fa8b6802120, type: 3}
+  musicaGrupo4: {fileID: 8300000, guid: ba5db7afbd55bfe46a996cc691935fad, type: 3}
   botonSonido: {fileID: 268326784}
   iconoSonidoOn: {fileID: 21300000, guid: cfeb52c1158468445be82e5c877e4f1a, type: 3}
   iconoSonidoOff: {fileID: 21300000, guid: a631e872ceb8c434ead7ead22b772b24, type: 3}
@@ -1359,9 +1359,9 @@ MonoBehaviour:
   mecanismo_palanca: {fileID: 8300000, guid: 4c114d39555874447b854a8322357095, type: 3}
   portal_atravesarlo: {fileID: 8300000, guid: 2358b5968c6ceeb489ee49025213b1f6, type: 3}
   trampa_caer: {fileID: 8300000, guid: 596250ad111e0a641bbb6a827e3bc52e, type: 3}
-  contador: {fileID: 0}
-  portal_activandose: {fileID: 0}
-  portal_viajando: {fileID: 0}
+  contador: {fileID: 8300000, guid: d0e39f1796ccac94b851f365f424bec2, type: 3}
+  portal_activandose: {fileID: 8300000, guid: 2358b5968c6ceeb489ee49025213b1f6, type: 3}
+  portal_viajando: {fileID: 8300000, guid: 735763f6702010342a0f351b0c512bcd, type: 3}
 --- !u!4 &615390830
 Transform:
   m_ObjectHideFlags: 0
@@ -3621,7 +3621,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.252
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
