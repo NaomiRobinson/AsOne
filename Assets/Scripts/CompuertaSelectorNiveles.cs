@@ -6,6 +6,7 @@ public class CompuertaSelectorNiveles : MonoBehaviour
 {
     public int grupoNiveles;
     private bool compuertaBloqueada = false;
+    private bool compuertaYaAbierta = false;
     private Animator animador;
 
     public bool esUltimaCompuerta;
@@ -28,11 +29,11 @@ public class CompuertaSelectorNiveles : MonoBehaviour
     {
         nivelSeleccionado = GetComponent<NivelSeleccionado>();
 
-        // Si ya estaba abierta de antes
         if (PlayerPrefs.GetInt($"CompuertaAbierta_{grupoNiveles}", 0) == 1)
         {
             AnimacionesControlador.SetBool(animador, "estaAbierta", true);
             generarImpulsoCamara = false;
+            compuertaYaAbierta = true;
             Debug.Log($"✅ Compureta {grupoNiveles} abierta desde PlayerPrefs");
         }
     }
@@ -51,6 +52,12 @@ public class CompuertaSelectorNiveles : MonoBehaviour
     {
         if (grupoTerminado == grupoNiveles)
         {
+            if (compuertaYaAbierta)
+            {
+                Debug.Log($"⛔ Compureta {grupoNiveles} ya abierta, no lanzo gema.");
+                return;
+            }
+
             Debug.Log($"✨ Grupo {grupoTerminado} completado → lanzando gema hacia compuerta {grupoNiveles}");
             LanzarGemaAnimacion();
         }
@@ -62,7 +69,7 @@ public class CompuertaSelectorNiveles : MonoBehaviour
         {
             var gema = Instantiate(prefabGemaBoomerang, jugador.position, Quaternion.identity);
             var anim = gema.GetComponent<AnimacionGemaCompuerta>();
-            anim.Inicializar(jugador, sensorCompuerta);
+            anim.Inicializar(jugador, sensorCompuerta, this);
             Debug.Log($"💎 Gema lanzada hacia compuerta {grupoNiveles}");
         }
         else
@@ -71,12 +78,12 @@ public class CompuertaSelectorNiveles : MonoBehaviour
         }
     }
 
-    // 🔹 Llamado por la gema al llegar al sensor
     public void GemaLlegoAlSensor()
     {
         Debug.Log($"💥 La gema llegó al sensor de la compuerta {grupoNiveles} → abriendo compuerta...");
         RevisarCompuerta();
         StartCoroutine(ImpulsoConRetraso(animador.GetCurrentAnimatorStateInfo(0).length));
+        compuertaYaAbierta = true; // 🔹 MARCAMOS DEFINITIVAMENTE ABIERTA
     }
 
     public void RevisarCompuerta()
@@ -102,7 +109,7 @@ public class CompuertaSelectorNiveles : MonoBehaviour
 
     private IEnumerator ImpulsoConRetraso(float delay)
     {
-        yield return new WaitForSeconds(delay * 0.1f); // 10% del tiempo de animación
+        yield return new WaitForSeconds(delay * 0.1f);
         ActivarImpulsoCamara();
     }
 
@@ -116,4 +123,16 @@ public class CompuertaSelectorNiveles : MonoBehaviour
 
         generarImpulsoCamara = false;
     }
+    public float GetDuracionApertura()
+    {
+        // 🔹 Si tu animador tiene una animación de apertura llamada "Abrir", podés hacer:
+        var clipInfo = animador.GetCurrentAnimatorClipInfo(0);
+        if (clipInfo.Length > 0)
+            return clipInfo[0].clip.length;
+
+        // 🔹 Si no, podés devolver un tiempo fijo (por ejemplo 1 segundo)
+        return 1f;
+    }
+
+
 }
