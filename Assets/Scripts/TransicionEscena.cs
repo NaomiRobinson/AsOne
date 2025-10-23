@@ -107,7 +107,7 @@ public class TransicionEscena : MonoBehaviour
         else
         {
 
-            if (nombreEscena != "Menu" && nombreEscena != "Ayuda" && nombreEscena != "SeleccionNiveles" && nombreEscena != "Victoria" && nombreEscena != "Creditos" && nombreEscena != "Cinematica")
+            if (nombreEscena != "Menu" && nombreEscena != "Ayuda" && nombreEscena != "SeleccionNiveles" && nombreEscena != "Victoria" && nombreEscena != "Creditos" && nombreEscena != "Cinematica" && nombreEscena != "CinematicaFinal")
             {
                 nombreNivel.text = nombreEscena;
 

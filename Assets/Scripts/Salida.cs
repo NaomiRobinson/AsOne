@@ -50,6 +50,9 @@ public class Salida : MonoBehaviour
             return;
         }
 
+        if (animPuerta != null)
+            animPuerta.SetBool("estaAbierta", true);
+
         jugadoresEnSalida++;
 
         if (jugadoresEnSalida == 1)
@@ -125,9 +128,9 @@ public class Salida : MonoBehaviour
 
     private IEnumerator MostrarPopupFaltaJugadorConRetraso()
     {
-        yield return new WaitForSeconds(0.3f); // ⏱ espera un poco por si entra el otro jugador enseguida
+        yield return new WaitForSeconds(0.3f);
 
-        if (nivelCompletandose) yield break; // si ya está terminando el nivel, no mostrar nada
+        if (nivelCompletandose) yield break;
         if (jugadoresEnSalida == 1 && popupFaltaJugador != null)
             popupFaltaJugador.SetActive(true);
     }
