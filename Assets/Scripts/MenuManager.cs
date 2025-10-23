@@ -7,6 +7,8 @@ public class MenuManager : MonoBehaviour
 {
     public AudioSource musica;
     public GameObject botonPorDefecto;
+    public GameObject popUpConfirmacion;
+    public GameObject botonPopUp;
 
     void Start()
     {
@@ -26,8 +28,16 @@ public class MenuManager : MonoBehaviour
     public void PlayGame()
     {
         SoundManager.instancia.ReproducirSonido(SoundManager.instancia.boton_interfaz_jugar);
+        popUpConfirmacion.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(botonPopUp);
 
-        ReiniciarProgreso();
+    }
+
+    public void ConfirmarPlayGame()
+    {
+        popUpConfirmacion.SetActive(false); // Ocultar pop-up
+        ReiniciarProgreso(); // Reinicia todo
 
         if (!PlayerPrefs.HasKey("CinematicaVista"))
         {
@@ -37,6 +47,14 @@ public class MenuManager : MonoBehaviour
         {
             SceneManager.LoadScene("Invertidos");
         }
+    }
+
+    public void CancelarPlayGame()
+    {
+        popUpConfirmacion.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(botonPorDefecto);
+
     }
 
     public void ContinueGame()
@@ -50,7 +68,14 @@ public class MenuManager : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene("Invertidos");
+            if (!PlayerPrefs.HasKey("CinematicaVista"))
+            {
+                SceneManager.LoadScene("Cinematica");
+            }
+            else
+            {
+                SceneManager.LoadScene("Invertidos");
+            }
         }
     }
 
