@@ -8,7 +8,10 @@ public class SoundManager : MonoBehaviour
     public static SoundManager instancia;
     //música
     public AudioClip musicaMenu;
-    public AudioClip musicaJuego;
+    public AudioClip musicaGrupo1;
+    public AudioClip musicaGrupo2;
+    public AudioClip musicaGrupo3;
+    public AudioClip musicaGrupo4;
     public Button botonSonido;
     public Sprite iconoSonidoOn;
     public Sprite iconoSonidoOff;
@@ -106,7 +109,14 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
-            clipAUsar = musicaJuego;
+            switch (LevelManager.Instance.grupoActual)
+            {
+                case 1: clipAUsar = musicaGrupo1; break;
+                case 2: clipAUsar = musicaGrupo2; break;
+                case 3: clipAUsar = musicaGrupo3; break;
+                case 4: clipAUsar = musicaGrupo4; break;
+                default: clipAUsar = musicaMenu; break;
+            }
         }
 
         if (audioSource.clip != clipAUsar)
