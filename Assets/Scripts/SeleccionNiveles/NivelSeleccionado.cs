@@ -143,7 +143,7 @@ public class NivelSeleccionado : MonoBehaviour
     {
         PlayerPrefs.SetInt("CheckpointGrupo", grupoSeleccionado);
         PlayerPrefs.SetInt("CheckpointID", checkpointID);
-        if (animPuerta != null && !esPuertaFinal)
+        if (animPuerta != null)
             AnimacionesControlador.SetBool(animPuerta, "estaAbierta", true);
 
         jugadoresEnPuerta++;
