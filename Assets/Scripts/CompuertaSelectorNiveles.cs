@@ -71,6 +71,8 @@ public class CompuertaSelectorNiveles : MonoBehaviour
             var anim = gema.GetComponent<AnimacionGemaCompuerta>();
             anim.Inicializar(jugador, sensorCompuerta, this);
             Debug.Log($"Gema lanzada hacia compuerta {grupoNiveles}");
+
+            SoundManager.instancia.ReproducirSonido(SoundManager.instancia.gema_sensor);
         }
         else
         {
@@ -103,6 +105,8 @@ public class CompuertaSelectorNiveles : MonoBehaviour
 
         AnimacionesControlador.SetBool(animador, "estaAbierta", !compuertaBloqueada);
 
+        SoundManager.instancia.ReproducirSonido(SoundManager.instancia.mecanismo_compuerta);
+
         if (!compuertaBloqueada)
             PlayerPrefs.SetInt($"CompuertaAbierta_{grupoNiveles}", 1);
     }
@@ -120,6 +124,9 @@ public class CompuertaSelectorNiveles : MonoBehaviour
         var impulso = GetComponent<CinemachineImpulseSource>();
         if (impulso != null)
             impulso.GenerateImpulse();
+
+        //SoundManager.instancia.ReproducirSonido(SoundManager.instancia.mecanismo_compuerta);
+
 
         generarImpulsoCamara = false;
     }

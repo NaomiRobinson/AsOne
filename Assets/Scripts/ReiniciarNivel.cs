@@ -20,7 +20,7 @@ public class ReiniciarNivel : MonoBehaviour
         if (!MovimientoJugador.Instancia.puedeMoverse) return;
 
         MovimientoJugador.Instancia.puedeMoverse = false;
-        SoundManager.instancia.ReproducirSonido(SoundManager.instancia.jugador_muerte);
+        SoundManager.instancia.ReproducirSonido(SoundManager.instancia.jugador_muerte, 1.3f);
 
         // Animación
         animatorJugador.ResetTrigger("murio");

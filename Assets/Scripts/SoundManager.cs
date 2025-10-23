@@ -44,6 +44,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip contador;
     public AudioClip portal_activandose;
     public AudioClip portal_viajando;
+    public AudioClip gema_sensor;
 
     //
     private AudioSource audioSource;
@@ -110,12 +111,16 @@ public class SoundManager : MonoBehaviour
         {
             clipAUsar = musicaMenu;
         }
-        else
+        else if (nombreEscena == "Cinematica" || nombreEscena == "Cinematica Finla")
+        {
+            clipAUsar = musicaCinematica
+        }
+        else                           
         {
             switch (LevelManager.Instance.grupoActual)
             {
                 case 1: clipAUsar = musicaGrupo1; audioSource.volume = 1f; break;
-                case 2: clipAUsar = musicaGrupo2; audioSource.volume = 0.4f; break;
+                case 2: clipAUsar = musicaGrupo2; audioSource.volume = 0.3f; break;
                 case 3: clipAUsar = musicaGrupo3; audioSource.volume = 0.5f; break;
                 case 4: clipAUsar = musicaGrupo4; audioSource.volume = 1f; break;
                 default: clipAUsar = musicaMenu; audioSource.volume = 1f; break;
@@ -204,11 +209,11 @@ public class SoundManager : MonoBehaviour
     }
 
 
-    public void ReproducirSonido(AudioClip clip)
+    public void ReproducirSonido(AudioClip clip, float volumen = 1f)
     {
         if (!sfxSilenciado && clip != null)
         {
-            sfxSource.PlayOneShot(clip);
+            sfxSource.PlayOneShot(clip,volumen);
         }
     }
 

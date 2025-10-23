@@ -961,15 +961,15 @@ RectTransform:
   m_GameObject: {fileID: 474953308}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.01375, y: 1.01375, z: 1.01375}
+  m_LocalScale: {x: 1.0137501, y: 1.0137501, z: 1.0137501}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1615699385}
-  m_Father: {fileID: 1754294144}
+  m_Father: {fileID: 655977606}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 913.06, y: 417.49}
+  m_AnchoredPosition: {x: -117, y: -205}
   m_SizeDelta: {x: 66.1006, y: 60.801}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &474953310
@@ -1340,6 +1340,8 @@ MonoBehaviour:
   musicaGrupo2: {fileID: 8300000, guid: e79346549fca3594882509709574f16c, type: 3}
   musicaGrupo3: {fileID: 8300000, guid: 57be39b30b331414a8849fa8b6802120, type: 3}
   musicaGrupo4: {fileID: 8300000, guid: ba5db7afbd55bfe46a996cc691935fad, type: 3}
+  musicaCinematica: {fileID: 0}
+  musicaCinematicaFinal: {fileID: 0}
   botonSonido: {fileID: 268326784}
   iconoSonidoOn: {fileID: 21300000, guid: cfeb52c1158468445be82e5c877e4f1a, type: 3}
   iconoSonidoOff: {fileID: 21300000, guid: a631e872ceb8c434ead7ead22b772b24, type: 3}
@@ -1362,6 +1364,7 @@ MonoBehaviour:
   contador: {fileID: 8300000, guid: d0e39f1796ccac94b851f365f424bec2, type: 3}
   portal_activandose: {fileID: 8300000, guid: 2358b5968c6ceeb489ee49025213b1f6, type: 3}
   portal_viajando: {fileID: 8300000, guid: 735763f6702010342a0f351b0c512bcd, type: 3}
+  gema_sensor: {fileID: 8300000, guid: 80e1b98cbf97f6d47835d2c06af93812, type: 3}
 --- !u!4 &615390830
 Transform:
   m_ObjectHideFlags: 0
@@ -1717,6 +1720,8 @@ RectTransform:
   - {fileID: 1115418534}
   - {fileID: 310277984}
   - {fileID: 1269499562}
+  - {fileID: 474953309}
+  - {fileID: 831409346}
   m_Father: {fileID: 1754294144}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2187,15 +2192,15 @@ RectTransform:
   m_GameObject: {fileID: 831409345}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.01375, y: 1.01375, z: 1.01375}
+  m_LocalScale: {x: 1.0137501, y: 1.0137501, z: 1.0137501}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1331889317}
-  m_Father: {fileID: 1754294144}
+  m_Father: {fileID: 655977606}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 917, y: 352}
+  m_AnchoredPosition: {x: 116, y: -203}
   m_SizeDelta: {x: 66.1006, y: 60.801}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &831409347
@@ -3586,6 +3591,8 @@ MonoBehaviour:
   musicaGrupo2: {fileID: 8300000, guid: e79346549fca3594882509709574f16c, type: 3}
   musicaGrupo3: {fileID: 8300000, guid: 57be39b30b331414a8849fa8b6802120, type: 3}
   musicaGrupo4: {fileID: 8300000, guid: ba5db7afbd55bfe46a996cc691935fad, type: 3}
+  musicaCinematica: {fileID: 0}
+  musicaCinematicaFinal: {fileID: 0}
   botonSonido: {fileID: 268326784}
   iconoSonidoOn: {fileID: -5544848815530659312, guid: cd69080d287800a48b0feb143a7caae4, type: 3}
   iconoSonidoOff: {fileID: 7908075426004432792, guid: c6e74e69df0a51e4e80e2fea81e2e7fd, type: 3}
@@ -3608,6 +3615,7 @@ MonoBehaviour:
   contador: {fileID: 0}
   portal_activandose: {fileID: 0}
   portal_viajando: {fileID: 0}
+  gema_sensor: {fileID: 0}
 --- !u!82 &1398713098
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4598,8 +4606,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 474953309}
-  - {fileID: 831409346}
   - {fileID: 215791075}
   - {fileID: 1203206453}
   - {fileID: 655977606}
