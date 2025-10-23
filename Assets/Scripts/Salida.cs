@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using static StaticVariables;
 using Unity.Cinemachine;
 using System.Collections;
+using UnityEngine.Rendering.Universal;
 
 
 public class Salida : MonoBehaviour
@@ -43,7 +44,6 @@ public class Salida : MonoBehaviour
 
         if (other.gameObject != jugadorAsignado) return;
 
-        // Verificar fragmento si aplica
         if (requiereFragmento && fragmentoAsociado != null && !fragmentoAsociado.juntoFragmento)
         {
             if (popupFaltaFragmento != null) popupFaltaFragmento.SetActive(true);
@@ -53,14 +53,11 @@ public class Salida : MonoBehaviour
         if (animPuerta != null)
             animPuerta.SetBool("estaAbierta", true);
 
-        // Aumentar contador global
         jugadoresEnSalida++;
 
-        // Mostrar popup si hay solo 1 jugador
         if (jugadoresEnSalida == 1 && popupFaltaJugador != null)
             StartCoroutine(MostrarPopupFaltaJugadorConRetraso());
 
-        // Iniciar animación si hay 2 jugadores
         if (jugadoresEnSalida == 2 && !nivelCompletandose)
             StartCoroutine(AnimacionPortalAmbos());
     }
@@ -72,7 +69,6 @@ public class Salida : MonoBehaviour
 
         if (other.gameObject != jugadorAsignado) return;
 
-        // Reducir contador global
         if (jugadoresEnSalida > 0)
             jugadoresEnSalida--;
 
@@ -106,30 +102,38 @@ public class Salida : MonoBehaviour
     {
         nivelCompletandose = true;
 
-        // Desactivar popups
         if (popupFaltaJugador != null) popupFaltaJugador.SetActive(false);
         if (popupFaltaFragmento != null) popupFaltaFragmento.SetActive(false);
 
+
+
         yield return new WaitForSeconds(0.2f);
+
 
         MovimientoJugador movimiento = MovimientoJugador.Instancia;
 
-        // Desactivar movimiento de ambos jugadores
+        if (movimiento.indicadorArriba != null)
+            movimiento.indicadorArriba.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        if (movimiento.indicadorAbajo != null)
+            movimiento.indicadorAbajo.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
+        foreach (var luz in movimiento.jugadorIzq.GetComponentsInChildren<Light2D>())
+            luz.enabled = false;
+        foreach (var luz in movimiento.jugadorDer.GetComponentsInChildren<Light2D>())
+            luz.enabled = false;
+
+
         movimiento.puedeMoverse = false;
 
-        // Animar ambos jugadores hacia sus portales simultáneamente
         float duracionAnim = 1f;
 
         AnimarJugador(movimiento.jugadorIzq, duracionAnim);
         AnimarJugador(movimiento.jugadorDer, duracionAnim);
 
-        // Esperar la animación
         yield return new WaitForSeconds(duracionAnim);
 
-        // Contador de animaciones completadas
         jugadoresAnimados = 2;
 
-        // Pasar nivel
         if (jugadoresAnimados == 2)
             PasarNivel();
     }

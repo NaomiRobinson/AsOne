@@ -26,8 +26,8 @@ public class MovimientoJugador : MonoBehaviour
     [SerializeField] private float velocidadMaximaY = 10f;
     [SerializeField] private float cooldownInversion = 0.25f;
 
-    [SerializeField] private ParticleSystem indicadorArriba;
-    [SerializeField] private ParticleSystem indicadorAbajo;
+    [SerializeField] public ParticleSystem indicadorArriba;
+    [SerializeField] public ParticleSystem indicadorAbajo;
     [SerializeField] private GameObject textoModoInvencible;
 
 
