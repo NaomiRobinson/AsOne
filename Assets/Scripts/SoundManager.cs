@@ -12,6 +12,9 @@ public class SoundManager : MonoBehaviour
     public AudioClip musicaGrupo2;
     public AudioClip musicaGrupo3;
     public AudioClip musicaGrupo4;
+
+    public AudioClip musicaCinematica;
+    public AudioClip musicaCinematicaFinal;
     public Button botonSonido;
     public Sprite iconoSonidoOn;
     public Sprite iconoSonidoOff;
@@ -111,11 +114,11 @@ public class SoundManager : MonoBehaviour
         {
             switch (LevelManager.Instance.grupoActual)
             {
-                case 1: clipAUsar = musicaGrupo1; break;
-                case 2: clipAUsar = musicaGrupo2; break;
-                case 3: clipAUsar = musicaGrupo3; break;
-                case 4: clipAUsar = musicaGrupo4; break;
-                default: clipAUsar = musicaMenu; break;
+                case 1: clipAUsar = musicaGrupo1; audioSource.volume = 1f; break;
+                case 2: clipAUsar = musicaGrupo2; audioSource.volume = 0.4f; break;
+                case 3: clipAUsar = musicaGrupo3; audioSource.volume = 0.5f; break;
+                case 4: clipAUsar = musicaGrupo4; audioSource.volume = 1f; break;
+                default: clipAUsar = musicaMenu; audioSource.volume = 1f; break;
             }
         }
 
@@ -201,7 +204,6 @@ public class SoundManager : MonoBehaviour
     }
 
 
-    //sonidos/efectos especiales
     public void ReproducirSonido(AudioClip clip)
     {
         if (!sfxSilenciado && clip != null)

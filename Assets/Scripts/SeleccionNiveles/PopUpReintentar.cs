@@ -50,7 +50,6 @@ public class PopUpReintentar : MonoBehaviour
 
         EventSystem.current.SetSelectedGameObject(null);
 
-        // 🔥 Avisamos a quien esté escuchando
         OnConfirmarReintento?.Invoke();
     }
 

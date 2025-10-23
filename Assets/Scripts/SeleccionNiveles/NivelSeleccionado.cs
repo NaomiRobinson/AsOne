@@ -142,11 +142,11 @@ public class NivelSeleccionado : MonoBehaviour
             indCompleto.SetActive(false);
         }
 
-        // reproducir sonido cuando la puerta se acaba de desbloquear
-        if (estabaBloqueadaAntes && !puertaBloqueada)
-        {
-            SoundManager.instancia.ReproducirSonido(SoundManager.instancia.portal_activandose);
-        }
+
+        // if (estabaBloqueadaAntes && !puertaBloqueada)
+        // {
+        //     SoundManager.instancia.ReproducirSonido(SoundManager.instancia.portal_activandose);
+        // }
 
         estabaBloqueadaAntes = puertaBloqueada;
     }

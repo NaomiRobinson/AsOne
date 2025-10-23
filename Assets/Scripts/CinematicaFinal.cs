@@ -16,6 +16,14 @@ public class CinematicaFinal : MonoBehaviour
 
     void Start()
     {
+         if (SoundManager.instancia != null && SoundManager.instancia.musicaCinematica != null)
+        {
+            AudioSource audioSource = SoundManager.instancia.GetComponent<AudioSource>();
+            audioSource.clip = SoundManager.instancia.musicaCinematicaFinal;
+            audioSource.loop = false; // o true si querés que se repita durante toda la cinemática
+            audioSource.mute = false;
+            audioSource.Play();
+        }
         if (saltear != null)
             saltear.gameObject.SetActive(false);
 

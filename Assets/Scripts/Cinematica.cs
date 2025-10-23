@@ -17,6 +17,16 @@ public class Cinematica : MonoBehaviour
 
     void Start()
     {
+        if (SoundManager.instancia != null && SoundManager.instancia.musicaCinematica != null)
+        {
+            AudioSource audioSource = SoundManager.instancia.GetComponent<AudioSource>();
+            audioSource.clip = SoundManager.instancia.musicaCinematica;
+            audioSource.loop = false; // o true si querés que se repita durante toda la cinemática
+            audioSource.mute = false;
+            audioSource.Play();
+        }
+
+
         if (saltear != null)
             saltear.gameObject.SetActive(false);
 
@@ -30,13 +40,11 @@ public class Cinematica : MonoBehaviour
             videoPlayer.Play();
         };
 
-        // Evento al terminar
         videoPlayer.loopPointReached += OnVideoEnd;
     }
 
     void Update()
     {
-        // Detectar tecla o botón
         if (Keyboard.current.anyKey.wasPressedThisFrame ||
             (Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame))
         {
