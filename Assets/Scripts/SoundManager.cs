@@ -44,6 +44,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip contador;
     public AudioClip portal_activandose;
     public AudioClip portal_viajando;
+    public AudioClip gema_sensor;
 
     //
     private AudioSource audioSource;

@@ -296,6 +296,11 @@ public class MovimientoJugador : MonoBehaviour
             puedeInvertirJugador = estado;
         else if (jugador == Jugador.Der)
             puedeInvertirEspejado = estado;
+
+        if (!estado && SoundManager.instancia != null)
+        {
+            SoundManager.instancia.ReproducirSonido(SoundManager.instancia.cambiar_gravedad_02);
+        }
     }
 
     private IEnumerator DesactivarTrail(TrailRenderer trail, float delay)
