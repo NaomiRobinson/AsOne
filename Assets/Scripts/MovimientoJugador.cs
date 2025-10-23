@@ -34,7 +34,7 @@ public class MovimientoJugador : MonoBehaviour
     private float tiempoUltimaInversion = 0f;
     private bool puedeInvertirJugador = true;
     private bool puedeInvertirEspejado = true;
- 
+
 
     private bool inputGravedadArriba, inputGravedadAbajo, inputModoInvencible, inputPausar;
     private Vector2 inputMovimiento;
@@ -86,6 +86,7 @@ public class MovimientoJugador : MonoBehaviour
 
         trail.emitting = false;
         trailEspejado.emitting = false;
+
     }
 
     void Update()
@@ -168,7 +169,7 @@ public class MovimientoJugador : MonoBehaviour
 
     IEnumerator InvertirGravedadCoroutine(bool invertir)
     {
-        yield return new WaitForSeconds(0.1f); 
+        yield return new WaitForSeconds(0.1f);
 
         float gravedad = invertir ? -1f : 1f;
         int flipY = invertir ? -1 : 1;
