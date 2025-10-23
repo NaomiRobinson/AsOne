@@ -111,9 +111,9 @@ public class SoundManager : MonoBehaviour
         {
             clipAUsar = musicaMenu;
         }
-        else if (nombreEscena == "Cinematica" || nombreEscena == "Cinematica Finla")
+        else if (nombreEscena == "Cinematica" || nombreEscena == "Cinematica Final")
         {
-            clipAUsar = musicaCinematica
+            clipAUsar = musicaCinematica;
         }
         else                           
         {
