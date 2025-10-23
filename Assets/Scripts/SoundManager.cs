@@ -53,6 +53,9 @@ public class SoundManager : MonoBehaviour
 
     private bool silenciado = false;
 
+    public bool MusicaMuted => silenciado;
+    public bool SonidosMuted => sfxSilenciado;
+
     void Awake()
     {
 
@@ -115,7 +118,7 @@ public class SoundManager : MonoBehaviour
         {
             clipAUsar = musicaCinematica;
         }
-        else                           
+        else
         {
             switch (LevelManager.Instance.grupoActual)
             {
@@ -213,7 +216,7 @@ public class SoundManager : MonoBehaviour
     {
         if (!sfxSilenciado && clip != null)
         {
-            sfxSource.PlayOneShot(clip,volumen);
+            sfxSource.PlayOneShot(clip, volumen);
         }
     }
 

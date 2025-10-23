@@ -49,7 +49,7 @@ public class MenuPausa : MonoBehaviour
 
     private void OnEscenaCargada(Scene escena, LoadSceneMode modo)
     {
-        if (escena.name == "Menu" || escena.name == "Ayuda" || escena.name == "Victoria"|| escena.name == "Creditos" || escena.name == "Cinematica")
+        if (escena.name == "Menu" || escena.name == "Ayuda" || escena.name == "Victoria" || escena.name == "Creditos" || escena.name == "Cinematica")
         {
             gameObject.SetActive(false);
         }
@@ -121,6 +121,66 @@ public class MenuPausa : MonoBehaviour
             panel.Find("NivelP")?.GetComponent<Button>()?.onClick.AddListener(NivelSiguiente);
 
             panel.Find("Selector")?.GetComponent<Button>()?.onClick.AddListener(VolverAlSelector);
+
+            Button botonMusicaPanel = panel.Find("MusicaPanel")?.GetComponent<Button>();
+            if (botonMusicaPanel != null)
+            {
+                botonMusicaPanel.onClick.AddListener(() =>
+                {
+                    if (SoundManager.instancia != null)
+                    {
+                        SoundManager.instancia.ToggleMusica();
+
+                        // Actualiza icono del panel
+                        Image img = botonMusicaPanel.GetComponent<Image>();
+                        if (img != null)
+                            img.sprite = SoundManager.instancia.MusicaMuted
+                                         ? SoundManager.instancia.iconoSonidoOff
+                                         : SoundManager.instancia.iconoSonidoOn;
+
+                        // Actualiza icono externo
+                        SoundManager.instancia.ActualizarIcono();
+                    }
+                });
+
+                // Sincronizar estado al abrir el panel
+                Image imgInicial = botonMusicaPanel.GetComponent<Image>();
+                if (imgInicial != null)
+                    imgInicial.sprite = SoundManager.instancia.MusicaMuted
+                                        ? SoundManager.instancia.iconoSonidoOff
+                                        : SoundManager.instancia.iconoSonidoOn;
+            }
+
+            // Botón SFX dentro del panel
+            Button botonSfxPanel = panel.Find("SonidosPanel")?.GetComponent<Button>();
+            if (botonSfxPanel != null)
+            {
+                botonSfxPanel.onClick.AddListener(() =>
+                {
+                    if (SoundManager.instancia != null)
+                    {
+                        SoundManager.instancia.ToggleSonidos();
+
+                        // Actualiza icono del panel
+                        Image img = botonSfxPanel.GetComponent<Image>();
+                        if (img != null)
+                            img.sprite = SoundManager.instancia.SonidosMuted
+                                         ? SoundManager.instancia.iconoSfxOff
+                                         : SoundManager.instancia.iconoSfxOn;
+
+                        // Actualiza icono externo
+                        SoundManager.instancia.ActualizarIconoSonidos();
+                    }
+                });
+
+                // Sincronizar estado al abrir el panel
+                Image imgInicial = botonSfxPanel.GetComponent<Image>();
+                if (imgInicial != null)
+                    imgInicial.sprite = SoundManager.instancia.SonidosMuted
+                                        ? SoundManager.instancia.iconoSfxOff
+                                        : SoundManager.instancia.iconoSfxOn;
+            }
+
         }
 
         if (nombreNivel != null) { nombreNivel.text = SceneManager.GetActiveScene().name; }
@@ -152,6 +212,39 @@ public class MenuPausa : MonoBehaviour
             controles.Jugador.Disable();
             controles.UI.Enable();
             PanelDePausa.SetActive(true);
+
+            // ----- Sincroniza iconos al abrir el panel -----
+            if (SoundManager.instancia != null)
+            {
+                Transform panel = PanelDePausa.transform;
+
+                // Música panel
+                Button botonMusicaPanel = panel.Find("MusicaPanel")?.GetComponent<Button>();
+                if (botonMusicaPanel != null)
+                {
+                    Image img = botonMusicaPanel.GetComponent<Image>();
+                    if (img != null)
+                        img.sprite = SoundManager.instancia.MusicaMuted
+              ? SoundManager.instancia.iconoSonidoOff
+              : SoundManager.instancia.iconoSonidoOn;
+
+                }
+
+                // Sonidos panel
+                Button botonSonidosPanel = panel.Find("SonidosPanel")?.GetComponent<Button>();
+                if (botonSonidosPanel != null)
+                {
+                    Image img = botonSonidosPanel.GetComponent<Image>();
+                    if (img != null)
+                        img.sprite = SoundManager.instancia.SonidosMuted
+             ? SoundManager.instancia.iconoSfxOff
+             : SoundManager.instancia.iconoSfxOn;
+                }
+
+                // También actualiza iconos externos
+                SoundManager.instancia.ActualizarIcono();
+                SoundManager.instancia.ActualizarIconoSonidos();
+            }
 
             int indice = SceneManager.GetActiveScene().buildIndex;
             int total = SceneManager.sceneCountInBuildSettings;

@@ -180,15 +180,15 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 35cc29bad4a8ab3449cfa08a52ce0ec1, type: 2}
-  m_sharedMaterial: {fileID: 1272497551095840435, guid: 35cc29bad4a8ab3449cfa08a52ce0ec1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 35da88efcafaa8e40b8e8b040566c266, type: 2}
+  m_sharedMaterial: {fileID: -6259322943426507694, guid: 35da88efcafaa8e40b8e8b040566c266, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4287377207
+  m_fontColor: {r: 0.2158601, g: 0.18325028, b: 0.5471698, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -211,7 +211,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -661,7 +661,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicaMenu: {fileID: 8300000, guid: 90c3df531786c894cb9d8ebb4e2f7f62, type: 3}
-  musicaJuego: {fileID: 8300000, guid: ba5db7afbd55bfe46a996cc691935fad, type: 3}
+  musicaGrupo1: {fileID: 0}
+  musicaGrupo2: {fileID: 0}
+  musicaGrupo3: {fileID: 0}
+  musicaGrupo4: {fileID: 0}
+  musicaCinematica: {fileID: 0}
+  musicaCinematicaFinal: {fileID: 0}
   botonSonido: {fileID: 0}
   iconoSonidoOn: {fileID: -5544848815530659312, guid: cd69080d287800a48b0feb143a7caae4, type: 3}
   iconoSonidoOff: {fileID: 7908075426004432792, guid: c6e74e69df0a51e4e80e2fea81e2e7fd, type: 3}
@@ -681,6 +686,10 @@ MonoBehaviour:
   mecanismo_palanca: {fileID: 8300000, guid: 4c114d39555874447b854a8322357095, type: 3}
   portal_atravesarlo: {fileID: 8300000, guid: 2358b5968c6ceeb489ee49025213b1f6, type: 3}
   trampa_caer: {fileID: 8300000, guid: 596250ad111e0a641bbb6a827e3bc52e, type: 3}
+  contador: {fileID: 0}
+  portal_activandose: {fileID: 0}
+  portal_viajando: {fileID: 0}
+  gema_sensor: {fileID: 0}
 --- !u!4 &1337341804
 Transform:
   m_ObjectHideFlags: 0

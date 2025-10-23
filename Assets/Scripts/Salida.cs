@@ -81,6 +81,18 @@ public class Salida : MonoBehaviour
 
     private void PasarNivel()
     {
+        if (LevelManager.Instance == null)
+        {
+            Debug.LogError("LevelManager no está instanciado.");
+            return;
+        }
+
+        if (TransicionEscena.Instance == null)
+        {
+            Debug.LogError("TransicionEscena no está instanciado.");
+            return;
+        }
+
         int nivelActual = SceneManager.GetActiveScene().buildIndex;
         int siguiente;
 
