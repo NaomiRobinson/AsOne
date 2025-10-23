@@ -34,7 +34,7 @@ public class CompuertaSelectorNiveles : MonoBehaviour
             AnimacionesControlador.SetBool(animador, "estaAbierta", true);
             generarImpulsoCamara = false;
             compuertaYaAbierta = true;
-            Debug.Log($"✅ Compureta {grupoNiveles} abierta desde PlayerPrefs");
+            Debug.Log($"Compureta {grupoNiveles} abierta");
         }
     }
 
@@ -54,11 +54,11 @@ public class CompuertaSelectorNiveles : MonoBehaviour
         {
             if (compuertaYaAbierta)
             {
-                Debug.Log($"⛔ Compureta {grupoNiveles} ya abierta, no lanzo gema.");
+                Debug.Log($"Compureta {grupoNiveles} ya abierta, no lanzo gema.");
                 return;
             }
 
-            Debug.Log($"✨ Grupo {grupoTerminado} completado → lanzando gema hacia compuerta {grupoNiveles}");
+            Debug.Log($"Grupo {grupoTerminado} completado, lanzando gema hacia compuerta {grupoNiveles}");
             LanzarGemaAnimacion();
         }
     }
@@ -70,20 +70,20 @@ public class CompuertaSelectorNiveles : MonoBehaviour
             var gema = Instantiate(prefabGemaBoomerang, jugador.position, Quaternion.identity);
             var anim = gema.GetComponent<AnimacionGemaCompuerta>();
             anim.Inicializar(jugador, sensorCompuerta, this);
-            Debug.Log($"💎 Gema lanzada hacia compuerta {grupoNiveles}");
+            Debug.Log($"Gema lanzada hacia compuerta {grupoNiveles}");
         }
         else
         {
-            Debug.LogWarning($"⚠️ Faltan referencias en compuerta {grupoNiveles}");
+            Debug.LogWarning($"Faltan referencias en compuerta {grupoNiveles}");
         }
     }
 
     public void GemaLlegoAlSensor()
     {
-        Debug.Log($"💥 La gema llegó al sensor de la compuerta {grupoNiveles} → abriendo compuerta...");
+        Debug.Log($"La gema llegó al sensor de la compuerta {grupoNiveles}");
         RevisarCompuerta();
         StartCoroutine(ImpulsoConRetraso(animador.GetCurrentAnimatorStateInfo(0).length));
-        compuertaYaAbierta = true; // 🔹 MARCAMOS DEFINITIVAMENTE ABIERTA
+        compuertaYaAbierta = true;
     }
 
     public void RevisarCompuerta()
@@ -125,12 +125,10 @@ public class CompuertaSelectorNiveles : MonoBehaviour
     }
     public float GetDuracionApertura()
     {
-        // 🔹 Si tu animador tiene una animación de apertura llamada "Abrir", podés hacer:
         var clipInfo = animador.GetCurrentAnimatorClipInfo(0);
         if (clipInfo.Length > 0)
             return clipInfo[0].clip.length;
 
-        // 🔹 Si no, podés devolver un tiempo fijo (por ejemplo 1 segundo)
         return 1f;
     }
 

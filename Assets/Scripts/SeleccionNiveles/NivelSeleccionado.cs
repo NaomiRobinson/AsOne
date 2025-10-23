@@ -9,6 +9,8 @@ public class NivelSeleccionado : MonoBehaviour
     public int grupoSeleccionado;
     public GameObject jugadorAsignado;
     private Animator animPuerta;
+    private SpriteRenderer spriteRenderer;
+
     private static int jugadoresEnPuerta = 0;
     private bool estaEnPuerta = false;
 
@@ -19,7 +21,7 @@ public class NivelSeleccionado : MonoBehaviour
     public TMP_Text textoEstado;
 
     public GameObject indAbierto;
-    public GameObject indBloqueado;
+
     public GameObject indCompleto;
 
     public Transform idCheckpoint;
@@ -30,6 +32,7 @@ public class NivelSeleccionado : MonoBehaviour
 
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         animPuerta = GetComponent<Animator>();
 
         LevelManager.Instance.grupoActual = Mathf.Min(grupoSeleccionado, LevelManager.Instance.grupoDesbloqueado);
@@ -114,26 +117,25 @@ public class NivelSeleccionado : MonoBehaviour
     void RevisarEstadoPuerta()
     {
         indAbierto.SetActive(false);
-        indBloqueado.SetActive(false);
         indCompleto.SetActive(false);
         puertaBloqueada = false;
 
-        bool todosCompletos = NivelSeleccionado.TodosLosGruposCompletados();
+        //bool todosCompletos = NivelSeleccionado.TodosLosGruposCompletados();
         bool grupoCompletado = PlayerPrefs.GetInt($"GrupoCompletado_{grupoSeleccionado}", 0) == 1;
 
-        if (grupoSeleccionado > LevelManager.Instance.grupoDesbloqueado ||
-            (esPuertaFinal && !todosCompletos))
-        {
-            puertaBloqueada = true;
-            indBloqueado.SetActive(true);
-        }
-        else if (grupoCompletado)
+        if (grupoCompletado)
         {
             indCompleto.SetActive(true);
+            indAbierto.SetActive(false);
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.color = new Color(0.149f, 0.737f, 0.655f);
+            }
         }
         else
         {
             indAbierto.SetActive(true);
+            indCompleto.SetActive(false);
         }
     }
 

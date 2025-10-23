@@ -26,6 +26,7 @@ public class Cinematica : MonoBehaviour
         videoPlayer.Prepare();
         videoPlayer.prepareCompleted += (source) =>
         {
+            videoPlayer.playbackSpeed = 0.5f;
             videoPlayer.Play();
         };
 

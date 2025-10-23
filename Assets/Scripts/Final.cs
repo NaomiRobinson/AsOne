@@ -2,65 +2,52 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Final : MonoBehaviour
 {
-    public GameObject jugador;
-    public GameObject canvasFinal;  
-
-    public float tiempoMostrarTexto = 2f;
-    public float tiempoAntesDeMostrarBoton = 1f;
-
-    private TMP_Text textoFinal;
-    private Button botonVolverAlMenu;
     private bool activado = false;
-
+    private bool jugadorIzqDentro = false;
+    private bool jugadorDerDentro = false;
     private void Start()
     {
-        canvasFinal.SetActive(false);
 
-        // Buscamos el texto y el botón dentro del Canvas para manejarlos
-        textoFinal = canvasFinal.GetComponentInChildren<TMP_Text>();
-        botonVolverAlMenu = canvasFinal.GetComponentInChildren<Button>();
-
-        textoFinal.gameObject.SetActive(false);
-        botonVolverAlMenu.gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (activado) return;
+        if (other.CompareTag("JugadorIzq"))
+            jugadorIzqDentro = true;
 
-        if (other.CompareTag("JugadorIzq") || other.CompareTag("JugadorDer"))
+        if (other.CompareTag("JugadorDer"))
+            jugadorDerDentro = true;
+
+        // Cuando ambos están dentro y aún no se activó
+        if (jugadorIzqDentro && jugadorDerDentro && !activado)
         {
             activado = true;
-            StartCoroutine(ProcesoFinal(other.gameObject));
+            StartCoroutine(ProcesoFinal());
         }
     }
 
-    IEnumerator ProcesoFinal(GameObject jugadorActual)
+    IEnumerator ProcesoFinal()
     {
-        // Desactivar movimiento
-        MovimientoJugador movimiento = jugadorActual.GetComponent<MovimientoJugador>();
-        if (movimiento) movimiento.puedeMoverse = false;
-
-        var rb = jugadorActual.GetComponent<Rigidbody2D>();
-        if (rb)
+        // Desactivar movimiento de ambos jugadores
+        MovimientoJugador[] jugadores = FindObjectsOfType<MovimientoJugador>();
+        foreach (var jugador in jugadores)
         {
-            rb.linearVelocity = Vector2.zero;
-            rb.isKinematic = true;
+            jugador.puedeMoverse = false;
+
+            var rb = jugador.GetComponent<Rigidbody2D>();
+            if (rb)
+            {
+                rb.linearVelocity = Vector2.zero;
+                rb.isKinematic = true;
+            }
         }
 
-        // Activar Canvas completo
-        canvasFinal.SetActive(true);
+        yield return new();
 
-
-        textoFinal.gameObject.SetActive(true);
-
-        yield return new WaitForSeconds(tiempoMostrarTexto);
-
-        yield return new WaitForSeconds(tiempoAntesDeMostrarBoton);
-
-        botonVolverAlMenu.gameObject.SetActive(true);
+        SceneManager.LoadScene("CinematicaFinal");
     }
 }
