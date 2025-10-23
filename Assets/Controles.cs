@@ -135,6 +135,15 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InvertirGravedad"",
+                    ""type"": ""Button"",
+                    ""id"": ""9d40f95f-3087-4417-9183-e6015f6faa82"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -271,6 +280,61 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""D-Pad"",
+                    ""id"": ""17ca902c-97f1-4d3e-9de6-462619399a46"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Moverse"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""d8757f45-b9e2-4485-bfe4-359665b8a988"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Moverse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""d2525f6a-4183-4410-9810-54b3b55137ab"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Moverse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""23cf0061-6b8a-4c9b-b93a-a76c0eeef97b"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Moverse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""8c820345-3784-4162-91f5-9da6f7225aee"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Moverse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
                     ""id"": ""46e9069b-3ed1-42bd-9de8-cecc17c401c4"",
                     ""path"": ""<Keyboard>/w"",
@@ -318,17 +382,6 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""2aadc694-98a5-4b03-8a95-b471792abfb6"",
                     ""path"": ""<Gamepad>/rightStick/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""GravedadArriba"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""85382af6-079b-40ee-8ef1-d6ef8238842c"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -393,17 +446,6 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""8a47df53-7624-4419-996a-afd16ce49b35"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""GravedadAbajo"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""600db96b-e547-4efe-866f-54765116afb1"",
                     ""path"": ""<Keyboard>/i"",
                     ""interactions"": """",
@@ -454,6 +496,50 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pausar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""de588ee3-be01-4309-9788-3c264720080a"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InvertirGravedad"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""16d3ef04-4127-4743-91c1-2cf0bf31c878"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InvertirGravedad"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""85382af6-079b-40ee-8ef1-d6ef8238842c"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InvertirGravedad"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a47df53-7624-4419-996a-afd16ce49b35"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InvertirGravedad"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -523,7 +609,7 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Flechas"",
-                    ""id"": ""4ec04c13-c81e-45dc-989e-04be46c741e6"",
+                    ""id"": ""92598d97-bc9a-4188-8aeb-50c0196f01fb"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -534,7 +620,7 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""up"",
-                    ""id"": ""e83f480f-1d4e-4fd2-be5e-3faace20592d"",
+                    ""id"": ""ea48668e-c0e5-4b20-b5c1-8533dbd919d5"",
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -545,8 +631,30 @@ public partial class @Controles: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""down"",
-                    ""id"": ""4cdbf572-eae3-4c07-8219-1655688595cf"",
+                    ""id"": ""2ffa05b4-885f-4299-a4af-24719c2858ff"",
                     ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""104b5997-709e-45f2-a330-bb552b68992c"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""d1d66d5d-c986-4ef6-b552-fca4c24788fa"",
+                    ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -632,6 +740,7 @@ public partial class @Controles: IInputActionCollection2, IDisposable
         m_Jugador_GravedadAbajo = m_Jugador.FindAction("GravedadAbajo", throwIfNotFound: true);
         m_Jugador_ModoInvencible = m_Jugador.FindAction("ModoInvencible", throwIfNotFound: true);
         m_Jugador_Pausar = m_Jugador.FindAction("Pausar", throwIfNotFound: true);
+        m_Jugador_InvertirGravedad = m_Jugador.FindAction("InvertirGravedad", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -725,6 +834,7 @@ public partial class @Controles: IInputActionCollection2, IDisposable
     private readonly InputAction m_Jugador_GravedadAbajo;
     private readonly InputAction m_Jugador_ModoInvencible;
     private readonly InputAction m_Jugador_Pausar;
+    private readonly InputAction m_Jugador_InvertirGravedad;
     /// <summary>
     /// Provides access to input actions defined in input action map "Jugador".
     /// </summary>
@@ -756,6 +866,10 @@ public partial class @Controles: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Jugador/Pausar".
         /// </summary>
         public InputAction @Pausar => m_Wrapper.m_Jugador_Pausar;
+        /// <summary>
+        /// Provides access to the underlying input action "Jugador/InvertirGravedad".
+        /// </summary>
+        public InputAction @InvertirGravedad => m_Wrapper.m_Jugador_InvertirGravedad;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -797,6 +911,9 @@ public partial class @Controles: IInputActionCollection2, IDisposable
             @Pausar.started += instance.OnPausar;
             @Pausar.performed += instance.OnPausar;
             @Pausar.canceled += instance.OnPausar;
+            @InvertirGravedad.started += instance.OnInvertirGravedad;
+            @InvertirGravedad.performed += instance.OnInvertirGravedad;
+            @InvertirGravedad.canceled += instance.OnInvertirGravedad;
         }
 
         /// <summary>
@@ -823,6 +940,9 @@ public partial class @Controles: IInputActionCollection2, IDisposable
             @Pausar.started -= instance.OnPausar;
             @Pausar.performed -= instance.OnPausar;
             @Pausar.canceled -= instance.OnPausar;
+            @InvertirGravedad.started -= instance.OnInvertirGravedad;
+            @InvertirGravedad.performed -= instance.OnInvertirGravedad;
+            @InvertirGravedad.canceled -= instance.OnInvertirGravedad;
         }
 
         /// <summary>
@@ -1038,6 +1158,13 @@ public partial class @Controles: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPausar(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "InvertirGravedad" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnInvertirGravedad(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

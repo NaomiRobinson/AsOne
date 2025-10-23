@@ -28,7 +28,7 @@ public class NivelSeleccionado : MonoBehaviour
     public int checkpointID;
 
     private bool puertaBloqueada = false;
-    private bool estabaBloqueadaAntes = true; // para detectar desbloqueo
+    private bool estabaBloqueadaAntes = true;
 
 
     void Start()
@@ -133,7 +133,7 @@ public class NivelSeleccionado : MonoBehaviour
             indAbierto.SetActive(false);
             if (spriteRenderer != null)
             {
-                spriteRenderer.color = new Color(0.149f, 0.737f, 0.655f);
+                spriteRenderer.color = new Color(0.6792453f, 6760413f, 0.6760413f);
             }
         }
         else

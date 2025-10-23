@@ -15,8 +15,8 @@ public class MovimientoJugador : MonoBehaviour
 
     private Rigidbody2D rb;
     private Rigidbody2D rbEspejado;
-    private Animator animatorJugador;
-    private Animator animatorEspejado;
+    public Animator animatorJugador;
+    public Animator animatorEspejado;
 
     private TrailRenderer trail;
     private TrailRenderer trailEspejado;
@@ -26,15 +26,15 @@ public class MovimientoJugador : MonoBehaviour
     [SerializeField] private float velocidadMaximaY = 10f;
     [SerializeField] private float cooldownInversion = 0.25f;
 
-    [SerializeField] private ParticleSystem indicadorArriba;
-    [SerializeField] private ParticleSystem indicadorAbajo;
+    [SerializeField] public ParticleSystem indicadorArriba;
+    [SerializeField] public ParticleSystem indicadorAbajo;
     [SerializeField] private GameObject textoModoInvencible;
 
 
     private float tiempoUltimaInversion = 0f;
     private bool puedeInvertirJugador = true;
     private bool puedeInvertirEspejado = true;
- 
+    private bool inputInvertirGravedad;
 
     private bool inputGravedadArriba, inputGravedadAbajo, inputModoInvencible, inputPausar;
     private Vector2 inputMovimiento;
@@ -60,6 +60,7 @@ public class MovimientoJugador : MonoBehaviour
         controles.Jugador.Moverse.canceled += ctx => inputMovimiento = Vector2.zero;
         controles.Jugador.GravedadArriba.performed += _ => inputGravedadArriba = true;
         controles.Jugador.GravedadAbajo.performed += _ => inputGravedadAbajo = true;
+        controles.Jugador.InvertirGravedad.performed += _ => inputInvertirGravedad = true;
         controles.Jugador.ModoInvencible.performed += _ => inputModoInvencible = true;
         controles.Jugador.Pausar.performed += _ => MenuPausa.Instancia.inputPausar();
     }
@@ -86,6 +87,7 @@ public class MovimientoJugador : MonoBehaviour
 
         trail.emitting = false;
         trailEspejado.emitting = false;
+
     }
 
     void Update()
@@ -124,12 +126,21 @@ public class MovimientoJugador : MonoBehaviour
         animatorJugador.SetFloat("Horizontal", Mathf.Abs(movimiento));
         animatorEspejado.SetFloat("Horizontal", Mathf.Abs(movimiento));
 
-        if ((inputGravedadArriba || inputGravedadAbajo) && Time.time - tiempoUltimaInversion > cooldownInversion)
+        bool puedeInvertirAhora = Time.time - tiempoUltimaInversion > cooldownInversion;
+
+        if (puedeInvertirAhora && (inputGravedadArriba || inputGravedadAbajo || inputInvertirGravedad))
         {
+            bool invertirArriba;
+
+            if (inputInvertirGravedad)
+                invertirArriba = !GravedadInvertida;
+            else
+                invertirArriba = inputGravedadArriba;
+
             if (SoundManager.instancia != null)
                 SoundManager.instancia.ReproducirSonido(SoundManager.instancia.cambiar_gravedad_01, 0.8f);
 
-            StartCoroutine(InvertirGravedadCoroutine(inputGravedadArriba));
+            StartCoroutine(InvertirGravedadCoroutine(invertirArriba));
             tiempoUltimaInversion = Time.time;
         }
 
@@ -140,7 +151,11 @@ public class MovimientoJugador : MonoBehaviour
                 MenuPausa.Instancia.ActualizarTextoInvencible();
         }
 
-        inputGravedadArriba = inputGravedadAbajo = inputModoInvencible = false;
+        // --- LIMPIAR FLAGS DE INPUT ---
+        inputGravedadArriba = false;
+        inputGravedadAbajo = false;
+        inputModoInvencible = false;
+        inputInvertirGravedad = false;
     }
 
     void FixedUpdate()
@@ -168,7 +183,7 @@ public class MovimientoJugador : MonoBehaviour
 
     IEnumerator InvertirGravedadCoroutine(bool invertir)
     {
-        yield return new WaitForSeconds(0.1f); 
+        yield return new WaitForSeconds(0.1f);
 
         float gravedad = invertir ? -1f : 1f;
         int flipY = invertir ? -1 : 1;
@@ -267,35 +282,42 @@ public class MovimientoJugador : MonoBehaviour
 
         if (Gamepad.current != null)
         {
-            if (Gamepad.current.leftStick.ReadValue().magnitude > 0.2f)
-                nuevoEsquema = EsquemaDeControl.WASD;
-            else if (Gamepad.current.rightStick.ReadValue().magnitude > 0.2f)
-                nuevoEsquema = EsquemaDeControl.Flechas;
+            if (Gamepad.current != null)
+            {
+                if (Gamepad.current.leftStick.ReadValue().magnitude > 0.2f ||
+                    Gamepad.current.dpad.up.isPressed || Gamepad.current.dpad.down.isPressed ||
+                    Gamepad.current.dpad.left.isPressed || Gamepad.current.dpad.right.isPressed)
+                {
+                    nuevoEsquema = EsquemaDeControl.WASD;
+                }
+                else if (Gamepad.current.rightStick.ReadValue().magnitude > 0.2f)
+                    nuevoEsquema = EsquemaDeControl.Flechas;
+            }
+
+            if (nuevoEsquema != esquemaActual)
+            {
+                esquemaActual = nuevoEsquema;
+                Debug.Log("Esquema detectado: " + esquemaActual);
+                ActualizarIndicadorVisual();
+            }
         }
 
-        if (nuevoEsquema != esquemaActual)
+        void ActualizarIndicadorVisual()
         {
-            esquemaActual = nuevoEsquema;
-            Debug.Log("Esquema detectado: " + esquemaActual);
-            ActualizarIndicadorVisual();
-        }
-    }
+            if (indicadorArriba == null || indicadorAbajo == null) return;
 
-    void ActualizarIndicadorVisual()
-    {
-        if (indicadorArriba == null || indicadorAbajo == null) return;
-
-        if (esquemaActual == EsquemaDeControl.WASD && (!indicadorArriba.isPlaying || indicadorActual != IndicadorActivo.Arriba))
-        {
-            indicadorAbajo.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-            indicadorArriba.Play();
-            indicadorActual = IndicadorActivo.Arriba;
-        }
-        else if (esquemaActual == EsquemaDeControl.Flechas && (!indicadorAbajo.isPlaying || indicadorActual != IndicadorActivo.Abajo))
-        {
-            indicadorArriba.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-            indicadorAbajo.Play();
-            indicadorActual = IndicadorActivo.Abajo;
+            if (esquemaActual == EsquemaDeControl.WASD && (!indicadorArriba.isPlaying || indicadorActual != IndicadorActivo.Arriba))
+            {
+                indicadorAbajo.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                indicadorArriba.Play();
+                indicadorActual = IndicadorActivo.Arriba;
+            }
+            else if (esquemaActual == EsquemaDeControl.Flechas && (!indicadorAbajo.isPlaying || indicadorActual != IndicadorActivo.Abajo))
+            {
+                indicadorArriba.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                indicadorAbajo.Play();
+                indicadorActual = IndicadorActivo.Abajo;
+            }
         }
     }
 

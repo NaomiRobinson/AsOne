@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using static StaticVariables;
 using Unity.Cinemachine;
 using System.Collections;
+using UnityEngine.Rendering.Universal;
 
 
 public class Salida : MonoBehaviour
@@ -16,10 +17,14 @@ public class Salida : MonoBehaviour
 
     public RecolectarFragmento fragmentoAsociado;
     private static int jugadoresEnSalida = 0;
+    private bool jugadorIzqEnSalida = false;
+    private bool jugadorDerEnSalida = false;
 
     public bool requiereFragmento = false;
 
     private static bool nivelCompletandose = false;
+
+    private static int jugadoresAnimados = 0;
 
     private void Start()
     {
@@ -35,18 +40,13 @@ public class Salida : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject != jugadorAsignado) return;
-        if (nivelCompletandose) return;
+        MovimientoJugador movimiento = MovimientoJugador.Instancia;
 
-        Debug.Log($"[Enter] {jugadorAsignado.name} entró a la salida");
+        if (other.gameObject != jugadorAsignado) return;
 
         if (requiereFragmento && fragmentoAsociado != null && !fragmentoAsociado.juntoFragmento)
         {
-            Debug.Log("Falta el fragmento, puerta cerrada.");
-
-            if (popupFaltaFragmento != null)
-                popupFaltaFragmento.SetActive(true);
-
+            if (popupFaltaFragmento != null) popupFaltaFragmento.SetActive(true);
             return;
         }
 
@@ -55,16 +55,11 @@ public class Salida : MonoBehaviour
 
         jugadoresEnSalida++;
 
-        if (jugadoresEnSalida == 1)
-        {
+        if (jugadoresEnSalida == 1 && popupFaltaJugador != null)
             StartCoroutine(MostrarPopupFaltaJugadorConRetraso());
 
-        }
-
-        if (jugadoresEnSalida == 2)
-        {
-            StartCoroutine(DesactivarPopupsYCambiarNivel());
-        }
+        if (jugadoresEnSalida == 2 && !nivelCompletandose)
+            StartCoroutine(AnimacionPortalAmbos());
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -74,15 +69,13 @@ public class Salida : MonoBehaviour
 
         if (other.gameObject != jugadorAsignado) return;
 
-        Debug.Log($"[Exit] {jugadorAsignado.name} salió de la salida");
-
         if (jugadoresEnSalida > 0)
             jugadoresEnSalida--;
 
-        if (popupFaltaJugador != null)
-            popupFaltaJugador.SetActive(false);
-        if (popupFaltaFragmento != null)
-            popupFaltaFragmento.SetActive(false);
+        if (popupFaltaJugador != null) popupFaltaJugador.SetActive(false);
+        if (popupFaltaFragmento != null) popupFaltaFragmento.SetActive(false);
+
+        Debug.Log($"[Exit] {other.gameObject.name} salió de la salida");
     }
 
 
@@ -91,52 +84,80 @@ public class Salida : MonoBehaviour
         int nivelActual = SceneManager.GetActiveScene().buildIndex;
         int siguiente;
 
-        Debug.Log("Ambos jugadores están en sus salidas");
-        Debug.Log("Completo un nivel");
-
         if (nivelActual == LevelManager.Instance.nivelTutorial)
-        {
             siguiente = LevelManager.Instance.SeleccionNiveles;
-        }
         else if (LevelManager.Instance.EsUltimoNivel(nivelActual))
         {
-            Debug.Log("¡Es el último nivel del grupo!");
-
             LevelManager.Instance.MarcarGrupoCompletado();
-            Debug.Log("Grupo desbloqueado tras completar: " + LevelManager.Instance.grupoDesbloqueado);
-
             siguiente = LevelManager.Instance.SeleccionNiveles;
         }
         else
-        {
             siguiente = LevelManager.Instance.ObtenerSiguienteNivel(nivelActual);
-        }
 
         TransicionEscena.Instance.Disolversalida(siguiente);
     }
 
 
-    private IEnumerator DesactivarPopupsYCambiarNivel()
+    private IEnumerator AnimacionPortalAmbos()
     {
         nivelCompletandose = true;
+
         if (popupFaltaJugador != null) popupFaltaJugador.SetActive(false);
         if (popupFaltaFragmento != null) popupFaltaFragmento.SetActive(false);
-        yield return new WaitForSeconds(0.5f);
-        SoundManager.instancia.ReproducirSonido(SoundManager.instancia.portal_atravesarlo);
-        PasarNivel();
+
+
+
+        yield return new WaitForSeconds(0.2f);
+
+
+        MovimientoJugador movimiento = MovimientoJugador.Instancia;
+
+        if (movimiento.indicadorArriba != null)
+            movimiento.indicadorArriba.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        if (movimiento.indicadorAbajo != null)
+            movimiento.indicadorAbajo.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
+        foreach (var luz in movimiento.jugadorIzq.GetComponentsInChildren<Light2D>())
+            luz.enabled = false;
+        foreach (var luz in movimiento.jugadorDer.GetComponentsInChildren<Light2D>())
+            luz.enabled = false;
+
+
+        movimiento.puedeMoverse = false;
+
+        float duracionAnim = 1f;
+
+        AnimarJugador(movimiento.jugadorIzq, duracionAnim);
+        AnimarJugador(movimiento.jugadorDer, duracionAnim);
+
+        yield return new WaitForSeconds(duracionAnim);
+
+        jugadoresAnimados = 2;
+
+        if (jugadoresAnimados == 2)
+            PasarNivel();
+    }
+    private void AnimarJugador(GameObject jugador, float duracion)
+    {
+        Vector3 destino = jugador.transform.position;
+        destino.z = jugador.transform.position.z;
+
+        LeanTween.move(jugador, destino, duracion).setEase(LeanTweenType.easeInQuad);
+        LeanTween.rotateZ(jugador, 360f, duracion);
+        LeanTween.scale(jugador, Vector3.zero, duracion);
+
+        if (SoundManager.instancia != null)
+            SoundManager.instancia.ReproducirSonido(SoundManager.instancia.portal_atravesarlo);
     }
 
     private IEnumerator MostrarPopupFaltaJugadorConRetraso()
     {
         yield return new WaitForSeconds(0.3f);
-
         if (nivelCompletandose) yield break;
-        if (jugadoresEnSalida == 1 && popupFaltaJugador != null)
+
+        if ((jugadorIzqEnSalida ^ jugadorDerEnSalida) && popupFaltaJugador != null)
             popupFaltaJugador.SetActive(true);
     }
-
-
-
 
 
 }
