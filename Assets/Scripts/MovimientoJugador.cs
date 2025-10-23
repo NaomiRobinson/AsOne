@@ -15,8 +15,8 @@ public class MovimientoJugador : MonoBehaviour
 
     private Rigidbody2D rb;
     private Rigidbody2D rbEspejado;
-    private Animator animatorJugador;
-    private Animator animatorEspejado;
+    public Animator animatorJugador;
+    public Animator animatorEspejado;
 
     private TrailRenderer trail;
     private TrailRenderer trailEspejado;
