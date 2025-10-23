@@ -127,7 +127,7 @@ public class MovimientoJugador : MonoBehaviour
         if ((inputGravedadArriba || inputGravedadAbajo) && Time.time - tiempoUltimaInversion > cooldownInversion)
         {
             if (SoundManager.instancia != null)
-                SoundManager.instancia.ReproducirSonido(SoundManager.instancia.cambiar_gravedad_01);
+                SoundManager.instancia.ReproducirSonido(SoundManager.instancia.cambiar_gravedad_01, 0.8f);
 
             StartCoroutine(InvertirGravedadCoroutine(inputGravedadArriba));
             tiempoUltimaInversion = Time.time;
@@ -181,6 +181,11 @@ public class MovimientoJugador : MonoBehaviour
             animatorJugador.ResetTrigger("stretch");
             animatorJugador.SetTrigger("stretch"); // jugador izquierdo
         }
+        else
+        {              
+                SoundManager.instancia.ReproducirSonido(SoundManager.instancia.cambiar_gravedad_03);           
+        }
+
 
         if (puedeInvertirEspejado)
         {
@@ -189,6 +194,10 @@ public class MovimientoJugador : MonoBehaviour
             SetFlipY(jugadorDer, flipY);
             animatorEspejado.ResetTrigger("stretch"); // CORRECTO: usar animatorEspejado
             animatorEspejado.SetTrigger("stretch");   // CORRECTO: jugador derecho
+        }
+        else
+        {
+            SoundManager.instancia.ReproducirSonido(SoundManager.instancia.cambiar_gravedad_03);
         }
 
         esperandoSquash = true;
@@ -296,11 +305,12 @@ public class MovimientoJugador : MonoBehaviour
             puedeInvertirJugador = estado;
         else if (jugador == Jugador.Der)
             puedeInvertirEspejado = estado;
-
+/*
         if (!estado && SoundManager.instancia != null)
         {
-            SoundManager.instancia.ReproducirSonido(SoundManager.instancia.cambiar_gravedad_02);
+            SoundManager.instancia.ReproducirSonido(SoundManager.instancia.cambiar_gravedad_03);
         }
+*/
     }
 
     private IEnumerator DesactivarTrail(TrailRenderer trail, float delay)
