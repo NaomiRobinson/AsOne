@@ -111,7 +111,11 @@ public class SoundManager : MonoBehaviour
         {
             clipAUsar = musicaMenu;
         }
-        else
+        else if (nombreEscena == "Cinematica" || nombreEscena == "Cinematica Finla")
+        {
+            clipAUsar = musicaCinematica
+        }
+        else                           
         {
             switch (LevelManager.Instance.grupoActual)
             {
