@@ -88,6 +88,9 @@ public class MovimientoJugador : MonoBehaviour
         trail.emitting = false;
         trailEspejado.emitting = false;
 
+        esquemaActual = EsquemaDeControl.WASD;
+    ActualizarIndicadorVisual();
+
     }
 
     void Update()
@@ -197,8 +200,8 @@ public class MovimientoJugador : MonoBehaviour
             animatorJugador.SetTrigger("stretch"); // jugador izquierdo
         }
         else
-        {              
-                SoundManager.instancia.ReproducirSonido(SoundManager.instancia.cambiar_gravedad_03);           
+        {
+            SoundManager.instancia.ReproducirSonido(SoundManager.instancia.cambiar_gravedad_03);
         }
 
 
@@ -268,8 +271,9 @@ public class MovimientoJugador : MonoBehaviour
 
     void DetectarEsquemaControl()
     {
-        var nuevoEsquema = esquemaActual;
+        EsquemaDeControl nuevoEsquema = esquemaActual;
 
+        // --- Teclado ---
         if (Keyboard.current != null)
         {
             if (Keyboard.current.wKey.isPressed || Keyboard.current.aKey.isPressed ||
@@ -280,46 +284,48 @@ public class MovimientoJugador : MonoBehaviour
                 nuevoEsquema = EsquemaDeControl.Flechas;
         }
 
+        // --- Gamepad ---
         if (Gamepad.current != null)
         {
-            if (Gamepad.current != null)
-            {
-                if (Gamepad.current.leftStick.ReadValue().magnitude > 0.2f ||
-                    Gamepad.current.dpad.up.isPressed || Gamepad.current.dpad.down.isPressed ||
-                    Gamepad.current.dpad.left.isPressed || Gamepad.current.dpad.right.isPressed)
-                {
-                    nuevoEsquema = EsquemaDeControl.WASD;
-                }
-                else if (Gamepad.current.rightStick.ReadValue().magnitude > 0.2f)
-                    nuevoEsquema = EsquemaDeControl.Flechas;
-            }
+            Vector2 leftStick = Gamepad.current.leftStick.ReadValue();
+            Vector2 rightStick = Gamepad.current.rightStick.ReadValue();
 
-            if (nuevoEsquema != esquemaActual)
-            {
-                esquemaActual = nuevoEsquema;
-                Debug.Log("Esquema detectado: " + esquemaActual);
-                ActualizarIndicadorVisual();
-            }
+            // Sticks actúan como WASD / Flechas
+            if (leftStick.magnitude > 0.2f)
+                nuevoEsquema = EsquemaDeControl.WASD;
+            else if (rightStick.magnitude > 0.2f)
+                nuevoEsquema = EsquemaDeControl.Flechas;
+
+            // Ignorar D-pad para esquema, solo usarlo como input de movimiento
         }
 
-        void ActualizarIndicadorVisual()
+        // --- Actualizar esquema si cambió ---
+        if (nuevoEsquema != esquemaActual)
         {
-            if (indicadorArriba == null || indicadorAbajo == null) return;
-
-            if (esquemaActual == EsquemaDeControl.WASD && (!indicadorArriba.isPlaying || indicadorActual != IndicadorActivo.Arriba))
-            {
-                indicadorAbajo.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-                indicadorArriba.Play();
-                indicadorActual = IndicadorActivo.Arriba;
-            }
-            else if (esquemaActual == EsquemaDeControl.Flechas && (!indicadorAbajo.isPlaying || indicadorActual != IndicadorActivo.Abajo))
-            {
-                indicadorArriba.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-                indicadorAbajo.Play();
-                indicadorActual = IndicadorActivo.Abajo;
-            }
+            esquemaActual = nuevoEsquema;
+            ActualizarIndicadorVisual();
+            Debug.Log("Esquema detectado: " + esquemaActual);
         }
     }
+
+    void ActualizarIndicadorVisual()
+    {
+        if (indicadorArriba == null || indicadorAbajo == null) return;
+
+        if (esquemaActual == EsquemaDeControl.WASD && (!indicadorArriba.isPlaying || indicadorActual != IndicadorActivo.Arriba))
+        {
+            indicadorAbajo.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            indicadorArriba.Play();
+            indicadorActual = IndicadorActivo.Arriba;
+        }
+        else if (esquemaActual == EsquemaDeControl.Flechas && (!indicadorAbajo.isPlaying || indicadorActual != IndicadorActivo.Abajo))
+        {
+            indicadorArriba.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            indicadorAbajo.Play();
+            indicadorActual = IndicadorActivo.Abajo;
+        }
+    }
+
 
     public void PuedeInvertir(Jugador jugador, bool estado)
     {
@@ -327,12 +333,12 @@ public class MovimientoJugador : MonoBehaviour
             puedeInvertirJugador = estado;
         else if (jugador == Jugador.Der)
             puedeInvertirEspejado = estado;
-/*
-        if (!estado && SoundManager.instancia != null)
-        {
-            SoundManager.instancia.ReproducirSonido(SoundManager.instancia.cambiar_gravedad_03);
-        }
-*/
+        /*
+                if (!estado && SoundManager.instancia != null)
+                {
+                    SoundManager.instancia.ReproducirSonido(SoundManager.instancia.cambiar_gravedad_03);
+                }
+        */
     }
 
     private IEnumerator DesactivarTrail(TrailRenderer trail, float delay)
@@ -340,8 +346,6 @@ public class MovimientoJugador : MonoBehaviour
         yield return new WaitForSeconds(delay);
         trail.emitting = false;
     }
-
-
 
 
 }

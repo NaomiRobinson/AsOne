@@ -133,7 +133,7 @@ public class NivelSeleccionado : MonoBehaviour
             indAbierto.SetActive(false);
             if (spriteRenderer != null)
             {
-                spriteRenderer.color = new Color(0.6792453f, 6760413f, 0.6760413f);
+                spriteRenderer.color = new Color(0.6792453f, 0.6760413f, 0.6760413f);
             }
         }
         else
