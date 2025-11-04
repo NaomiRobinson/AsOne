@@ -23,7 +23,7 @@ public class Final : MonoBehaviour
             jugadorDerDentro = true;
 
         // Cuando ambos están dentro y aún no se activó
-        if (jugadorIzqDentro && jugadorDerDentro && !activado)
+        if (jugadorIzqDentro || jugadorDerDentro || !activado)
         {
             activado = true;
             StartCoroutine(ProcesoFinal());

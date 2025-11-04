@@ -1615,7 +1615,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicaMenu: {fileID: 8300000, guid: 90c3df531786c894cb9d8ebb4e2f7f62, type: 3}
-  musicaJuego: {fileID: 8300000, guid: ba5db7afbd55bfe46a996cc691935fad, type: 3}
+  musicaGrupo1: {fileID: 0}
+  musicaGrupo2: {fileID: 0}
+  musicaGrupo3: {fileID: 0}
+  musicaGrupo4: {fileID: 0}
+  musicaCinematica: {fileID: 0}
+  musicaCinematicaFinal: {fileID: 0}
   botonSonido: {fileID: 0}
   iconoSonidoOn: {fileID: 4840934775598319947, guid: 5c29e424c113593489f48ca2daae800e, type: 3}
   iconoSonidoOff: {fileID: 7908075426004432792, guid: c6e74e69df0a51e4e80e2fea81e2e7fd, type: 3}
@@ -1638,6 +1643,7 @@ MonoBehaviour:
   contador: {fileID: 0}
   portal_activandose: {fileID: 0}
   portal_viajando: {fileID: 0}
+  gema_sensor: {fileID: 0}
 --- !u!82 &297162661
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1873,7 +1879,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.063106775, y: 1.1674438}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1883,7 +1889,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.26, y: 2.91}
+  m_Size: {x: 7.5511413, y: 5.2448874}
   m_EdgeRadius: 0
 --- !u!114 &330745164
 MonoBehaviour:
@@ -3658,7 +3664,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.07517815, y: 1.0739608}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3668,7 +3674,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.26, y: 2.91}
+  m_Size: {x: 7.3625374, y: 5.0579214}
   m_EdgeRadius: 0
 --- !u!1 &679706478
 GameObject:
@@ -38890,7 +38896,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.18931603, y: 1.0570092}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -38900,7 +38906,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.26, y: 2.91}
+  m_Size: {x: 7.6142526, y: 5.0240183}
   m_EdgeRadius: 0
 --- !u!1 &798614724
 GameObject:
@@ -39043,7 +39049,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.053692818, y: 1.1384001}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -39053,7 +39059,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.26, y: 2.91}
+  m_Size: {x: 7.5773335, y: 5.1868}
   m_EdgeRadius: 0
 --- !u!1001 &802494415
 PrefabInstance:
@@ -60171,7 +60177,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.042959213, y: 1.0847006}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -60181,7 +60187,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.26, y: 2.91}
+  m_Size: {x: 7.384014, y: 5.079401}
   m_EdgeRadius: 0
 --- !u!1 &981044950
 GameObject:
@@ -61322,7 +61328,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.107393265, y: 1.1169195}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -61332,7 +61338,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.26, y: 2.91}
+  m_Size: {x: 7.555847, y: 5.143839}
   m_EdgeRadius: 0
 --- !u!1001 &1163942556
 PrefabInstance:
@@ -61709,7 +61715,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.05012846, y: 1.152945}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -61719,7 +61725,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.26, y: 2.91}
+  m_Size: {x: 7.671275, y: 5.21589}
   m_EdgeRadius: 0
 --- !u!1001 &1228556338
 PrefabInstance:
@@ -62421,7 +62427,7 @@ Tilemap:
       - {fileID: -302083178, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: 1011259967, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: -117324836, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
-      m_AnimationSpeed: 7.923969
+      m_AnimationSpeed: 7.379732
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -12, y: -14, z: 0}
@@ -62488,7 +62494,7 @@ Tilemap:
       - {fileID: -302083178, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: 1011259967, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: -117324836, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
-      m_AnimationSpeed: 9.644581
+      m_AnimationSpeed: 7.2180634
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -15, y: -13, z: 0}
@@ -62555,7 +62561,7 @@ Tilemap:
       - {fileID: -302083178, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: 1011259967, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: -117324836, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
-      m_AnimationSpeed: 5.9206357
+      m_AnimationSpeed: 8.967701
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -12, y: -13, z: 0}
@@ -62622,7 +62628,7 @@ Tilemap:
       - {fileID: -302083178, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: 1011259967, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: -117324836, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
-      m_AnimationSpeed: 7.6566205
+      m_AnimationSpeed: 5.465444
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -15, y: -12, z: 0}
@@ -62689,7 +62695,7 @@ Tilemap:
       - {fileID: -302083178, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: 1011259967, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: -117324836, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
-      m_AnimationSpeed: 8.1020775
+      m_AnimationSpeed: 8.770769
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -12, y: -12, z: 0}
@@ -62756,7 +62762,7 @@ Tilemap:
       - {fileID: -302083178, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: 1011259967, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: -117324836, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
-      m_AnimationSpeed: 5.4127765
+      m_AnimationSpeed: 6.261112
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -15, y: -11, z: 0}
@@ -62823,7 +62829,7 @@ Tilemap:
       - {fileID: -302083178, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: 1011259967, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: -117324836, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
-      m_AnimationSpeed: 7.7675924
+      m_AnimationSpeed: 8.981826
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -12, y: -11, z: 0}
@@ -62890,7 +62896,7 @@ Tilemap:
       - {fileID: -302083178, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: 1011259967, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: -117324836, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
-      m_AnimationSpeed: 8.104721
+      m_AnimationSpeed: 7.321709
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -15, y: -10, z: 0}
@@ -62957,7 +62963,7 @@ Tilemap:
       - {fileID: -302083178, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: 1011259967, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: -117324836, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
-      m_AnimationSpeed: 8.701165
+      m_AnimationSpeed: 8.052488
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -12, y: -10, z: 0}
@@ -63024,7 +63030,7 @@ Tilemap:
       - {fileID: -302083178, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: 1011259967, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: -117324836, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
-      m_AnimationSpeed: 8.937275
+      m_AnimationSpeed: 7.543233
       m_AnimationTimeOffset: 0
       m_Flags: 0
   m_TileAssetArray:
@@ -67757,7 +67763,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.025064707, y: 1.1529458}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -67767,7 +67773,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.26, y: 2.91}
+  m_Size: {x: 7.6211476, y: 5.2158914}
   m_EdgeRadius: 0
 --- !u!1001 &1444253499
 PrefabInstance:
@@ -69599,6 +69605,8 @@ MonoBehaviour:
   jugadorIzq: {fileID: 1582898233}
   jugadorDer: {fileID: 430326079}
   PanelDePausa: {fileID: 0}
+  animatorJugador: {fileID: 0}
+  animatorEspejado: {fileID: 0}
   velocidadX: 4
   velocidadMaximaY: 10
   cooldownInversion: 0.45
@@ -69836,7 +69844,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5603365124969246766, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1582898239}
   m_SourcePrefab: {fileID: 100100000, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
 --- !u!198 &1833412295 stripped
 ParticleSystem:
