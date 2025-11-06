@@ -1151,7 +1151,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicaMenu: {fileID: 8300000, guid: 90c3df531786c894cb9d8ebb4e2f7f62, type: 3}
-  musicaJuego: {fileID: 8300000, guid: ba5db7afbd55bfe46a996cc691935fad, type: 3}
+  musicaGrupo1: {fileID: 0}
+  musicaGrupo2: {fileID: 0}
+  musicaGrupo3: {fileID: 0}
+  musicaGrupo4: {fileID: 0}
+  musicaCinematica: {fileID: 0}
+  musicaCinematicaFinal: {fileID: 0}
   botonSonido: {fileID: 0}
   iconoSonidoOn: {fileID: 4840934775598319947, guid: 5c29e424c113593489f48ca2daae800e, type: 3}
   iconoSonidoOff: {fileID: 7908075426004432792, guid: c6e74e69df0a51e4e80e2fea81e2e7fd, type: 3}
@@ -1171,6 +1176,10 @@ MonoBehaviour:
   mecanismo_palanca: {fileID: 0}
   portal_atravesarlo: {fileID: 0}
   trampa_caer: {fileID: 0}
+  contador: {fileID: 0}
+  portal_activandose: {fileID: 0}
+  portal_viajando: {fileID: 0}
+  gema_sensor: {fileID: 0}
 --- !u!82 &297162661
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1803,7 +1812,7 @@ Tilemap:
       - {fileID: -302083178, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: 1011259967, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: -117324836, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
-      m_AnimationSpeed: 7.0808477
+      m_AnimationSpeed: 5.2423162
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 57, y: -28, z: 0}
@@ -1870,7 +1879,7 @@ Tilemap:
       - {fileID: -302083178, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: 1011259967, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: -117324836, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
-      m_AnimationSpeed: 7.3233814
+      m_AnimationSpeed: 9.017668
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 57, y: -27, z: 0}
@@ -1937,7 +1946,7 @@ Tilemap:
       - {fileID: -302083178, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: 1011259967, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: -117324836, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
-      m_AnimationSpeed: 9.1872015
+      m_AnimationSpeed: 6.084605
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 57, y: -26, z: 0}
@@ -2004,7 +2013,7 @@ Tilemap:
       - {fileID: -302083178, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: 1011259967, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: -117324836, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
-      m_AnimationSpeed: 6.4587326
+      m_AnimationSpeed: 9.515334
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 57, y: -25, z: 0}
@@ -2071,7 +2080,7 @@ Tilemap:
       - {fileID: -302083178, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: 1011259967, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
       - {fileID: -117324836, guid: a281bfbac5f3ccc4886c793c221e0cc3, type: 3}
-      m_AnimationSpeed: 8.235993
+      m_AnimationSpeed: 5.873908
       m_AnimationTimeOffset: 0
       m_Flags: 0
   m_TileAssetArray:
@@ -2998,7 +3007,7 @@ PrefabInstance:
     - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: popupFaltaJugador
       value: 
-      objectReference: {fileID: 2005900477}
+      objectReference: {fileID: 696546175}
     - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: requiereFragmento
       value: 1
@@ -3006,7 +3015,11 @@ PrefabInstance:
     - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: popupFaltaFragmento
       value: 
-      objectReference: {fileID: 2005900478}
+      objectReference: {fileID: 696546176}
+    - target: {fileID: 6902246738778250394, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 4938417089214850493, guid: 5d142d99e2d5a324d9fa595cadff457b, type: 3}
     - target: {fileID: 8381649785619027962, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: m_Name
       value: Puerta
@@ -3016,6 +3029,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+--- !u!1 &696546175 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7494525474594675809, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+  m_PrefabInstance: {fileID: 696546174}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &696546176 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2817757917926763152, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+  m_PrefabInstance: {fileID: 696546174}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &757296475
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82761,6 +82784,8 @@ MonoBehaviour:
   jugadorIzq: {fileID: 1582898233}
   jugadorDer: {fileID: 430326079}
   PanelDePausa: {fileID: 0}
+  animatorJugador: {fileID: 0}
+  animatorEspejado: {fileID: 0}
   velocidadX: 4
   velocidadMaximaY: 10
   cooldownInversion: 0.45
@@ -83068,7 +83093,11 @@ PrefabInstance:
     - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: popupFaltaJugador
       value: 
-      objectReference: {fileID: 1833412296}
+      objectReference: {fileID: 1772287394}
+    - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+      propertyPath: popupFaltaFragmento
+      value: 
+      objectReference: {fileID: 1772287395}
     - target: {fileID: 8381649785619027962, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: m_Name
       value: Puerta Izq
@@ -83078,6 +83107,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+--- !u!1 &1772287394 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7494525474594675809, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+  m_PrefabInstance: {fileID: 1772287393}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1772287395 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2817757917926763152, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+  m_PrefabInstance: {fileID: 1772287393}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1775178770
 GameObject:
   m_ObjectHideFlags: 0
@@ -83444,11 +83483,6 @@ PrefabInstance:
 --- !u!198 &1833412295 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 7981907068824147355, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
-  m_PrefabInstance: {fileID: 1833412294}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1833412296 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7607089780468000887, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
   m_PrefabInstance: {fileID: 1833412294}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1834828091
@@ -84236,16 +84270,6 @@ ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 3102961608335823829, guid: e085413049cdd354383103d7e69a3668, type: 3}
   m_PrefabInstance: {fileID: 2005900475}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2005900477 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6462744968861033694, guid: e085413049cdd354383103d7e69a3668, type: 3}
-  m_PrefabInstance: {fileID: 2005900475}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2005900478 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9184717854388333174, guid: e085413049cdd354383103d7e69a3668, type: 3}
-  m_PrefabInstance: {fileID: 2005900475}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2007871674
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -84563,7 +84587,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5322303061146768634, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -35.803963
+      value: -35.80062
       objectReference: {fileID: 0}
     - target: {fileID: 5322303061146768634, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
       propertyPath: m_LocalPosition.y

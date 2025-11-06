@@ -4174,11 +4174,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5603365124969246766, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
   m_PrefabInstance: {fileID: 252812880}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &254327198 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7607089780468000887, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
-  m_PrefabInstance: {fileID: 252812880}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &358602916 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2423661396787756412, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
@@ -4960,11 +4955,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5911614825838371142, guid: e085413049cdd354383103d7e69a3668, type: 3}
   m_PrefabInstance: {fileID: 1318824665}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1318824667 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9184717854388333174, guid: e085413049cdd354383103d7e69a3668, type: 3}
-  m_PrefabInstance: {fileID: 1318824665}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1341103545 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8353208340778544931, guid: 9334d2ec07b03e948b96ca0fa5dab683, type: 3}
@@ -4976,11 +4966,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1414391214 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6462744968861033694, guid: e085413049cdd354383103d7e69a3668, type: 3}
-  m_PrefabInstance: {fileID: 1318824665}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1421636972
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5471,7 +5456,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicaMenu: {fileID: 8300000, guid: 90c3df531786c894cb9d8ebb4e2f7f62, type: 3}
-  musicaJuego: {fileID: 8300000, guid: ba5db7afbd55bfe46a996cc691935fad, type: 3}
+  musicaGrupo1: {fileID: 0}
+  musicaGrupo2: {fileID: 0}
+  musicaGrupo3: {fileID: 0}
+  musicaGrupo4: {fileID: 0}
+  musicaCinematica: {fileID: 0}
+  musicaCinematicaFinal: {fileID: 0}
   botonSonido: {fileID: 0}
   iconoSonidoOn: {fileID: 21300000, guid: 064f9b6e237007f428abecb57ac236d2, type: 3}
   iconoSonidoOff: {fileID: -9195736181805555077, guid: 6d35a5f148b6dc044b2a984ebf503c8f, type: 3}
@@ -5491,6 +5481,10 @@ MonoBehaviour:
   mecanismo_palanca: {fileID: 0}
   portal_atravesarlo: {fileID: 0}
   trampa_caer: {fileID: 0}
+  contador: {fileID: 0}
+  portal_activandose: {fileID: 0}
+  portal_viajando: {fileID: 0}
+  gema_sensor: {fileID: 0}
 --- !u!4 &1527145314
 Transform:
   m_ObjectHideFlags: 0
@@ -5706,11 +5700,15 @@ PrefabInstance:
     - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: popupFaltaJugador
       value: 
-      objectReference: {fileID: 254327198}
+      objectReference: {fileID: 1574469671}
     - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: requiereFragmento
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+      propertyPath: popupFaltaFragmento
+      value: 
+      objectReference: {fileID: 1574469672}
     - target: {fileID: 8381649785619027962, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: m_Name
       value: PuertaIzq
@@ -5720,6 +5718,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+--- !u!1 &1574469671 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7494525474594675809, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+  m_PrefabInstance: {fileID: 1574469670}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1574469672 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2817757917926763152, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+  m_PrefabInstance: {fileID: 1574469670}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1598077822
 GameObject:
   m_ObjectHideFlags: 0
@@ -14028,7 +14036,7 @@ PrefabInstance:
     - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: popupFaltaJugador
       value: 
-      objectReference: {fileID: 1414391214}
+      objectReference: {fileID: 1970274093}
     - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: requiereFragmento
       value: 1
@@ -14036,7 +14044,11 @@ PrefabInstance:
     - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: popupFaltaFragmento
       value: 
-      objectReference: {fileID: 1318824667}
+      objectReference: {fileID: 1970274094}
+    - target: {fileID: 6902246738778250394, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 4938417089214850493, guid: 5d142d99e2d5a324d9fa595cadff457b, type: 3}
     - target: {fileID: 8381649785619027962, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: m_Name
       value: PuertaDer
@@ -14046,6 +14058,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+--- !u!1 &1970274093 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7494525474594675809, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+  m_PrefabInstance: {fileID: 1970274092}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1970274094 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2817757917926763152, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+  m_PrefabInstance: {fileID: 1970274092}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2026348531
 GameObject:
   m_ObjectHideFlags: 0

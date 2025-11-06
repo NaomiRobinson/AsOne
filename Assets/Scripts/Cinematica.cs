@@ -21,7 +21,7 @@ public class Cinematica : MonoBehaviour
         {
             AudioSource audioSource = SoundManager.instancia.GetComponent<AudioSource>();
             audioSource.clip = SoundManager.instancia.musicaCinematica;
-            audioSource.loop = false; // o true si querés que se repita durante toda la cinemática
+            audioSource.loop = false;
             audioSource.mute = false;
             audioSource.Play();
         }
@@ -36,7 +36,7 @@ public class Cinematica : MonoBehaviour
         videoPlayer.Prepare();
         videoPlayer.prepareCompleted += (source) =>
         {
-            videoPlayer.playbackSpeed = 0.5f;
+
             videoPlayer.Play();
         };
 

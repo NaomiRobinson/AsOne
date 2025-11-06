@@ -33527,16 +33527,30 @@ PrefabInstance:
     - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: popupFaltaJugador
       value: 
-      objectReference: {fileID: 4802588376437909788}
+      objectReference: {fileID: 233865340}
+    - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+      propertyPath: popupFaltaFragmento
+      value: 
+      objectReference: {fileID: 233865341}
     - target: {fileID: 8381649785619027962, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: m_Name
-      value: Puerta (2)
+      value: PuertaIzq
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+--- !u!1 &233865340 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7494525474594675809, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+  m_PrefabInstance: {fileID: 233865339}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &233865341 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2817757917926763152, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+  m_PrefabInstance: {fileID: 233865339}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &240636831 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 60835700721293187, guid: 2a8f9454e81bd984a87ae51e69f906a7, type: 3}
@@ -53474,6 +53488,7 @@ MonoBehaviour:
   contador: {fileID: 0}
   portal_activandose: {fileID: 0}
   portal_viajando: {fileID: 0}
+  gema_sensor: {fileID: 0}
 --- !u!82 &1123556149
 AudioSource:
   m_ObjectHideFlags: 0
@@ -55604,7 +55619,7 @@ PrefabInstance:
     - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: popupFaltaJugador
       value: 
-      objectReference: {fileID: 3288987556766156352}
+      objectReference: {fileID: 1941427274}
     - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: requiereFragmento
       value: 1
@@ -55612,7 +55627,11 @@ PrefabInstance:
     - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: popupFaltaFragmento
       value: 
-      objectReference: {fileID: 3288987556766156353}
+      objectReference: {fileID: 1941427275}
+    - target: {fileID: 6902246738778250394, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 4938417089214850493, guid: 5d142d99e2d5a324d9fa595cadff457b, type: 3}
     - target: {fileID: 8381649785619027962, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: m_Name
       value: PuertaDer
@@ -55622,6 +55641,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+--- !u!1 &1941427274 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7494525474594675809, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+  m_PrefabInstance: {fileID: 1941427273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1941427275 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2817757917926763152, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+  m_PrefabInstance: {fileID: 1941427273}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1954540214
 GameObject:
   m_ObjectHideFlags: 0
@@ -56195,16 +56224,6 @@ ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 3102961608335823829, guid: e085413049cdd354383103d7e69a3668, type: 3}
   m_PrefabInstance: {fileID: 3288987556766156350}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &3288987556766156352 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6462744968861033694, guid: e085413049cdd354383103d7e69a3668, type: 3}
-  m_PrefabInstance: {fileID: 3288987556766156350}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3288987556766156353 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9184717854388333174, guid: e085413049cdd354383103d7e69a3668, type: 3}
-  m_PrefabInstance: {fileID: 3288987556766156350}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4802588376437909786
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56273,11 +56292,6 @@ PrefabInstance:
 --- !u!198 &4802588376437909787 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 7981907068824147355, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
-  m_PrefabInstance: {fileID: 4802588376437909786}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4802588376437909788 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7607089780468000887, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
   m_PrefabInstance: {fileID: 4802588376437909786}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7499410428721999076

@@ -452,7 +452,7 @@ PrefabInstance:
     - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: popupFaltaJugador
       value: 
-      objectReference: {fileID: 2005900477}
+      objectReference: {fileID: 133482496}
     - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: requiereFragmento
       value: 1
@@ -460,7 +460,11 @@ PrefabInstance:
     - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: popupFaltaFragmento
       value: 
-      objectReference: {fileID: 2005900478}
+      objectReference: {fileID: 133482497}
+    - target: {fileID: 6902246738778250394, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 4938417089214850493, guid: 5d142d99e2d5a324d9fa595cadff457b, type: 3}
     - target: {fileID: 8381649785619027962, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: m_Name
       value: PuertaDer
@@ -473,6 +477,16 @@ PrefabInstance:
 --- !u!1 &133482495 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8381649785619027962, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+  m_PrefabInstance: {fileID: 133482494}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &133482496 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7494525474594675809, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+  m_PrefabInstance: {fileID: 133482494}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &133482497 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2817757917926763152, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
   m_PrefabInstance: {fileID: 133482494}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &168362530
@@ -6378,7 +6392,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 151
-      m_TileSpriteIndex: 187
+      m_TileSpriteIndex: 189
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -7588,7 +7602,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 179
-      m_TileSpriteIndex: 179
+      m_TileSpriteIndex: 187
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -14691,8 +14705,8 @@ Tilemap:
     m_Data: {fileID: 1100500468, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: 757213666, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 1498062249, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 6
     m_Data: {fileID: 197955006, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
   - m_RefCount: 15
@@ -14708,11 +14722,11 @@ Tilemap:
   - m_RefCount: 6
     m_Data: {fileID: -496895557, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: -403605838, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
+    m_Data: {fileID: 1498062249, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
   - m_RefCount: 3
     m_Data: {fileID: -329089541, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -403605838, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -234760786, guid: 4569613fb7d2d9e43846c55c9fbf721b, type: 3}
   - m_RefCount: 1
@@ -16875,7 +16889,11 @@ PrefabInstance:
     - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: popupFaltaJugador
       value: 
-      objectReference: {fileID: 1833412296}
+      objectReference: {fileID: 854416464}
+    - target: {fileID: 6175321541845095007, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+      propertyPath: popupFaltaFragmento
+      value: 
+      objectReference: {fileID: 854416465}
     - target: {fileID: 8381649785619027962, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
       propertyPath: m_Name
       value: Puerta (1)
@@ -16885,6 +16903,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+--- !u!1 &854416464 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7494525474594675809, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+  m_PrefabInstance: {fileID: 854416463}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &854416465 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2817757917926763152, guid: 1fc8f4a0f8e97234cb1af20db5081d5b, type: 3}
+  m_PrefabInstance: {fileID: 854416463}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &921466801
 GameObject:
   m_ObjectHideFlags: 0
@@ -20920,6 +20948,7 @@ MonoBehaviour:
   contador: {fileID: 0}
   portal_activandose: {fileID: 0}
   portal_viajando: {fileID: 0}
+  gema_sensor: {fileID: 0}
 --- !u!82 &1151338635
 AudioSource:
   m_ObjectHideFlags: 0
@@ -33380,11 +33409,6 @@ ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 7981907068824147355, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
   m_PrefabInstance: {fileID: 1833412294}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1833412296 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7607089780468000887, guid: 6c741e0a5c7cd384ca5fd4ba0a31938c, type: 3}
-  m_PrefabInstance: {fileID: 1833412294}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1853520973
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33729,16 +33753,6 @@ PrefabInstance:
 --- !u!198 &2005900476 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 3102961608335823829, guid: e085413049cdd354383103d7e69a3668, type: 3}
-  m_PrefabInstance: {fileID: 2005900475}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2005900477 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6462744968861033694, guid: e085413049cdd354383103d7e69a3668, type: 3}
-  m_PrefabInstance: {fileID: 2005900475}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2005900478 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9184717854388333174, guid: e085413049cdd354383103d7e69a3668, type: 3}
   m_PrefabInstance: {fileID: 2005900475}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2109702374
