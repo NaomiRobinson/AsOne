@@ -30,6 +30,8 @@ public class NivelSeleccionado : MonoBehaviour
     private bool puertaBloqueada = false;
     private bool estabaBloqueadaAntes = true;
 
+    [SerializeField] private Color colorTerminado = Color.black;
+
 
     void Start()
     {
@@ -133,7 +135,7 @@ public class NivelSeleccionado : MonoBehaviour
             indAbierto.SetActive(false);
             if (spriteRenderer != null)
             {
-                spriteRenderer.color = new Color(0.6792453f, 0.6760413f, 0.6760413f);
+                spriteRenderer.color = colorTerminado;
             }
         }
         else

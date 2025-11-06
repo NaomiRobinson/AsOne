@@ -59,6 +59,16 @@ public class MenuManager : MonoBehaviour
 
     public void ContinueGame()
     {
+        // Si el juego ya se completó → ir al selector de niveles
+        if (PlayerPrefs.HasKey("JuegoCompletado") && PlayerPrefs.GetInt("JuegoCompletado") == 1)
+        {
+            // Asegurar grupo actual
+            LevelManager.Instance.grupoActual = LevelManager.Instance.grupoDesbloqueado;
+            SceneManager.LoadScene(LevelManager.Instance.SeleccionNiveles);
+            return;
+        }
+
+        // Continuar partida normal
         if (PlayerPrefs.HasKey("NivelActual"))
         {
             int nivel = PlayerPrefs.GetInt("NivelActual");
@@ -69,13 +79,9 @@ public class MenuManager : MonoBehaviour
         else
         {
             if (!PlayerPrefs.HasKey("CinematicaVista"))
-            {
                 SceneManager.LoadScene("Cinematica");
-            }
             else
-            {
                 SceneManager.LoadScene("Invertidos");
-            }
         }
     }
 

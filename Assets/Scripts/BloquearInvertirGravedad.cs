@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class BloquearInvertirGravedad : MonoBehaviour
 {
-    [SerializeField] private LayerMask capaZona;       // Capa de la zona que bloquea la gravedad
-    [SerializeField] private GameObject jugadorIzq;    // Jugador izquierdo
-    [SerializeField] private GameObject jugadorDer;    // Jugador derecho
+    [SerializeField] private LayerMask capaZona;
+    [SerializeField] private GameObject jugadorIzq;
+    [SerializeField] private GameObject jugadorDer;
 
     private MovimientoJugador movimientoJugador;
 
@@ -29,15 +29,12 @@ public class BloquearInvertirGravedad : MonoBehaviour
 
     private void Update()
     {
-        // Guardar estado previo para detectar cambios
         bool estabaDentroIzq = jugadorIzqDentro;
         bool estabaDentroDer = jugadorDerDentro;
 
-        // Chequear si los jugadores están dentro de la zona usando OverlapCircle y capa Player
         jugadorIzqDentro = Physics2D.OverlapCircle(jugadorIzq.transform.position, chequeoRadio, capaZona);
         jugadorDerDentro = Physics2D.OverlapCircle(jugadorDer.transform.position, chequeoRadio, capaZona);
 
-        // Actualizar bloqueo solo si cambió el estado
         if (jugadorIzqDentro != estabaDentroIzq)
         {
             movimientoJugador.PuedeInvertir(MovimientoJugador.Jugador.Izq, !jugadorIzqDentro);
@@ -51,7 +48,6 @@ public class BloquearInvertirGravedad : MonoBehaviour
         }
     }
 
-    // Opcional: visualizar el radio en la escena
     private void OnDrawGizmosSelected()
     {
         if (jugadorIzq != null)

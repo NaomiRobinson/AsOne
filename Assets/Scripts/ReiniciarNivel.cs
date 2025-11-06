@@ -47,7 +47,11 @@ public class ReiniciarNivel : MonoBehaviour
             rbIzq.bodyType = RigidbodyType2D.Kinematic;
         }
 
-        SoundManager.instancia.ReproducirSonido(SoundManager.instancia.jugador_muerte, 1.3f);
+        if (SoundManager.instancia != null)
+        {
+            SoundManager.instancia.ReproducirSonido(SoundManager.instancia.jugador_muerte, 1.3f);
+        }
+
 
         if (animIzq != null)
         {

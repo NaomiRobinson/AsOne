@@ -22,6 +22,14 @@ public class MovimientoJugador : MonoBehaviour
     private TrailRenderer trailEspejado;
     public bool GravedadInvertida => rb.gravityScale < 0f;
 
+    private SpriteRenderer spriteJugador;
+    private SpriteRenderer spriteEspejado;
+
+    private Color colorOriginalJugador;
+    private Color colorOriginalEspejado;
+
+    [SerializeField] private Color colorBloqueo = Color.red;
+
     [SerializeField] private float velocidadX = 5f;
     [SerializeField] private float velocidadMaximaY = 10f;
     [SerializeField] private float cooldownInversion = 0.25f;
@@ -76,6 +84,12 @@ public class MovimientoJugador : MonoBehaviour
         rb = jugadorIzq.GetComponent<Rigidbody2D>();
         rbEspejado = jugadorDer.GetComponent<Rigidbody2D>();
 
+        spriteJugador = jugadorIzq.GetComponent<SpriteRenderer>();
+        spriteEspejado = jugadorDer.GetComponent<SpriteRenderer>();
+
+        colorOriginalJugador = spriteJugador.color;
+        colorOriginalEspejado = spriteEspejado.color;
+
         animatorJugador = jugadorIzq.GetComponent<Animator>();
         animatorEspejado = jugadorDer.GetComponent<Animator>();
 
@@ -89,7 +103,7 @@ public class MovimientoJugador : MonoBehaviour
         trailEspejado.emitting = false;
 
         esquemaActual = EsquemaDeControl.WASD;
-    ActualizarIndicadorVisual();
+        ActualizarIndicadorVisual();
 
     }
 
@@ -201,7 +215,10 @@ public class MovimientoJugador : MonoBehaviour
         }
         else
         {
-            SoundManager.instancia.ReproducirSonido(SoundManager.instancia.cambiar_gravedad_03);
+            if (SoundManager.instancia != null)
+                SoundManager.instancia.ReproducirSonido(SoundManager.instancia.cambiar_gravedad_03);
+
+            StartCoroutine(FeedbackBloqueo(spriteJugador, colorOriginalJugador));
         }
 
 
@@ -215,12 +232,15 @@ public class MovimientoJugador : MonoBehaviour
         }
         else
         {
-            SoundManager.instancia.ReproducirSonido(SoundManager.instancia.cambiar_gravedad_03);
+            if (SoundManager.instancia != null)
+                SoundManager.instancia.ReproducirSonido(SoundManager.instancia.cambiar_gravedad_03);
+
+            StartCoroutine(FeedbackBloqueo(spriteEspejado, colorOriginalEspejado));
         }
+
 
         esperandoSquash = true;
 
-        // Trail
         trail.emitting = true;
         trailEspejado.emitting = true;
         StartCoroutine(DesactivarTrail(trail, 0.5f));
@@ -243,7 +263,6 @@ public class MovimientoJugador : MonoBehaviour
 
     public void HandleCollision(Collision2D collision)
     {
-        // Solo colisiones con "Walls"
         if (!collision.gameObject.CompareTag("Walls"))
             return;
 
@@ -273,7 +292,6 @@ public class MovimientoJugador : MonoBehaviour
     {
         EsquemaDeControl nuevoEsquema = esquemaActual;
 
-        // --- Teclado ---
         if (Keyboard.current != null)
         {
             if (Keyboard.current.wKey.isPressed || Keyboard.current.aKey.isPressed ||
@@ -284,22 +302,18 @@ public class MovimientoJugador : MonoBehaviour
                 nuevoEsquema = EsquemaDeControl.Flechas;
         }
 
-        // --- Gamepad ---
         if (Gamepad.current != null)
         {
             Vector2 leftStick = Gamepad.current.leftStick.ReadValue();
             Vector2 rightStick = Gamepad.current.rightStick.ReadValue();
 
-            // Sticks actúan como WASD / Flechas
             if (leftStick.magnitude > 0.2f)
                 nuevoEsquema = EsquemaDeControl.WASD;
             else if (rightStick.magnitude > 0.2f)
                 nuevoEsquema = EsquemaDeControl.Flechas;
 
-            // Ignorar D-pad para esquema, solo usarlo como input de movimiento
         }
 
-        // --- Actualizar esquema si cambió ---
         if (nuevoEsquema != esquemaActual)
         {
             esquemaActual = nuevoEsquema;
@@ -347,5 +361,11 @@ public class MovimientoJugador : MonoBehaviour
         trail.emitting = false;
     }
 
+    private IEnumerator FeedbackBloqueo(SpriteRenderer sprite, Color colorOriginal)
+    {
+        sprite.color = colorBloqueo;
+        yield return new WaitForSeconds(0.2f);
+        sprite.color = colorOriginal;
+    }
 
 }

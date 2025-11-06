@@ -9,7 +9,7 @@ public class RecolectarFragmento : MonoBehaviour
 
   public GameObject jugadorRecolecta;
 
- public bool estaEnTecho = false;
+  public bool estaEnTecho = false;
 
   float duracion = 2f;
   private Vector3 posInicial;
@@ -61,7 +61,10 @@ public class RecolectarFragmento : MonoBehaviour
 
   void ReproducirSonido()
   {
-    SoundManager.instancia.ReproducirSonido(SoundManager.instancia.llave_recolectada);
+    if (SoundManager.instancia != null)
+    {
+      SoundManager.instancia.ReproducirSonido(SoundManager.instancia.llave_recolectada);
+    }
   }
 
   void AnimacionRecogida(GameObject jugadorRecolecta)
