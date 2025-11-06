@@ -40,9 +40,10 @@ public class Salida : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        MovimientoJugador movimiento = MovimientoJugador.Instancia;
-
         if (other.gameObject != jugadorAsignado) return;
+
+        if (other.CompareTag("JugadorIzq")) jugadorIzqEnSalida = true;
+        if (other.CompareTag("JugadorDer")) jugadorDerEnSalida = true;
 
         if (requiereFragmento && fragmentoAsociado != null && !fragmentoAsociado.juntoFragmento)
         {
@@ -64,13 +65,15 @@ public class Salida : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
+        if (other.gameObject != jugadorAsignado) return;
+
+        if (other.CompareTag("JugadorIzq")) jugadorIzqEnSalida = false;
+        if (other.CompareTag("JugadorDer")) jugadorDerEnSalida = false;
+
         if (animPuerta != null)
             animPuerta.SetBool("estaAbierta", false);
 
-        if (other.gameObject != jugadorAsignado) return;
-
-        if (jugadoresEnSalida > 0)
-            jugadoresEnSalida--;
+        jugadoresEnSalida = Mathf.Max(0, jugadoresEnSalida - 1);
 
         if (popupFaltaJugador != null) popupFaltaJugador.SetActive(false);
         if (popupFaltaFragmento != null) popupFaltaFragmento.SetActive(false);
