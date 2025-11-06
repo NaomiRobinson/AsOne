@@ -22,8 +22,8 @@ public class Final : MonoBehaviour
         if (other.CompareTag("JugadorDer"))
             jugadorDerDentro = true;
 
-        // Cuando ambos están dentro y aún no se activó
-        if (jugadorIzqDentro || jugadorDerDentro || !activado)
+
+        if ((jugadorIzqDentro || jugadorDerDentro) && !activado)
         {
             activado = true;
             StartCoroutine(ProcesoFinal());
@@ -32,7 +32,6 @@ public class Final : MonoBehaviour
 
     IEnumerator ProcesoFinal()
     {
-        // Desactivar movimiento de ambos jugadores
         MovimientoJugador[] jugadores = FindObjectsOfType<MovimientoJugador>();
         foreach (var jugador in jugadores)
         {
@@ -47,6 +46,10 @@ public class Final : MonoBehaviour
         }
 
         yield return new();
+
+        PlayerPrefs.SetInt("JuegoCompletado", 1);
+        PlayerPrefs.SetInt("NivelActual", LevelManager.Instance.SeleccionNiveles);
+        PlayerPrefs.Save();
 
         SceneManager.LoadScene("CinematicaFinal");
     }

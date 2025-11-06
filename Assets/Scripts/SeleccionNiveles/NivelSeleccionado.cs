@@ -186,7 +186,7 @@ public class NivelSeleccionado : MonoBehaviour
                 Debug.LogWarning("No todos los grupos fueron completados, no se puede cargar final.");
                 return;
             }
-            LevelManager.Instance.CargarFinal();
+            StartCoroutine(AnimacionPortalAmbos_Nivel(LevelManager.Instance.final));
             return;
         }
         else
@@ -208,7 +208,8 @@ public class NivelSeleccionado : MonoBehaviour
             return;
         }
 
-        TransicionEscena.Instance.Disolversalida(nivelACargar);
+        StartCoroutine(AnimacionPortalAmbos_Nivel(nivelACargar));
+        return;
     }
 
 
@@ -226,6 +227,44 @@ public class NivelSeleccionado : MonoBehaviour
                 return false;
         }
         return true;
+    }
+
+
+    private IEnumerator AnimacionPortalAmbos_Nivel(int nivelACargar)
+    {
+        MovimientoJugador movimiento = MovimientoJugador.Instancia;
+        movimiento.puedeMoverse = false;
+
+        // Apagar partículas
+        if (movimiento.indicadorArriba != null)
+            movimiento.indicadorArriba.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        if (movimiento.indicadorAbajo != null)
+            movimiento.indicadorAbajo.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
+        // foreach (var luz in movimiento.jugadorIzq.GetComponentsInChildren<Light2D>())
+        //    luz.enabled = false;
+        // foreach (var luz in movimiento.jugadorDer.GetComponentsInChildren<Light2D>())
+        //     luz.enabled = false;
+
+        float duracionAnim = 1f;
+
+        AnimarJugadorPortal(movimiento.jugadorIzq, duracionAnim);
+        AnimarJugadorPortal(movimiento.jugadorDer, duracionAnim);
+
+        yield return new WaitForSeconds(duracionAnim);
+
+        TransicionEscena.Instance.Disolversalida(nivelACargar);
+    }
+
+    private void AnimarJugadorPortal(GameObject jugador, float duracion)
+    {
+        Vector3 destino = jugador.transform.position;
+        LeanTween.move(jugador, destino, duracion).setEase(LeanTweenType.easeInQuad);
+        LeanTween.rotateZ(jugador, 360f, duracion);
+        LeanTween.scale(jugador, Vector3.zero, duracion);
+
+        if (SoundManager.instancia != null)
+            SoundManager.instancia.ReproducirSonido(SoundManager.instancia.portal_atravesarlo);
     }
 
 }

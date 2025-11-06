@@ -110,7 +110,7 @@ public class SoundManager : MonoBehaviour
         AudioClip clipAUsar = null;
 
         if (nombreEscena == "Menu" || nombreEscena == "Invertidos" ||
-            nombreEscena == "SeleccionNiveles" || nombreEscena == "Ayuda")
+            nombreEscena == "SeleccionNiveles" || nombreEscena == "Ayuda" || nombreEscena == "Creditos" || nombreEscena == "Victoria")
         {
             clipAUsar = musicaMenu;
         }
@@ -122,7 +122,7 @@ public class SoundManager : MonoBehaviour
         {
             switch (LevelManager.Instance.grupoActual)
             {
-                case 1: clipAUsar = musicaGrupo1; audioSource.volume = 1f; break;
+                case 1: clipAUsar = musicaGrupo1; audioSource.volume = 0.5f; break;
                 case 2: clipAUsar = musicaGrupo2; audioSource.volume = 0.3f; break;
                 case 3: clipAUsar = musicaGrupo3; audioSource.volume = 0.5f; break;
                 case 4: clipAUsar = musicaGrupo4; audioSource.volume = 1f; break;
